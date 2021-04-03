@@ -1,29 +1,45 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import {Icon} from 'native-base';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {colors} from '../../../utils';
 
 const Headers = ({
   title,
   type,
   actions,
+  icon,
   iconName,
   onPressBack,
   onPressRight,
+  value,
+  placeholder,
+  onChangeText,
 }) => {
   const Heading = () => {
     if (type === 'main') {
       return (
-        <View>
-          <Text style={styles.title}>{title}</Text>
-        </View>
+        <>
+          <View style={styles.mainTitleBundle}>
+            <Text style={styles.titleStyle}>{title}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.mainIconBundle}
+            onPress={onPressRight}>
+            <Icon style={styles.iconStyle} name={iconName} />
+          </TouchableOpacity>
+        </>
       );
-    } else if (type === 'double') {
+    } else if (type === 'main-search') {
       return (
         <>
-          <View>
-            <Text style={styles.title}>{title}</Text>
+          <View style={styles.mainSearch}>
+            <Text style={styles.titleStyle}>{title}</Text>
           </View>
           <TouchableOpacity onPress={onPressRight}>
             <Icon style={styles.iconStyle} name={iconName} />
@@ -33,57 +49,48 @@ const Headers = ({
     } else if (type === 'sub-main') {
       return (
         <>
-          <View style={styles.leftSide}>
+          <View style={styles.subMain}>
             <TouchableOpacity onPress={onPressBack}>
               <Icon style={styles.iconStyle} name="chevron-back-outline" />
             </TouchableOpacity>
-            <View style={styles.bundleTitle}>
-              <Text style={styles.title}>{title}</Text>
+            <View style={styles.subMainTitleBundle}>
+              <Text style={styles.titleStyle}>{title}</Text>
             </View>
           </View>
+          {actions ? (
+            <TouchableOpacity onPress={onPressRight}>
+              {icon ? (
+                <Icon style={styles.iconStyle} name="chevron-back-outline" />
+              ) : (
+                <Text style={styles.subMainTitleActions}>{actions}</Text>
+              )}
+            </TouchableOpacity>
+          ) : null}
         </>
       );
-    } else if (type === 'sub-main-icons') {
+    } else if (type === 'search') {
       return (
         <>
-          <View style={styles.leftSide}>
+          <View style={styles.subMain}>
             <TouchableOpacity onPress={onPressBack}>
               <Icon style={styles.iconStyle} name="chevron-back-outline" />
             </TouchableOpacity>
-            <View style={styles.bundleTitle}>
-              <Text style={styles.title}>{title}</Text>
-            </View>
+            <TextInput
+              value={value}
+              style={styles.inputText}
+              onChangeText={onChangeText}
+              placeholder={placeholder}
+            />
           </View>
-          <TouchableOpacity onPress={onPressRight}>
-            <Icon style={styles.iconStyle} name="chevron-back-outline" />
-          </TouchableOpacity>
-        </>
-      );
-    } else if (type === 'sub-main-actions') {
-      return (
-        <>
-          <View style={styles.leftSide}>
-            <TouchableOpacity onPress={onPressBack}>
-              <Icon style={styles.iconStyle} name="chevron-back-outline" />
+          {actions ? (
+            <TouchableOpacity onPress={onPressRight}>
+              {icon ? (
+                <Icon style={styles.iconStyle} name="chevron-back-outline" />
+              ) : (
+                <Text style={styles.subMainTitleActions}>{actions}</Text>
+              )}
             </TouchableOpacity>
-            <View style={styles.bundleTitle}>
-              <Text style={styles.title}>{title}</Text>
-            </View>
-          </View>
-          <TouchableOpacity onPress={onPressRight}>
-            <Text style={styles.titleActions}>{actions}</Text>
-          </TouchableOpacity>
-        </>
-      );
-    } else if (type === 'edit') {
-      return (
-        <>
-          <View style={styles.leftSide}>
-            <Text style={styles.title}>{title}</Text>
-          </View>
-          <TouchableOpacity onPress={onPressRight}>
-            <Icon style={styles.iconStyle} name={iconName} />
-          </TouchableOpacity>
+          ) : null}
         </>
       );
     }
@@ -102,30 +109,50 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.primaryWhite,
     justifyContent: 'space-between',
-    paddingVertical: 18,
+    paddingVertical: 10,
     paddingHorizontal: 23,
     alignItems: 'center',
   },
-  bundleTitle: {
-    marginLeft: '20%',
-  },
-  title: {
+  titleStyle: {
     justifyContent: 'center',
     fontSize: 20,
     fontFamily: 'Segoe-UI-SemiBold',
     color: colors.text.secondary,
-  },
-  titleActions: {
-    fontFamily: 'Segoe-UI-Bold',
-    fontSize: 18,
-    color: colors.text.primaryBlue,
   },
   iconStyle: {
     fontSize: 26,
     alignSelf: 'center',
     color: colors.text.secondary,
   },
-  leftSide: {
+
+  mainTitleBundle: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  mainIconBundle: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+
+  subMain: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  subMainTitleBundle: {
+    marginLeft: '20%',
+  },
+  subMainTitleActions: {
+    fontFamily: 'Segoe-UI-Bold',
+    fontSize: 18,
+    color: colors.text.primaryBlue,
+  },
+
+  inputText: {
+    fontSize: 18,
+    fontFamily: 'Segoe-UI',
+    paddingHorizontal: 16,
+    color: colors.input.text,
+    backgroundColor: colors.input.background,
   },
 });
