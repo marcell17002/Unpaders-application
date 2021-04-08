@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home, Chat, Berita, Akun, Alumni} from '../pages';
+import {Home, Chat, Berita, Akun, Alumni, Login} from '../pages';
 import {BottomNavigator} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
@@ -47,7 +47,12 @@ const MainAppGraduated = () => {
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainAppCollege">
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="MainApp"
         component={MainApp}

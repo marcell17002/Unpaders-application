@@ -1,33 +1,35 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {colors} from '../../../utils/colors';
 
-const Buttons = ({status, isLittle, title}) => {
+const Buttons = ({status, isLittle, title, onPress}) => {
   const ButtonsMenu = () => {
     switch (status) {
       case 'primary':
         return (
-          <View style={styles.buttonPrimary}>
+          <TouchableOpacity onPress={onPress} style={styles.buttonPrimary}>
             <Text style={styles.textPrimary}>{title}</Text>
-          </View>
+          </TouchableOpacity>
         );
       case 'secondary':
         return (
-          <View style={styles.buttonSecondary}>
+          <TouchableOpacity onPress={onPress} style={styles.buttonSecondary}>
             <Text style={styles.textSecondary}> {titke} </Text>
-          </View>
+          </TouchableOpacity>
         );
       case 'tertiary':
         return (
-          <View style={styles.buttonTertiary(isLittle)}>
+          <TouchableOpacity
+            onPress={onPress}
+            style={styles.buttonTertiary(isLittle)}>
             <Text style={styles.textTertiary}> {title}</Text>
-          </View>
+          </TouchableOpacity>
         );
       default:
         return (
-          <View style={styles.buttonPrimary}>
+          <TouchableOpacity onPress={onPress} style={styles.buttonPrimary}>
             <Text style={styles.textPrimary}> {title} </Text>
-          </View>
+          </TouchableOpacity>
         );
     }
   };

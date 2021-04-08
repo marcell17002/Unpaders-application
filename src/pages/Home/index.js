@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
-import {colors} from '../../utils/colors';
+import {colors} from '../../utils';
 import {Buttons, Gap, Inputs} from '../../components/atoms';
 import {Headers, Event, Comment} from '../../components/moleculs';
+import {api} from '../../services';
+import axios from 'axios';
 
 const Home = () => {
   return (
