@@ -9,7 +9,7 @@ const withToken = async config => {
   return {
     ...config,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: token ? `Bearer ${token}` : '',
     },
   };
 };

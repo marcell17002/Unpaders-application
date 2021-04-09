@@ -18,3 +18,27 @@ export const getData = async key => {
     //error reading value
   }
 };
+
+export const updateToken = async (key, token) => {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      var data = value;
+      data = {
+        ...value,
+        token: token,
+      };
+      await storeData(key, data);
+    }
+  } catch (e) {
+    //error reading value
+  }
+};
+
+export const destroyData = () => {
+  try {
+    AsyncStorage.clear();
+  } catch (e) {
+    //error reading value
+  }
+};

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Buttons, Gap, Inputs} from '../../components/atoms';
-import {useForm, storeData, getData} from '../../utils';
+import {useForm, storeData, getData, destroyData} from '../../utils';
 import {api} from '../../services';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -34,8 +34,7 @@ const Login = () => {
       console.log('isi  data :', res);
     });
 
-    await AsyncStorage.clear().then(console.log('data has been clear'));
-
+    await destroyData();
     getData('user').then(res => {
       console.log('isi  data :', res);
     });

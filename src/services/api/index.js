@@ -3,27 +3,11 @@ import post from './post';
 import put from './put';
 import drop from './drop';
 import config from './config';
-import {getData, storeData} from '../../utils';
+import {destroyData, getData, updateToken} from '../../utils';
 import {BASE_URL} from '@env';
 import axios from 'axios';
 
-//request interceptor to add the auth token header to requests
-
-// axios.interceptors.request.use(
-//   config => {
-//     getData('user').then(res => {
-//       if (res) {
-//         config.headers['Authorization'] = 'Bearer ' + res.token;
-//         return res.token;
-//       }
-//     });
-
-//     return config;
-//   },
-//   error => {
-//     Promise.reject(error);
-//   },
-// );
+import {NavigationActions} from '@react-navigation/native';
 
 //response interceptor to refresh token on receiving token expired error
 axios.interceptors.response.use(
@@ -31,37 +15,32 @@ axios.interceptors.response.use(
     return response;
   },
   async function (error) {
+    const originalRequest = error.config;
     const data = await getData('user').then(res => {
       if (res) {
         return res;
       }
     });
-    const originalRequest = error.config;
+    if (error.response.status === 401) {
+      console.log('401 navigate to login');
+      await destroyData();
+    }
     if (error.response.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;
+      console.log('FLAG REFRSH TOKEN');
       return axios
         .post(`${BASE_URL}/refreshToken`, {
           email: data.email,
           refreshToken: data.refreshToken,
         })
-        .then(response => {
+        .then(async response => {
           const newToken = response.data.data.token;
           console.log('token baru :', newToken);
           if (response.status === 200) {
-            getData('user').then(async res => {
-              if (res) {
-                var data = res;
-                data = {
-                  ...res,
-                  token: newToken,
-                };
-                await storeData('user', data);
-                console.log('isi data refresh :', data);
-              }
-            });
+            await updateToken('user', newToken);
           }
           console.log('Access token refreshed!');
-          originalRequest.headers.autorizarion = newToken;
+          originalRequest.headers.Authorization = 'Bearer ' + newToken;
           return axios(originalRequest);
         })
         .catch(function (error) {
