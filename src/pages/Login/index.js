@@ -3,10 +3,6 @@ import {StyleSheet, Text, View, Alert} from 'react-native';
 import {Buttons, Gap, Inputs} from '../../components/atoms';
 import {useForm, storeData, getData, destroyData} from '../../utils';
 import {api} from '../../services';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {BASE_URL} from '@env';
-import firebase from 'react-native-firebase';
 
 const Login = () => {
   const [form, setForm] = useForm({

@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, {useEffect} from 'react';
 import {
   SafeAreaView,
@@ -26,8 +18,11 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import messaging from '@react-native-firebase/messaging';
+import {Buttons} from '../../components/atoms';
 
-const Alumni = () => {
+import {Fire, api} from '../../services';
+
+const App = () => {
   messaging().setBackgroundMessageHandler(async remoteMessage => {
     console.log('Message handled in the background!', remoteMessage);
   });
@@ -62,9 +57,69 @@ const Alumni = () => {
     }
   };
 
+  const sendNotif = async () => {
+    const id = 'users01';
+    const token = await Fire.getToken(id);
+    const data = {
+      token: token,
+      title: 'Marcell Antonius',
+      body: 'Hello Marcell',
+    };
+    console.log('token : ', token);
+    api.postNotifications(data).then(
+      res => {
+        console.log('success send notif ', res.data);
+      },
+      error => {
+        console.log('error', error.message);
+      },
+    );
+  };
   return (
     <>
-      <Text>Notifications</Text>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={styles.scrollView}>
+          <Header />
+          {global.HermesInternal == null ? null : (
+            <View style={styles.engine}>
+              <Text style={styles.footer}>Engine: Hermes</Text>
+            </View>
+          )}
+
+          <Buttons status="primary" onPress={sendNotif} title="Send Notif" />
+          <View style={styles.body}>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Step One</Text>
+              <Text style={styles.sectionDescription}>
+                Edit <Text style={styles.highlight}>App.js</Text> to change this
+                screen and then come back to see your edits.
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>See Your Changes</Text>
+              <Text style={styles.sectionDescription}>
+                <ReloadInstructions />
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Debug</Text>
+              <Text style={styles.sectionDescription}>
+                <DebugInstructions />
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Learn More</Text>
+              <Text style={styles.sectionDescription}>
+                Read the docs to discover what to do next:
+              </Text>
+            </View>
+            <LearnMoreLinks />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };
@@ -108,4 +163,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Alumni;
+export default App;

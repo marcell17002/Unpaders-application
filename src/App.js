@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Router from './router';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 const App = () => {
+  LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       <Router />

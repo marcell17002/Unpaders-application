@@ -61,8 +61,10 @@ const getEvent = async () => get('event', await config.withToken());
 
 //post
 const postRegister = async data => post('user/login', data);
+const postNotifications = async data => post('pushNotifications', data);
 
 export const api = {
   getEvent,
   postRegister,
+  postNotifications,
 };
