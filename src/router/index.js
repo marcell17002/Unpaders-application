@@ -9,14 +9,6 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
-const TopNavigation = () => {
-  return (
-    <TopTab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="CHat" component={Chat} />
-    </TopTab.Navigator>
-  );
-};
 const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
@@ -47,10 +39,15 @@ const MainAppGraduated = () => {
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Alumni">
       <Stack.Screen
         name="Login"
         component={Login}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Alumni"
+        component={Alumni}
         options={{headerShown: false}}
       />
       <Stack.Screen

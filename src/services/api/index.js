@@ -6,8 +6,8 @@ import config from './config';
 import {destroyData, getData, updateToken} from '../../utils';
 import {BASE_URL} from '@env';
 import axios from 'axios';
-
-import {NavigationActions} from '@react-navigation/native';
+import {goToLogin} from '../../router/helpers';
+import {NavigationService} from '../../router/navigationHandler';
 
 //response interceptor to refresh token on receiving token expired error
 axios.interceptors.response.use(
@@ -22,6 +22,7 @@ axios.interceptors.response.use(
       }
     });
     if (error.response.status === 401) {
+      NavigationService.navigate('Login');
       console.log('401 navigate to login');
       await destroyData();
     }
