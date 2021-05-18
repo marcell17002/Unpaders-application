@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TextInput, Text, View} from 'react-native';
-import {colors} from '../../../utils';
+import {colors, fonts} from '../../../utils';
 
 const Inputs = ({title, value, edit, placeholder, onChangeText, secure}) => {
   return (
@@ -23,22 +23,22 @@ export default Inputs;
 const styles = StyleSheet.create({
   input: {
     backgroundColor: colors.input.secondary,
-    marginVertical: 12,
+    //marginTop: 12,
   },
   titleText: {
-    fontSize: 14,
-    fontFamily: 'Segoe-UI-SemiBold',
-    color: colors.input.text,
-    marginBottom: 10,
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.primary,
+    marginBottom: 12,
   },
   inputText: {
-    fontSize: 12,
-    fontFamily: 'Segoe-UI',
+    fontSize: 13,
+    fontFamily: fonts.primary.reguler,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 16,
     borderColor: colors.input.outline,
-    color: colors.input.text,
+    color: colors.text.tertiary,
     backgroundColor: colors.input.background,
   },
 });

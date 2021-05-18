@@ -1,12 +1,16 @@
 const mainColors = {
   blue: '#14B1F5', //biru
+  donker1: '#010080', //donker tua
+  donker2: '#254CA7', //donker agak muda
   yellow: '#FFB900', //menu
   yellowLight: '#FEBF19', //kuning
   grey: '#A5A5A5', //Abu2
   greyLight: '#787878', //U-Tulisan, Abu1
   greylighter: '#BDBDBD',
   greyLightest: '#F2F2F2',
-  black: '#000000', //black
+  greyLightBox: '#C4C4C4', //warna box shadow
+  black: '#4D4D4D', //warna tulisan
+  black2: '#2E2E2E', //warna tulisan
   white: '#ffffff', //white
   red: '#F84F31',
   green: '#23C552',
@@ -16,13 +20,21 @@ export const colors = {
   primary: mainColors.blue,
   secondary: mainColors.yellow,
   primaryWhite: mainColors.white,
+  primaryBlack: mainColors.black,
 
   text: {
-    primary: mainColors.black,
+    primary: mainColors.black, //warna tulisan
+    title: mainColors.black2, //warna tulisan lebih bold
     primaryBlue: mainColors.blue,
     secondary: mainColors.grey,
-    tertiary: mainColors.greyLight,
+    tertiary: mainColors.greyLight, //tulisan abu
     quartenary: mainColors.yellowLight,
+    primdonker1: mainColors.donker1,
+    primdonker2: mainColors.donker2,
+    grey: mainColors.greyLightest,
+  },
+  boxShadow: {
+    primary: mainColors.greyLightBox,
   },
   button: {
     primary: {
@@ -42,6 +54,7 @@ export const colors = {
       background: mainColors.white,
       text: mainColors.black,
       outline: mainColors.yellowLight,
+      blue: mainColors.blue,
     },
     dropdown: {
       background: mainColors.greyLightest,
