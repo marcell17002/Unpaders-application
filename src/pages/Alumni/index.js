@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -18,9 +18,9 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import messaging from '@react-native-firebase/messaging';
-import {Buttons} from '../../components/atoms';
+import { Buttons } from '../../components/atoms';
 
-import {Fire, api} from '../../services';
+import { Fire, api } from '../../services';
 
 const App = () => {
   messaging().setBackgroundMessageHandler(async remoteMessage => {

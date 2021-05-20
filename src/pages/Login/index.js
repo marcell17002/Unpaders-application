@@ -6,8 +6,7 @@ import {api} from '../../services';
 
 const Login = () => {
   const [form, setForm] = useForm({
-    email: '',
-    password: '',
+    email: '',password: '',
   });
   // useEffect(() => {
   //   requestUserPermission();
