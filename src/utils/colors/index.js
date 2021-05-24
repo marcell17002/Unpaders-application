@@ -1,5 +1,6 @@
 const mainColors = {
   blue: '#14B1F5', //biru
+  blueLight: '#DDF4FD', //biru muda
   donker1: '#010080', //donker tua
   donker2: '#254CA7', //donker agak muda
   yellow: '#FFB900', //menu
@@ -18,9 +19,12 @@ const mainColors = {
 
 export const colors = {
   primary: mainColors.blue,
+  secondBlue: mainColors.blueLight,
   secondary: mainColors.yellow,
   primaryWhite: mainColors.white,
   primaryBlack: mainColors.black,
+  backgroundgrey: mainColors.greyLightest,
+  primarygrey: mainColors.grey,
 
   text: {
     primary: mainColors.black, //warna tulisan

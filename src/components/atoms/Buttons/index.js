@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { fonts } from '../../../utils';
-import {colors} from '../../../utils/colors';
+import {colors, fonts} from '../../../utils';
+import {Icon} from 'native-base';
+//import {BtnIcon} from './BtnIcon';
 
-const Buttons = ({status, isLittle, title, onPress}) => {
+const Buttons = ({status, isLittle, title, onPress, disable}) => {
   const ButtonsMenu = () => {
     switch (status) {
       //button biru primary
@@ -35,6 +36,13 @@ const Buttons = ({status, isLittle, title, onPress}) => {
               <Text style={styles.textQuarternary}> {title} </Text>
             </TouchableOpacity>
           );  
+      case 'btn-icon-send' :
+        return ( 
+          <TouchableOpacity style={styles.iconBundle(disable)} onPress={onPress}>
+              {disable && <Icon style={styles.iconDisable} name="send" />}
+              {!disable && <Icon style={styles.iconNonDis} name="send" />}
+          </TouchableOpacity>
+        );
       default:
         return (
           <TouchableOpacity onPress={onPress} style={styles.buttonPrimary}>
@@ -109,4 +117,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     //paddingVertical: 15,
   },
+  iconBundle: (disable) => (
+    {
+      backgroundColor: disable ? colors.backgroundgrey : colors.primary,
+      width: 52,
+      height: 52,
+      padding: 8,
+      borderRadius : 10,
+    }
+  ),
+  iconDisable: {
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    color: colors.primarygrey,
+  },
+  iconNonDis: {
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    color: colors.primaryWhite,
+  }
 });

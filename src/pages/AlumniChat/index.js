@@ -11,8 +11,6 @@ const AlumniChat = ({navigation}) => {
             <View >
                 <Headers title="CHAT" type="main"/>
             </View>
-            
-           
             <View style={styles.page}>
                 <View>
                     <ListButton namaTombol="Temukan Alumni"
@@ -24,7 +22,8 @@ const AlumniChat = ({navigation}) => {
                     <Gap height={12}/>
                 </View>
                 <ListAlumniChat nama="Dzakia Rayhana" 
-                lastText="Wilujeng Enjing, kang Malik"/>
+                lastText="Wilujeng Enjing, kang Malik"
+                onPress={() => navigation.navigate('AlumniChatting')}/>
                 <ListAlumniChat nama="Dzakia Rayhana" 
                 lastText="Wilujeng Enjing, kang Malik"/>
                 <ListAlumniChat nama="Dzakia Rayhana" 

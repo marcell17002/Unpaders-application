@@ -2,7 +2,7 @@ import Home from './Home';
 import Chat from './Chat';
 import Berita from './Berita';
 import Akun from './Akun';
-import Alumni from './Alumni';
+//import Alumni from './Alumni';
 
 import Splashscreen from './Splashscreen';
 import Intro from './Intro';
@@ -26,14 +26,16 @@ import AlumniList from './AlumniList';
 import AlumniKontrib from './AlumniKontrib';
 import AlumniTulisBerita from './AlumniTulisBerita';
 import AlumniBeritaUnggah from './AlumniBeritaUnggah';
+import AlumniChatting from './AlumniChatting';
 
 
 import MahasiswaDaftar from './MahasiswaDaftar';
 
-export {Home, Chat, Berita, Akun, Alumni, 
+export {Home, Chat, Berita, Akun,
     Splashscreen, Intro, Masuk, Daftar,
     AlumniDaftar, AlumniHome, AlumniChat, AlumniBerita, AlumniLainnya, 
     AlumniDetailBerita, AlumniKomentar, AlumniProfileAuthor, AlumniProfileUser,
     AlumniEditProfile, AlumniTentangKami, AlumniKontak, AlumniDisclaimer,
     AlumniList, AlumniKontrib, AlumniTulisBerita, AlumniBeritaUnggah,
+    AlumniChatting, 
     MahasiswaDaftar};

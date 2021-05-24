@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, Image, Text, ScrollView } from 'react-native';
-import { color } from 'react-native-reanimated';
-import { NavigationEvents, withOrientation } from 'react-navigation';
 import { Buttons, Gap, Inputs, Link } from '../../components/atoms';
 import { fonts, colors } from '../../utils';
 

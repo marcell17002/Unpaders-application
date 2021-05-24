@@ -1,13 +1,15 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home, Chat, Berita, Akun, Alumni, 
+import {Home, Chat, Berita, Akun,
   Splashscreen, Intro, Masuk, Daftar,
   AlumniDaftar, AlumniHome, AlumniChat, AlumniBerita, AlumniLainnya, 
   AlumniDetailBerita, AlumniKomentar, AlumniProfileAuthor, AlumniProfileUser,
   AlumniEditProfile, AlumniTentangKami, AlumniKontak, AlumniDisclaimer,
   AlumniList, AlumniKontrib, AlumniTulisBerita, AlumniBeritaUnggah,
+  AlumniChatting, 
   MahasiswaDaftar} from '../pages';
+//import {AlumniDaftar} from '../../../pages';
 import {ABottomNavigator} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
@@ -19,7 +21,7 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Alumni" component={Alumni} />
+      <Tab.Screen name="AlumniHome" component={AlumniHome} />
       <Tab.Screen name="Akun" component={Akun} />
     </Tab.Navigator>
   );
@@ -61,6 +63,7 @@ const Router = () => {
         component={Masuk}
         options={{headerShown: false}}
       />
+      {/* DAFTAR */}
       <Stack.Screen
         name="Daftar"
         component={Daftar}
@@ -152,17 +155,22 @@ const Router = () => {
         component={AlumniBeritaUnggah}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="AlumniChatting"
+        component={AlumniChatting}
+        options={{headerShown: false}}
+      />
       {/* Mahasiswa */}
       <Stack.Screen
         name="MahasiswaDaftar"
         component={MahasiswaDaftar}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Alumni"
         component={Alumni}
         options={{headerShown: false}}
-      />
+      /> */}
       <Stack.Screen
         name="MainApp"
         component={MainApp}

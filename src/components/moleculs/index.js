@@ -10,6 +10,9 @@ import ListAlumniChat from './ListAlumniChat';
 import ProfileUser from './ProfileUser';
 import ListAlumni from './ListAlumni';
 import UnggahBerita from './UnggahBerita';
+import ChatItem from './ChatItem';
+import InputChat from './InputChat';
 
 export {ABottomNavigator, Headers, Event, Comment, Kategori, Berita, CommentUser, 
-    ProfileAuthor, ListAlumniChat, ProfileUser, ListAlumni, UnggahBerita};
+    ProfileAuthor, ListAlumniChat, ProfileUser, ListAlumni, UnggahBerita, ChatItem,
+    InputChat,};
