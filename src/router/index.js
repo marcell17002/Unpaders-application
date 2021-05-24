@@ -11,22 +11,22 @@ import {Home, Chat, Berita, Akun,
   MahasiswaDaftar, MhsChat, MhsHome, MhsLainnya,
   MhsDetailBerita, MhsKomentar, MhsProfileAuthor,
   MhsProfileUser, MhsEditProfile, MhsTentangKami, MhsKontak, MhsDisclaimer, 
-  MhsListAlumni, MhsChatting, } from '../pages';
-//import Mahasiswa from '../../Mahasiswa';
-//import {AlumniDaftar} from '../../../pages';
-import {ABottomNavigator, MBottomNavigator} from '../components/moleculs';
+  MhsListAlumni, MhsChatting, 
+  UmumList, UmumLainnya, UmumHome, UmumDetailBerita, UmumKomentar, UmumProfileAuthor, 
+  UmumTentangKami, UmumKontak, UmumDisclaimer} from '../pages';
+import {ABottomNavigator, MBottomNavigator, UBottomNavigator} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
-const MainApp = () => {
+const MainApp = () => { //untuk umum
   return (
-    <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="AlumniHome" component={AlumniHome} />
-      <Tab.Screen name="Akun" component={Akun} />
+    <Tab.Navigator tabBar={props => <UBottomNavigator {...props} />}>
+      <Tab.Screen name="Home" component={UmumHome} />
+      <Tab.Screen name="List Alumni" component={UmumList} />
+      <Tab.Screen name="Lainnya" component={UmumLainnya} />
     </Tab.Navigator>
   );
 };
@@ -51,7 +51,7 @@ const MainAppGraduated = () => { //buat alumni
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainAppCollege">
+    <Stack.Navigator initialRouteName="MainApp">
       <Stack.Screen
         name="Splashscreen"
         component={Splashscreen}
@@ -235,11 +235,53 @@ const Router = () => {
         component={MhsChatting}
         options={{headerShown: false}}
       />
-      {/* <Stack.Screen
-        name="Alumni"
-        component={Alumni}
+      {/* Masyarakat Umum */}
+      <Stack.Screen
+        name="UmumList"
+        component={UmumList}
         options={{headerShown: false}}
-      /> */}
+      />
+      <Stack.Screen
+        name="UmumLainnya"
+        component={UmumLainnya}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UmumHome"
+        component={UmumHome}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UmumDetailBerita"
+        component={UmumDetailBerita}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UmumKomentar"
+        component={UmumKomentar}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UmumProfileAuthor"
+        component={UmumProfileAuthor}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UmumTentangKami"
+        component={UmumTentangKami}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UmumKontak"
+        component={UmumKontak}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UmumDisclaimer"
+        component={UmumDisclaimer}
+        options={{headerShown: false}}
+      />
+      {/* Navigator */}
       <Stack.Screen
         name="MainApp"
         component={MainApp}

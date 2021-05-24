@@ -8,6 +8,7 @@ import Link from './Link';
 import ListButton from './ListButton';
 
 import MhsTabItems from './MhsTabItems';
+import UmumTabItems from './UmumTabItems';
 
 export {AlumniTabItems, Buttons, Inputs, Gap, Loading, Separator, Link, ListButton,
-        MhsTabItems};
+        MhsTabItems, UmumTabItems};

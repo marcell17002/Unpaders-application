@@ -46,6 +46,18 @@ import MhsDisclaimer from './MhsDisclaimer';
 import MhsListAlumni from './MhsListAlumni';
 import MhsChatting from './MhsChatting';
 
+import UmumList from './UmumList';
+import UmumLainnya from './UmumLainnya';
+import UmumHome from './UmumHome';
+//bagian home
+import UmumDetailBerita from './UmumDetailBerita';
+import UmumKomentar from './UmumKomentar';
+import UmumProfileAuthor from './UmumProfileAuthor';
+//bagian lainnya
+import UmumTentangKami from './UmumTentangKami';
+import UmumKontak from './UmumKontak';
+import UmumDisclaimer from './UmumDisclaimer';
+
 
 
 export {Home, Chat, Berita, Akun,
@@ -57,4 +69,6 @@ export {Home, Chat, Berita, Akun,
     AlumniChatting, 
     MahasiswaDaftar, MhsHome, MhsChat, MhsLainnya, MhsDetailBerita,
     MhsKomentar, MhsProfileAuthor, MhsProfileUser, MhsEditProfile,
-    MhsTentangKami, MhsKontak, MhsDisclaimer, MhsListAlumni, MhsChatting};
+    MhsTentangKami, MhsKontak, MhsDisclaimer, MhsListAlumni, MhsChatting,
+    UmumList, UmumLainnya, UmumHome, UmumDetailBerita, UmumKomentar, UmumProfileAuthor, 
+    UmumTentangKami, UmumKontak, UmumDisclaimer};

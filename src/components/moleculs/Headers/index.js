@@ -62,7 +62,7 @@ const Headers = ({
           ) : null} */}
         </>
       );
-      } else if (type === 'three-icon') { //ada icon kiri & kanan (2)
+    } else if (type === 'three-icon') { //ada icon kiri & kanan (2)
         return (
           <>
             <View style={styles.subMain}>
@@ -85,7 +85,27 @@ const Headers = ({
             </View>
           </>
         );
-      } else if (type === 'sub-edit') { //icon back & button edit
+    }else if (type === 'two-icon') { //ada icon kanan (2)
+      return (
+        <>
+          <View style={styles.subMain}>
+            <View style={styles.subMainTitleBundle}>
+              <Text style={styles.titleStyle}>{title}</Text>
+            </View>
+            <TouchableOpacity //icon kanan 1
+                style={styles.MiddleIconBundle}
+                onPress={onPressMiddle}>
+                <Icon style={styles.iconStyle} name='share-social' /> 
+            </TouchableOpacity>
+            <TouchableOpacity //icon kanan 2
+                style={styles.RightIconBundle}
+                onPress={onPressRight}>
+                <Icon style={styles.iconStyle} name='filter' /> 
+            </TouchableOpacity>
+          </View>
+        </>
+      );
+    } else if (type === 'sub-edit') { //icon back & button edit
         return (
           <>
             <View style={styles.subEdit}>
@@ -103,7 +123,7 @@ const Headers = ({
             </View>
           </>
         );
-        } else if (type === 'sub-main-back') { //ada icon back kiri 
+    } else if (type === 'sub-main-back') { //ada icon back kiri 
         return (
           <>
             <View style={styles.subMain}>
