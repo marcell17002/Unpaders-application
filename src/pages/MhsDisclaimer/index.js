@@ -4,7 +4,7 @@ import {Headers, } from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
 import { colors, fonts } from '../../utils';
 
-const AlumniDisclaimer = ({navigation}) => {
+const MhsDisclaimer = ({navigation}) => {
     return (
         <View>
             <View>
@@ -32,7 +32,7 @@ const AlumniDisclaimer = ({navigation}) => {
     );
 };
 
-export default AlumniDisclaimer;
+export default MhsDisclaimer;
 
 const styles = StyleSheet.create({
     page: {

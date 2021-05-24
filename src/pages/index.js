@@ -28,8 +28,25 @@ import AlumniTulisBerita from './AlumniTulisBerita';
 import AlumniBeritaUnggah from './AlumniBeritaUnggah';
 import AlumniChatting from './AlumniChatting';
 
-
 import MahasiswaDaftar from './MahasiswaDaftar';
+import MhsHome from './MhsHome';
+import MhsChat from './MhsChat';
+import MhsLainnya from './MhsLainnya';
+//bagian home
+import MhsDetailBerita from './MhsDetailBerita';
+import MhsKomentar from './MhsKomentar';
+import MhsProfileAuthor from './MhsProfileAuthor';
+//bagian lainnya
+import MhsProfileUser from './MhsProfileUser';
+import MhsEditProfile from './MhsEditProfile';
+import MhsTentangKami from './MhsTentangKami';
+import MhsKontak from './MhsKontak';
+import MhsDisclaimer from './MhsDisclaimer';
+//bagian chat
+import MhsListAlumni from './MhsListAlumni';
+import MhsChatting from './MhsChatting';
+
+
 
 export {Home, Chat, Berita, Akun,
     Splashscreen, Intro, Masuk, Daftar,
@@ -38,4 +55,6 @@ export {Home, Chat, Berita, Akun,
     AlumniEditProfile, AlumniTentangKami, AlumniKontak, AlumniDisclaimer,
     AlumniList, AlumniKontrib, AlumniTulisBerita, AlumniBeritaUnggah,
     AlumniChatting, 
-    MahasiswaDaftar};
+    MahasiswaDaftar, MhsHome, MhsChat, MhsLainnya, MhsDetailBerita,
+    MhsKomentar, MhsProfileAuthor, MhsProfileUser, MhsEditProfile,
+    MhsTentangKami, MhsKontak, MhsDisclaimer, MhsListAlumni, MhsChatting};

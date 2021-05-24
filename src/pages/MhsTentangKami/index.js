@@ -4,7 +4,7 @@ import {Headers, } from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
 import { colors, fonts } from '../../utils';
 
-const AlumniTentangKami = ({navigation}) => {
+const MhsTentangKami = ({navigation}) => {
     return (
         <View>
             <View>
@@ -31,7 +31,7 @@ const AlumniTentangKami = ({navigation}) => {
     );
 };
 
-export default AlumniTentangKami;
+export default MhsTentangKami;
 
 const styles = StyleSheet.create({
     page: {

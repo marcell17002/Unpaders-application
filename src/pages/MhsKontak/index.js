@@ -4,7 +4,7 @@ import {Headers, } from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
 import { colors, fonts } from '../../utils';
 
-const AlumniKontak = ({navigation}) => {
+const MhsKontak = ({navigation}) => {
     return (
         <View>
             <View>
@@ -55,7 +55,7 @@ const AlumniKontak = ({navigation}) => {
     );
 };
 
-export default AlumniKontak;
+export default MhsKontak;
 
 const styles = StyleSheet.create({
     page: {

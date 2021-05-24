@@ -13,6 +13,9 @@ import UnggahBerita from './UnggahBerita';
 import ChatItem from './ChatItem';
 import InputChat from './InputChat';
 
+import MBottomNavigator from './MBottomNavigator';
+
+
 export {ABottomNavigator, Headers, Event, Comment, Kategori, Berita, CommentUser, 
     ProfileAuthor, ListAlumniChat, ProfileUser, ListAlumni, UnggahBerita, ChatItem,
-    InputChat,};
+    InputChat, MBottomNavigator, };

@@ -7,4 +7,7 @@ import Separator from './Separator';
 import Link from './Link';
 import ListButton from './ListButton';
 
-export {AlumniTabItems, Buttons, Inputs, Gap, Loading, Separator, Link, ListButton};
+import MhsTabItems from './MhsTabItems';
+
+export {AlumniTabItems, Buttons, Inputs, Gap, Loading, Separator, Link, ListButton,
+        MhsTabItems};

@@ -4,7 +4,7 @@ import {Headers, Event, Berita, Comment} from '../../components/moleculs';
 import {Gap, Buttons} from '../../components/atoms';
 import { fonts, colors } from '../../utils';
 
-const AlumniChat = ({navigation}) => {
+const MhsDetailBerita = ({navigation}) => {
     return (
         <View style={styles.page}>
             <View>
@@ -27,12 +27,12 @@ const AlumniChat = ({navigation}) => {
                 <Gap height={24}/>
                 <Comment author="Tim Unpaders"
                 waktu="SELASA, 23 FEBRUARI 2021 12:16" 
-                onPress={() => navigation.navigate('AlumniProfileAuthor')}/>
+                onPress={() => navigation.navigate('MhsProfileAuthor')}/>
                 
                 <View style={styles.secButtons}>
                     <Buttons
                         status="secondary" title="LIHAT KOMENTAR"
-                        onPress={() => navigation.navigate('AlumniKomentar')}/>
+                        onPress={() => navigation.navigate('MhsKomentar')}/>
                     <Gap height={24}/>
                 </View>
             </View>
@@ -45,14 +45,14 @@ const AlumniChat = ({navigation}) => {
                 <Text style={styles.sectionLainnya}>Berita Terbaru Lainnya</Text>
                 <Event category="AKTUAL" time="3 JAM YANG LALU" 
                 title="Irawati Hermawan: Penanganan Covid-19 Perlu Kolaborasi" author='Tim Unpaders' 
-                onPress={() => navigation.navigate('AlumniHome')}/>
+                onPress={() => navigation.navigate('MhsHome')}/>
             </View>
         </ScrollView>
     </View>
     );
 };
 
-export default AlumniChat;
+export default MhsDetailBerita;
 
 const styles = StyleSheet.create({
     page: {

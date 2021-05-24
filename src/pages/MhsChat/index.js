@@ -4,17 +4,16 @@ import {Headers, ListAlumniChat} from '../../components/moleculs';
 import {Gap, ListButton} from '../../components/atoms';
 import { fonts, colors } from '../../utils';
 
-const AlumniChat = ({navigation}) => {
+const MhsChat = ({navigation}) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.page}>
-            <View >
-                <Headers title="CHAT" type="main"/>
-            </View>
+            <Headers title="CHAT" type="main"/>
+
             <View style={styles.page}>
                 <View>
                     <ListButton namaTombol="Temukan Alumni"
-                    onPress={() => navigation.navigate('AlumniList')}/>
+                    onPress={() => navigation.navigate('MhsListAlumni')}/>
                 </View>
                 <View style={styles.ghap}>
                     <Gap height={12}/>
@@ -23,7 +22,7 @@ const AlumniChat = ({navigation}) => {
                 </View>
                 <ListAlumniChat nama="Dzakia Rayhana" 
                 lastText="Wilujeng Enjing, kang Malik"
-                onPress={() => navigation.navigate('AlumniChatting')}/>
+                onPress={() => navigation.navigate('MhsChatting')}/>
                 <ListAlumniChat nama="Dzakia Rayhana" 
                 lastText="Wilujeng Enjing, kang Malik"/>
                 <ListAlumniChat nama="Dzakia Rayhana" 
@@ -35,13 +34,13 @@ const AlumniChat = ({navigation}) => {
                 <ListAlumniChat nama="Dzakia Rayhana" 
                 lastText="Wilujeng Enjing, kang Malik"/>
             </View>
+           
         </View>    
-    </ScrollView>    
-    
+        </ScrollView> 
     );
 };
 
-export default AlumniChat;
+export default MhsChat;
 
 const styles = StyleSheet.create({
     page: {

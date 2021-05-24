@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         flexDirection: 'row',
         marginBottom: 24,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.text.grey,
+        paddingBottom: 16,
     },
     ketUser: {
         flexDirection: 'row',

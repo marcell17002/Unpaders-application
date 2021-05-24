@@ -4,13 +4,13 @@ import {Headers,} from '../../components/moleculs/';
 import {Gap, Inputs, Buttons} from '../../components/atoms/';
 import { fonts, colors } from '../../utils';
 
-const AlumniEditProfile = ({navigation}) => {
+const MhsEditProfile = ({navigation}) => {
     return (
         <View >
             <View style={styles.contHeader}>
                 <Headers type="sub-edit" title="Edit Profil"
                 namaButton="SIMPAN" onPressBack={() => navigation.goBack()}
-                onPressRight={() => navigation.navigate("AlumniHome")}/>
+                onPressRight={() => navigation.navigate("MhsHome")}/>
             </View>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.page}>
@@ -39,7 +39,6 @@ const AlumniEditProfile = ({navigation}) => {
                 <Inputs title="Nama Lengkap" placeholder="Masukkan Nama Lengkap"/>
                 <Gap height={24}/>
                 <Inputs title="Nomor Telepon" placeholder="Masukkan Nomor Telepon"/>
-                <Text style={styles.note}>*Nomor WA tidak akan ditampilkan pada profile</Text>
                 <Gap height={24}/>
             </View>
             <Gap height={32}/>
@@ -57,15 +56,9 @@ const AlumniEditProfile = ({navigation}) => {
                 <Inputs title="Tahun Lulus" placeholder="Masukkan Tahun Lulus"/>
             </View>
             <Gap height={24}/>
-            {/* Button yg kalo ditambahin bakal nambah fieldnya sendiri */}
-            <View style={styles.contTambah}> 
-                <Buttons
-                status="quarternary" title="+ Tambah Pendidikan" />
-            </View>
+
             <Gap height={88}/>
-            {/* <View>
-                <Link title="+ Tambah Pendidikan" type='secondary'/>
-            </View> */}
+
         </View>
         </ScrollView>
 
@@ -74,7 +67,7 @@ const AlumniEditProfile = ({navigation}) => {
     );
 };
 
-export default AlumniEditProfile;
+export default MhsEditProfile;
 
 const styles = StyleSheet.create({
     page: {

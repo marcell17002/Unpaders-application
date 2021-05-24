@@ -85,7 +85,7 @@ const Headers = ({
             </View>
           </>
         );
-      }else if (type === 'sub-edit') { //icon back & button edit
+      } else if (type === 'sub-edit') { //icon back & button edit
         return (
           <>
             <View style={styles.subEdit}>
@@ -185,16 +185,16 @@ const styles = StyleSheet.create({
   },
   mainHeader: {
     flex: 1,
-    justifyContent: 'space-between',
+    //justifyContent: 'space-between',
     marginTop: 17,
     marginBottom: 20,
     //backgroundColor: 'yellow',
   },
   titleStyleMain: { //title style ditengah
-    flex: 1,
+    //flex: 1,
     textAlign: 'center',
     fontSize: 20,
-    fontFamily: 'Segoe-UI-SemiBold',
+    fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
   },
   titleStyleBack: { //buat yg back tapi ga ngaruhh

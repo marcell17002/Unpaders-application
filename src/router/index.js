@@ -8,9 +8,13 @@ import {Home, Chat, Berita, Akun,
   AlumniEditProfile, AlumniTentangKami, AlumniKontak, AlumniDisclaimer,
   AlumniList, AlumniKontrib, AlumniTulisBerita, AlumniBeritaUnggah,
   AlumniChatting, 
-  MahasiswaDaftar} from '../pages';
+  MahasiswaDaftar, MhsChat, MhsHome, MhsLainnya,
+  MhsDetailBerita, MhsKomentar, MhsProfileAuthor,
+  MhsProfileUser, MhsEditProfile, MhsTentangKami, MhsKontak, MhsDisclaimer, 
+  MhsListAlumni, MhsChatting, } from '../pages';
+//import Mahasiswa from '../../Mahasiswa';
 //import {AlumniDaftar} from '../../../pages';
-import {ABottomNavigator} from '../components/moleculs';
+import {ABottomNavigator, MBottomNavigator} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -26,12 +30,12 @@ const MainApp = () => {
     </Tab.Navigator>
   );
 };
-const MainAppCollege = () => {
+const MainAppCollege = () => { //buat mahasiswa
   return (
-    <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Chat" component={Chat} />
-      <Tab.Screen name="Akun" component={Akun} />
+    <Tab.Navigator tabBar={props => <MBottomNavigator {...props} />}>
+      <Tab.Screen name="Home" component={MhsHome} />
+      <Tab.Screen name="Chat" component={MhsChat} />
+      <Tab.Screen name="Lainnya" component={MhsLainnya} />
     </Tab.Navigator>
   );
 };
@@ -47,7 +51,7 @@ const MainAppGraduated = () => { //buat alumni
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainAppGraduated">
+    <Stack.Navigator initialRouteName="MainAppCollege">
       <Stack.Screen
         name="Splashscreen"
         component={Splashscreen}
@@ -164,6 +168,71 @@ const Router = () => {
       <Stack.Screen
         name="MahasiswaDaftar"
         component={MahasiswaDaftar}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsHome"
+        component={MhsHome}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsChat"
+        component={MhsChat}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsLainnya"
+        component={MhsLainnya}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsDetailBerita"
+        component={MhsDetailBerita}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsKomentar"
+        component={MhsKomentar}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsProfileAuthor"
+        component={MhsProfileAuthor}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsProfileUser"
+        component={MhsProfileUser}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsEditProfile"
+        component={MhsEditProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsTentangKami"
+        component={MhsTentangKami}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsKontak"
+        component={MhsKontak}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsDisclaimer"
+        component={MhsDisclaimer}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsListAlumni"
+        component={MhsListAlumni}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MhsChatting"
+        component={MhsChatting}
         options={{headerShown: false}}
       />
       {/* <Stack.Screen

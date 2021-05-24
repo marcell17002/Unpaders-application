@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
 import {Headers, ListAlumni,} from '../../components/moleculs';
 
-const AlumniList = ({navigation}) => {
+const MhsListAlumni = ({navigation}) => {
     return (
-    <View>    
+        <View>    
         <View style={styles.contHeader}>
             <Headers title='Temukan Alumni' type='three-icon' 
                 onPressBack={() => navigation.goBack()}/>
@@ -35,7 +35,7 @@ const AlumniList = ({navigation}) => {
     );
 };
 
-export default AlumniList;
+export default MhsListAlumni;
 
 const styles = StyleSheet.create({
     page: {

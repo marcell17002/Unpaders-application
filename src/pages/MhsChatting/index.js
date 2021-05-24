@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import {Headers, ChatItem, InputChat} from '../../components/moleculs';
 import { colors, fonts } from '../../utils';
 
-const AlumniChatting = ({navigation}) => {
+const MhsChatting = ({navigation}) => {
     return (
         <View style={styles.page}>
             <View>
@@ -22,7 +22,7 @@ const AlumniChatting = ({navigation}) => {
     );
 };
 
-export default AlumniChatting;
+export default MhsChatting;
 
 const styles = StyleSheet.create({
     page: {
