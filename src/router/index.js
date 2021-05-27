@@ -1,14 +1,35 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home, Chat, Berita, Akun,
-  Splashscreen, Intro, Masuk, Daftar,
-  AlumniDaftar, AlumniHome, AlumniChat, AlumniBerita, AlumniLainnya, 
-  AlumniDetailBerita, AlumniKomentar, AlumniProfileAuthor, AlumniProfileUser,
-  AlumniEditProfile, AlumniTentangKami, AlumniKontak, AlumniDisclaimer,
-  AlumniList, AlumniKontrib, AlumniTulisBerita, AlumniBeritaUnggah,
-  AlumniChatting, 
-  MahasiswaDaftar} from '../pages';
+import {
+  Home,
+  Chat,
+  Berita,
+  Akun,
+  Splashscreen,
+  Intro,
+  Masuk,
+  Daftar,
+  AlumniDaftar,
+  AlumniHome,
+  AlumniChat,
+  AlumniBerita,
+  AlumniLainnya,
+  AlumniDetailBerita,
+  AlumniKomentar,
+  AlumniProfileAuthor,
+  AlumniProfileUser,
+  AlumniEditProfile,
+  AlumniTentangKami,
+  AlumniKontak,
+  AlumniDisclaimer,
+  AlumniList,
+  AlumniKontrib,
+  AlumniTulisBerita,
+  AlumniBeritaUnggah,
+  AlumniChatting,
+  MahasiswaDaftar,
+} from '../pages';
 //import {AlumniDaftar} from '../../../pages';
 import {ABottomNavigator} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -35,7 +56,8 @@ const MainAppCollege = () => {
     </Tab.Navigator>
   );
 };
-const MainAppGraduated = () => { //buat alumni
+const MainAppGraduated = () => {
+  //buat alumni
   return (
     <Tab.Navigator tabBar={props => <ABottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={AlumniHome} />
@@ -47,7 +69,7 @@ const MainAppGraduated = () => { //buat alumni
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainAppGraduated">
+    <Stack.Navigator initialRouteName="Splashscreen">
       <Stack.Screen
         name="Splashscreen"
         component={Splashscreen}

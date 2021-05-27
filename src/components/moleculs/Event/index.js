@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import { colors, fonts } from '../../../utils';
+import {colors, fonts} from '../../../utils';
 
 const Event = ({picture, category, time, title, author, onPress}) => {
   return (
-    <TouchableOpacity style={styles.event} onPress={onPress} >
+    <TouchableOpacity style={styles.event} onPress={onPress}>
       <View style={styles.eventImage}>
         <Image
           style={styles.image}
@@ -38,21 +38,20 @@ const styles = StyleSheet.create({
   event: {
     flexDirection: 'row',
     //marginBottom: 24,
-    backgroundColor: 'yellow',
     paddingVertical: 24,
     paddingLeft: 24,
     paddingRight: 20,
   },
   image: {
-    maxHeight: 120,
-    maxWidth: 140,
+    height: 120,
+    width: 140,
     resizeMode: 'cover',
     borderRadius: 5,
     alignSelf: 'center',
   },
   logo: {
-    maxHeight: 16,
-    maxWidth: 16,
+    height: 16,
+    width: 16,
     resizeMode: 'cover',
     borderRadius: 8,
     alignSelf: 'center',
@@ -91,5 +90,5 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
     textAlignVertical: 'center',
-  }
+  },
 });

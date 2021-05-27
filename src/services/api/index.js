@@ -7,8 +7,7 @@ import {destroyData, getData, updateToken} from '../../utils';
 import {BASE_URL} from '@env';
 import axios from 'axios';
 import {goToLogin} from '../../router/helpers';
-import {NavigationService} from '../../router/navigationHandler';
-
+import {useSelector, useDispatch} from 'react-redux';
 //response interceptor to refresh token on receiving token expired error
 axios.interceptors.response.use(
   response => {
@@ -36,9 +35,11 @@ axios.interceptors.response.use(
         })
         .then(async response => {
           const newToken = response.data.data.token;
+          const dispatch = useDispatch();
           console.log('token baru :', newToken);
           if (response.status === 200) {
             await updateToken('user', newToken);
+            // await dispatch('SET_PROFILE',newToken);
           }
           console.log('Access token refreshed!');
           originalRequest.headers.Authorization = 'Bearer ' + newToken;
@@ -57,14 +58,51 @@ axios.interceptors.response.use(
 );
 
 //get
-const getEvent = async () => get('event', await config.withToken());
+const getEvent = () => get('event', null);
+const getUserByCategory = (variable, value) =>
+  get(`user/${variable}/${value}`, null);
+const getProfileUser = async id =>
+  get(`user/_id/${id}`, await config.withToken());
+const getProfileCategory = async (variable, value) =>
+  get(`user/${variable}/${value}`, await config.withToken());
+const getLikedEvent = async (variable, id) =>
+  get(`likedEvent/${variable}/${id}`, await config.withToken());
+const getHistoryChat = async (variable, value) =>
+  get(`historyChat/${variable}/${value}`, await config.withToken());
 
 //post
-const postRegister = async data => post('user/login', data);
+const postRegister = data => post('user/register', data, null);
+const postLogIn = data => post('user/login', data, null);
+const postLikedEvent = data => post('likedEvent', data, null);
 const postNotifications = async data => post('pushNotifications', data);
+const postEvent = async data => post('event', data, await config.withToken());
+
+//put
+const updateLikedEvent = async (data, id) =>
+  put(`likedEvent/${id}`, data, null);
+const updateProfileUser = async (data, id) =>
+  put(`user/${id}`, data, await config.withToken());
+
+//delete
+const deleteLikedEvent = async id =>
+  drop(`likedEvent/${id}`, await config.withToken());
 
 export const api = {
   getEvent,
+  getUserByCategory,
+  getLikedEvent,
+  getProfileUser,
+  getProfileCategory,
+  getHistoryChat,
+
   postRegister,
+  postLogIn,
+  postLikedEvent,
   postNotifications,
+  postEvent,
+
+  updateLikedEvent,
+  updateProfileUser,
+
+  deleteLikedEvent,
 };

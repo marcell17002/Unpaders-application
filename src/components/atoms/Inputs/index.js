@@ -2,19 +2,28 @@ import React from 'react';
 import {StyleSheet, TextInput, Text, View} from 'react-native';
 import {colors, fonts} from '../../../utils';
 
-const Inputs = ({title, value, edit, placeholder, onChangeText, secure}) => {
+const Inputs = ({
+  title,
+  value,
+  isNumeric,
+  edit,
+  placeholder,
+  onChangeText,
+  secure,
+}) => {
   return (
-    <View style={styles.input}>
+    <>
       <Text style={styles.titleText}>{title}</Text>
       <TextInput
         value={value}
         style={styles.inputText}
         secureTextEntry={secure}
+        keyboardType={isNumeric ? 'numeric' : 'default'}
         editable={edit}
         onChangeText={onChangeText}
         placeholder={placeholder}
       />
-    </View>
+    </>
   );
 };
 
