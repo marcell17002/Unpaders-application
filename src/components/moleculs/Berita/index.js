@@ -24,7 +24,7 @@ const Berita = ({title, author, waktu, isiBerita, images}) => {
       <View style={styles.beritaImage}>
         <Image
           style={styles.image}
-          source={{uri: `${BASE_URL_ROOT}/${images}`}}
+          source={{uri: `${BASE_URL_ROOT}${images}`}}
         />
       </View>
       {/* <Gap height={24}/> */}

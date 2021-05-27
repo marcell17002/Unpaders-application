@@ -8,16 +8,16 @@ import moment from 'moment';
 const UmumHome = ({navigation}) => {
   const [event, setEvent] = useState([]);
   const [tempEvent, setTempEvent] = useState([]);
-  // tagcomment
-  // useEffect(() => {
-  //   api.getEvent().then(
-  //     res => {
-  //       setEvent(res.data);
-  //       setTempEvent(res.data);
-  //     },
-  //     err => notifications('danger', 'no internet connection'),
-  //   );
-  // }, []);
+
+  useEffect(() => {
+    api.getEvent().then(
+      res => {
+        setEvent(res.data);
+        setTempEvent(res.data);
+      },
+      err => notifications('danger', 'no internet connection'),
+    );
+  }, []);
 
   const filterDataEvent = async props => {
     const filteredData = await filterData(tempEvent, 'category', props);

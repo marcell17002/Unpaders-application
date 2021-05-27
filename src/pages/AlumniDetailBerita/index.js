@@ -34,29 +34,29 @@ const AlumniChat = ({navigation, route}) => {
   const [idLike, setIdLike] = useState('');
 
   const user = useSelector(state => state).user;
-  // tagcomment
-  // useEffect(() => {
-  //   console.log('isi redux : ', user);
-  //   api.getProfileUser(payload.author.id).then(
-  //     res => setAuthor(res.data[0]),
-  //     err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
-  //   );
-  //   api.getLikedEvent('eventId', payload._id).then(
-  //     async res => {
-  //       const filterStatusTrue = await filterData(res.data, 'status', true);
-  //       setCountLike(filterStatusTrue); //counter like
-  //       const filterStatusFalse = await filterData(res.data, 'status', false);
-  //       setCountDislike(filterStatusFalse); //counter false
-  //       const filteredData = await filterData(res.data, 'userId', `${user.id}`);
-  //       if (filteredData.length > 0) {
-  //         if (filteredData[0].status === true) setLike(true);
-  //         else setDislike(true);
-  //         setIdLike(filteredData[0]._id);
-  //       }
-  //     },
-  //     err => {},
-  //   );
-  // }, []);
+
+  useEffect(() => {
+    console.log('isi redux : ', payload.image);
+    api.getProfileUser(payload.author.id).then(
+      res => setAuthor(res.data[0]),
+      err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
+    );
+    api.getLikedEvent('eventId', payload._id).then(
+      async res => {
+        const filterStatusTrue = await filterData(res.data, 'status', true);
+        setCountLike(filterStatusTrue); //counter like
+        const filterStatusFalse = await filterData(res.data, 'status', false);
+        setCountDislike(filterStatusFalse); //counter false
+        const filteredData = await filterData(res.data, 'userId', `${user.id}`);
+        if (filteredData.length > 0) {
+          if (filteredData[0].status === true) setLike(true);
+          else setDislike(true);
+          setIdLike(filteredData[0]._id);
+        }
+      },
+      err => {},
+    );
+  }, []);
 
   const updateValueLiked = () => {
     api.getLikedEvent('eventId', payload._id).then(

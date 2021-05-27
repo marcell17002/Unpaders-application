@@ -27,24 +27,22 @@ const Masuk = ({navigation}) => {
   };
   const onLog = async () => {
     await checkValueNull();
-    // tagcomment
-    // api.postLogIn(form).then(
-    //   async res => {
-    //     const status = res.data.status;
-    //     notifications('success', 'login berhasil');
-    //     dispatch({type: 'SET_PROFILE', value: res.data});
-    //     await storeData('user', res.data);
-    //     if (status === 'alumni') navigation.replace('MainAppGraduated');
-    //     else if (status === 'mahasiswa') navigation.replace('MainAppCollege');
-    //     else navigation.replace('MainAppCollege');
-    //   },
-    //   err => {
-    //     notifications('danger', 'email atau password salah');
-    //   },
-    // );
-    if (status === 'alumni') navigation.replace('MainAppGraduated');
-    else if (status === 'mahasiswa') navigation.replace('MainAppCollege');
-    else navigation.replace('MainAppCollege');
+
+    api.postLogIn(form).then(
+      async res => {
+        const status = res.data.status;
+        notifications('success', 'login berhasil');
+        console.log('data sucess', res.data);
+        dispatch({type: 'SET_PROFILE', value: res.data});
+        await storeData('user', res.data);
+        if (status === 'alumni') navigation.replace('MainAppGraduated');
+        else if (status === 'mahasiswa') navigation.replace('MainAppCollege');
+        else navigation.replace('MainAppCollege');
+      },
+      err => {
+        notifications('danger', 'email atau password salah');
+      },
+    );
   };
   return (
     <View style={styles.page}>

@@ -8,13 +8,12 @@ import {useSelector} from 'react-redux';
 
 const AlumniList = ({navigation}) => {
   const [alumni, setAlumni] = useState([]);
-  // tagcomment
-  // useEffect(() => {
-  //   api.getUserByCategory('status', 'alumni').then(
-  //     res => setAlumni(res.data),
-  //     err => console.log('isi err : ', err),
-  //   );
-  // }, []);
+  useEffect(() => {
+    api.getUserByCategory('status', 'alumni').then(
+      res => setAlumni(res.data),
+      err => console.log('isi err : ', err),
+    );
+  }, []);
   return (
     <View>
       <View style={styles.contHeader}>

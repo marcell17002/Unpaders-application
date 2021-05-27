@@ -67,20 +67,18 @@ const AlumniEditProfile = ({navigation, route}) => {
   };
   const onSave = async () => {
     await checkValueNull();
-    navigation.replace('Masuk');
-    // tagcomment
-    // const dataEditProfile = {...profile, image: profileImage};
-    // api.updateProfileUser(dataEditProfile, profile._id).then(
-    //   async res => {
-    //     notifications(
-    //       'success',
-    //       'data profile berhasil diubah silahkan login kembali',
-    //     );
-    //     destroyData();
-    //     navigation.replace('Masuk');
-    //   },
-    //   err => console.log('isi data :', dataEditProfile, err),
-    // );
+    const dataEditProfile = {...profile, image: profileImage};
+    api.updateProfileUser(dataEditProfile, profile._id).then(
+      async res => {
+        notifications(
+          'success',
+          'data profile berhasil diubah silahkan login kembali',
+        );
+        destroyData();
+        navigation.replace('Masuk');
+      },
+      err => console.log('isi data :', dataEditProfile, err),
+    );
   };
   return (
     <View>

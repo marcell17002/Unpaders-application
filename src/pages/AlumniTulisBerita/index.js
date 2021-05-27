@@ -58,26 +58,26 @@ const AlumniTulisBerita = ({navigation}) => {
     await checkValueNull();
     navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
 
-    // tagcomment
-    // const dataEvent = {
-    //   ...form,
-    //   image: photo,
-    // };
-    // api.postEvent(dataEvent).then(
-    //   res => {
-    //     notifications(
-    //       'success',
-    //       'berita sukses dibuat, silahkan tunggu verifikasi admin',
-    //     );
-    //     navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
-    //   },
-    //   err => {
-    //     const message = JSON.parse(err.response.request._response).data[0].msg;
-    //     console.log('isi errr :', message);
-    //     notifications('danger', message);
-    //   },
-    // );
-    // console.log('isi event :', dataEvent);
+    const dataEvent = {
+      ...form,
+      image: photo,
+    };
+    api.postEvent(dataEvent).then(
+      res => {
+        notifications(
+          'success',
+          'berita sukses dibuat, silahkan tunggu verifikasi admin',
+        );
+        navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
+        console.log('isi berita success : ', res.data);
+      },
+      err => {
+        const message = JSON.parse(err.response.request._response).data[0].msg;
+        console.log('isi errr :', message);
+        notifications('danger', message);
+      },
+    );
+    console.log('isi event :', dataEvent);
   };
   return (
     <View>

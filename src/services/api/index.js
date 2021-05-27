@@ -59,6 +59,8 @@ axios.interceptors.response.use(
 
 //get
 const getEvent = () => get('event', null);
+const getEventByCategory = (variable, value) =>
+  get(`event/${variable}/${value}`, null);
 const getUserByCategory = (variable, value) =>
   get(`user/${variable}/${value}`, null);
 const getProfileUser = async id =>
@@ -89,6 +91,7 @@ const deleteLikedEvent = async id =>
 
 export const api = {
   getEvent,
+  getEventByCategory,
   getUserByCategory,
   getLikedEvent,
   getProfileUser,

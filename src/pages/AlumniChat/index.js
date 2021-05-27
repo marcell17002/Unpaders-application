@@ -16,11 +16,10 @@ const AlumniChat = ({navigation}) => {
   const [historyTemp, setHistoryTemp] = useState([]);
   const user = useSelector(state => state).user;
 
-  // tagcomment
-  // useEffect(() => {
-  //   getHistory('idSender');
-  //   getHistory('idReceiver');
-  // }, []);
+  useEffect(() => {
+    getHistory('idSender');
+    getHistory('idReceiver');
+  }, []);
 
   const getHistory = type => {
     api.getHistoryChat(type, user.id).then(

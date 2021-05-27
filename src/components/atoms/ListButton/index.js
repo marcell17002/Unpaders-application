@@ -4,7 +4,7 @@ import {colors, fonts} from '../../../utils';
 import {Gap} from '../../atoms';
 import {Icon} from 'native-base';
 
-const ListButton = ({type, namaTombol, onPress}) => {
+const ListButton = ({type, namaTombol, image, onPress}) => {
   const ListButtonMenu = () => {
     switch (type) {
       case 'primary':
@@ -19,10 +19,7 @@ const ListButton = ({type, namaTombol, onPress}) => {
       case 'secondary':
         return (
           <TouchableOpacity style={styles.pageSecond} onPress={onPress}>
-            <Image
-              style={styles.logoSosmed}
-              source={require('../../../assets/facebook.png')}
-            />
+            <Image style={styles.logoSosmed} source={image} />
             <View>
               <Text style={styles.namaButton}>{namaTombol}</Text>
             </View>

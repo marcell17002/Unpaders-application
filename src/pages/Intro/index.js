@@ -23,8 +23,18 @@ const Intro = ({navigation}) => {
       name: name,
       status: 'umum',
     };
-    await dispatch({type: 'SET_PROFILE', value: dataUser});
-    await storeData('user_umum', dataUser);
+
+    await getData('user_umum').then(
+      async res => {
+        if (res) return console.log('isi data ', res);
+        else {
+          await dispatch({type: 'SET_PROFILE', value: dataUser});
+          await storeData('user_umum', dataUser);
+        }
+      },
+      err => console.log('isi err : ', err),
+    );
+
     navigation.navigate('MainApp');
   };
 
