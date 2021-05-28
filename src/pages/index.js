@@ -4,6 +4,7 @@ import Berita from './Berita';
 import Akun from './Akun';
 //import Alumni from './Alumni';
 
+import Auth from './Auth';
 import Splashscreen from './Splashscreen';
 import Intro from './Intro';
 import Masuk from './Masuk';
@@ -63,6 +64,7 @@ export {
   Chat,
   Berita,
   Akun,
+  Auth,
   Splashscreen,
   Intro,
   Masuk,

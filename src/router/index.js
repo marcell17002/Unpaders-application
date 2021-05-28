@@ -6,6 +6,7 @@ import {
   Chat,
   Berita,
   Akun,
+  Auth,
   Splashscreen,
   Intro,
   Masuk,
@@ -96,7 +97,12 @@ const MainAppGraduated = () => {
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Splashscreen">
+    <Stack.Navigator initialRouteName="Auth">
+      <Stack.Screen
+        name="Auth"
+        component={Auth}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Splashscreen"
         component={Splashscreen}

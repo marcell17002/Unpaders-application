@@ -7,23 +7,31 @@ import {
   ListAlumniChat,
 } from '../../components/moleculs';
 import {Gap, ListButton} from '../../components/atoms';
-import {fonts, colors, useForm, getDateName} from '../../utils';
+import {fonts, colors, useForm, getDateName, notifications} from '../../utils';
 import {api} from '../../services';
 import {useSelector} from 'react-redux';
 
 const AlumniBerita = ({navigation}) => {
   const user = useSelector(state => state).user;
   const [event, setEvent] = useState([]);
+  console.log('isi user id : ', user.id);
   useEffect(() => {
-    api.getEventByUserId(user.id, user.name).then(
-      res => setEvent(res.data),
-      err => console.log('isi err', event),
-    );
-  }, []);
-  const editableEvent = data => {
-    if (item.status === 'waiting ') {
-      return false;
-    } else return true;
+    const unsubscribe = navigation.addListener('focus', () => {
+      api.getEventByCategory('author', user.id).then(
+        res => setEvent(res.data),
+        err => console.log('isi err', event),
+      );
+    });
+    return unsubscribe;
+  }, [navigation]);
+  const editableEvent = payload => {
+    console.log('isi event :', payload);
+    if (payload.status === 'waiting') {
+      return notifications(
+        'info',
+        'silahkan menunggu data anda direview oleh admin',
+      );
+    } else return navigation.navigate('AlumniTulisBerita', payload);
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -56,7 +64,7 @@ const AlumniBerita = ({navigation}) => {
               time={getDateName(item.createdAt)}
               picture={item.image}
               title={item.title}
-              onPress={() => navigation.navigate('AlumniTulisBerita', item)}
+              onPress={() => editableEvent(item)}
             />
           );
         })}

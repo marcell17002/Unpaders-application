@@ -11,9 +11,26 @@ const AlumniHome = ({navigation}) => {
 
   useEffect(() => {
     api.getEventByCategory('status', 'published').then(
-      res => {
-        setEvent(res.data);
-        setTempEvent(res.data);
+      async res => {
+        const eventData = res.data;
+        const data = [];
+        const promises = await Object.keys(eventData).map(async key => {
+          await api.getProfileUser(eventData[key].author).then(
+            async res => {
+              await data.push({
+                id: key,
+                name: res.data[0].name,
+                userImage: res.data[0].image,
+                ...eventData[key],
+              });
+            },
+            err => console.log('isi error :', err),
+          );
+        });
+        await Promise.all(promises);
+        console.log('data baru : ', data);
+        setEvent(data);
+        setTempEvent(data);
       },
       err => notifications('danger', 'no internet connection'),
     );
@@ -34,7 +51,7 @@ const AlumniHome = ({navigation}) => {
           title="Semua"
         />
         <Kategori
-          onPress={() => filterDataEvent('umum')}
+          onPress={() => filterDataEvent('aktual')}
           pict={require('../../assets/KatAktual.png')}
           title="Aktual"
         />
@@ -63,7 +80,8 @@ const AlumniHome = ({navigation}) => {
               time={moment(item.createdAt).fromNow()}
               title={item.title}
               picture={item.image}
-              author={item.author.name}
+              userPicture={item.userImage}
+              author={item.name}
               onPress={() => navigation.navigate('AlumniDetailBerita', item)}
             />
           );

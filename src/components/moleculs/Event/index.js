@@ -5,6 +5,7 @@ import {BASE_URL_ROOT} from '@env';
 
 const Event = ({
   picture,
+  userPicture,
   isHistory,
   status,
   category,
@@ -44,7 +45,7 @@ const Event = ({
             <>
               <Image
                 style={styles.logo}
-                source={require('../../../assets/LogoUnpadersKecil.png')}
+                source={{uri: `${BASE_URL_ROOT}${userPicture}`}}
               />
               <Text style={styles.penulis}>{author}</Text>
             </>

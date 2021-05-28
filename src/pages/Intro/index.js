@@ -24,12 +24,12 @@ const Intro = ({navigation}) => {
       status: 'umum',
     };
 
-    await getData('user_umum').then(
+    await getData('user').then(
       async res => {
         if (res) return console.log('isi data ', res);
         else {
           await dispatch({type: 'SET_PROFILE', value: dataUser});
-          await storeData('user_umum', dataUser);
+          await storeData('user', dataUser);
         }
       },
       err => console.log('isi err : ', err),

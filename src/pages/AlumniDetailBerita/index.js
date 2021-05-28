@@ -23,6 +23,7 @@ import {
 } from '../../utils';
 import {api} from '../../services';
 import {useSelector} from 'react-redux';
+import {Icon} from 'native-base';
 
 const AlumniChat = ({navigation, route}) => {
   const payload = route.params;
@@ -36,8 +37,7 @@ const AlumniChat = ({navigation, route}) => {
   const user = useSelector(state => state).user;
 
   useEffect(() => {
-    console.log('isi redux : ', payload.image);
-    api.getProfileUser(payload.author.id).then(
+    api.getProfileUser(payload.author).then(
       res => setAuthor(res.data[0]),
       err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
     );
@@ -148,11 +148,14 @@ const AlumniChat = ({navigation, route}) => {
           style={styles.like(like)}
           onPress={() => rateEvent('like')}>
           <Text>{countLike.length}</Text>
+
+          <Icon style={styles.iconStyle} type="Feather" name="thumbs-up" />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.disLike(dislike)}
           onPress={() => rateEvent('dislike')}>
           <Text>{countDislike.length}</Text>
+          <Icon style={styles.iconStyle} type="Feather" name="thumbs-down" />
         </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -160,10 +163,11 @@ const AlumniChat = ({navigation, route}) => {
           <Gap height={24} />
           <Berita
             title={payload.title}
-            author={payload.author.name}
+            author={author.name}
             waktu={getDateName(payload.createdAt)}
             isiBerita={payload.desc}
             images={payload.image}
+            imagesUser={author.image}
           />
           <Gap height={24} />
         </View>
@@ -173,7 +177,8 @@ const AlumniChat = ({navigation, route}) => {
         <View>
           <Gap height={24} />
           <Comment
-            author={payload.author.name}
+            author={author.name}
+            image={author.image}
             waktu={getDateName(payload.createdAt)}
             onPress={() => navigation.navigate('AlumniProfileAuthor', author)}
           />
@@ -241,5 +246,11 @@ const styles = StyleSheet.create({
   secButtons: {
     marginLeft: 24,
     marginRight: 20,
+  },
+  iconStyle: {
+    //DONE
+    alignSelf: 'flex-start',
+    justifyContent: 'space-around',
+    color: colors.primaryBlack,
   },
 });

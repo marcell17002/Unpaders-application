@@ -31,10 +31,7 @@ const AlumniTulisBerita = ({navigation, route}) => {
     image: payload ? payload.image : '',
     category: payload ? payload.category : '',
     subCategory: payload ? payload.subCategory : '',
-    author: {
-      id: user.id,
-      name: user.name,
-    },
+    author: user.id,
     desc: payload ? payload.desc : '',
     status: 'waiting',
   });
