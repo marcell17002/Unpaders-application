@@ -24,11 +24,10 @@ const AlumniHome = ({navigation}) => {
                 ...eventData[key],
               });
             },
-            err => console.log('isi error :', err),
+            err => console.log('isi error alumni home:', err),
           );
         });
         await Promise.all(promises);
-        console.log('data baru : ', data);
         setEvent(data);
         setTempEvent(data);
       },
