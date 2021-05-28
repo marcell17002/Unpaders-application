@@ -8,3 +8,4 @@ export * from './notifications';
 export * from './filterData';
 export * from './randomName';
 export * from './randomId';
+export * from './errorParse';

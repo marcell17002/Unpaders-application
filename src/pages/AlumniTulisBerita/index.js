@@ -9,24 +9,33 @@ import {
 } from 'react-native';
 import {Headers, CommentUser} from '../../components/moleculs';
 import {Gap, Inputs} from '../../components/atoms';
-import {checkValue, colors, fonts, notifications, useForm} from '../../utils';
+import {
+  checkValue,
+  colors,
+  errorParse,
+  fonts,
+  notifications,
+  useForm,
+} from '../../utils';
 import {useSelector} from 'react-redux';
 import {api} from '../../services';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {BASE_URL_ROOT} from '@env';
 
-const AlumniTulisBerita = ({navigation}) => {
+const AlumniTulisBerita = ({navigation, route}) => {
+  const payload = route.params;
   const user = useSelector(state => state).user;
-  const [photo, setPhoto] = useState();
+  const [photo, setPhoto] = useState('');
   const [form, setForm] = useForm({
-    title: '',
-    image: '',
-    category: '',
-    subCategory: '',
+    title: payload ? payload.title : '',
+    image: payload ? payload.image : '',
+    category: payload ? payload.category : '',
+    subCategory: payload ? payload.subCategory : '',
     author: {
       id: user.id,
       name: user.name,
     },
-    desc: '',
+    desc: payload ? payload.desc : '',
     status: 'waiting',
   });
 
@@ -47,6 +56,7 @@ const AlumniTulisBerita = ({navigation}) => {
       },
     );
   };
+
   const checkValueNull = () => {
     checkValue(form.title, 'judul');
     checkValue(form.category, 'kategory');
@@ -54,38 +64,48 @@ const AlumniTulisBerita = ({navigation}) => {
     checkValue(form.desc, 'isi berita');
     checkValue(form.image, 'foto');
   };
+  const responseSuccess = () => {
+    notifications(
+      'success',
+      'berita sukses dibuat, silahkan tunggu verifikasi admin',
+    );
+    navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
+  };
   const onSave = async () => {
     await checkValueNull();
-    navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
-
     const dataEvent = {
       ...form,
       image: photo,
     };
-    api.postEvent(dataEvent).then(
-      res => {
-        notifications(
-          'success',
-          'berita sukses dibuat, silahkan tunggu verifikasi admin',
-        );
-        navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
-        console.log('isi berita success : ', res.data);
-      },
-      err => {
-        const message = JSON.parse(err.response.request._response).data[0].msg;
-        console.log('isi errr :', message);
-        notifications('danger', message);
-      },
-    );
-    console.log('isi event :', dataEvent);
+    if (payload) {
+      api.updateEvent(dataEvent, payload._id).then(
+        res => responseSuccess(),
+        err => {
+          const message = JSON.parse(err.response.request._response).message;
+          console.log('isi errr :', dataEvent);
+          notifications('danger', message);
+        },
+      );
+    } else {
+      api.postEvent(dataEvent).then(
+        res => responseSuccess(),
+        err => {
+          const message = JSON.parse(err.response.request._response).data[0]
+            .msg;
+          console.log('isi errr :', message);
+          notifications('danger', message);
+        },
+      );
+      console.log('isi event :', dataEvent);
+    }
   };
   return (
     <View>
       <View>
         <Headers
           type="sub-edit"
-          title="Tulis Berita"
-          namaButton="UNGGAH"
+          title={payload ? 'Edit Berita' : 'Tulis Berita'}
+          namaButton={payload ? 'SIMPAN' : 'UNGGAH'}
           onPressBack={() => navigation.goBack()}
           onPressRight={() => onSave()}
         />
@@ -106,14 +126,25 @@ const AlumniTulisBerita = ({navigation}) => {
             <TouchableOpacity
               onPress={() => getImage()}
               style={styles.eventWrapper}>
-              <Image
-                style={styles.photoEvent}
-                source={
-                  photo
-                    ? {uri: photo}
-                    : require('../../assets/default-image.png')
-                }
-              />
+              {payload ? (
+                <Image
+                  style={styles.photoEvent}
+                  source={
+                    photo
+                      ? {uri: photo}
+                      : {uri: `${BASE_URL_ROOT}${payload.image}`}
+                  }
+                />
+              ) : (
+                <Image
+                  style={styles.photoEvent}
+                  source={
+                    photo
+                      ? {uri: photo}
+                      : require('../../assets/default-image.png')
+                  }
+                />
+              )}
             </TouchableOpacity>
             <Gap height={24} />
             <Inputs

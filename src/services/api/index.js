@@ -61,6 +61,8 @@ axios.interceptors.response.use(
 const getEvent = () => get('event', null);
 const getEventByCategory = (variable, value) =>
   get(`event/${variable}/${value}`, null);
+const getEventByUserId = async (userId, name) =>
+  get(`event/user/${userId}/${name}`, await config.withToken());
 const getUserByCategory = (variable, value) =>
   get(`user/${variable}/${value}`, null);
 const getProfileUser = async id =>
@@ -84,6 +86,8 @@ const updateLikedEvent = async (data, id) =>
   put(`likedEvent/${id}`, data, null);
 const updateProfileUser = async (data, id) =>
   put(`user/${id}`, data, await config.withToken());
+const updateEvent = async (data, id) =>
+  put(`event/${id}`, data, await config.withToken());
 
 //delete
 const deleteLikedEvent = async id =>
@@ -92,6 +96,7 @@ const deleteLikedEvent = async id =>
 export const api = {
   getEvent,
   getEventByCategory,
+  getEventByUserId,
   getUserByCategory,
   getLikedEvent,
   getProfileUser,
@@ -106,6 +111,7 @@ export const api = {
 
   updateLikedEvent,
   updateProfileUser,
+  updateEvent,
 
   deleteLikedEvent,
 };

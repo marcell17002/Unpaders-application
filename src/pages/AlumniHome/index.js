@@ -62,6 +62,7 @@ const AlumniHome = ({navigation}) => {
               category={item.category}
               time={moment(item.createdAt).fromNow()}
               title={item.title}
+              picture={item.image}
               author={item.author.name}
               onPress={() => navigation.navigate('AlumniDetailBerita', item)}
             />
