@@ -75,10 +75,11 @@ const styles = StyleSheet.create({
         color: colors.text.tertiary,
       },
       image: {
-        maxHeight: 175,
-        maxWidth: 350,
+        height: 175,
+        width: 350,
         resizeMode: 'cover',
         borderRadius: 5,
+        marginBottom: 24,
       },
       isiBerita: {
           fontSize: 18,

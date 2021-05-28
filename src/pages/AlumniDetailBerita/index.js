@@ -1,8 +1,9 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Headers, Event, Berita, Comment} from '../../components/moleculs';
 import {Gap, Buttons} from '../../components/atoms';
 import { fonts, colors } from '../../utils';
+import {Icon} from 'native-base';
 
 const AlumniChat = ({navigation}) => {
     return (
@@ -48,6 +49,23 @@ const AlumniChat = ({navigation}) => {
                 onPress={() => navigation.navigate('AlumniHome')}/>
             </View>
         </ScrollView>
+        <View style={styles.rating}>
+            <TouchableOpacity 
+                // style={styles.like(like)}
+                // onPress={() => rateEvent('like')}
+            >
+                <Icon style={styles.iconStyle} name="thumbs-up-outline" />
+            </TouchableOpacity>
+            <Text style={styles.textLike}>100</Text>
+
+            <TouchableOpacity
+                // style={styles.like(like)}
+                // onPress={() => rateEvent('like')}
+            >
+                <Icon style={styles.iconStyle} name="thumbs-down-outline" />
+            </TouchableOpacity>
+            <Text style={styles.textLike}>100</Text>
+      </View>
     </View>
     );
 };
@@ -71,5 +89,24 @@ const styles = StyleSheet.create({
     secButtons: {
         marginLeft: 24,
         marginRight: 20,
+    },
+    rating: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 60,
+        borderTopWidth: 1,
+        borderTopColor: colors.backgroundgrey,
+      },
+    iconStyle: { //DONE
+        //alignSelf: 'flex-start',
+        justifyContent: 'space-around',
+        color: colors.primarygrey,
+        marginRight: 8,
+        marginLeft: 24,
+    }, 
+    textLike: {
+        fontSize: 16,
+        fontFamily: fonts.primary.semibold,
+        color: colors.text.primary,
     }
 });

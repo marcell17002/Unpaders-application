@@ -12,6 +12,7 @@ import ListAlumni from './ListAlumni';
 import UnggahBerita from './UnggahBerita';
 import ChatItem from './ChatItem';
 import InputChat from './InputChat';
+import SubKategori from './SubKategori';
 
 import MBottomNavigator from './MBottomNavigator';
 import UBottomNavigator from './UBottomNavigator';
@@ -19,4 +20,4 @@ import UBottomNavigator from './UBottomNavigator';
 
 export {ABottomNavigator, Headers, Event, Comment, Kategori, Berita, CommentUser, 
     ProfileAuthor, ListAlumniChat, ProfileUser, ListAlumni, UnggahBerita, ChatItem,
-    InputChat, MBottomNavigator, UBottomNavigator};
+    InputChat, MBottomNavigator, UBottomNavigator, SubKategori};

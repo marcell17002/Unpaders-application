@@ -51,7 +51,7 @@ const MainAppGraduated = () => { //buat alumni
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainApp">
+    <Stack.Navigator initialRouteName="MainAppGraduated">
       <Stack.Screen
         name="Splashscreen"
         component={Splashscreen}

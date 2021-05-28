@@ -38,14 +38,13 @@ const styles = StyleSheet.create({
   event: {
     flexDirection: 'row',
     //marginBottom: 24,
-    backgroundColor: 'yellow',
     paddingVertical: 24,
     paddingLeft: 24,
     paddingRight: 20,
   },
   image: {
-    maxHeight: 120,
-    maxWidth: 140,
+    height: 120,
+    width: 140,
     resizeMode: 'cover',
     borderRadius: 5,
     alignSelf: 'center',
