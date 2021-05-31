@@ -11,6 +11,8 @@ import {
   getData,
 } from '../../utils';
 import {useDispatch} from 'react-redux';
+import {BASE_IMG} from '@env';
+import {api} from '../../services';
 
 const Intro = ({navigation}) => {
   const dispatch = useDispatch();
@@ -19,22 +21,33 @@ const Intro = ({navigation}) => {
     const name = await randomName();
     const uniqId = await randomId();
     const dataUser = {
-      id: uniqId,
       name: name,
       status: 'umum',
+      email: `${uniqId}`,
+      password: `${uniqId}`,
+      phone: `${uniqId}`,
+      image: BASE_IMG,
     };
 
     await getData('user').then(
       async res => {
-        if (res) return console.log('isi data ', res);
-        else {
-          await dispatch({type: 'SET_PROFILE', value: dataUser});
-          await storeData('user', dataUser);
+        if (res) {
+        } else {
+          api.postRegister(dataUser).then(
+            async res => {
+              const data = {
+                ...res.data,
+                id: res.data._id,
+              };
+              await dispatch({type: 'SET_PROFILE', value: data});
+              await storeData('user', res.data);
+            },
+            err => console.log('isi err register :', err),
+          );
         }
       },
       err => console.log('isi err : ', err),
     );
-
     navigation.navigate('MainApp');
   };
 

@@ -63,11 +63,13 @@ const AlumniChat = ({navigation, route}) => {
       async res => {
         const filterStatusTrue = await filterData(res.data, 'status', true);
         setCountLike(filterStatusTrue); //counter like
+        console.log('isi filrer : ', filterStatusTrue);
         const filterStatusFalse = await filterData(res.data, 'status', false);
         setCountDislike(filterStatusFalse); //counter false
       },
       err => {
-        console.log('errror get liked : ', err);
+        setCountLike([]);
+        setCountDislike([]);
       },
     );
   };
@@ -105,10 +107,10 @@ const AlumniChat = ({navigation, route}) => {
 
   const deleteCounter = async status => {
     await api.deleteLikedEvent(idLike).then(
-      res => {
+      async res => {
         if (status === true) setLike(false);
         else setDislike(false);
-        updateValueLiked();
+        await updateValueLiked();
       },
       err => console.log('errr del: ', err),
     );
@@ -187,7 +189,7 @@ const AlumniChat = ({navigation, route}) => {
             <Buttons
               status="secondary"
               title="LIHAT KOMENTAR"
-              onPress={() => navigation.navigate('AlumniKomentar')}
+              onPress={() => navigation.navigate('AlumniKomentar', payload._id)}
             />
             <Gap height={24} />
           </View>

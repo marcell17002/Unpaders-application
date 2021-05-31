@@ -14,6 +14,7 @@ import {
   colors,
   errorParse,
   fonts,
+  getData,
   notifications,
   useForm,
 } from '../../utils';
@@ -34,6 +35,13 @@ const AlumniTulisBerita = ({navigation, route}) => {
     author: user.id,
     desc: payload ? payload.desc : '',
     status: 'waiting',
+  });
+
+  getData('user').then(res => {
+    if (res) {
+      console.log('isi res', res);
+      return res;
+    }
   });
 
   const getImage = () => {
