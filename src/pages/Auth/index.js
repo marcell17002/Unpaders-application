@@ -10,6 +10,7 @@ const Auth = ({navigation}) => {
       const isLogin = await getData('user');
       if (isLogin) {
         const status = isLogin.status;
+        console.log('isi session : ', isLogin);
         await dispatch({type: 'SET_PROFILE', value: isLogin});
         if (status === 'alumni') return navigation.replace('MainAppGraduated');
         else if (status === 'mahasiswa')

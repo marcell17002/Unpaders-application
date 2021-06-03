@@ -4,9 +4,8 @@ import {Headers, CommentUser, InputChat} from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
 import {api} from '../../services';
 import moment from 'moment';
-import {getTime, useForm} from '../../utils';
+import {getTime, useForm, useChat} from '../../utils';
 import {useSelector} from 'react-redux';
-import {useChat} from '../../utils/useChat';
 import {BASE_IMG} from '@env';
 
 const AlumniKomentar = ({navigation, route}) => {
@@ -18,11 +17,12 @@ const AlumniKomentar = ({navigation, route}) => {
   const {messages, sendMessage, setMessages} = useChat(idEvent);
 
   useEffect(async () => {
-    await getCommenter(idEvent);
+    await getCommentar(idEvent);
     await getProfile(user.id);
+    console.log('isi data user : ', user);
   }, []);
 
-  const getCommenter = id => {
+  const getCommentar = id => {
     api.getChat('chatID', id).then(
       async res => {
         console.log('isi res data getchat :', res.data);

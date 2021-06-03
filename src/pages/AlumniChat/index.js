@@ -17,17 +17,20 @@ const AlumniChat = ({navigation}) => {
   const user = useSelector(state => state).user;
 
   useEffect(() => {
-    getHistory('idSender');
-    getHistory('idReceiver');
-  }, []);
+    const unsubscribe = navigation.addListener('focus', async () => {
+      await getHistory('idSender', 'idReceiver'); //a_b   -> a
+      await getHistory('idReceiver', 'idSender'); //b_a   -> a
+    });
+    return unsubscribe;
+  }, [navigation]);
 
-  const getHistory = type => {
+  const getHistory = (type, subType) => {
     api.getHistoryChat(type, user.id).then(
       async res => {
         const historyChat = res.data;
         const data = [];
         const promises = await Object.keys(historyChat).map(async key => {
-          await api.getProfileUser(historyChat[key].idSender).then(
+          await api.getProfileUser(historyChat[key][subType]).then(
             async res => {
               await data.push({
                 id: key,
@@ -42,7 +45,9 @@ const AlumniChat = ({navigation}) => {
         await Promise.all(promises);
         console.log(`data ${type}: `, data);
         if (type === 'idSender') await setHistory(data);
-        else if (type === 'idReceiver') await setHistoryTemp(data);
+        else if (type === 'idReceiver') {
+          await setHistoryTemp(data);
+        }
       },
       err => console.log('isi errhist : ', err),
     );
@@ -73,7 +78,7 @@ const AlumniChat = ({navigation}) => {
                   nama={item.name}
                   picture={item.image}
                   lastText={item.lastChat}
-                  onPress={() => navigation.navigate('AlumniChatting')}
+                  onPress={() => navigation.navigate('AlumniChatting', item)}
                 />
               );
             })}
@@ -85,7 +90,7 @@ const AlumniChat = ({navigation}) => {
                   nama={item.name}
                   picture={item.image}
                   lastText={item.lastChat}
-                  onPress={() => navigation.navigate('AlumniChatting')}
+                  onPress={() => navigation.navigate('AlumniChatting', item)}
                 />
               );
             })}

@@ -29,24 +29,17 @@ const Intro = ({navigation}) => {
       image: BASE_IMG,
     };
 
-    await getData('user').then(
+    api.postRegister(dataUser).then(
       async res => {
-        if (res) {
-        } else {
-          api.postRegister(dataUser).then(
-            async res => {
-              const data = {
-                ...res.data,
-                id: res.data._id,
-              };
-              await dispatch({type: 'SET_PROFILE', value: data});
-              await storeData('user', res.data);
-            },
-            err => console.log('isi err register :', err),
-          );
-        }
+        const data = {
+          ...res.data,
+          id: res.data._id,
+        };
+        await dispatch({type: 'SET_PROFILE', value: data});
+        console.log('isi  register :', data);
+        await storeData('user', data);
       },
-      err => console.log('isi err : ', err),
+      err => console.log('isi err register :', err),
     );
     navigation.navigate('MainApp');
   };

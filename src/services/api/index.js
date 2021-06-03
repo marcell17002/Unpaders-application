@@ -80,6 +80,8 @@ const postLikedEvent = data => post('likedEvent', data, null);
 const postNotifications = async data => post('pushNotifications', data);
 const postEvent = async data => post('event', data, await config.withToken());
 const postChat = async data => post('chat', data, null);
+const postHistoryChat = async data =>
+  post('historyChat', data, await config.withToken());
 
 //put
 const updateLikedEvent = async (data, id) =>
@@ -88,6 +90,8 @@ const updateProfileUser = async (data, id) =>
   put(`user/${id}`, data, await config.withToken());
 const updateEvent = async (data, id) =>
   put(`event/${id}`, data, await config.withToken());
+const updateHistory = async (data, id) =>
+  put(`historyChat/${id}`, data, await config.withToken());
 
 //delete
 const deleteLikedEvent = async id => drop(`likedEvent/${id}`, null);
@@ -110,10 +114,12 @@ export const api = {
   postNotifications,
   postEvent,
   postChat,
+  postHistoryChat,
 
   updateLikedEvent,
   updateProfileUser,
   updateEvent,
+  updateHistory,
 
   deleteLikedEvent,
   deleteRefreshToken,
