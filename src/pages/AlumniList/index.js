@@ -21,6 +21,7 @@ const AlumniList = ({navigation}) => {
           title="Temukan Alumni"
           type="three-icon"
           onPressBack={() => navigation.goBack()}
+          onPressMiddle={() => navigation.navigate('SearchAlumni')}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

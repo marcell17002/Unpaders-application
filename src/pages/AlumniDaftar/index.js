@@ -4,6 +4,7 @@ import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
 import {api} from '../../services';
 import {fonts, colors, useForm, checkValue, notifications} from '../../utils';
 import {BASE_IMG} from '@env';
+import {Picker} from 'native-base';
 
 const AlumniDaftar = ({navigation, route}) => {
   const status = route.params.status;
@@ -105,20 +106,114 @@ const AlumniDaftar = ({navigation, route}) => {
             placeholder="Masukkan Nomor Pokok Mahasiswa"
           />
           <Gap height={24} />
-          {/* ini harusnya bentuk pilihan!! */}
-          <Inputs
+          {/* PICKER FAKULTAS */}
+          <View>
+              <Text style={styles.titleText}>Fakultas</Text>
+              <View style={styles.contPicker}>  
+                <Picker style={styles.contText}
+                // placeholder="Pilih Kategori"
+                // mode="dropdown"
+                >
+                  <Picker.Item label="Pilih Kategori" value="disabled"/>
+                  <Picker.Item label="F. Ekonomi dan Bisnis"/>
+                  <Picker.Item label="F. Farmasi"/>
+                  <Picker.Item label="F. Hukum"/>
+                  <Picker.Item label="F. Ilmu Budaya"/>
+                  <Picker.Item label="F. Ilmu Komunikasi"/>
+                  <Picker.Item label="F. ISIP"/>
+                  <Picker.Item label="F. Kedokteran"/>
+                  <Picker.Item label="F. Kedokteran Gigi"/>
+                  <Picker.Item label="F. Keperawatan"/>
+                  <Picker.Item label="F. MIPA"/>
+                  <Picker.Item label="F. PIK"/>
+                  <Picker.Item label="F. Pertanian"/>
+                  <Picker.Item label="F. Peternakan"/>
+                  <Picker.Item label="F. Psikologi"/>
+                  <Picker.Item label="F. T. Geologi"/>
+                  <Picker.Item label="F. T. Industri Pertanian"/>
+                </Picker>
+              </View>
+            </View>
+          {/* <Inputs
             title="Fakultas"
             value={form.faculty}
             onChangeText={value => setForm('faculty', value)}
             placeholder="Masukkan Fakultas"
-          />
+          /> */}
           <Gap height={24} />
-          <Inputs
+          {/* <Inputs
             title="Program Studi"
             value={form.study}
             onChangeText={value => setForm('prodi', value)}
             placeholder="Masukkan Program Studi"
-          />
+          /> */}
+          {/* PICKER PROGRAM STUDI */}
+          <View>
+              <Text style={styles.titleText}>Program Studi</Text>
+              <View style={styles.contPicker}>  
+                <Picker style={styles.contText}
+                // placeholder="Pilih Kategori"
+                // mode="dropdown"
+                >
+                  <Picker.Item label="Pilih Kategori" value="disabled"/>
+                  <Picker.Item label="Administrasi Bisnis"/>
+                  <Picker.Item label="Administrasi Publik"/>
+                  <Picker.Item label="Agribisnis"/>
+                  <Picker.Item label="Agroteknologi"/>
+                  <Picker.Item label="Aktuaria"/>
+                  <Picker.Item label="Akuntansi"/>
+                  <Picker.Item label="Antropologi"/>
+                  <Picker.Item label="Biologi"/>
+                  <Picker.Item label="Bisnis Digital"/>
+                  <Picker.Item label="Ekonomi Islam"/>
+                  <Picker.Item label="Ekonomi Pembangunan"/>
+                  <Picker.Item label="Farmasi"/>
+                  <Picker.Item label="Fisika"/>
+                  <Picker.Item label="Geofisika"/>
+                  <Picker.Item label="Geologi"/>
+                  <Picker.Item label="Hubungan Internasional"/>
+
+                  <Picker.Item label="Hubungan Masyarakat"/>
+                  <Picker.Item label="Hukum"/>
+                  <Picker.Item label="Ilmu Kelautan"/>
+                  <Picker.Item label="Ilmu Komunikasi"/>
+                  <Picker.Item label="Ilmu Pemerintahan"/>
+                  <Picker.Item label="Ilmu Politik"/>
+                  <Picker.Item label="Ilmu Sejarah"/>
+                  <Picker.Item label="Jurnalistik"/>
+                  <Picker.Item label="Kedokteran"/>
+                  <Picker.Item label="Kedokteran Gigi"/>
+                  <Picker.Item label="Keperawatan"/>
+                  <Picker.Item label="Kesejahteraan Sosial"/>
+                  <Picker.Item label="Kimia"/>
+                  <Picker.Item label="Manajemen"/>
+                  <Picker.Item label="Manajemen Komunikasi"/>
+                  <Picker.Item label="Matematika"/>
+
+                  <Picker.Item label="Perikanan"/>
+                  <Picker.Item label="Perpustakaan"/>
+                  <Picker.Item label="Peternakan"/>
+                  <Picker.Item label="Psikologi"/>
+                  <Picker.Item label="Sastra Arab"/>
+                  <Picker.Item label="Sastra Indonesia"/>
+                  <Picker.Item label="Sastra Inggris"/>
+                  <Picker.Item label="Sastra Jepang"/>
+                  <Picker.Item label="Sastra Jerman"/>
+                  <Picker.Item label="Sastra Perancis"/>
+                  <Picker.Item label="Sastra Rusia"/>
+                  <Picker.Item label="Sastra Sunda"/>
+                  
+                  <Picker.Item label="Statistika"/>
+                  <Picker.Item label="Sosiologi"/>
+                  <Picker.Item label="Teknik Elektro"/>
+                  <Picker.Item label="Teknik Informatika"/>
+                  <Picker.Item label="Teknik Pertanian"/>
+                  <Picker.Item label="Teknologi Pangan"/>
+                  <Picker.Item label="Televisi dan Film"/>
+                  <Picker.Item label="T. Industri Pertanian"/>
+                </Picker>
+              </View>
+            </View>
           <Gap height={24} />
           <Inputs
             title="Angkatan"
@@ -136,12 +231,8 @@ const AlumniDaftar = ({navigation, route}) => {
             placeholder="Masukkan Tahun Lulus"
           />
         </View>
-        <Gap height={24} />
-        {/* Button yg kalo ditambahin bakal nambah fieldnya sendiri */}
-        {/* <View>
-          <Link title="+ Tambah Pendidikan" type="secondary" />
-        </View>
-        <Gap height={50} /> */}
+
+        <Gap height={50} />
         <View>
           <Buttons title="Daftar" onPress={onSave} />
 
@@ -195,4 +286,21 @@ const styles = StyleSheet.create({
     color: colors.text.tertiary,
     marginTop: -8,
   },
+  contPicker: {
+    backgroundColor: colors.backgroundgrey,
+    borderRadius: 5,
+    //paddingHorizontal: 16,
+    borderColor: colors.input.outline,
+  },
+  titleText: {
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.primary,
+    marginBottom: 12,
+  },
+  contText: { //INI GAMAU KE GANTI STYLENYA
+    fontSize: 8,
+    fontFamily: fonts.primary.reguler,
+    color: colors.text.primary,
+  }, 
 });

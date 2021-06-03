@@ -22,6 +22,7 @@ import {
   filterData,
 } from '../../utils';
 import {api} from '../../services';
+import {Icon} from 'native-base';
 import {useSelector} from 'react-redux';
 
 const AlumniChat = ({navigation, route}) => {
@@ -143,18 +144,7 @@ const AlumniChat = ({navigation, route}) => {
           onPressBack={() => navigation.goBack()}
         />
       </View>
-      <View style={styles.rating}>
-        <TouchableOpacity
-          style={styles.like(like)}
-          onPress={() => rateEvent('like')}>
-          <Text>{countLike.length}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.disLike(dislike)}
-          onPress={() => rateEvent('dislike')}>
-          <Text>{countDislike.length}</Text>
-        </TouchableOpacity>
-      </View>
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <Gap height={24} />
@@ -203,6 +193,30 @@ const AlumniChat = ({navigation, route}) => {
           />
         </View>
       </ScrollView>
+
+      <View style={styles.rating}>
+        <TouchableOpacity
+          style={styles.likedButton}
+          onPress={() => rateEvent('like')}>
+          <Icon style={styles.like(like)} type="Feather" name="thumbs-up" />
+          <Gap width={8} />
+          <Text style={styles.textLike}>{countLike.length}</Text>
+        </TouchableOpacity>
+
+        <Gap width={20} />
+
+        <TouchableOpacity
+          style={styles.disLikedButton}
+          onPress={() => rateEvent('dislike')}>
+          <Icon
+            style={styles.disLike(dislike)}
+            type="Feather"
+            name="thumbs-down"
+          />
+          <Gap width={8} />
+          <Text style={styles.textLike}>{countDislike.length}</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -211,20 +225,15 @@ export default AlumniChat;
 
 const styles = StyleSheet.create({
   rating: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: 'space-between',
+    height: 60,
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 5.7,
+    shadowRadius: 0,
+    elevation: 10,
   },
-  like: like => ({
-    width: 50,
-    height: 50,
-    backgroundColor: like ? '#b3d1ff' : '#dadada',
-  }),
-  disLike: disLike => ({
-    width: 50,
-    height: 50,
-    backgroundColor: disLike ? '#ffb3b3' : '#dadada',
-  }),
   page: {
     flex: 1,
     backgroundColor: 'white',
@@ -241,5 +250,26 @@ const styles = StyleSheet.create({
   secButtons: {
     marginLeft: 24,
     marginRight: 20,
+  },
+  like: like => ({
+    color: like ? '#b3d1ff' : colors.primaryBlack,
+  }),
+  disLike: disLike => ({
+    color: disLike ? '#ffb3b3' : colors.primaryBlack,
+  }),
+  textLike: {
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.tertiary,
+  },
+  likedButton: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginLeft: 24,
+  },
+  disLikedButton: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    //marginLeft: 24,
   },
 });

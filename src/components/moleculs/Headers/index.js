@@ -42,7 +42,50 @@ const Headers = ({
           </TouchableOpacity>
         </>
       );
-    } else if (type === 'main') {
+    } else if (type === 'search-berita') {
+    //search di berita
+      return (
+        <>
+          <View style={styles.subMain}>
+            <TouchableOpacity onPress={onPressBack}>
+              <Icon style={styles.iconStyle} name="arrow-back" />
+            </TouchableOpacity>
+            <View >
+              <Text style={styles.searchTitle}>{title}</Text>
+            </View>
+            <TouchableOpacity //icon kanan
+              style={styles.RightIconBundle}
+              onPress={onPressRight}>
+              <Icon style={styles.iconStyle} name="search" />
+            </TouchableOpacity>
+          </View>
+        </>
+      )
+    } else if (type === 'search-alumni') {
+      return (
+        <>
+          <View style={styles.subMain}>
+            <TouchableOpacity onPress={onPressBack}>
+              <Icon style={styles.iconStyle} name="arrow-back" />
+            </TouchableOpacity>
+            <View >
+              <Text style={styles.searchTitle}>{title}</Text>
+            </View>
+            <TouchableOpacity //icon kanan 1
+              style={styles.MiddleIconBundle}
+              onPress={onPressMiddle}>
+              <Icon style={styles.iconStyle} name="search" />
+            </TouchableOpacity>
+            <TouchableOpacity //icon kanan 2
+              style={styles.RightIconBundle}
+              onPress={onPressRight}>
+              <Icon style={styles.iconStyle} type="AntDesign"  name="filter" />
+            </TouchableOpacity>
+          </View>
+        </>
+      );
+    }
+    else if (type === 'main') {
       //judul doang
       return (
         <>
@@ -93,12 +136,12 @@ const Headers = ({
             <TouchableOpacity //icon kanan 1
               style={styles.MiddleIconBundle}
               onPress={onPressMiddle}>
-              <Icon style={styles.iconStyle} name="share-social" />
+              <Icon style={styles.iconStyle} name="search" />
             </TouchableOpacity>
             <TouchableOpacity //icon kanan 2
               style={styles.RightIconBundle}
               onPress={onPressRight}>
-              <Icon style={styles.iconStyle} name="filter" />
+              <Icon style={styles.iconStyle} type="AntDesign" name="filter" />
             </TouchableOpacity>
           </View>
         </>
@@ -307,4 +350,10 @@ const styles = StyleSheet.create({
     color: colors.input.text,
     backgroundColor: colors.input.background,
   },
+  searchTitle: {
+    fontSize: 18,
+    fontFamily: fonts.primary.reguler,
+    color: colors.text.tertiary,
+    textAlign: 'right',
+  }
 });

@@ -28,6 +28,9 @@ import {
   AlumniTulisBerita,
   AlumniBeritaUnggah,
   AlumniChatting,
+  AlumniFilter,
+  SearchPage,
+  SearchAlumni,
   MahasiswaDaftar,
   MhsChat,
   MhsHome,
@@ -207,6 +210,21 @@ const Router = () => {
       <Stack.Screen
         name="AlumniChatting"
         component={AlumniChatting}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AlumniFilter"
+        component={AlumniFilter}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchPage"
+        component={SearchPage}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchAlumni"
+        component={SearchAlumni}
         options={{headerShown: false}}
       />
       {/* Mahasiswa */}

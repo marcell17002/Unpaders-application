@@ -14,7 +14,7 @@ const AlumniBerita = ({navigation}) => {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.page}>
         <View>
-          <Headers title="CHAT" type="main" />
+          <Headers title="BERITA" type="main" />
         </View>
 
         <View style={styles.page}>

@@ -27,6 +27,9 @@ import AlumniKontrib from './AlumniKontrib';
 import AlumniTulisBerita from './AlumniTulisBerita';
 import AlumniBeritaUnggah from './AlumniBeritaUnggah';
 import AlumniChatting from './AlumniChatting';
+import AlumniFilter from './AlumniFilter';
+import SearchPage from './SearchPage';
+import SearchAlumni from './SearchAlumni';
 
 import MahasiswaDaftar from './MahasiswaDaftar';
 import MhsHome from './MhsHome';
@@ -84,7 +87,7 @@ export {
   AlumniKontrib,
   AlumniTulisBerita,
   AlumniBeritaUnggah,
-  AlumniChatting,
+  AlumniChatting, AlumniFilter, SearchPage, SearchAlumni,
   MahasiswaDaftar,
   MhsHome,
   MhsChat,

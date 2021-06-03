@@ -31,12 +31,12 @@ export const colors = {
     title: mainColors.black2, //warna tulisan lebih bold
     primaryBlue: mainColors.blue,
     secondary: mainColors.grey,
-    tertiary: mainColors.black, //tulisan abu
+    tertiary: mainColors.grey, //tulisan abu
     quartenary: mainColors.yellowLight,
     primdonker1: mainColors.donker1,
     primdonker2: mainColors.donker2,
     grey: mainColors.greyLightest,
-    white: mainColors.primaryWhite
+    white: mainColors.primaryWhite,
   },
   boxShadow: {
     primary: mainColors.greyLightBox,
