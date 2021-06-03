@@ -1,45 +1,90 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home, Chat, Berita, Akun,
-  Splashscreen, Intro, Masuk, Daftar,
-  AlumniDaftar, AlumniHome, AlumniChat, AlumniBerita, AlumniLainnya, 
-  AlumniDetailBerita, AlumniKomentar, AlumniProfileAuthor, AlumniProfileUser,
-  AlumniEditProfile, AlumniTentangKami, AlumniKontak, AlumniDisclaimer,
-  AlumniList, AlumniKontrib, AlumniTulisBerita, AlumniBeritaUnggah,
-  AlumniChatting, 
-  MahasiswaDaftar, MhsChat, MhsHome, MhsLainnya,
-  MhsDetailBerita, MhsKomentar, MhsProfileAuthor,
-  MhsProfileUser, MhsEditProfile, MhsTentangKami, MhsKontak, MhsDisclaimer, 
-  MhsListAlumni, MhsChatting, 
-  UmumList, UmumLainnya, UmumHome, UmumDetailBerita, UmumKomentar, UmumProfileAuthor, 
-  UmumTentangKami, UmumKontak, UmumDisclaimer} from '../pages';
-import {ABottomNavigator, MBottomNavigator, UBottomNavigator} from '../components/moleculs';
+import {
+  Home,
+  Chat,
+  Berita,
+  Akun,
+  Splashscreen,
+  Intro,
+  Masuk,
+  Daftar,
+  AlumniDaftar,
+  AlumniHome,
+  AlumniChat,
+  AlumniBerita,
+  AlumniLainnya,
+  AlumniDetailBerita,
+  AlumniKomentar,
+  AlumniProfileAuthor,
+  AlumniProfileUser,
+  AlumniEditProfile,
+  AlumniTentangKami,
+  AlumniKontak,
+  AlumniDisclaimer,
+  AlumniList,
+  AlumniKontrib,
+  AlumniTulisBerita,
+  AlumniBeritaUnggah,
+  AlumniChatting, AlumniFilter, SearchPage, SearchAlumni,
+  MahasiswaDaftar,
+  MhsChat,
+  MhsHome,
+  MhsLainnya,
+  MhsDetailBerita,
+  MhsKomentar,
+  MhsProfileAuthor,
+  MhsProfileUser,
+  MhsEditProfile,
+  MhsTentangKami,
+  MhsKontak,
+  MhsDisclaimer,
+  MhsListAlumni,
+  MhsChatting,
+  UmumList,
+  UmumLainnya,
+  UmumHome,
+  UmumDetailBerita,
+  UmumKomentar,
+  UmumProfileAuthor,
+  UmumTentangKami,
+  UmumKontak,
+  UmumDisclaimer,
+} from '../pages';
+import {
+  ABottomNavigator,
+  MBottomNavigator,
+  UBottomNavigator,
+} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
-const MainApp = () => { //untuk umum
+const MainApp = () => {
+  //untuk umum
   return (
     <Tab.Navigator tabBar={props => <UBottomNavigator {...props} />}>
-      <Tab.Screen name="Home" component={UmumHome} />
+      <Tab.Screen name="Home" component={AlumniHome} />
       <Tab.Screen name="List Alumni" component={UmumList} />
       <Tab.Screen name="Lainnya" component={UmumLainnya} />
     </Tab.Navigator>
   );
 };
-const MainAppCollege = () => { //buat mahasiswa
+const MainAppCollege = () => {
+  //buat mahasiswa
   return (
     <Tab.Navigator tabBar={props => <MBottomNavigator {...props} />}>
-      <Tab.Screen name="Home" component={MhsHome} />
-      <Tab.Screen name="Chat" component={MhsChat} />
-      <Tab.Screen name="Lainnya" component={MhsLainnya} />
+      <Tab.Screen name="Home" component={AlumniHome} />
+      <Tab.Screen name="Chat" component={AlumniChat} />
+      <Tab.Screen name="Lainnya" component={AlumniLainnya} />
     </Tab.Navigator>
   );
 };
-const MainAppGraduated = () => { //buat alumni
+const MainAppGraduated = () => {
+  //buat alumni
   return (
     <Tab.Navigator tabBar={props => <ABottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={AlumniHome} />
@@ -51,7 +96,7 @@ const MainAppGraduated = () => { //buat alumni
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainAppGraduated">
+    <Stack.Navigator initialRouteName="AlumniProfileUser">
       <Stack.Screen
         name="Splashscreen"
         component={Splashscreen}
@@ -162,6 +207,21 @@ const Router = () => {
       <Stack.Screen
         name="AlumniChatting"
         component={AlumniChatting}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AlumniFilter"
+        component={AlumniFilter}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchPage"
+        component={SearchPage}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchAlumni"
+        component={SearchAlumni}
         options={{headerShown: false}}
       />
       {/* Mahasiswa */}

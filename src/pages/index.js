@@ -27,6 +27,9 @@ import AlumniKontrib from './AlumniKontrib';
 import AlumniTulisBerita from './AlumniTulisBerita';
 import AlumniBeritaUnggah from './AlumniBeritaUnggah';
 import AlumniChatting from './AlumniChatting';
+import AlumniFilter from './AlumniFilter';
+import SearchPage from './SearchPage';
+import SearchAlumni from './SearchAlumni';
 
 import MahasiswaDaftar from './MahasiswaDaftar';
 import MhsHome from './MhsHome';
@@ -58,17 +61,54 @@ import UmumTentangKami from './UmumTentangKami';
 import UmumKontak from './UmumKontak';
 import UmumDisclaimer from './UmumDisclaimer';
 
-
-
-export {Home, Chat, Berita, Akun,
-    Splashscreen, Intro, Masuk, Daftar,
-    AlumniDaftar, AlumniHome, AlumniChat, AlumniBerita, AlumniLainnya, 
-    AlumniDetailBerita, AlumniKomentar, AlumniProfileAuthor, AlumniProfileUser,
-    AlumniEditProfile, AlumniTentangKami, AlumniKontak, AlumniDisclaimer,
-    AlumniList, AlumniKontrib, AlumniTulisBerita, AlumniBeritaUnggah,
-    AlumniChatting, 
-    MahasiswaDaftar, MhsHome, MhsChat, MhsLainnya, MhsDetailBerita,
-    MhsKomentar, MhsProfileAuthor, MhsProfileUser, MhsEditProfile,
-    MhsTentangKami, MhsKontak, MhsDisclaimer, MhsListAlumni, MhsChatting,
-    UmumList, UmumLainnya, UmumHome, UmumDetailBerita, UmumKomentar, UmumProfileAuthor, 
-    UmumTentangKami, UmumKontak, UmumDisclaimer};
+export {
+  Home,
+  Chat,
+  Berita,
+  Akun,
+  Splashscreen,
+  Intro,
+  Masuk,
+  Daftar,
+  AlumniDaftar,
+  AlumniHome,
+  AlumniChat,
+  AlumniBerita,
+  AlumniLainnya,
+  AlumniDetailBerita,
+  AlumniKomentar,
+  AlumniProfileAuthor,
+  AlumniProfileUser,
+  AlumniEditProfile,
+  AlumniTentangKami,
+  AlumniKontak,
+  AlumniDisclaimer,
+  AlumniList,
+  AlumniKontrib,
+  AlumniTulisBerita,
+  AlumniBeritaUnggah,
+  AlumniChatting, AlumniFilter, SearchPage, SearchAlumni,
+  MahasiswaDaftar,
+  MhsHome,
+  MhsChat,
+  MhsLainnya,
+  MhsDetailBerita,
+  MhsKomentar,
+  MhsProfileAuthor,
+  MhsProfileUser,
+  MhsEditProfile,
+  MhsTentangKami,
+  MhsKontak,
+  MhsDisclaimer,
+  MhsListAlumni,
+  MhsChatting,
+  UmumList,
+  UmumLainnya,
+  UmumHome,
+  UmumDetailBerita,
+  UmumKomentar,
+  UmumProfileAuthor,
+  UmumTentangKami,
+  UmumKontak,
+  UmumDisclaimer,
+};
