@@ -21,7 +21,7 @@ export const getData = async key => {
 
 export const updateToken = async (key, token) => {
   try {
-    const value = await AsyncStorage.getItem(key);
+    const value = await getData(key);
     if (value !== null) {
       var data = value;
       data = {

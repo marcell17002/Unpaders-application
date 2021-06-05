@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import {
   Headers,
@@ -7,9 +7,32 @@ import {
   ListAlumniChat,
 } from '../../components/moleculs';
 import {Gap, ListButton} from '../../components/atoms';
-import {fonts, colors, useForm} from '../../utils';
+import {fonts, colors, useForm, getDateName, notifications} from '../../utils';
+import {api} from '../../services';
+import {useSelector} from 'react-redux';
 
 const AlumniBerita = ({navigation}) => {
+  const user = useSelector(state => state).user;
+  const [event, setEvent] = useState([]);
+  console.log('isi user id : ', user.id);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      api.getEventByCategory('author', user.id).then(
+        res => setEvent(res.data),
+        err => console.log('isi err', event),
+      );
+    });
+    return unsubscribe;
+  }, [navigation]);
+  const editableEvent = payload => {
+    console.log('isi event :', payload);
+    if (payload.status === 'waiting') {
+      return notifications(
+        'info',
+        'silahkan menunggu data anda direview oleh admin',
+      );
+    } else return navigation.navigate('AlumniTulisBerita', payload);
+  };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.page}>
@@ -32,13 +55,19 @@ const AlumniBerita = ({navigation}) => {
         </View>
         <Gap height={24} />
         <Text style={styles.sectionLainnya}>DAFTAR UNGGAH BERITA</Text>
-        <Event
-          category="AKTUAL"
-          time="3 JAM YANG LALU"
-          title="Irawati Hermawan: Penanganan Covid-19 Perlu Kolaborasi"
-          author="Tim Unpaders"
-          onPress={() => navigation.navigate('AlumniHome')}
-        />
+        {event.map(item => {
+          return (
+            <Event
+              isHistory
+              status={item.status}
+              category={item.category}
+              time={getDateName(item.createdAt)}
+              picture={item.image}
+              title={item.title}
+              onPress={() => editableEvent(item)}
+            />
+          );
+        })}
       </View>
     </ScrollView>
   );

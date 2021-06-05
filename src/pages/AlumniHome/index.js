@@ -1,20 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Headers, Kategori, Event, SubKategori} from '../../components/moleculs';
-import { Gap } from '../../components/atoms';
+import {Gap} from '../../components/atoms';
 import {api} from '../../services';
-import {colors, filterData, fonts, notifications} from '../../utils';
+import {colors, filterData, fonts, notifications, useForm} from '../../utils';
 import moment from 'moment';
-
+import SubCategoryHome from '../../components/moleculs/SubCategoryHome';
+SubCategoryHome;
 const AlumniHome = ({navigation}) => {
   const [event, setEvent] = useState([]);
   const [tempEvent, setTempEvent] = useState([]);
-
+  const [subCategory, setSubCategory] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
     api.getEventByCategory('status', 'published').then(
-      res => {
-        setEvent(res.data);
-        setTempEvent(res.data);
+      async res => {
+        const eventData = res.data;
+        const data = [];
+        const promises = await Object.keys(eventData).map(async key => {
+          await api.getProfileUser(eventData[key].author).then(
+            async res => {
+              await data.push({
+                id: key,
+                name: res.data[0].name,
+                userImage: res.data[0].image,
+                ...eventData[key],
+              });
+            },
+            err => console.log('isi error alumni home:', err),
+          );
+        });
+        await Promise.all(promises);
+        setEvent(data);
+        setTempEvent(data);
       },
       err => notifications('danger', 'no internet connection'),
     );
@@ -24,176 +42,87 @@ const AlumniHome = ({navigation}) => {
     const filteredData = await filterData(tempEvent, 'category', props);
     await setEvent(filteredData);
   };
+  const filterDataSubCategory = async props => {
+    const data = tempEvent;
+    const filteredData = await filterData(data, 'subCategory', props);
+    console.log('isi data : ', props);
+    await setEvent(filteredData);
+  };
   return (
     <View style={styles.page}>
-      <Headers title="Home" type="main-search" 
-      onPressRight={() => navigation.navigate('SearchPage')}/>
-    
-    <ScrollView style={styles.event} showsVerticalScrollIndicator={false}>
-      <View style={styles.kategori}>
-        <Kategori
-          type="aktif"
-          onPress={() => setEvent(tempEvent)}
-          pict={require('../../assets/KatSemua.png')}
-          title="Semua"
-        />
-        <Kategori
-          onPress={() => filterDataEvent('umum')}
-          pict={require('../../assets/KatAktual.png')}
-          title="Aktual"
-        />
-        <Kategori
-          onPress={() => filterDataEvent('hobi')}
-          pict={require('../../assets/KatAlumni.png')}
-          title="Alumni"
-        />
-        <Kategori
-          onPress={() => filterDataEvent('lapak')}
-          pict={require('../../assets/KatLapak.png')}
-          title="Lapak"
-        />
-        <Kategori
-          onPress={() => filterDataEvent('loker')}
-          pict={require('../../assets/KatLoker.png')}
-          title="Loker"
-        />
-      </View>
-        
-      
-      {/* AKTUAL */}
-      <View >
-        <View style={styles.textSubkat}>
-          <Text style={styles.judulKategori}>Aktual</Text>
-          <Gap height={12}/>
-          <Text style={styles.descKategori}>Berita teraktual seputar kegiatan dan acara yang diadakan IKA Unpad</Text>
-        </View>
-        <Gap height={24}/> 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Subkat}>
-          <SubKategori
-          //onPress={() => filterDataEvent('umum')}
-          pict={require('../../assets/Ak-Berita.png')}
-          title="Berita"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/Ak-Acara.png')}
-            title="Acara"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/Ak-Opini.png')}
-            title="Opini"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/Ak-Akademis.png')}
-            title="Akademis"
-          />
-          <Gap width={20}/>
-        </ScrollView>
-      </View>
+      <Headers
+        title="Home"
+        type="main-search"
+        onPressRight={() => navigation.navigate('SearchPage')}
+      />
 
-      {/* ALUMNI */}
-      <View >
-        <View style={styles.textSubkat}>
-          <Text style={styles.judulKategori}>Alumni</Text>
-          <Gap height={12}/>
-          <Text style={styles.descKategori}>Artikel seputar Alumni Unpad dan Universitas Padjadjaran</Text>
+      <ScrollView style={styles.event} showsVerticalScrollIndicator={false}>
+        <View style={styles.kategori}>
+          <Kategori
+            type="aktif"
+            onPress={() => {
+              setSubCategory('semua');
+              setEvent(tempEvent);
+              setActiveIndex(0);
+            }}
+            active={activeIndex === 0 ? true : false}
+            pict={require('../../assets/KatSemua.png')}
+            title="Semua"
+          />
+          <Kategori
+            onPress={() => {
+              filterDataEvent('Aktual');
+              setSubCategory('Aktual');
+              setActiveIndex(1);
+            }}
+            active={activeIndex === 1 ? true : false}
+            pict={require('../../assets/KatAktual.png')}
+            title="Aktual"
+          />
+          <Kategori
+            onPress={() => {
+              filterDataEvent('Alumni');
+              setSubCategory('Alumni');
+              setActiveIndex(2);
+            }}
+            active={activeIndex === 2 ? true : false}
+            pict={require('../../assets/KatAlumni.png')}
+            title="Alumni"
+          />
+          <Kategori
+            onPress={() => {
+              filterDataEvent('Lapak');
+              setSubCategory('Lapak');
+              setActiveIndex(3);
+            }}
+            active={activeIndex === 3 ? true : false}
+            pict={require('../../assets/KatLapak.png')}
+            title="Lapak"
+          />
+          <Kategori
+            onPress={() => {
+              filterDataEvent('Loker');
+              setSubCategory('Loker');
+              setActiveIndex(4);
+            }}
+            active={activeIndex === 4 ? true : false}
+            pict={require('../../assets/KatLoker.png')}
+            title="Loker"
+          />
         </View>
-        <Gap height={24}/>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Subkat}>
-          <SubKategori
-          //onPress={() => filterDataEvent('umum')}
-          pict={require('../../assets/Al-Terkini.png')}
-          title="Terkini"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/Al-Wikialumni.png')}
-            title="WikiAlumni"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/Al-Berkabar.png')}
-            title="Berkabar"
-          />
-          <Gap width={20}/>
-        </ScrollView>
-      </View>
-
-      {/* Lapak */}
-      <View >
-        <View style={styles.textSubkat}>
-          <Text style={styles.judulKategori}>Lapak</Text>
-          <Gap height={12}/>
-          <Text style={styles.descKategori}>Artikel seputar kegiatan bisnis mandiri Alumni Unpad </Text>
-        </View>
-        <Gap height={24}/> 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Subkat}>
-          <SubKategori
-          //onPress={() => filterDataEvent('umum')}
-          pict={require('../../assets/La-Umkm.png')}
-          title="UMKM Center"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/La-Kuliner.png')}
-            title="Kuliner"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/La-Bisnis.png')}
-            title="Kiat Bisnis"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/La-Merchandise.png')}
-            title="Merchandise"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/La-Preloved.png')}
-            title="Preloved"
-          />
-          <Gap width={20}/>
-        </ScrollView>
-      </View>
-
-      {/* Loker */}
-      <View >
-        <View style={styles.textSubkat}>
-          <Text style={styles.judulKategori}>Loker</Text>
-          <Gap height={12}/>
-          <Text style={styles.descKategori}>Artikel seputar informasi lowongan kerja baik Internship, Fulltime, dan Freelance</Text>
-        </View>
-        <Gap height={24}/> 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Subkat}>
-          <SubKategori
-          //onPress={() => filterDataEvent('umum')}
-          pict={require('../../assets/Lo-Internship.png')}
-          title="Internship"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/Lo-Fulltime.png')}
-            title="Fulltime"
-          />
-          <SubKategori
-            //onPress={() => filterDataEvent('umum')}
-            pict={require('../../assets/Lo-Freelance.png')}
-            title="Freelance"
-          />
-          <Gap width={20}/>
-        </ScrollView>
-      </View>
-      
+        <SubCategoryHome
+          props={subCategory}
+          parentCallBack={filterDataSubCategory}
+        />
         {event.map(item => {
           return (
             <Event
               category={item.category}
               time={moment(item.createdAt).fromNow()}
               title={item.title}
-              author={item.author.name}
+              picture={item.image}
+              userPicture={item.userImage}
+              author={item.name}
               onPress={() => navigation.navigate('AlumniDetailBerita', item)}
             />
           );

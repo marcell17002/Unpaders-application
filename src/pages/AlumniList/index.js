@@ -10,7 +10,19 @@ const AlumniList = ({navigation}) => {
   const [alumni, setAlumni] = useState([]);
   useEffect(() => {
     api.getUserByCategory('status', 'alumni').then(
-      res => setAlumni(res.data),
+      async res => {
+        const alumnus = res.data;
+        const data = [];
+        const promises = await Object.keys(alumnus).map(async key => {
+          await data.push({
+            idReceiver: alumnus[key]._id,
+            isNew: true,
+            ...alumnus[key],
+          });
+        });
+        await Promise.all(promises);
+        await setAlumni(data);
+      },
       err => console.log('isi err : ', err),
     );
   }, []);
@@ -21,7 +33,8 @@ const AlumniList = ({navigation}) => {
           title="Temukan Alumni"
           type="three-icon"
           onPressBack={() => navigation.goBack()}
-          onPressMiddle={() => navigation.navigate('SearchAlumni')}
+          onPressMiddle={() => navigation.navigate('SearchAlumni', alumni)}
+          onPressRight={() => navigation.navigate('AlumniFilter')}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -35,6 +48,10 @@ const AlumniList = ({navigation}) => {
                 fakultas={item.faculty}
                 jurusan={item.prodi}
                 angkatan={item.level}
+                onPressImage={() =>
+                  navigation.navigate('AlumniProfileAuthor', item)
+                }
+                onPressBody={() => navigation.navigate('AlumniChatting', item)}
               />
             );
           })}

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {colors, fonts} from '../../../utils';
 import {Gap} from '../../atoms';
 
-const Kategori = ({type, title, onPress, pict, }) => {
+const Kategori = ({type, active, title, onPress, pict}) => {
   // const Ctgry = () => {
   //   if (type === 'aktif') {
   //     return (
@@ -17,7 +17,7 @@ const Kategori = ({type, title, onPress, pict, }) => {
   //       </TouchableOpacity>
   //     </>
   //     );
-  //   } 
+  //   }
   //   else {
   //     <>
   //       <TouchableOpacity onPress={onPress} style={styles.container}>
@@ -31,20 +31,20 @@ const Kategori = ({type, title, onPress, pict, }) => {
   //   }
   // };
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-     <View style={styles.ImageCont}>
-       <Image style={styles.image} source={pict} />
-     </View>
-     <Gap height={16} />
-     <Text style={styles.text}>{title}</Text>
-     </TouchableOpacity>
+    <TouchableOpacity onPress={onPress} style={styles.container(active)}>
+      <View style={styles.ImageCont}>
+        <Image style={styles.image} source={pict} />
+      </View>
+      <Gap height={16} />
+      <Text style={styles.text(active)}>{title}</Text>
+    </TouchableOpacity>
   );
 };
 
 export default Kategori;
 
 const styles = StyleSheet.create({
-  container: {
+  container: active => ({
     height: 91,
     width: 62,
     paddingTop: 14,
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 1,
     elevation: 2,
-    backgroundColor: colors.primaryWhite,
-  },
+    backgroundColor: active ? colors.primary : colors.primaryWhite,
+  }),
   containerActive: {
     height: 91,
     width: 62,
@@ -82,12 +82,12 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     alignSelf: 'center',
   },
-  text: {
+  text: active => ({
     fontSize: 14,
     fontFamily: fonts.primary.semibold,
-    color: colors.text.tertiary,
+    color: active ? colors.primaryWhite : colors.text.tertiary,
     textAlign: 'center',
-  },
+  }),
   textActive: {
     fontSize: 14,
     fontFamily: fonts.primary.semibold,

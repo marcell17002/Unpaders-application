@@ -37,8 +37,7 @@ const AlumniChat = ({navigation, route}) => {
   const user = useSelector(state => state).user;
 
   useEffect(() => {
-    console.log('isi redux : ', payload.image);
-    api.getProfileUser(payload.author.id).then(
+    api.getProfileUser(payload.author).then(
       res => setAuthor(res.data[0]),
       err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
     );
@@ -64,11 +63,13 @@ const AlumniChat = ({navigation, route}) => {
       async res => {
         const filterStatusTrue = await filterData(res.data, 'status', true);
         setCountLike(filterStatusTrue); //counter like
+        console.log('isi filrer : ', filterStatusTrue);
         const filterStatusFalse = await filterData(res.data, 'status', false);
         setCountDislike(filterStatusFalse); //counter false
       },
       err => {
-        console.log('errror get liked : ', err);
+        setCountLike([]);
+        setCountDislike([]);
       },
     );
   };
@@ -106,10 +107,10 @@ const AlumniChat = ({navigation, route}) => {
 
   const deleteCounter = async status => {
     await api.deleteLikedEvent(idLike).then(
-      res => {
+      async res => {
         if (status === true) setLike(false);
         else setDislike(false);
-        updateValueLiked();
+        await updateValueLiked();
       },
       err => console.log('errr del: ', err),
     );
@@ -150,10 +151,11 @@ const AlumniChat = ({navigation, route}) => {
           <Gap height={24} />
           <Berita
             title={payload.title}
-            author={payload.author.name}
+            author={author.name}
             waktu={getDateName(payload.createdAt)}
             isiBerita={payload.desc}
             images={payload.image}
+            imagesUser={author.image}
           />
           <Gap height={24} />
         </View>
@@ -163,7 +165,8 @@ const AlumniChat = ({navigation, route}) => {
         <View>
           <Gap height={24} />
           <Comment
-            author={payload.author.name}
+            author={author.name}
+            image={author.image}
             waktu={getDateName(payload.createdAt)}
             onPress={() => navigation.navigate('AlumniProfileAuthor', author)}
           />
@@ -172,7 +175,7 @@ const AlumniChat = ({navigation, route}) => {
             <Buttons
               status="secondary"
               title="LIHAT KOMENTAR"
-              onPress={() => navigation.navigate('AlumniKomentar')}
+              onPress={() => navigation.navigate('AlumniKomentar', payload._id)}
             />
             <Gap height={24} />
           </View>
@@ -225,7 +228,7 @@ export default AlumniChat;
 
 const styles = StyleSheet.create({
   rating: {
-    flexDirection: 'space-between',
+    flexDirection: 'row',
     height: 60,
     backgroundColor: 'white',
     shadowColor: '#000',

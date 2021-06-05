@@ -8,9 +8,21 @@ import {
 } from 'react-native';
 import {Gap, ListButton} from '../../components/atoms/';
 import {Headers} from '../../components/moleculs/';
+import {api} from '../../services';
 import {fonts, colors, destroyData} from '../../utils';
+import {useSelector} from 'react-redux';
 
 const AlumniLainnya = ({navigation}) => {
+  const user = useSelector(state => state).user;
+  const onLogOut = () => {
+    api.deleteRefreshToken(user.id).then(
+      res => {
+        destroyData();
+        navigation.replace('Intro');
+      },
+      err => {},
+    );
+  };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.page}>
@@ -81,10 +93,7 @@ const AlumniLainnya = ({navigation}) => {
           <Text style={styles.textGap}>LOGOUT</Text>
           <Gap height={12} />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            destroyData(), navigation.replace('Intro');
-          }}>
+        <TouchableOpacity onPress={() => onLogOut()}>
           <Text style={styles.logout}>Logout Akun</Text>
         </TouchableOpacity>
       </View>

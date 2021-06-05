@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,11 +15,13 @@ import {
   notifications,
   checkValue,
   destroyData,
+  filterData,
 } from '../../utils';
 import {Icon} from 'native-base';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {BASE_URL_ROOT} from '@env';
 import {api} from '../../services';
+import {Picker} from 'native-base';
 
 const AlumniEditProfile = ({navigation, route}) => {
   const payload = route.params;
@@ -27,6 +29,91 @@ const AlumniEditProfile = ({navigation, route}) => {
   const pathImage = `${BASE_URL_ROOT}${profile.image}`;
   const [photo, setPhoto] = useState(pathImage);
   const [profileImage, setProfileImage] = useState('');
+  const [facultyList, setFacultyList] = useState([
+    {label: 'F. Ekonomi dan Bisnis'},
+    {label: 'F. Farmasi'},
+    {label: 'F. Hukum'},
+    {label: 'F. Ilmu Budaya'},
+    {label: 'F. Fisip'},
+    {label: 'F. Kedokteran'},
+    {label: 'F. Kedokteran Gigi'},
+    {label: 'F. MIPA'},
+    {label: 'F. PIK'},
+    {label: 'F. Pertanian'},
+    {label: 'F. Peternakan'},
+    {label: 'F. Psikologi'},
+    {label: 'F. Geologi'},
+    {label: 'F. Industri Pertanian'},
+  ]);
+  const [prodiList, setProdiList] = useState([
+    {label: 'Administrasi Publik', faculty: 'F. MIPA'},
+    {label: 'Agribisnis', faculty: 'F. MIPA'},
+    {label: 'Agroteknologi', faculty: 'F. MIPA'},
+    {label: 'Aktuaria'},
+    {label: 'Akuntansi'},
+    {label: 'Antropologi', faculty: 'F. Fisip'},
+    {label: 'Biologi'},
+    {label: 'Bisnis Digital'},
+    {label: 'Ekonomi Islam'},
+    {label: 'Ekonomi Pembangunan'},
+    {label: 'Farmasi'},
+    {label: 'Fisika'},
+    {label: 'Geofisika'},
+    {label: 'Geologi'},
+    {label: 'Hubungan Internasional', faculty: 'F. Fisip'},
+    {label: 'Hubungan Masyarakat'},
+    {label: 'Hukum'},
+    {label: 'Ilmu Kelautan'},
+    {label: 'Ilmu Komunikasi'},
+    {label: 'Ilmu Pemerintahan'},
+    {label: 'Ilmu Politik'},
+    {label: 'Ilmu Sejarah'},
+    {label: 'Jurnalistik'},
+    {label: 'Kedokteran'},
+    {label: 'Kedokteran Gigi'},
+    {label: 'Keperawatan'},
+    {label: 'Kesejahteraan Sosial'},
+    {label: 'Kimia'},
+    {label: 'Manajemen'},
+    {label: 'Manajemen Komunikasi'},
+    {label: 'Matematika'},
+    {label: 'Perikanan'},
+    {label: 'Perpustakaan'},
+    {label: 'Peternakan'},
+    {label: 'Psikologi'},
+    {label: 'Sastra Arab'},
+    {label: 'Sastra Indonesia'},
+    {label: 'Sastra Inggris'},
+    {label: 'Sastra Jepang'},
+    {label: 'Sastra Jerman'},
+    {label: 'Sastra Perancis'},
+    {label: 'Sastra Rusia'},
+    {label: 'Sastra Sunda'},
+    {label: 'Statistika'},
+    {label: 'Sosiologi'},
+    {label: 'Teknik Elektro'},
+    {label: 'Teknik Informatika'},
+    {label: 'Teknik Pertanian'},
+    {label: 'Teknologi Pangan'},
+    {label: 'Televisi dan Film'},
+    {label: 'T. Industri Pertanian'},
+  ]);
+  const [prodiTemp, setProdiTemp] = useState([]);
+  useEffect(async () => {
+    const filteredData = await filterData(
+      prodiList,
+      'faculty',
+      payload.faculty,
+    );
+    await setProdiTemp(filteredData);
+  }, []);
+  const filterDataProdi = async props => {
+    const filteredData = await filterData(prodiList, 'faculty', props);
+    await setProdiTemp(filteredData);
+    console.log('isi data faculty : ', props, filteredData[1].label);
+    changeText('prodi', filteredData[1].label);
+    changeText('faculty', props);
+  };
 
   const getImage = () => {
     launchImageLibrary(
@@ -151,7 +238,7 @@ const AlumniEditProfile = ({navigation, route}) => {
               placeholder="Masukkan Nomor Pokok Mahasiswa"
             />
             <Gap height={24} />
-            
+
             {/* <Inputs
               value={profile.faculty}
               onChangeText={value => changeText('faculty', value)}
@@ -166,99 +253,34 @@ const AlumniEditProfile = ({navigation, route}) => {
               placeholder="Masukkan Program Studi"
             /> */}
 
-            {/* PICKER FAKULTAS */}
             <View>
-                <Text style={styles.titleText}>Fakultas</Text>
-                <View style={styles.contPicker}>  
-                  <Picker style={styles.contText}
-                  // placeholder="Pilih Kategori"
-                  // mode="dropdown"
-                  >
-                    <Picker.Item label="Pilih Kategori" value="disabled"/>
-                    <Picker.Item label="F. Ekonomi dan Bisnis"/>
-                    <Picker.Item label="F. Farmasi"/>
-                    <Picker.Item label="F. Hukum"/>
-                    <Picker.Item label="F. Ilmu Budaya"/>
-                    <Picker.Item label="F. Ilmu Komunikasi"/>
-                    <Picker.Item label="F. ISIP"/>
-                    <Picker.Item label="F. Kedokteran"/>
-                    <Picker.Item label="F. Kedokteran Gigi"/>
-                    <Picker.Item label="F. Keperawatan"/>
-                    <Picker.Item label="F. MIPA"/>
-                    <Picker.Item label="F. PIK"/>
-                    <Picker.Item label="F. Pertanian"/>
-                    <Picker.Item label="F. Peternakan"/>
-                    <Picker.Item label="F. Psikologi"/>
-                    <Picker.Item label="F. T. Geologi"/>
-                    <Picker.Item label="F. T. Industri Pertanian"/>
-                  </Picker>
-                </View>
+              <Text style={styles.titleText}>Fakultas</Text>
+              <View style={styles.contPicker}>
+                <Picker
+                  style={styles.contText}
+                  selectedValue={profile.faculty}
+                  onValueChange={value => filterDataProdi(value)}>
+                  {facultyList.map(item => {
+                    return (
+                      <Picker.Item label={item.label} value={item.label} />
+                    );
+                  })}
+                </Picker>
+              </View>
             </View>
             <Gap height={24} />
-            {/* PICKER PROGRAM STUDI */}
-          <View>
+            <View>
               <Text style={styles.titleText}>Program Studi</Text>
-              <View style={styles.contPicker}>  
-                <Picker style={styles.contText}
-                // placeholder="Pilih Kategori"
-                // mode="dropdown"
-                >
-                  <Picker.Item label="Pilih Kategori" value="disabled"/>
-                  <Picker.Item label="Administrasi Bisnis"/>
-                  <Picker.Item label="Administrasi Publik"/>
-                  <Picker.Item label="Agribisnis"/>
-                  <Picker.Item label="Agroteknologi"/>
-                  <Picker.Item label="Aktuaria"/>
-                  <Picker.Item label="Akuntansi"/>
-                  <Picker.Item label="Antropologi"/>
-                  <Picker.Item label="Biologi"/>
-                  <Picker.Item label="Bisnis Digital"/>
-                  <Picker.Item label="Ekonomi Islam"/>
-                  <Picker.Item label="Ekonomi Pembangunan"/>
-                  <Picker.Item label="Farmasi"/>
-                  <Picker.Item label="Fisika"/>
-                  <Picker.Item label="Geofisika"/>
-                  <Picker.Item label="Geologi"/>
-                  <Picker.Item label="Hubungan Internasional"/>
-
-                  <Picker.Item label="Hubungan Masyarakat"/>
-                  <Picker.Item label="Hukum"/>
-                  <Picker.Item label="Ilmu Kelautan"/>
-                  <Picker.Item label="Ilmu Komunikasi"/>
-                  <Picker.Item label="Ilmu Pemerintahan"/>
-                  <Picker.Item label="Ilmu Politik"/>
-                  <Picker.Item label="Ilmu Sejarah"/>
-                  <Picker.Item label="Jurnalistik"/>
-                  <Picker.Item label="Kedokteran"/>
-                  <Picker.Item label="Kedokteran Gigi"/>
-                  <Picker.Item label="Keperawatan"/>
-                  <Picker.Item label="Kesejahteraan Sosial"/>
-                  <Picker.Item label="Kimia"/>
-                  <Picker.Item label="Manajemen"/>
-                  <Picker.Item label="Manajemen Komunikasi"/>
-                  <Picker.Item label="Matematika"/>
-
-                  <Picker.Item label="Perikanan"/>
-                  <Picker.Item label="Perpustakaan"/>
-                  <Picker.Item label="Peternakan"/>
-                  <Picker.Item label="Psikologi"/>
-                  <Picker.Item label="Sastra Arab"/>
-                  <Picker.Item label="Sastra Indonesia"/>
-                  <Picker.Item label="Sastra Inggris"/>
-                  <Picker.Item label="Sastra Jepang"/>
-                  <Picker.Item label="Sastra Jerman"/>
-                  <Picker.Item label="Sastra Perancis"/>
-                  <Picker.Item label="Sastra Rusia"/>
-                  <Picker.Item label="Sastra Sunda"/>
-                  
-                  <Picker.Item label="Statistika"/>
-                  <Picker.Item label="Sosiologi"/>
-                  <Picker.Item label="Teknik Elektro"/>
-                  <Picker.Item label="Teknik Informatika"/>
-                  <Picker.Item label="Teknik Pertanian"/>
-                  <Picker.Item label="Teknologi Pangan"/>
-                  <Picker.Item label="Televisi dan Film"/>
-                  <Picker.Item label="T. Industri Pertanian"/>
+              <View style={styles.contPicker}>
+                <Picker
+                  style={styles.contText}
+                  selectedValue={profile.prodi}
+                  onValueChange={value => changeText('prodi', value)}>
+                  {prodiTemp.map(item => {
+                    return (
+                      <Picker.Item label={item.label} value={item.label} />
+                    );
+                  })}
                 </Picker>
               </View>
             </View>
@@ -352,9 +374,10 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     marginBottom: 12,
   },
-  contText: { //INI GAMAU KE GANTI STYLENYA
+  contText: {
+    //INI GAMAU KE GANTI STYLENYA
     fontSize: 8,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
-  }, 
+  },
 });

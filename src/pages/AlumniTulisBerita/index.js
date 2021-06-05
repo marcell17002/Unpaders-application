@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,7 @@ import {
   checkValue,
   colors,
   errorParse,
+  filterData,
   fonts,
   getData,
   notifications,
@@ -22,11 +23,47 @@ import {useSelector} from 'react-redux';
 import {api} from '../../services';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {BASE_URL_ROOT} from '@env';
+import {Picker} from 'native-base';
 
 const AlumniTulisBerita = ({navigation, route}) => {
   const payload = route.params;
   const user = useSelector(state => state).user;
   const [photo, setPhoto] = useState('');
+
+  const [categoryList, setCategoryList] = useState([
+    {category: 'Aktual'},
+    {category: 'Alumni'},
+    {category: 'Lapak'},
+    {category: 'Loker'},
+  ]);
+  const [subCategoryList, setSubCategoryList] = useState([
+    {subCategory: 'Berita', category: 'Aktual'},
+    {subCategory: 'Acara', category: 'Aktual'},
+    {subCategory: 'Opini', category: 'Aktual'},
+    {subCategory: 'Akademis', category: 'Aktual'},
+    {subCategory: 'Terkini', category: 'Alumni'},
+    {subCategory: 'WikiAlumni', category: 'Alumni'},
+    {subCategory: 'Berkabar', category: 'Alumni'},
+    {subCategory: 'UMKM Center', category: 'Lapak'},
+    {subCategory: 'Kuliner', category: 'Lapak'},
+    {subCategory: 'Kiat Bisnis', category: 'Lapak'},
+    {subCategory: 'Preloved', category: 'Lapak'},
+    {subCategory: 'Intership', category: 'Loker'},
+    {subCategory: 'Fulltime', category: 'Loker'},
+    {subCategory: 'Freelance', category: 'Loker'},
+  ]);
+  const [subCategoryTemp, setSubCategoryTemp] = useState([]);
+
+  useEffect(async () => {
+    await setSubCategoryTemp(subCategoryList);
+  }, []);
+
+  const filterDataSubCategory = async props => {
+    const filteredData = await filterData(subCategoryList, 'category', props);
+    await setSubCategoryTemp(filteredData);
+    await setForm('subCategory', filteredData[1].category);
+    await setForm('category', props);
+  };
   const [form, setForm] = useForm({
     title: payload ? payload.title : '',
     image: payload ? payload.image : '',
@@ -35,13 +72,6 @@ const AlumniTulisBerita = ({navigation, route}) => {
     author: user.id,
     desc: payload ? payload.desc : '',
     status: 'waiting',
-  });
-
-  getData('user').then(res => {
-    if (res) {
-      console.log('isi res', res);
-      return res;
-    }
   });
 
   const getImage = () => {
@@ -126,11 +156,10 @@ const AlumniTulisBerita = ({navigation, route}) => {
               placeholder="Judul Berita"
             />
             <Gap height={24} />
-            <Inputs title="Foto" placeholder="Pilih Foto" />
-            <Gap height={24} />
+            <Text style={styles.titleText}>Foto</Text>
             <TouchableOpacity
               onPress={() => getImage()}
-              style={styles.eventWrapper}>
+              style={styles.eventWrapper(payload)}>
               {payload ? (
                 <Image
                   style={styles.photoEvent}
@@ -140,33 +169,73 @@ const AlumniTulisBerita = ({navigation, route}) => {
                       : {uri: `${BASE_URL_ROOT}${payload.image}`}
                   }
                 />
-              ) : (
-                <Image
-                  style={styles.photoEvent}
-                  source={
-                    photo
-                      ? {uri: photo}
-                      : require('../../assets/default-image.png')
-                  }
-                />
-              )}
+              ) : null}
             </TouchableOpacity>
+            {payload ? null : (
+              <TouchableOpacity onPress={() => getImage()}>
+                {photo ? (
+                  <Image
+                    style={styles.photoEvent}
+                    source={
+                      photo
+                        ? {uri: photo}
+                        : require('../../assets/default-image.png')
+                    }
+                  />
+                ) : (
+                  <View style={styles.inputImage}>
+                    <Image
+                      style={styles.photoInput}
+                      source={require('../../assets/default-image.png')}
+                    />
+                    <Text>Pilih Foto</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            )}
+
+            <Gap height={24} />
+            <View>
+              <Text style={styles.titleText}>Kategori</Text>
+              <View style={styles.contPicker}>
+                <Picker
+                  style={styles.contText}
+                  selectedValue={form.category}
+                  onValueChange={value => filterDataSubCategory(value)}>
+                  {categoryList.map(item => {
+                    return (
+                      <Picker.Item
+                        label={item.category}
+                        value={item.category}
+                      />
+                    );
+                  })}
+                </Picker>
+              </View>
+            </View>
+            <Gap height={24} />
+            <View>
+              <Text style={styles.titleText}>Sub Kategori</Text>
+              <View style={styles.contPicker}>
+                <Picker
+                  style={styles.contText}
+                  selectedValue={''}
+                  onValueChange={value => setForm('subCategory', value)}>
+                  {subCategoryTemp.map(item => {
+                    return (
+                      <Picker.Item
+                        label={item.subCategory}
+                        value={item.subCategory}
+                      />
+                    );
+                  })}
+                </Picker>
+              </View>
+            </View>
             <Gap height={24} />
             <Inputs
-              value={form.category}
-              onChangeText={value => setForm('category', value)}
-              title="Kategori"
-              placeholder="Pilih Kategori"
-            />
-            <Gap height={24} />
-            <Inputs
-              value={form.subCategory}
-              onChangeText={value => setForm('subCategory', value)}
-              title="Sub Kategori"
-              placeholder="Pilih Sub Kategori"
-            />
-            <Gap height={24} />
-            <Inputs
+              multiline
+              numberOfLines={10}
               value={form.desc}
               onChangeText={value => setForm('desc', value)}
               title="Isi Berita"
@@ -189,9 +258,9 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 20,
   },
-  eventWrapper: {
-    height: 120,
-  },
+  eventWrapper: payload => ({
+    height: payload ? 120 : 5,
+  }),
   photoEvent: {
     height: 120,
     width: '100%',
@@ -207,5 +276,52 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
+  },
+  titleText: {
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.primary,
+    marginBottom: 12,
+  },
+  inputImage: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    fontSize: 13,
+    fontFamily: fonts.primary.reguler,
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 16,
+    borderColor: colors.input.outline,
+    color: colors.text.tertiary,
+    backgroundColor: colors.input.background,
+    paddingVertical: 60,
+  },
+  photoInput: {
+    width: 20,
+    height: 20,
+    borderRadius: 5,
+    resizeMode: 'cover',
+    marginRight: '5%',
+  },
+  contTambah: {
+    alignSelf: 'flex-start',
+  },
+  contPicker: {
+    backgroundColor: colors.backgroundgrey,
+    borderRadius: 5,
+    //paddingHorizontal: 16,
+    borderColor: colors.input.outline,
+  },
+  titleText: {
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.primary,
+    marginBottom: 12,
+  },
+  contText: {
+    //INI GAMAU KE GANTI STYLENYA
+    fontSize: 8,
+    fontFamily: fonts.primary.reguler,
+    color: colors.text.primary,
   },
 });

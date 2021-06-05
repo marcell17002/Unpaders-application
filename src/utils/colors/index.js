@@ -36,7 +36,7 @@ export const colors = {
     primdonker1: mainColors.donker1,
     primdonker2: mainColors.donker2,
     grey: mainColors.greyLightest,
-    white: mainColors.primaryWhite,
+    primaryWhite: mainColors.primaryWhite,
   },
   boxShadow: {
     primary: mainColors.greyLightBox,

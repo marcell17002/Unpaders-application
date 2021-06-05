@@ -4,6 +4,7 @@ import Berita from './Berita';
 import Akun from './Akun';
 //import Alumni from './Alumni';
 
+import Auth from './Auth';
 import Splashscreen from './Splashscreen';
 import Intro from './Intro';
 import Masuk from './Masuk';
@@ -27,9 +28,9 @@ import AlumniKontrib from './AlumniKontrib';
 import AlumniTulisBerita from './AlumniTulisBerita';
 import AlumniBeritaUnggah from './AlumniBeritaUnggah';
 import AlumniChatting from './AlumniChatting';
-import AlumniFilter from './AlumniFilter';
-import SearchPage from './SearchPage';
 import SearchAlumni from './SearchAlumni';
+import SearchPage from './SearchPage';
+import AlumniFilter from './AlumniFilter';
 
 import MahasiswaDaftar from './MahasiswaDaftar';
 import MhsHome from './MhsHome';
@@ -66,6 +67,7 @@ export {
   Chat,
   Berita,
   Akun,
+  Auth,
   Splashscreen,
   Intro,
   Masuk,
@@ -87,7 +89,7 @@ export {
   AlumniKontrib,
   AlumniTulisBerita,
   AlumniBeritaUnggah,
-  AlumniChatting, AlumniFilter, SearchPage, SearchAlumni,
+  AlumniChatting,
   MahasiswaDaftar,
   MhsHome,
   MhsChat,
@@ -111,4 +113,7 @@ export {
   UmumTentangKami,
   UmumKontak,
   UmumDisclaimer,
+  SearchAlumni,
+  SearchPage,
+  AlumniFilter,
 };
