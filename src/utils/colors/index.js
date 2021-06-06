@@ -11,6 +11,7 @@ const mainColors = {
   greyLightest: '#F2F2F2',
   greyLightBox: '#C4C4C4', //warna box shadow
   black: '#4D4D4D', //warna tulisan
+  black1: 'rgba(0,0,0,0.3)',
   black2: '#2E2E2E', //warna tulisan
   white: '#ffffff', //white
   red: '#F84F31',
@@ -25,6 +26,7 @@ export const colors = {
   primaryBlack: mainColors.black,
   backgroundgrey: mainColors.greyLightest,
   primarygrey: mainColors.grey,
+  backgroundBlack: mainColors.black1,
 
   text: {
     primary: mainColors.black, //warna tulisan

@@ -107,6 +107,7 @@ const AlumniEditProfile = ({navigation, route}) => {
     );
     await setProdiTemp(filteredData);
   }, []);
+  
   const filterDataProdi = async props => {
     const filteredData = await filterData(prodiList, 'faculty', props);
     await setProdiTemp(filteredData);

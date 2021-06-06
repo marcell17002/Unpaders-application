@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Image, ScrollView, Text} from 'react-native';
 import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
-import {api} from '../../services';
+import {api, Fire} from '../../services';
 import {
   fonts,
   colors,
@@ -10,6 +10,7 @@ import {
   notifications,
   storeData,
   getData,
+  requestToken,
 } from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -34,6 +35,7 @@ const Masuk = ({navigation}) => {
         notifications('success', 'login berhasil');
         console.log('data sucess', res.data);
         dispatch({type: 'SET_PROFILE', value: res.data});
+        requestToken(res.data.id);
         await storeData('user', res.data);
         if (status === 'alumni') navigation.replace('MainAppGraduated');
         else if (status === 'mahasiswa') navigation.replace('MainAppCollege');

@@ -10,6 +10,7 @@ const initialState = {
     token: '',
     refreshToken: '',
   },
+  alumni: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +27,18 @@ const reducer = (state = initialState, action) => {
         token: action.value,
       },
     };
+  } else if (action.type === 'SET_LOADING') {
+    return {
+      ...state,
+      loading: action.value,
+    };
+  } else if (action.type === 'SET_ALUMNI') {
+    return {
+      ...state,
+      alumni: action.value,
+    };
   }
+  return state;
 };
 
 const store = createStore(reducer);

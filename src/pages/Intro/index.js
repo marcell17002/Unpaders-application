@@ -9,6 +9,7 @@ import {
   randomId,
   storeData,
   getData,
+  requestToken,
 } from '../../utils';
 import {useDispatch} from 'react-redux';
 import {BASE_IMG} from '@env';
@@ -36,6 +37,7 @@ const Intro = ({navigation}) => {
           id: res.data._id,
         };
         await dispatch({type: 'SET_PROFILE', value: data});
+        requestToken(data.id);
         console.log('isi  register :', data);
         await storeData('user', data);
       },

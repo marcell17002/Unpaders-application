@@ -24,6 +24,7 @@ import {
 import {api} from '../../services';
 import {Icon} from 'native-base';
 import {useSelector} from 'react-redux';
+import moment from 'moment';
 
 const AlumniChat = ({navigation, route}) => {
   const payload = route.params;
@@ -33,15 +34,15 @@ const AlumniChat = ({navigation, route}) => {
   const [countLike, setCountLike] = useState([]);
   const [countDislike, setCountDislike] = useState([]);
   const [idLike, setIdLike] = useState('');
-
+  const [recommendation, setRecommendation] = useState([]);
   const user = useSelector(state => state).user;
 
-  useEffect(() => {
-    api.getProfileUser(payload.author).then(
+  useEffect(async () => {
+    api.getProfileUser(payload.item.author).then(
       res => setAuthor(res.data[0]),
       err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
     );
-    api.getLikedEvent('eventId', payload._id).then(
+    api.getLikedEvent('eventId', payload.item._id).then(
       async res => {
         const filterStatusTrue = await filterData(res.data, 'status', true);
         setCountLike(filterStatusTrue); //counter like
@@ -56,10 +57,15 @@ const AlumniChat = ({navigation, route}) => {
       },
       err => {},
     );
+
+    const data = await payload.event.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    await setRecommendation(data);
   }, []);
 
   const updateValueLiked = () => {
-    api.getLikedEvent('eventId', payload._id).then(
+    api.getLikedEvent('eventId', payload.item._id).then(
       async res => {
         const filterStatusTrue = await filterData(res.data, 'status', true);
         setCountLike(filterStatusTrue); //counter like
@@ -77,7 +83,7 @@ const AlumniChat = ({navigation, route}) => {
   const postCounter = async status => {
     const dataUserLikedEvent = {
       userId: user.id,
-      eventId: payload._id,
+      eventId: payload.item._id,
       status: status,
     };
     await api.postLikedEvent(dataUserLikedEvent).then(
@@ -92,7 +98,7 @@ const AlumniChat = ({navigation, route}) => {
   const updateCounter = async status => {
     const dataUserLikedEvent = {
       userId: user.id,
-      eventId: payload._id,
+      eventId: payload.item._id,
       status: status,
     };
     await api.updateLikedEvent(dataUserLikedEvent, idLike).then(
@@ -150,11 +156,11 @@ const AlumniChat = ({navigation, route}) => {
         <View>
           <Gap height={24} />
           <Berita
-            title={payload.title}
+            title={payload.item.title}
             author={author.name}
-            waktu={getDateName(payload.createdAt)}
-            isiBerita={payload.desc}
-            images={payload.image}
+            waktu={getDateName(payload.item.createdAt)}
+            isiBerita={payload.item.desc}
+            images={payload.item.image}
             imagesUser={author.image}
           />
           <Gap height={24} />
@@ -167,7 +173,7 @@ const AlumniChat = ({navigation, route}) => {
           <Comment
             author={author.name}
             image={author.image}
-            waktu={getDateName(payload.createdAt)}
+            waktu={getDateName(payload.item.createdAt)}
             onPress={() => navigation.navigate('AlumniProfileAuthor', author)}
           />
 
@@ -175,7 +181,9 @@ const AlumniChat = ({navigation, route}) => {
             <Buttons
               status="secondary"
               title="LIHAT KOMENTAR"
-              onPress={() => navigation.navigate('AlumniKomentar', payload._id)}
+              onPress={() =>
+                navigation.navigate('AlumniKomentar', payload.item._id)
+              }
             />
             <Gap height={24} />
           </View>
@@ -187,13 +195,24 @@ const AlumniChat = ({navigation, route}) => {
         <View>
           <Gap height={24} />
           <Text style={styles.sectionLainnya}>Berita Terbaru Lainnya</Text>
-          <Event
-            category="AKTUAL"
-            time="3 JAM YANG LALU"
-            title="Irawati Hermawan: Penanganan Covid-19 Perlu Kolaborasi"
-            author="Tim Unpaders"
-            onPress={() => navigation.navigate('AlumniHome')}
-          />
+          {recommendation.slice(0, 3).map(item => {
+            return (
+              <Event
+                category={item.category}
+                time={moment(item.createdAt).fromNow()}
+                title={item.title}
+                picture={item.image}
+                userPicture={item.userImage}
+                author={item.name}
+                onPress={() =>
+                  navigation.navigate('AlumniDetailBerita', {
+                    event: payload.event,
+                    item: item,
+                  })
+                }
+              />
+            );
+          })}
         </View>
       </ScrollView>
 

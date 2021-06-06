@@ -10,3 +10,4 @@ export * from './filterData';
 export * from './randomName';
 export * from './randomId';
 export * from './errorParse';
+export * from './requestToken';

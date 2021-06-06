@@ -8,20 +8,31 @@ import {
 } from 'react-native';
 import {Gap, ListButton} from '../../components/atoms/';
 import {Headers} from '../../components/moleculs/';
-import {api} from '../../services';
+import {api, Fire} from '../../services';
 import {fonts, colors, destroyData} from '../../utils';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 const AlumniLainnya = ({navigation}) => {
   const user = useSelector(state => state).user;
+  const dispatch = useDispatch();
+  const data = {
+    id: '',
+    email: '',
+    name: '',
+    status: '',
+    token: '',
+    refreshToken: '',
+  };
   const onLogOut = () => {
     api.deleteRefreshToken(user.id).then(
       res => {
         destroyData();
+        dispatch({type: 'SET_PROFILE', value: data});
         navigation.replace('Intro');
       },
       err => {},
     );
+    Fire.destroyToken(user.id);
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

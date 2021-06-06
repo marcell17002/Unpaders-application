@@ -4,12 +4,13 @@ import {Headers, Kategori, Event, ListAlumni} from '../../components/moleculs';
 import {Gap, ListButton} from '../../components/atoms';
 import {fonts, colors} from '../../utils';
 import {api} from '../../services';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 const AlumniList = ({navigation}) => {
   const [alumni, setAlumni] = useState([]);
-  useEffect(() => {
-    api.getUserByCategory('status', 'alumni').then(
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    await api.getUserByCategory('status', 'alumni').then(
       async res => {
         const alumnus = res.data;
         const data = [];
@@ -22,6 +23,7 @@ const AlumniList = ({navigation}) => {
         });
         await Promise.all(promises);
         await setAlumni(data);
+        await dispatch({type: 'SET_ALUMNI', value: data});
       },
       err => console.log('isi err : ', err),
     );
@@ -33,7 +35,7 @@ const AlumniList = ({navigation}) => {
           title="Temukan Alumni"
           type="three-icon"
           onPressBack={() => navigation.goBack()}
-          onPressMiddle={() => navigation.navigate('SearchAlumni', alumni)}
+          onPressMiddle={() => navigation.navigate('SearchAlumni')}
           onPressRight={() => navigation.navigate('AlumniFilter')}
         />
       </View>

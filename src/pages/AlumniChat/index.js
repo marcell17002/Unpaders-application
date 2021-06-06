@@ -17,21 +17,23 @@ const AlumniChat = ({navigation}) => {
   const user = useSelector(state => state).user;
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', async () => {
-      await getHistory('idSender', 'idReceiver'); //a_b   -> a
-      await getHistory('idReceiver', 'idSender'); //b_a   -> a
+    const unsubscribe = navigation.addListener('focus', () => {
+      setHistory([]);
+      setHistoryTemp([]);
+      getHistorySender(); //a_b   -> a
+      getHistoryReceiver(); //b_a   -> a
     });
     return unsubscribe;
   }, [navigation]);
 
-  const getHistory = (type, subType) => {
-    api.getHistoryChat(type, user.id).then(
+  const getHistorySender = () => {
+    api.getHistoryChat('idSender', user.id).then(
       async res => {
         const historyChat = res.data;
         const data = [];
         console.log('isi data :', res.data);
         const promises = await Object.keys(historyChat).map(async key => {
-          await api.getProfileUser(historyChat[key][subType]).then(
+          await api.getProfileUser(historyChat[key].idReceiver).then(
             async res => {
               await data.push({
                 id: key,
@@ -44,11 +46,32 @@ const AlumniChat = ({navigation}) => {
           );
         });
         await Promise.all(promises);
-        console.log(`data ${type}: `, data);
-        if (type === 'idSender') await setHistory(data);
-        else if (type === 'idReceiver') {
-          await setHistoryTemp(data);
-        }
+        await setHistory(data);
+      },
+      err => console.log('isi errhist : ', err, user.id),
+    );
+  };
+  const getHistoryReceiver = () => {
+    api.getHistoryChat('idReceiver', user.id).then(
+      async res => {
+        const historyChat = res.data;
+        const data = [];
+        console.log('isi data :', res.data);
+        const promises = await Object.keys(historyChat).map(async key => {
+          await api.getProfileUser(historyChat[key].idSender).then(
+            async res => {
+              await data.push({
+                id: key,
+                name: res.data[0].name,
+                image: res.data[0].image,
+                ...historyChat[key],
+              });
+            },
+            err => console.log('isi error :', err),
+          );
+        });
+        await Promise.all(promises);
+        await setHistoryTemp(data);
       },
       err => console.log('isi errhist : ', err, user.id),
     );
@@ -83,7 +106,6 @@ const AlumniChat = ({navigation}) => {
                 />
               );
             })}
-            <Text>paired</Text>
             {historyTemp.map(item => {
               return (
                 <ListAlumniChat

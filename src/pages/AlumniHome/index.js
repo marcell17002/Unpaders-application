@@ -31,8 +31,11 @@ const AlumniHome = ({navigation}) => {
           );
         });
         await Promise.all(promises);
-        setEvent(data);
-        setTempEvent(data);
+        const sortedData = await data.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setEvent(sortedData);
+        setTempEvent(sortedData);
       },
       err => notifications('danger', 'no internet connection'),
     );
@@ -123,7 +126,12 @@ const AlumniHome = ({navigation}) => {
               picture={item.image}
               userPicture={item.userImage}
               author={item.name}
-              onPress={() => navigation.navigate('AlumniDetailBerita', item)}
+              onPress={() =>
+                navigation.navigate('AlumniDetailBerita', {
+                  event: event,
+                  item: item,
+                })
+              }
             />
           );
         })}

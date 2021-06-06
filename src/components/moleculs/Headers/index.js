@@ -24,7 +24,7 @@ const Headers = ({
   onPressMiddle,
   valueData,
   placeholder,
-  onChangeTextData,
+  onChangeText,
 }) => {
   const Heading = () => {
     if (type === 'main-search') {
@@ -72,7 +72,7 @@ const Headers = ({
             </TouchableOpacity>
             <TextInput
               value={valueData}
-              onChangeText={onChangeTextData}
+              onChangeText={onChangeText}
               placeholder={title}
               style={styles.searchTitle}
             />
@@ -363,7 +363,6 @@ const styles = StyleSheet.create({
     width: '70%',
     textAlign: 'left',
     paddingLeft: '5%',
-    flex: 1,
   },
   inputText: {
     fontSize: 13,

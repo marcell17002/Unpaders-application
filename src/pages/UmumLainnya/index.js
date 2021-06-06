@@ -9,8 +9,26 @@ import {
 import {Gap, ListButton} from '../../components/atoms/';
 import {Headers} from '../../components/moleculs/';
 import {fonts, colors, destroyData} from '../../utils';
+import {useSelector, useDispatch} from 'react-redux';
+import {Fire} from '../../services';
 
 const UmumLainnya = ({navigation}) => {
+  const user = useSelector(state => state).user;
+  const dispatch = useDispatch();
+  const onLogOut = () => {
+    const data = {
+      id: '',
+      email: '',
+      name: '',
+      status: '',
+      token: '',
+      refreshToken: '',
+    };
+    dispatch({type: 'SET_PROFILE', value: data});
+    destroyData();
+    navigation.replace('Intro');
+    Fire.destroyToken(user.id);
+  };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.page}>
@@ -70,10 +88,7 @@ const UmumLainnya = ({navigation}) => {
           <Gap height={12} />
         </View>
 
-        <TouchableOpacity
-          onPress={() => {
-            destroyData(), navigation.replace('Intro');
-          }}>
+        <TouchableOpacity onPress={() => onLogOut()}>
           <Text style={styles.logout}>Keluar Aplikasi</Text>
         </TouchableOpacity>
         <Gap height={20} />

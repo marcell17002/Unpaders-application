@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import {Headers, ChatItem, InputChat} from '../../components/moleculs';
 import {colors, fonts, getTime, useChat, useForm} from '../../utils';
 import {useSelector} from 'react-redux';
-import {api} from '../../services';
+import {api, Fire} from '../../services';
 
 const AlumniChatting = ({navigation, route}) => {
   const today = new Date();
@@ -11,44 +11,41 @@ const AlumniChatting = ({navigation, route}) => {
   const user = useSelector(state => state).user;
   const [input, setInput] = useState('');
   const [historyId, setHistoryId] = useState('');
-  const [chatId, setChatId] = useState(`${user.id}_${payload.idReceiver}`);
+  const [chatId, setChatId] = useState();
+  const [idReceiver, setIdReceiver] = useState(
+    payload.idReceiver === user.id ? payload.idSender : payload.idReceiver,
+  );
+  const [token, setToken] = useState('');
   const {messages, sendMessage, setMessages} = useChat();
 
-  const [history, setHistory] = useForm({
-    chatId: chatId,
-    lastChat: '',
-    lastDate: getTime(today),
-    idSender: `${user.id}`,
-    idReceiver:
-      payload.idReceiver === user.id
-        ? `${payload.idSender}`
-        : `${payload.idReceiver}`,
-  });
-
   useEffect(async () => {
-    console.log('isi payload : ', payload.chatId);
-    console.log('isi idsender : ', payload.idSender);
-    console.log('isi idreceiver : ', payload.idReceiver);
-    console.log('isi user id : ', user.id);
     await getChatList();
+    Fire.getToken(payload.idReceiver).then(res => {
+      setToken(res);
+    });
+    console.log('isi sender : ', user.email);
+    console.log('isi payload : ', payload);
   }, []);
 
   const getChatList = () => {
     if (payload.chatId === undefined) {
       api.getChat('chatId', `${payload.idReceiver}_${user.id}`).then(
         async res => {
-          console.log(`helolo 1${payload.idReceiver}_${user.id}`);
-          await setChatId(`${user.id}_${payload.idReceiver}`);
+          console.log(`isi chat id 1${payload.idReceiver}_${user.id}`);
+          await setChatId(`${payload.idReceiver}_${user.id}`);
           await setMessages(res.data);
         },
         err => {
           api.getChat('chatId', `${user.id}_${payload.idReceiver}`).then(
             async res => {
-              console.log('hello 2');
+              console.log(`isi chat id 2${user.id}_${payload.idReceiver}`);
               await setChatId(`${user.id}_${payload.idReceiver}`);
               await setMessages(res.data);
             },
-            err => console.log('isi error 2', err),
+            async err => {
+              await setChatId(`${user.id}_${payload.idReceiver}`);
+              console.log('new communication');
+            },
           );
         },
       );
@@ -56,15 +53,21 @@ const AlumniChatting = ({navigation, route}) => {
       api.getChat('chatId', payload.chatId).then(
         async res => {
           await setChatId(payload.chatId);
-          await setHistory('chatId', payload.chatId);
           await setMessages(res.data);
         },
-        err => console.log('isi errr get rc2', history, payload.chatId),
+        err => console.log('isi errr get rc2', payload.chatId),
       );
     }
   };
 
-  const postHistory = async data => {
+  const postHistory = async () => {
+    const data = {
+      chatId: chatId,
+      lastChat: input,
+      lastDate: getTime(today),
+      idSender: `${user.id}`,
+      idReceiver: idReceiver,
+    };
     await api.postHistoryChat(data).then(
       async res => {
         console.log('history baru terbuat', res.data);
@@ -74,30 +77,40 @@ const AlumniChatting = ({navigation, route}) => {
     );
   };
   const updateHistory = async id => {
-    console.log('isii update data : ', history);
-    await api.updateHistory(history, id).then(
+    const data = {
+      chatId: chatId,
+      lastChat: input,
+      lastDate: getTime(today),
+      idSender: `${user.id}`,
+      idReceiver: idReceiver,
+    };
+    console.log('isii update data : ', data);
+    await api.updateHistory(data, id).then(
       res => console.log('update histrory : ', res.data),
-      err => console.log('isi err history : ', history, id),
+      err => console.log('isi err history : ', id),
     );
   };
 
   const findHistory = async id => {
-    if (historyId === '') {
-      api.getHistoryChat('chatId', id).then(
-        async res => {
-          const idHistory = res.data[0]._id;
-          console.log('isi data res ', idHistory);
-          await setHistoryId(idHistory);
-          await updateHistory(idHistory);
-        },
-        async err => {
-          await postHistory(history);
-        },
-      );
-    } else {
-      await setHistoryId(historyId);
-      await updateHistory(historyId);
-    }
+    api.getHistoryChat('chatId', id).then(
+      async res => {
+        const idHistory = res.data[0]._id;
+        console.log('isi data res ', idHistory);
+        await setHistoryId(idHistory);
+        await updateHistory(idHistory);
+      },
+      async err => {
+        await postHistory();
+      },
+    );
+  };
+  const sendNotifications = () => {
+    const data = {
+      token: token,
+      title: payload.name,
+      body: input,
+    };
+    api.postNotifications(data);
   };
   const onSend = async () => {
     const data = {
@@ -112,10 +125,14 @@ const AlumniChatting = ({navigation, route}) => {
         },
       },
     };
+    console.log('isi data ', data);
     await sendMessage(data);
     await setInput('');
     await api.postChat(data).then(
-      res => console.log('isi ress :', res.data),
+      res => {
+        console.log('isi ress :', res.data);
+        sendNotifications();
+      },
       err => console.log('isi err :', err, data),
     );
     await findHistory(chatId);
@@ -146,7 +163,6 @@ const AlumniChatting = ({navigation, route}) => {
         value={input}
         onChangeText={value => {
           setInput(value);
-          setHistory('lastChat', value);
         }}
         onPress={() => onSend()}
       />

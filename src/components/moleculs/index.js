@@ -14,7 +14,7 @@ import ChatItem from './ChatItem';
 import InputChat from './InputChat';
 import SubKategori from './SubKategori';
 import SubCategoryHome from './SubCategoryHome';
-
+import SearchHeader from './SearchHeader';
 import MBottomNavigator from './MBottomNavigator';
 import UBottomNavigator from './UBottomNavigator';
 
@@ -37,4 +37,5 @@ export {
   UBottomNavigator,
   SubKategori,
   SubCategoryHome,
+  SearchHeader,
 };
