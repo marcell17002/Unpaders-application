@@ -10,7 +10,9 @@ const initialState = {
     token: '',
     refreshToken: '',
   },
+  recommendation: {},
   alumni: {},
+  seen: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +38,16 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       alumni: action.value,
+    };
+  } else if (action.type === 'SET_SEEN') {
+    return {
+      ...state,
+      seen: action.value,
+    };
+  } else if (action.type === 'SET_RECOMMENDATION') {
+    return {
+      ...state,
+      recommendation: action.value,
     };
   }
   return state;

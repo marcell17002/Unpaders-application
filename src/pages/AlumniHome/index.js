@@ -1,17 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Headers, Kategori, Event, SubKategori} from '../../components/moleculs';
+import {
+  Headers,
+  Kategori,
+  Event,
+  SubCategoryHome,
+} from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
 import {api} from '../../services';
-import {colors, filterData, fonts, notifications, useForm} from '../../utils';
+import {
+  colors,
+  filterData,
+  fonts,
+  getDateName,
+  notifications,
+  useForm,
+} from '../../utils';
 import moment from 'moment';
-import SubCategoryHome from '../../components/moleculs/SubCategoryHome';
-SubCategoryHome;
+import {useDispatch} from 'react-redux';
+
 const AlumniHome = ({navigation}) => {
   const [event, setEvent] = useState([]);
   const [tempEvent, setTempEvent] = useState([]);
   const [subCategory, setSubCategory] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
+  const dispatch = useDispatch();
   useEffect(() => {
     api.getEventByCategory('status', 'published').then(
       async res => {
@@ -36,11 +49,17 @@ const AlumniHome = ({navigation}) => {
         });
         setEvent(sortedData);
         setTempEvent(sortedData);
+        setRecommendation(sortedData);
       },
       err => notifications('danger', 'no internet connection'),
     );
+    console.log('date : ', new Date().toISOString());
+    console.log('date 2: ', getDateName(new Date().toISOString()));
   }, []);
-
+  const setRecommendation = data => {
+    const recommendation = data.slice(0, 3);
+    dispatch({type: 'SET_RECOMMENDATION', value: recommendation});
+  };
   const filterDataEvent = async props => {
     const filteredData = await filterData(tempEvent, 'category', props);
     await setEvent(filteredData);

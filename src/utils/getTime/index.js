@@ -5,7 +5,7 @@ export const getTime = date => {
   return `${hour}:${minutes} ${hour >= 12 ? 'PM' : 'AM'}`;
 };
 
-export const getDateName = date => {
+export const getDateName = (date, less) => {
   const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
   const months = [
     'Januari',
@@ -33,5 +33,6 @@ export const getDateName = date => {
 
   const year = timeParsed.split('-')[0];
   const newDate = timeParsed.split('-')[2];
-  return `${dayName}, ${newDate} ${monthName} ${year} ${time}:${minutes}`;
+  if (less) return `${dayName}, ${newDate} ${monthName} ${year}`;
+  else return `${dayName}, ${newDate} ${monthName} ${year} ${time}:${minutes} `;
 };

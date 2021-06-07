@@ -34,8 +34,9 @@ const AlumniChat = ({navigation, route}) => {
   const [countLike, setCountLike] = useState([]);
   const [countDislike, setCountDislike] = useState([]);
   const [idLike, setIdLike] = useState('');
-  const [recommendation, setRecommendation] = useState([]);
-  const user = useSelector(state => state).user;
+  const stateGlobal = useSelector(state => state);
+  const user = stateGlobal.user;
+  const recommendation = stateGlobal.recommendation;
 
   useEffect(async () => {
     api.getProfileUser(payload.item.author).then(
@@ -57,11 +58,6 @@ const AlumniChat = ({navigation, route}) => {
       },
       err => {},
     );
-
-    const data = await payload.event.sort((a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt);
-    });
-    await setRecommendation(data);
   }, []);
 
   const updateValueLiked = () => {

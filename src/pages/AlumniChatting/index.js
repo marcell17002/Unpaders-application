@@ -1,8 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import {Headers, ChatItem, InputChat} from '../../components/moleculs';
-import {colors, fonts, getTime, useChat, useForm} from '../../utils';
-import {useSelector} from 'react-redux';
+import {
+  colors,
+  fonts,
+  getDateName,
+  getTime,
+  useChat,
+  useForm,
+} from '../../utils';
+import {useSelector, useDispatch} from 'react-redux';
 import {api, Fire} from '../../services';
 
 const AlumniChatting = ({navigation, route}) => {
@@ -15,6 +22,7 @@ const AlumniChatting = ({navigation, route}) => {
   const [idReceiver, setIdReceiver] = useState(
     payload.idReceiver === user.id ? payload.idSender : payload.idReceiver,
   );
+  const dispatch = useDispatch();
   const [token, setToken] = useState('');
   const {messages, sendMessage, setMessages} = useChat();
 
@@ -67,6 +75,7 @@ const AlumniChatting = ({navigation, route}) => {
       lastDate: getTime(today),
       idSender: `${user.id}`,
       idReceiver: idReceiver,
+      status: true,
     };
     await api.postHistoryChat(data).then(
       async res => {
@@ -83,6 +92,7 @@ const AlumniChatting = ({navigation, route}) => {
       lastDate: getTime(today),
       idSender: `${user.id}`,
       idReceiver: idReceiver,
+      status: true,
     };
     console.log('isii update data : ', data);
     await api.updateHistory(data, id).then(
@@ -143,19 +153,25 @@ const AlumniChatting = ({navigation, route}) => {
         <Headers
           title={payload.name}
           type="sub-main-back"
-          onPressBack={() => navigation.goBack()}
+          onPressBack={async () => {
+            await dispatch({type: 'SET_SEEN', value: true});
+            navigation.goBack();
+          }}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.contText}>
-        <Text style={styles.chatDate}>Rabu, 19 Mei 2021</Text>
         {messages.map(item => {
           var content = item.allChat.chatText;
+          var date = item.allChat.dateChat;
           return (
-            <ChatItem
-              isMe={content.sendBy === user.id}
-              content={content.chatContent}
-              time={content.chatTime}
-            />
+            <>
+              <Text style={styles.chatDate}>{date}</Text>
+              <ChatItem
+                isMe={content.sendBy === user.id}
+                content={content.chatContent}
+                time={content.chatTime}
+              />
+            </>
           );
         })}
       </ScrollView>

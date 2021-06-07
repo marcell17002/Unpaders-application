@@ -11,11 +11,10 @@ import {fonts, colors} from '../../utils';
 import {api} from '../../services';
 import {useSelector} from 'react-redux';
 
-const AlumniChat = ({navigation}) => {
+const AlumniChat = ({navigation, route}) => {
   const [history, setHistory] = useState([]);
   const [historyTemp, setHistoryTemp] = useState([]);
   const user = useSelector(state => state).user;
-
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       setHistory([]);
@@ -111,6 +110,7 @@ const AlumniChat = ({navigation}) => {
                 <ListAlumniChat
                   key={item._id}
                   nama={item.name}
+                  isBadge={item.status}
                   picture={item.image}
                   lastText={item.lastChat}
                   onPress={() => navigation.navigate('AlumniChatting', item)}
