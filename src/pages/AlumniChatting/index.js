@@ -14,6 +14,7 @@ import {api, Fire} from '../../services';
 
 const AlumniChatting = ({navigation, route}) => {
   const today = new Date();
+  const date = getDateName(new Date().toISOString(), true);
   const payload = route.params;
   const user = useSelector(state => state).user;
   const [input, setInput] = useState('');
@@ -127,7 +128,7 @@ const AlumniChatting = ({navigation, route}) => {
       chatId: chatId,
       category: 'chat',
       allChat: {
-        dateChat: today.getTime(),
+        dateChat: date,
         chatText: {
           sendBy: user.id,
           chatTime: getTime(today),
@@ -160,12 +161,18 @@ const AlumniChatting = ({navigation, route}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.contText}>
-        {messages.map(item => {
+        {messages.map((item, index) => {
           var content = item.allChat.chatText;
           var date = item.allChat.dateChat;
+          if (date === date + 1) return console.log('ture');
+          console.log(`isi date ${index}: `, date[index], date[index + 1]);
           return (
             <>
-              <Text style={styles.chatDate}>{date}</Text>
+              {date === date ? (
+                <Text key={index} style={styles.chatDate}>
+                  {date}
+                </Text>
+              ) : null}
               <ChatItem
                 isMe={content.sendBy === user.id}
                 content={content.chatContent}

@@ -71,14 +71,15 @@ const AlumniKomentar = ({navigation, route}) => {
         dateChat: today.getTime(),
       },
       category: 'commentar',
-      chatID: idEvent,
+      chatId: idEvent,
       name: profile.name,
       image: profile.image,
     };
     api.postChat(data).then(
       res => sendMessage(data),
-      err => console.log('isi err :', err),
+      err => console.log('isi err post :', data),
     );
+    setInput('');
   };
 
   return (

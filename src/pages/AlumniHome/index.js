@@ -53,8 +53,6 @@ const AlumniHome = ({navigation}) => {
       },
       err => notifications('danger', 'no internet connection'),
     );
-    console.log('date : ', new Date().toISOString());
-    console.log('date 2: ', getDateName(new Date().toISOString()));
   }, []);
   const setRecommendation = data => {
     const recommendation = data.slice(0, 3);
