@@ -35,12 +35,12 @@ const AlumniLainnya = ({navigation}) => {
     Fire.destroyToken(user.id);
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    
       <View style={styles.page}>
         <View style={styles.contHeader}>
           <Headers type="main" title="LAINNYA" />
         </View>
-
+        <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.ghap}>
           <Gap height={12} />
           <Text style={styles.textGap}>PROFILE</Text>
@@ -107,8 +107,9 @@ const AlumniLainnya = ({navigation}) => {
         <TouchableOpacity onPress={() => onLogOut()}>
           <Text style={styles.logout}>Logout Akun</Text>
         </TouchableOpacity>
-      </View>
+      
     </ScrollView>
+    </View>
   );
 };
 

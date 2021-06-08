@@ -138,6 +138,6 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     fontSize: 12,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
+    color: colors.text.secondGrey,
   },
 });

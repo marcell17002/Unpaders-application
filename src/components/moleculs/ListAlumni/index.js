@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
   },
   desc: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
+    color: colors.text.secondGrey,
     marginRight: 5,
   },
   secData: {

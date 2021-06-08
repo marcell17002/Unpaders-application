@@ -84,10 +84,8 @@ const styles = StyleSheet.create({
     color: active ? colors.text.primary : colors.text.secondary,
   }),
   text: active => ({
-    //paddingTop: 5,
     color: active ? colors.text.quartenary : colors.text.secondary,
     fontSize: 14,
     fontFamily: fonts.primary.semibold,
-    //fontWeight: 'bold',
   }),
 });

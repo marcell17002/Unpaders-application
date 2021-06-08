@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   textSecondary: {
     color: colors.button.secondaryOutline.blue,
     textAlign: 'center',
-    fontFamily: 'Segoe-UI',
+    fontFamily: fonts.primary.semibold,
     fontSize: 16,
     paddingVertical: 15,
   },

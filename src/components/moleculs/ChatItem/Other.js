@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 0,
     },
     textChat: {
-        fontSize: 12,
+        fontSize: 14,
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
     },
     date: {
-        fontSize: 11,
+        fontSize: 12,
         fontFamily: fonts.primary.reguler,
         color: colors.text.tertiary,
         marginTop: 8,

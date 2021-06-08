@@ -319,8 +319,8 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
   },
   pilihFoto: {
-    fontSize: 13,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
+    color: colors.text.secondGrey,
   }
 });

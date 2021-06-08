@@ -19,7 +19,7 @@ const InputChat = ({value, onChangeText, onPress}) => {
           value={value}
           onChangeText={onChangeText}
           placeholder="Tulis pesan..."></TextInput>
-        <Buttons onPress={onPress} status="btn-icon-send" disable={false} />
+        <Buttons onPress={onPress} status="btn-icon-send" disable={value.length <1} />
         {/* disable bernilai true, kl false disable={false} */}
       </View>
     </View>
