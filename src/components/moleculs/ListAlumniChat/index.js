@@ -3,8 +3,8 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {colors, fonts} from '../../../utils';
 import {Gap} from '../../atoms';
 import {BASE_URL_ROOT} from '@env';
-
-const ListAlumniChat = ({nama, lastText, picture, onPress}) => {
+import {Badge} from 'native-base';
+const ListAlumniChat = ({nama, lastText, isBadge, picture, onPress}) => {
   return (
     <TouchableOpacity style={styles.page} onPress={onPress}>
       <Image
@@ -16,6 +16,15 @@ const ListAlumniChat = ({nama, lastText, picture, onPress}) => {
         <Gap height={8} />
         <Text style={styles.desc}>{lastText}</Text>
       </View>
+      {isBadge ? (
+        <View style={styles.badgeWrapper}>
+          <Badge style={styles.badge}>
+            <Text style={styles.badgeText}>1</Text>
+          </Badge>
+        </View>
+      ) : (
+        <View />
+      )}
     </TouchableOpacity>
   );
 };
@@ -48,5 +57,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
+  },
+  badgeWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  badge: {
+    backgroundColor: colors.primary,
+  },
+  badgeText: {
+    color: '#ffff',
+    paddingVertical: 1,
+    paddingHorizontal: 3,
   },
 });

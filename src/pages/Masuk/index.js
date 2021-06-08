@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Image, ScrollView, Text} from 'react-native';
 import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
-import {api} from '../../services';
+import {api, Fire} from '../../services';
 import {
   fonts,
   colors,
@@ -10,6 +10,7 @@ import {
   notifications,
   storeData,
   getData,
+  requestToken,
 } from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -18,8 +19,8 @@ const Masuk = ({navigation}) => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useForm({
-    email: 'qwerty@gmail.com',
-    password: 'qwerty123',
+    email: 'alumni@gmail.com',
+    password: 'alumni123',
   });
   const checkValueNull = () => {
     checkValue(form.email, 'email');
@@ -27,25 +28,23 @@ const Masuk = ({navigation}) => {
   };
   const onLog = async () => {
     await checkValueNull();
-    // tagcomment
-    // api.postLogIn(form).then(
-    //   async res => {
-    //     const status = res.data.status;
-    //     notifications('success', 'login berhasil');
-    //     dispatch({type: 'SET_PROFILE', value: res.data});
-    //     await storeData('user', res.data);
-    //     if (status === 'alumni') navigation.replace('MainAppGraduated');
-    //     else if (status === 'mahasiswa') navigation.replace('MainAppCollege');
-    //     else navigation.replace('MainAppCollege');
-    //   },
-    //   err => {
-    //     notifications('danger', 'email atau password salah');
-    //   },
-    // );
-    //if (status === 'alumni') navigation.replace('MainAppGraduated');
-    //else if (status === 'mahasiswa') navigation.replace('MainAppCollege');
-    //else navigation.replace('MainAppCollege');
-    navigation.replace('MainAppGraduated');
+
+    api.postLogIn(form).then(
+      async res => {
+        const status = res.data.status;
+        notifications('success', 'login berhasil');
+        console.log('data sucess', res.data);
+        dispatch({type: 'SET_PROFILE', value: res.data});
+        requestToken(res.data.id);
+        await storeData('user', res.data);
+        if (status === 'alumni') navigation.replace('MainAppGraduated');
+        else if (status === 'mahasiswa') navigation.replace('MainAppCollege');
+        else navigation.replace('MainAppCollege');
+      },
+      err => {
+        notifications('danger', 'email atau password salah');
+      },
+    );
   };
   return (
     <View style={styles.page}>

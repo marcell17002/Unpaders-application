@@ -30,17 +30,19 @@ const Buttons = ({status, isLittle, title, onPress, disable}) => {
           </TouchableOpacity>
         );
       //button tulisan doang
-      case 'quarternary': 
-          return (
-            <TouchableOpacity onPress={onPress} style={styles.buttonQuarternary}>
-              <Text style={styles.textQuarternary}> {title} </Text>
-            </TouchableOpacity>
-          );  
-      case 'btn-icon-send' :
-        return ( 
-          <TouchableOpacity style={styles.iconBundle(disable)} onPress={onPress}>
-              {disable && <Icon style={styles.iconDisable} name="send" />}
-              {!disable && <Icon style={styles.iconNonDis} name="send" />}
+      case 'quarternary':
+        return (
+          <TouchableOpacity onPress={onPress} style={styles.buttonQuarternary}>
+            <Text style={styles.textQuarternary}> {title} </Text>
+          </TouchableOpacity>
+        );
+      case 'btn-icon-send':
+        return (
+          <TouchableOpacity
+            style={styles.iconBundle(disable)}
+            onPress={onPress}>
+            {disable && <Icon style={styles.iconDisable} name="send" />}
+            {!disable && <Icon style={styles.iconNonDis} name="send" />}
           </TouchableOpacity>
         );
       default:
@@ -117,15 +119,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     //paddingVertical: 15,
   },
-  iconBundle: (disable) => (
-    {
-      backgroundColor: disable ? colors.backgroundgrey : colors.primary,
-      width: 52,
-      height: 52,
-      padding: 8,
-      borderRadius : 10,
-    }
-  ),
+  iconBundle: disable => ({
+    backgroundColor: disable ? colors.backgroundgrey : colors.primary,
+    width: 52,
+    height: 52,
+    padding: 8,
+    borderRadius: 10,
+  }),
   iconDisable: {
     alignSelf: 'center',
     justifyContent: 'space-between',
@@ -135,5 +135,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'space-between',
     color: colors.primaryWhite,
-  }
+  },
 });

@@ -3,9 +3,12 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Headers, ProfileAuthor, Event} from '../../components/moleculs';
 import {Gap, Buttons} from '../../components/atoms';
 import {fonts, colors} from '../../utils';
+import {useSelector} from 'react-redux';
+import moment from 'moment';
 
 const AlumniProfileAuthor = ({navigation, route}) => {
   const payload = route.params;
+  const recommendation = useSelector(state => state).recommendation;
   return (
     <View style={styles.page}>
       <View>
@@ -31,7 +34,7 @@ const AlumniProfileAuthor = ({navigation, route}) => {
           <Buttons
             title="Chat"
             status="secondary"
-            onPress={() => navigation.replace('AlumniHome')}
+            onPress={() => navigation.navigate('AlumniChatting', payload)}
           />
         </View>
         <Gap height={24} />
@@ -40,14 +43,25 @@ const AlumniProfileAuthor = ({navigation, route}) => {
         </View>
         <Gap height={24} />
         <View>
-          <Text style={styles.sectionLainnya}>Berita Terbaru Lainnya</Text>
-          <Event
-            category="AKTUAL"
-            time="3 JAM YANG LALU"
-            title="Irawati Hermawan: Penanganan Covid-19 Perlu Kolaborasi"
-            author="Tim Unpaders"
-            onPress={() => navigation.navigate('AlumniHome')}
-          />
+          <Text style={styles.sectionLainnya}>Berita yang dipublikasikan</Text>
+          {recommendation.map(item => {
+            return (
+              <Event
+                category={item.category}
+                time={moment(item.createdAt).fromNow()}
+                title={item.title}
+                picture={item.image}
+                userPicture={item.userImage}
+                author={item.name}
+                onPress={() =>
+                  navigation.navigate('AlumniDetailBerita', {
+                    event: payload.event,
+                    item: item,
+                  })
+                }
+              />
+            );
+          })}
         </View>
       </ScrollView>
     </View>

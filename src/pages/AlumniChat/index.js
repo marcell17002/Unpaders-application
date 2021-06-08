@@ -9,24 +9,53 @@ import {
 import {Gap, ListButton} from '../../components/atoms';
 import {fonts, colors} from '../../utils';
 import {api} from '../../services';
-//import {useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
-const AlumniChat = ({navigation}) => {
+const AlumniChat = ({navigation, route}) => {
   const [history, setHistory] = useState([]);
   const [historyTemp, setHistoryTemp] = useState([]);
-  //const user = useSelector(state => state).user;
+  const user = useSelector(state => state).user;
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setHistory([]);
+      setHistoryTemp([]);
+      getHistorySender(); //a_b   -> a
+      getHistoryReceiver(); //b_a   -> a
+    });
+    return unsubscribe;
+  }, [navigation]);
 
-  // tagcomment
-  // useEffect(() => {
-  //   getHistory('idSender');
-  //   getHistory('idReceiver');
-  // }, []);
-
-  const getHistory = type => {
-    api.getHistoryChat(type, user.id).then(
+  const getHistorySender = () => {
+    api.getHistoryChat('idSender', user.id).then(
       async res => {
         const historyChat = res.data;
         const data = [];
+        console.log('isi data :', res.data);
+        const promises = await Object.keys(historyChat).map(async key => {
+          await api.getProfileUser(historyChat[key].idReceiver).then(
+            async res => {
+              await data.push({
+                id: key,
+                name: res.data[0].name,
+                image: res.data[0].image,
+                ...historyChat[key],
+              });
+            },
+            err => console.log('isi error :', err),
+          );
+        });
+        await Promise.all(promises);
+        await setHistory(data);
+      },
+      err => console.log('isi errhist : ', err, user.id),
+    );
+  };
+  const getHistoryReceiver = () => {
+    api.getHistoryChat('idReceiver', user.id).then(
+      async res => {
+        const historyChat = res.data;
+        const data = [];
+        console.log('isi data :', res.data);
         const promises = await Object.keys(historyChat).map(async key => {
           await api.getProfileUser(historyChat[key].idSender).then(
             async res => {
@@ -41,11 +70,9 @@ const AlumniChat = ({navigation}) => {
           );
         });
         await Promise.all(promises);
-        console.log(`data ${type}: `, data);
-        if (type === 'idSender') await setHistory(data);
-        else if (type === 'idReceiver') await setHistoryTemp(data);
+        await setHistoryTemp(data);
       },
-      err => console.log('isi errhist : ', err),
+      err => console.log('isi errhist : ', err, user.id),
     );
   };
   return (
@@ -74,19 +101,19 @@ const AlumniChat = ({navigation}) => {
                   nama={item.name}
                   picture={item.image}
                   lastText={item.lastChat}
-                  onPress={() => navigation.navigate('AlumniChatting')}
+                  onPress={() => navigation.navigate('AlumniChatting', item)}
                 />
               );
             })}
-            <Text>paired</Text>
             {historyTemp.map(item => {
               return (
                 <ListAlumniChat
                   key={item._id}
                   nama={item.name}
+                  isBadge={item.status}
                   picture={item.image}
                   lastText={item.lastChat}
-                  onPress={() => navigation.navigate('AlumniChatting')}
+                  onPress={() => navigation.navigate('AlumniChatting', item)}
                 />
               );
             })}

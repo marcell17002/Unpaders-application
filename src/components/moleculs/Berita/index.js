@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import {fonts, colors} from '../../../utils';
 import {Gap} from '../../atoms';
 import {BASE_URL_ROOT} from '@env';
-const Berita = ({title, author, waktu, isiBerita, images}) => {
+const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
   //belum dimasukin props untuk image
   return (
     <View style={styles.page}>
@@ -12,7 +12,7 @@ const Berita = ({title, author, waktu, isiBerita, images}) => {
       <View style={styles.contPenulis}>
         <Image
           style={styles.logo}
-          source={require('../../../assets/LogoUnpadersKecil.png')}
+          source={{uri: `${BASE_URL_ROOT}${imagesUser}`}}
         />
         <View style={styles.ketPenulis}>
           <Text style={styles.penulis}>{author}</Text>
@@ -24,7 +24,7 @@ const Berita = ({title, author, waktu, isiBerita, images}) => {
       <View style={styles.beritaImage}>
         <Image
           style={styles.image}
-          source={{uri: `${BASE_URL_ROOT}/${images}`}}
+          source={{uri: `${BASE_URL_ROOT}${images}`}}
         />
       </View>
       {/* <Gap height={24}/> */}

@@ -1,93 +1,146 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   Image,
-  ScrollView, 
+  ScrollView,
 } from 'react-native';
 import {Headers, CommentUser} from '../../components/moleculs';
-import {Picker} from 'native-base';
 import {Gap, Inputs} from '../../components/atoms';
-import {checkValue, colors, fonts, notifications, useForm} from '../../utils';
-//import {useSelector} from 'react-redux';
+import {
+  checkValue,
+  colors,
+  errorParse,
+  filterData,
+  fonts,
+  getData,
+  notifications,
+  useForm,
+} from '../../utils';
+import {useSelector} from 'react-redux';
 import {api} from '../../services';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {BASE_URL_ROOT} from '@env';
+import {Picker} from 'native-base';
 
-const AlumniTulisBerita = ({navigation}) => {
-  // const user = useSelector(state => state).user;
-  // const [photo, setPhoto] = useState();
-  // const [form, setForm] = useForm({
-  //   title: '',
-  //   image: '',
-  //   category: '',
-  //   subCategory: '',
-  //   author: {
-  //     id: user.id,
-  //     name: user.name,
-  //   },
-  //   desc: '',
-  //   status: 'waiting',
-  // }
-  // );
+const AlumniTulisBerita = ({navigation, route}) => {
+  const payload = route.params;
+  const user = useSelector(state => state).user;
+  const [photo, setPhoto] = useState('');
+
+  const [categoryList, setCategoryList] = useState([
+    {category: 'Aktual'},
+    {category: 'Alumni'},
+    {category: 'Lapak'},
+    {category: 'Loker'},
+  ]);
+  const [subCategoryList, setSubCategoryList] = useState([
+    {subCategory: 'Berita', category: 'Aktual'},
+    {subCategory: 'Acara', category: 'Aktual'},
+    {subCategory: 'Opini', category: 'Aktual'},
+    {subCategory: 'Akademis', category: 'Aktual'},
+    {subCategory: 'Terkini', category: 'Alumni'},
+    {subCategory: 'WikiAlumni', category: 'Alumni'},
+    {subCategory: 'Berkabar', category: 'Alumni'},
+    {subCategory: 'UMKM Center', category: 'Lapak'},
+    {subCategory: 'Kuliner', category: 'Lapak'},
+    {subCategory: 'Kiat Bisnis', category: 'Lapak'},
+    {subCategory: 'Preloved', category: 'Lapak'},
+    {subCategory: 'Intership', category: 'Loker'},
+    {subCategory: 'Fulltime', category: 'Loker'},
+    {subCategory: 'Freelance', category: 'Loker'},
+  ]);
+  const [subCategoryTemp, setSubCategoryTemp] = useState([]);
+
+  useEffect(async () => {
+    await setSubCategoryTemp(subCategoryList);
+  }, []);
+
+  const filterDataSubCategory = async props => {
+    const filteredData = await filterData(subCategoryList, 'category', props);
+    await setSubCategoryTemp(filteredData);
+    await setForm('subCategory', filteredData[1].category);
+    await setForm('category', props);
+  };
+  const [form, setForm] = useForm({
+    title: payload ? payload.title : '',
+    image: payload ? payload.image : '',
+    category: payload ? payload.category : '',
+    subCategory: payload ? payload.subCategory : '',
+    author: user.id,
+    desc: payload ? payload.desc : '',
+    status: 'waiting',
+  });
 
   const getImage = () => {
-    // launchImageLibrary(
-    //   {quality: 0.3, minHeight: 110, minWidth: 110, includeBase64: true},
-    //   response => {
-    //     if (response.didCancel || response.errorMessage) {
-    //       notifications(
-    //         'warning',
-    //         'oops, sepertinya anda tidak jadi upload foto ?',
-    //       );
-    //     } else {
-    //       const source = `data:${response.type};base64,${response.base64}`;
-    //       setPhoto(source);
-    //       setForm('image', source);
-    //     }
-    //   },
-    // );
+    launchImageLibrary(
+      {quality: 0.3, minHeight: 110, minWidth: 110, includeBase64: true},
+      response => {
+        if (response.didCancel || response.errorMessage) {
+          notifications(
+            'warning',
+            'oops, sepertinya anda tidak jadi upload foto ?',
+          );
+        } else {
+          const source = `data:${response.type};base64,${response.base64}`;
+          setPhoto(source);
+          setForm('image', source);
+        }
+      },
+    );
   };
+
   const checkValueNull = () => {
-    // checkValue(form.title, 'judul');
-    // checkValue(form.category, 'kategory');
-    // checkValue(form.subCategory, 'sub kategori');
-    // checkValue(form.desc, 'isi berita');
-    // checkValue(form.image, 'foto');
+    checkValue(form.title, 'judul');
+    checkValue(form.category, 'kategory');
+    checkValue(form.subCategory, 'sub kategori');
+    checkValue(form.desc, 'isi berita');
+    checkValue(form.image, 'foto');
+  };
+  const responseSuccess = () => {
+    notifications(
+      'success',
+      'berita sukses dibuat, silahkan tunggu verifikasi admin',
+    );
+    navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
   };
   const onSave = async () => {
     await checkValueNull();
-    navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
-
-    // tagcomment
-    // const dataEvent = {
-    //   ...form,
-    //   image: photo,
-    // };
-    // api.postEvent(dataEvent).then(
-    //   res => {
-    //     notifications(
-    //       'success',
-    //       'berita sukses dibuat, silahkan tunggu verifikasi admin',
-    //     );
-    //     navigation.navigate('MainAppGraduated', {screen: 'AlumniBerita'});
-    //   },
-    //   err => {
-    //     const message = JSON.parse(err.response.request._response).data[0].msg;
-    //     console.log('isi errr :', message);
-    //     notifications('danger', message);
-    //   },
-    // );
-    // console.log('isi event :', dataEvent);
+    const dataEvent = {
+      ...form,
+      image: photo,
+    };
+    if (payload) {
+      api.updateEvent(dataEvent, payload._id).then(
+        res => responseSuccess(),
+        err => {
+          const message = JSON.parse(err.response.request._response).message;
+          console.log('isi errr :', dataEvent);
+          notifications('danger', message);
+        },
+      );
+    } else {
+      api.postEvent(dataEvent).then(
+        res => responseSuccess(),
+        err => {
+          const message = JSON.parse(err.response.request._response).data[0]
+            .msg;
+          console.log('isi errr :', message);
+          notifications('danger', message);
+        },
+      );
+      console.log('isi event :', dataEvent);
+    }
   };
   return (
     <View>
       <View>
         <Headers
           type="sub-edit"
-          title="Tulis Berita"
-          namaButton="UNGGAH"
+          title={payload ? 'Edit Berita' : 'Tulis Berita'}
+          namaButton={payload ? 'SIMPAN' : 'UNGGAH'}
           onPressBack={() => navigation.goBack()}
           onPressRight={() => onSave()}
         />
@@ -97,105 +150,97 @@ const AlumniTulisBerita = ({navigation}) => {
           <Gap height={24} />
           <View>
             <Inputs
-              // value={form.title}
-              // onChangeText={value => setForm('title', value)}
+              value={form.title}
+              onChangeText={value => setForm('title', value)}
               title="Judul"
               placeholder="Judul Berita"
             />
             <Gap height={24} />
-            {/* <Inputs title="Foto" placeholder="Pilih Foto" 
-              type = "addPhoto"
-              numberLines={15}/> */}
-
-            <View style={styles.contPhoto}>
-              <Text style={styles.titleText}>Foto</Text>
-              <View style={styles.contAddPhoto}>
-              <Image
-                source={require('../../assets/mdi_image.png')}
-                style={StyleSheet.image}
-              />
-              <Text style={styles.phPhoto}>Pilih Foto</Text>
-              </View>
-            </View>
-
-            <Gap height={24} />
-            {/* <TouchableOpacity
+            <Text style={styles.titleText}>Foto</Text>
+            <TouchableOpacity
               onPress={() => getImage()}
-              style={styles.eventWrapper}>
-              <Image
-                style={styles.photoEvent}
-                // source={
-                //   photo
-                //     // ? {uri: photo}
-                //     // : require('../../assets/default-image.png')
-                  
-                // }
-              />
-            </TouchableOpacity> */}
-            {/* <Gap height={24} /> */}
-            {/* <Inputs
-              // value={form.category}
-              // onChangeText={value => setForm('category', value)}
-              title="Kategori"
-              placeholder="Pilih Kategori"
-            /> */}
-            <View>
-              <Text style={styles.titleText}>Kategori Berita</Text>
-              <View style={styles.contPicker}>  
-                <Picker style={styles.contText}
-                // placeholder="Pilih Kategori"
-                // mode="dropdown"
-                >
-                  <Picker.Item label="Pilih Kategori" value="disabled"/>
-                  <Picker.Item label="Aktual"/>
-                  <Picker.Item label="Alumni"/>
-                  <Picker.Item label="Lapak"/>
-                  <Picker.Item label="Loker"/>
-                </Picker>
-              </View>
-            </View>
-        
-            <Gap height={24} />
-            {/* <Inputs
-              // value={form.subCategory}
-              // onChangeText={value => setForm('subCategory', value)}
-              title="Sub Kategori"
-              placeholder="Pilih Sub Kategori"
-            /> */}
-            <View>
-              <Text style={styles.titleText}>SubKategori Berita</Text>
-              <View style={styles.contPicker}>  
-                <Picker style={styles.contText}>
-                  <Picker.Item label="Pilih Subkategori"
-                  // itemTextStyle={{ color: "blue", fontFamily:"Ebrima", fontSize:13 }}
+              style={styles.eventWrapper(payload)}>
+              {payload ? (
+                <Image
+                  style={styles.photoEvent}
+                  source={
+                    photo
+                      ? {uri: photo}
+                      : {uri: `${BASE_URL_ROOT}${payload.image}`}
+                  }
+                />
+              ) : null}
+            </TouchableOpacity>
+            {payload ? null : (
+              <TouchableOpacity onPress={() => getImage()}>
+                {photo ? (
+                  <Image
+                    style={styles.photoEvent}
+                    source={
+                      photo
+                        ? {uri: photo}
+                        : require('../../assets/default-image.png')
+                    }
                   />
-                  <Picker.Item label="Berita"/>
-                  <Picker.Item label="Acara"/>
-                  <Picker.Item label="Opini"/>
-                  <Picker.Item label="Akademis"/>
-                  <Picker.Item label="Terkini"/>
-                  <Picker.Item label="WikiAlumni"/>
-                  <Picker.Item label="Berkabar"/>
-                  <Picker.Item label="UMKM Center"/>
-                  <Picker.Item label="Kuliner"/>
-                  <Picker.Item label="Kiat Bisnis"/>
-                  <Picker.Item label="Merchandise"/>
-                  <Picker.Item label="Preloved"/>
-                  <Picker.Item label="Internship"/>
-                  <Picker.Item label="Full Time"/>
-                  <Picker.Item label="Freelance"/>
+                ) : (
+                  <View style={styles.inputImage}>
+                    <Image
+                      style={styles.photoInput}
+                      source={require('../../assets/default-image.png')}
+                    />
+                    <Text style={styles.pilihFoto}>Pilih Foto</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            )}
+
+            <Gap height={24} />
+            <View>
+              <Text style={styles.titleText}>Kategori</Text>
+              <View style={styles.contPicker}>
+                <Picker
+                  style={styles.contText}
+                  selectedValue={form.category}
+                  onValueChange={value => filterDataSubCategory(value)}>
+                  {categoryList.map(item => {
+                    return (
+                      <Picker.Item
+                        label={item.category}
+                        value={item.category}
+                      />
+                    );
+                  })}
                 </Picker>
               </View>
-              <Gap height={24} />
-              <Inputs
-                // value={form.desc}
-                // onChangeText={value => setForm('desc', value)}
-                title="Isi Berita"
-                placeholder="Masukkan isi berita"
-                type = "multiline"
-                numberLines={40}
-              />
             </View>
+            <Gap height={24} />
+            <View>
+              <Text style={styles.titleText}>Sub Kategori</Text>
+              <View style={styles.contPicker}>
+                <Picker
+                  style={styles.contText}
+                  selectedValue={''}
+                  onValueChange={value => setForm('subCategory', value)}>
+                  {subCategoryTemp.map(item => {
+                    return (
+                      <Picker.Item
+                        label={item.subCategory}
+                        value={item.subCategory}
+                      />
+                    );
+                  })}
+                </Picker>
+              </View>
+            </View>
+            <Gap height={24} />
+            <Inputs
+              multiline
+              numberOfLines={10}
+              value={form.desc}
+              onChangeText={value => setForm('desc', value)}
+              title="Isi Berita"
+              placeholder="Masukkan isi berita"
+            />
             <Gap height={100} />
           </View>
         </View>
@@ -213,9 +258,9 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 20,
   },
-  eventWrapper: {
-    height: 120,
-  },
+  eventWrapper: payload => ({
+    height: payload ? 120 : 5,
+  }),
   photoEvent: {
     height: 120,
     width: '100%',
@@ -232,39 +277,50 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-  contPicker: {
-    backgroundColor: colors.backgroundgrey,
-    borderRadius: 5,
-    //paddingHorizontal: 16,
-    borderColor: colors.input.outline,
-  },
   titleText: {
     fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     marginBottom: 12,
   },
-  contText: { //INI GAMAU KE GANTI STYLENYA
+  inputImage: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    fontSize: 13,
+    fontFamily: fonts.primary.reguler,
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 16,
+    borderColor: colors.input.outline,
+    color: colors.text.tertiary,
+    backgroundColor: colors.input.background,
+    paddingVertical: 60,
+  },
+  photoInput: {
+    width: 20,
+    height: 20,
+    borderRadius: 5,
+    resizeMode: 'cover',
+    marginRight: '5%',
+  },
+  contTambah: {
+    alignSelf: 'flex-start',
+  },
+  contPicker: {
+    backgroundColor: colors.backgroundgrey,
+    borderRadius: 5,
+    //paddingHorizontal: 16,
+    borderColor: colors.input.outline,
+  },
+  contText: {
+    //INI GAMAU KE GANTI STYLENYA
     fontSize: 8,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
-  }, 
-  contAddPhoto: {
-    flexDirection: 'row',
-    backgroundColor: colors.primaryWhite,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: colors.input.outline,
-    height: 175,
-    width: 350,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  phPhoto: {
+  pilihFoto: {
     fontSize: 13,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
-    marginLeft: 8,
   }
-
 });

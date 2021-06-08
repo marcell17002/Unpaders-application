@@ -34,19 +34,17 @@ const MahasiswaDaftar = ({navigation, route}) => {
   };
   const onSave = async () => {
     await checkValueNull();
-    navigation.navigate('Masuk');
-    // tagcomment
-    // api.postRegister(form).then(
-    //   res => {
-    //     notifications('success', 'registrasi berhasil silahkan login');
-    //     navigation.replace('Masuk');
-    //   },
-    //   err => {
-    //     const message = JSON.parse(err.response.request._response).message;
-    //     console.log('isi errr :', JSON.parse(err.response.request._response));
-    //     notifications('danger', message);
-    //   },
-    // );
+    api.postRegister(form).then(
+      res => {
+        notifications('success', 'registrasi berhasil silahkan login');
+        navigation.replace('Masuk');
+      },
+      err => {
+        const message = JSON.parse(err.response.request._response).message;
+        console.log('isi errr :', JSON.parse(err.response.request._response));
+        notifications('danger', message);
+      },
+    );
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

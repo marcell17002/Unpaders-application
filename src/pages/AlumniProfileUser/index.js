@@ -9,16 +9,17 @@ import {api} from '../../services';
 const AlumniProfileUser = ({navigation}) => {
   const user = useSelector(state => state).user;
   const [profile, setProfile] = useState([]);
-  // tagcomment
-  // useEffect(() => {
-  //   api.getProfileUser(user.id).then(
-  //     res => {
-  //       setProfile(res.data[0]);
-  //       console.log('image : ', res.data[0].image);
-  //     },
-  //     err => notifications('danger', 'anda tidak terknoneksi ke internet'),
-  //   );
-  // }, []);
+
+  useEffect(() => {
+    api.getProfileUser(user.id).then(
+      res => {
+        setProfile(res.data[0]);
+        console.log('image : ', res.data[0].image);
+      },
+      err => notifications('danger', 'anda tidak terknoneksi ke internet'),
+    );
+  }, []);
+
   return (
     <View style={styles.page}>
       <View style={styles.contHeader}>

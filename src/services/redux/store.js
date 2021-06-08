@@ -10,6 +10,9 @@ const initialState = {
     token: '',
     refreshToken: '',
   },
+  recommendation: {},
+  alumni: {},
+  seen: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +29,28 @@ const reducer = (state = initialState, action) => {
         token: action.value,
       },
     };
+  } else if (action.type === 'SET_LOADING') {
+    return {
+      ...state,
+      loading: action.value,
+    };
+  } else if (action.type === 'SET_ALUMNI') {
+    return {
+      ...state,
+      alumni: action.value,
+    };
+  } else if (action.type === 'SET_SEEN') {
+    return {
+      ...state,
+      seen: action.value,
+    };
+  } else if (action.type === 'SET_RECOMMENDATION') {
+    return {
+      ...state,
+      recommendation: action.value,
+    };
   }
+  return state;
 };
 
 const store = createStore(reducer);

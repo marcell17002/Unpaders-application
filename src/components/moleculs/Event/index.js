@@ -1,14 +1,25 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {colors, fonts} from '../../../utils';
+import {BASE_URL_ROOT} from '@env';
 
-const Event = ({picture, category, time, title, author, onPress}) => {
+const Event = ({
+  picture,
+  userPicture,
+  isHistory,
+  status,
+  category,
+  time,
+  title,
+  author,
+  onPress,
+}) => {
   return (
     <TouchableOpacity style={styles.event} onPress={onPress}>
       <View style={styles.eventImage}>
         <Image
           style={styles.image}
-          source={require('../../../assets/event.png')}
+          source={{uri: `${BASE_URL_ROOT}${picture}`}}
         />
       </View>
       <View style={styles.eventDetail}>
@@ -21,11 +32,24 @@ const Event = ({picture, category, time, title, author, onPress}) => {
           <Text style={styles.Judul}>{title}</Text>
         </View>
         <View style={styles.eventCreatorDetail}>
-          <Image
-            style={styles.logo}
-            source={require('../../../assets/LogoUnpadersKecil.png')}
-          />
-          <Text style={styles.penulis}>{author}</Text>
+          {isHistory ? (
+            <>
+              <View>
+                <Text>STATUS : </Text>
+              </View>
+              <View>
+                <Text>{status}</Text>
+              </View>
+            </>
+          ) : (
+            <>
+              <Image
+                style={styles.logo}
+                source={{uri: `${BASE_URL_ROOT}${userPicture}`}}
+              />
+              <Text style={styles.penulis}>{author}</Text>
+            </>
+          )}
         </View>
       </View>
     </TouchableOpacity>

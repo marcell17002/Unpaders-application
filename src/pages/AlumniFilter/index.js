@@ -1,195 +1,199 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import {Headers} from '../../components/moleculs';
 import {BtnFilter, Gap} from '../../components/atoms';
-import { colors, fonts } from '../../utils';
+import {colors, filterData, fonts, useForm} from '../../utils';
+import {Icon} from 'native-base';
+import GridList from 'react-native-grid-list';
+import {useDispatch} from 'react-redux';
+const AlumniFilter = ({navigation}) => {
+  const dispatch = useDispatch();
+  const [openFaculty, setOpenFaculty] = useState(true);
+  const [openProdi, setOpenProdi] = useState(true);
+  const [filter, setFilter] = useForm({
+    faculty: '',
+    prodi: '',
+  });
 
-const AlumniFilter = () => {
+  const [facultyList, setFacultyList] = useState([
+    {label: 'F. Ekonomi dan Bisnis'},
+    {label: 'F. Farmasi'},
+    {label: 'F. Hukum'},
+    {label: 'F. Ilmu Budaya'},
+    {label: 'F. Fisip'},
+    {label: 'F. Kedokteran'},
+    {label: 'F. Kedokteran Gigi'},
+    {label: 'F. MIPA'},
+    {label: 'F. PIK'},
+    {label: 'F. Pertanian'},
+    {label: 'F. Peternakan'},
+    {label: 'F. Psikologi'},
+    {label: 'F. Geologi'},
+    {label: 'F. Industri Pertanian'},
+  ]);
+
+  const [prodiList, setProdiList] = useState([
+    {label: 'Administrasi Publik', faculty: 'F. MIPA'},
+    {label: 'Agribisnis', faculty: 'F. MIPA'},
+    {label: 'Agroteknologi', faculty: 'F. MIPA'},
+    {label: 'Aktuaria'},
+    {label: 'Akuntansi'},
+    {label: 'Antropologi', faculty: 'F. Fisip'},
+    {label: 'Biologi'},
+    {label: 'Bisnis Digital'},
+    {label: 'Ekonomi Islam'},
+    {label: 'Ekonomi Pembangunan'},
+    {label: 'Farmasi'},
+    {label: 'Fisika', faculty: 'F. Fisip'},
+    {label: 'Geofisika', faculty: 'F. Fisip'},
+    {label: 'Geologi', faculty: 'F. Fisip'},
+    {label: 'Hubungan Internasional', faculty: 'F. Fisip'},
+    {label: 'Hubungan Masyarakat'},
+    {label: 'Hukum'},
+    {label: 'Ilmu Kelautan'},
+    {label: 'Ilmu Komunikasi'},
+    {label: 'Ilmu Pemerintahan'},
+    {label: 'Ilmu Politik'},
+    {label: 'Ilmu Sejarah'},
+    {label: 'Jurnalistik'},
+    {label: 'Kedokteran'},
+    {label: 'Kedokteran Gigi'},
+    {label: 'Keperawatan'},
+    {label: 'Kesejahteraan Sosial'},
+    {label: 'Kimia'},
+    {label: 'Manajemen'},
+    {label: 'Manajemen Komunikasi'},
+    {label: 'Matematika'},
+    {label: 'Perikanan'},
+    {label: 'Perpustakaan'},
+    {label: 'Peternakan'},
+    {label: 'Psikologi'},
+    {label: 'Sastra Arab'},
+    {label: 'Sastra Indonesia'},
+    {label: 'Sastra Inggris'},
+    {label: 'Sastra Jepang'},
+    {label: 'Sastra Jerman'},
+    {label: 'Sastra Perancis'},
+    {label: 'Sastra Rusia'},
+    {label: 'Sastra Sunda'},
+    {label: 'Statistika'},
+    {label: 'Sosiologi'},
+    {label: 'Teknik Elektro'},
+    {label: 'Teknik Informatika'},
+    {label: 'Teknik Pertanian'},
+    {label: 'Teknologi Pangan'},
+    {label: 'Televisi dan Film'},
+    {label: 'T. Industri Pertanian'},
+  ]);
+  const [prodiTemp, setProdiTemp] = useState([]);
+
+  const filterDataProdi = async props => {
+    const filteredData = await filterData(prodiList, 'faculty', props);
+    await setFilter('faculty', props);
+    await setProdiTemp(filteredData);
+  };
+
+  const renderButtonFaculty = ({item, index}) => {
     return (
-        <View>
-            <View>
-                <Headers title='Filter' type='sub-main-back' 
-                onPressBack={() => navigation.goBack()}/>
-            </View>
-            <ScrollView showsVerticalScrollIndicator={false}>  
-            <View style={styles.page}>
-                <View style={styles.ghap}>
-                    <Gap height={12}/>
-                    <Text style={styles.textGap}>FAKULTAS</Text>
-                    <Gap height={12}/>
-                </View>
-                <Gap height={20}/>
-                <View>
-                    <BtnFilter 
-                        type="kanan-kiri" title1="F. Ekonomi dan Bisnis"
-                        title2="F. Farmasi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="F. Hukum"
-                        title2="F. Ilmu Budaya"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="F. Ilmu Komunikasi"
-                        title2="F. ISIP"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="F. Kedokteran"
-                        title2="F. Kedokteran Gigi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="F. Keperawatan"
-                        title2="F. MIPA"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="F. PIK"
-                        title2="F. Pertanian"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="F. Peternakan"
-                        title2="F. Psikologi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="F. T. Geologi"
-                        title2="F. T. Industri Pertanian"
-                        />
-                </View>
-                <View style={styles.ghap}>
-                    <Gap height={12}/>
-                    <Text style={styles.textGap}>PROGRAM STUDI</Text>
-                    <Gap height={12}/>
-                </View>
-                <Gap height={20}/>
-                <View>
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Administrasi Bisnis"
-                        title2="Administrasi Publik"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Agribisnis"
-                        title2="Agroteknologi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Aktuaria"
-                        title2="Akuntansi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Antropologi"
-                        title2="Biologi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Bisnis Digital"
-                        title2="Ekonomi Islam"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Ekonomi Pembangunan"
-                        title2="Farmasi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Fisika"
-                        title2="Geofisika"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Geologi"
-                        title2="Hubungan Internasional"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Hubungan Masyarakat"
-                        title2="Hukum"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Ilmu Kelautan"
-                        title2="Ilmu Komunikasi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Ilmu Pemerintahan"
-                        title2="Ilmu Politik"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Ilmu Sejarah"
-                        title2="Jurnalistik"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Kedokteran"
-                        title2="Kedokteran Gigi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Keperawatan"
-                        title2="Kesejahteraan Sosial"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Kimia"
-                        title2="Manajemen"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Manajemen Komunikasi"
-                        title2="Matematika"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Perikanan"
-                        title2="Perpustakaan"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Peternakan"
-                        title2="Psikologi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Sastra Arab"
-                        title2="Sastra Indonesia"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Sastra Inggris"
-                        title2="Sastra Jepang"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Sastra Jerman"
-                        title2="Sastra Perancis"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Sastra Rusia"
-                        title2="Sastra Sunda"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Statistika"
-                        title2="Sosiologi"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Teknik Elektro"
-                        title2="Teknik Informatika"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Teknik Pertanian"
-                        title2="Teknologi Pangan"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Teknik Pertanian"
-                        title2="Teknologi Pangan"
-                        />
-                    <BtnFilter 
-                        type="kanan-kiri" title1="Televisi dan Film"
-                        title2="T. Industri Pertanian"
-                        />
-                </View>
-                <Gap height={70}/>
-            </View>
-            </ScrollView>
-        </View>
+      <BtnFilter
+        onPress={async () => await filterDataProdi(item.label)}
+        title1={item.label}
+      />
     );
+  };
+  const renderButtonProdi = ({item, index}) => {
+    return (
+      <BtnFilter
+        onPress={async () => await setFilter('prodi', item.label)}
+        title1={item.label}
+      />
+    );
+  };
+  return (
+    <View>
+      <View>
+        <Headers
+          title="Filter"
+          type="filter"
+          onPressBack={() => navigation.navigate('SearchAlumni', filter)}
+        />
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.page}>
+          <TouchableOpacity
+            onPress={() => setOpenFaculty(!openFaculty)}
+            style={styles.ghap}>
+            <Text style={styles.textGap}>FAKULTAS</Text>
+            <Icon style={styles.iconStyle} type="AntDesign" name="caretdown" />
+          </TouchableOpacity>
+          <View style={styles.content}>
+            <Gap height={20} />
+            {openFaculty && (
+              <GridList
+                showSeparator
+                data={facultyList}
+                numColumns={2}
+                renderItem={renderButtonFaculty}
+              />
+            )}
+          </View>
+          <TouchableOpacity
+            onPress={() => setOpenProdi(!openProdi)}
+            style={styles.ghap}>
+            <Text style={styles.textGap}>PROGRAM STUDI</Text>
+            <Icon style={styles.iconStyle} type="AntDesign" name="caretdown" />
+          </TouchableOpacity>
+          <Gap height={20} />
+          <View style={styles.content}>
+            {openProdi && (
+              <GridList
+                showSeparator
+                data={prodiTemp}
+                numColumns={2}
+                renderItem={renderButtonProdi}
+              />
+            )}
+          </View>
+        </View>
+      </ScrollView>
+    </View>
+  );
 };
 
 export default AlumniFilter;
 
 const styles = StyleSheet.create({
-    page: {
-        backgroundColor: colors.primaryWhite,
-        flex: 1,
-    },
-    ghap: {
-        backgroundColor: colors.text.grey,
-    },
-    textGap: {
-        marginLeft: 24,
-        fontSize: 12,
-        fontFamily: fonts.primary.reguler,
-        color: colors.text.tertiary,
-    },
+  page: {
+    backgroundColor: colors.primaryWhite,
+    flex: 1,
+    paddingBottom: '30%',
+  },
+  ghap: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    backgroundColor: colors.text.grey,
+  },
+  textGap: {
+    fontSize: 12,
+    fontFamily: fonts.primary.reguler,
+    color: colors.text.tertiary,
+  },
+  iconStyle: {
+    //DONE
+    fontSize: 13,
+    alignSelf: 'flex-start',
+    justifyContent: 'space-around',
+    color: colors.primaryBlack,
+  },
+  content: {
+    paddingHorizontal: 14,
+  },
 });

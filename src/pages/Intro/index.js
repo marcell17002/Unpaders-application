@@ -1,6 +1,6 @@
 //import { Button } from 'native-base';
 import React from 'react';
-import {StyleSheet, View, Image, Text,} from 'react-native';
+import {StyleSheet, View, Image, Text, ScrollView} from 'react-native';
 import {Buttons, Gap, Link} from '../../components/atoms';
 import {
   fonts,
@@ -9,8 +9,11 @@ import {
   randomId,
   storeData,
   getData,
+  requestToken,
 } from '../../utils';
 import {useDispatch} from 'react-redux';
+import {BASE_IMG} from '@env';
+import {api} from '../../services';
 
 const Intro = ({navigation}) => {
   const dispatch = useDispatch();
@@ -19,12 +22,27 @@ const Intro = ({navigation}) => {
     const name = await randomName();
     const uniqId = await randomId();
     const dataUser = {
-      id: uniqId,
       name: name,
       status: 'umum',
+      email: `${uniqId}`,
+      password: `${uniqId}`,
+      phone: `${uniqId}`,
+      image: BASE_IMG,
     };
-    await dispatch({type: 'SET_PROFILE', value: dataUser});
-    await storeData('user_umum', dataUser);
+
+    api.postRegister(dataUser).then(
+      async res => {
+        const data = {
+          ...res.data,
+          id: res.data._id,
+        };
+        await dispatch({type: 'SET_PROFILE', value: data});
+        requestToken(data.id);
+        console.log('isi  register :', data);
+        await storeData('user', data);
+      },
+      err => console.log('isi err register :', err),
+    );
     navigation.navigate('MainApp');
   };
 

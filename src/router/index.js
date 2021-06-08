@@ -6,6 +6,9 @@ import {
   Chat,
   Berita,
   Akun,
+  Auth,
+  SearchAlumni,
+  SearchPage,
   Splashscreen,
   Intro,
   Masuk,
@@ -27,7 +30,8 @@ import {
   AlumniKontrib,
   AlumniTulisBerita,
   AlumniBeritaUnggah,
-  AlumniChatting, AlumniFilter, SearchPage, SearchAlumni,
+  AlumniChatting,
+  AlumniSubCategory,
   MahasiswaDaftar,
   MhsChat,
   MhsHome,
@@ -51,6 +55,7 @@ import {
   UmumTentangKami,
   UmumKontak,
   UmumDisclaimer,
+  AlumniFilter,
 } from '../pages';
 import {
   ABottomNavigator,
@@ -96,7 +101,12 @@ const MainAppGraduated = () => {
 };
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="AlumniHome">
+    <Stack.Navigator initialRouteName="Auth">
+      <Stack.Screen
+        name="Auth"
+        component={Auth}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Splashscreen"
         component={Splashscreen}
@@ -116,6 +126,21 @@ const Router = () => {
       <Stack.Screen
         name="Daftar"
         component={Daftar}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchAlumni"
+        component={SearchAlumni}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchPage"
+        component={SearchPage}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AlumniFilter"
+        component={AlumniFilter}
         options={{headerShown: false}}
       />
       {/* Alumni */}
@@ -210,18 +235,8 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniFilter"
-        component={AlumniFilter}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="SearchPage"
-        component={SearchPage}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="SearchAlumni"
-        component={SearchAlumni}
+        name="AlumniSubCategory"
+        component={AlumniSubCategory}
         options={{headerShown: false}}
       />
       {/* Mahasiswa */}

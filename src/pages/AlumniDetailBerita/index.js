@@ -23,93 +23,96 @@ import {
 } from '../../utils';
 import {api} from '../../services';
 import {Icon} from 'native-base';
-//import {useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
+import moment from 'moment';
 
 const AlumniChat = ({navigation, route}) => {
-  //const payload = route.params;
+  const payload = route.params;
   const [author, setAuthor] = useState({});
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
   const [countLike, setCountLike] = useState([]);
   const [countDislike, setCountDislike] = useState([]);
   const [idLike, setIdLike] = useState('');
+  const stateGlobal = useSelector(state => state);
+  const user = stateGlobal.user;
+  const recommendation = stateGlobal.recommendation;
 
-  //const user = useSelector(state => state).user;
-  // tagcomment
-  // useEffect(() => {
-  //   console.log('isi redux : ', user);
-  //   api.getProfileUser(payload.author.id).then(
-  //     res => setAuthor(res.data[0]),
-  //     err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
-  //   );
-  //   api.getLikedEvent('eventId', payload._id).then(
-  //     async res => {
-  //       const filterStatusTrue = await filterData(res.data, 'status', true);
-  //       setCountLike(filterStatusTrue); //counter like
-  //       const filterStatusFalse = await filterData(res.data, 'status', false);
-  //       setCountDislike(filterStatusFalse); //counter false
-  //       const filteredData = await filterData(res.data, 'userId', `${user.id}`);
-  //       if (filteredData.length > 0) {
-  //         if (filteredData[0].status === true) setLike(true);
-  //         else setDislike(true);
-  //         setIdLike(filteredData[0]._id);
-  //       }
-  //     },
-  //     err => {},
-  //   );
-  // }, []);
+  useEffect(async () => {
+    api.getProfileUser(payload.item.author).then(
+      res => setAuthor(res.data[0]),
+      err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
+    );
+    api.getLikedEvent('eventId', payload.item._id).then(
+      async res => {
+        const filterStatusTrue = await filterData(res.data, 'status', true);
+        setCountLike(filterStatusTrue); //counter like
+        const filterStatusFalse = await filterData(res.data, 'status', false);
+        setCountDislike(filterStatusFalse); //counter false
+        const filteredData = await filterData(res.data, 'userId', `${user.id}`);
+        if (filteredData.length > 0) {
+          if (filteredData[0].status === true) setLike(true);
+          else setDislike(true);
+          setIdLike(filteredData[0]._id);
+        }
+      },
+      err => {},
+    );
+  }, []);
 
   const updateValueLiked = () => {
-    // api.getLikedEvent('eventId', payload._id).then(
-    //   async res => {
-    //     const filterStatusTrue = await filterData(res.data, 'status', true);
-    //     setCountLike(filterStatusTrue); //counter like
-    //     const filterStatusFalse = await filterData(res.data, 'status', false);
-    //     setCountDislike(filterStatusFalse); //counter false
-    //   },
-    //   err => {
-    //     console.log('errror get liked : ', err);
-    //   },
-    // );
+    api.getLikedEvent('eventId', payload.item._id).then(
+      async res => {
+        const filterStatusTrue = await filterData(res.data, 'status', true);
+        setCountLike(filterStatusTrue); //counter like
+        console.log('isi filrer : ', filterStatusTrue);
+        const filterStatusFalse = await filterData(res.data, 'status', false);
+        setCountDislike(filterStatusFalse); //counter false
+      },
+      err => {
+        setCountLike([]);
+        setCountDislike([]);
+      },
+    );
   };
 
   const postCounter = async status => {
-    // const dataUserLikedEvent = {
-    //   userId: user.id,
-    //   eventId: payload._id,
-    //   status: status,
-    // };
-    // await api.postLikedEvent(dataUserLikedEvent).then(
-    //   res => {
-    //     setIdLike(res.data._id);
-    //   },
-    //   err => console.log('errr post : ', err),
-    // );
-    // await updateValueLiked();
+    const dataUserLikedEvent = {
+      userId: user.id,
+      eventId: payload.item._id,
+      status: status,
+    };
+    await api.postLikedEvent(dataUserLikedEvent).then(
+      res => {
+        setIdLike(res.data._id);
+      },
+      err => console.log('errr post : ', err),
+    );
+    await updateValueLiked();
   };
 
   const updateCounter = async status => {
-    // const dataUserLikedEvent = {
-    //   userId: user.id,
-    //   eventId: payload._id,
-    //   status: status,
-    // };
-    // await api.updateLikedEvent(dataUserLikedEvent, idLike).then(
-    //   async res => {
-    //     if (status === true) setLike(true), setDislike(false);
-    //     else setLike(false), setDislike(true);
-    //   },
-    //   err => console.log('errr del: ', err),
-    // );
-    // await updateValueLiked();
+    const dataUserLikedEvent = {
+      userId: user.id,
+      eventId: payload.item._id,
+      status: status,
+    };
+    await api.updateLikedEvent(dataUserLikedEvent, idLike).then(
+      async res => {
+        if (status === true) setLike(true), setDislike(false);
+        else setLike(false), setDislike(true);
+      },
+      err => console.log('errr del: ', err),
+    );
+    await updateValueLiked();
   };
 
   const deleteCounter = async status => {
     await api.deleteLikedEvent(idLike).then(
-      res => {
+      async res => {
         if (status === true) setLike(false);
         else setDislike(false);
-        updateValueLiked();
+        await updateValueLiked();
       },
       err => console.log('errr del: ', err),
     );
@@ -144,16 +147,17 @@ const AlumniChat = ({navigation, route}) => {
           onPressBack={() => navigation.goBack()}
         />
       </View>
-      
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <Gap height={24} />
           <Berita
-            // title={payload.title}
-            // author={payload.author.name}
-            // waktu={getDateName(payload.createdAt)}
-            // isiBerita={payload.desc}
-            // images={payload.image}
+            title={payload.item.title}
+            author={author.name}
+            waktu={getDateName(payload.item.createdAt)}
+            isiBerita={payload.item.desc}
+            images={payload.item.image}
+            imagesUser={author.image}
           />
           <Gap height={24} />
         </View>
@@ -163,16 +167,19 @@ const AlumniChat = ({navigation, route}) => {
         <View>
           <Gap height={24} />
           <Comment
-            // author={payload.author.name}
-            // waktu={getDateName(payload.createdAt)}
-            // onPress={() => navigation.navigate('AlumniProfileAuthor', author)}
+            author={author.name}
+            image={author.image}
+            waktu={getDateName(payload.item.createdAt)}
+            onPress={() => navigation.navigate('AlumniProfileAuthor', author)}
           />
 
           <View style={styles.secButtons}>
             <Buttons
               status="secondary"
               title="LIHAT KOMENTAR"
-              onPress={() => navigation.navigate('AlumniKomentar')}
+              onPress={() =>
+                navigation.navigate('AlumniKomentar', payload.item._id)
+              }
             />
             <Gap height={24} />
           </View>
@@ -184,37 +191,48 @@ const AlumniChat = ({navigation, route}) => {
         <View>
           <Gap height={24} />
           <Text style={styles.sectionLainnya}>Berita Terbaru Lainnya</Text>
-          <Event
-            category="AKTUAL"
-            time="3 JAM YANG LALU"
-            title="Irawati Hermawan: Penanganan Covid-19 Perlu Kolaborasi"
-            author="Tim Unpaders"
-            onPress={() => navigation.navigate('AlumniHome')}
-          />
+          {recommendation.slice(0, 3).map(item => {
+            return (
+              <Event
+                category={item.category}
+                time={moment(item.createdAt).fromNow()}
+                title={item.title}
+                picture={item.image}
+                userPicture={item.userImage}
+                author={item.name}
+                onPress={() =>
+                  navigation.navigate('AlumniDetailBerita', {
+                    event: payload.event,
+                    item: item,
+                  })
+                }
+              />
+            );
+          })}
         </View>
       </ScrollView>
 
       <View style={styles.rating}>
         <TouchableOpacity
-          // style={styles.likedButton(like)}
           style={styles.likedButton}
           onPress={() => rateEvent('like')}>
-          <Icon style={styles.iconStyle} type="Feather" name="thumbs-up"
-          style={{color: colors.primaryBlack }} />
-          <Gap width={8}/>
+          <Icon style={styles.like(like)} type="Feather" name="thumbs-up" />
+          <Gap width={8} />
           <Text style={styles.textLike}>{countLike.length}</Text>
         </TouchableOpacity>
 
-        <Gap width={20}/>
-        
+        <Gap width={20} />
+
         <TouchableOpacity
-          // style={styles.disLike(dislike)}
           style={styles.disLikedButton}
           onPress={() => rateEvent('dislike')}>
-          <Icon style={styles.iconStyle} type="Feather" name="thumbs-down"
-          style={{color: colors.primaryBlack }}/>
-          <Gap width={8}/>
-          <Text style={styles.textLike}>{countDislike.length}</Text>
+          <Icon
+            style={styles.disLike(dislike)}
+            type="Feather"
+            name="thumbs-down"
+          />
+          <Gap width={8} />
+          <Text style={styles.textdisLike}>{countDislike.length}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -234,16 +252,6 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     elevation: 10,
   },
-  like: like => ({
-    width: 50,
-    height: 50,
-    backgroundColor: like ? '#b3d1ff' : '#dadada',
-  }),
-  disLike: disLike => ({
-    width: 50,
-    height: 50,
-    backgroundColor: disLike ? '#ffb3b3' : '#dadada',
-  }),
   page: {
     flex: 1,
     backgroundColor: 'white',
@@ -261,15 +269,28 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     marginRight: 20,
   },
+  like: like => ({
+    color: like ? colors.primary : colors.secondGrey,
+  }),
+  disLike: disLike => ({
+    color: disLike ? colors.primary : colors.secondGrey,
+  }),
+  textLike: {
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.secondGrey,
+    //color: like ? colors.primary : colors.secondGrey,
+  },
+  textdisLike: {
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.secondGrey,
+    //color: disLike ? colors.primary : colors.secondGrey,
+  },
   likedButton: {
     alignItems: 'center',
     flexDirection: 'row',
     marginLeft: 24,
-  },
-  textLike: {
-    fontSize: 16,
-    fontFamily: fonts.primary.semibold,
-    color: colors.text.tertiary,
   },
   disLikedButton: {
     alignItems: 'center',

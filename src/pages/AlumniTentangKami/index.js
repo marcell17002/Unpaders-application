@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Headers, } from '../../components/moleculs';
+import {Headers, NotFound, } from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
 import { colors, fonts } from '../../utils';
 
@@ -11,7 +11,7 @@ const AlumniTentangKami = ({navigation}) => {
                 <Headers title='Tentang Kami' type='sub-main-back' 
                 onPressBack={() => navigation.goBack()}/>
             </View>
-            <ScrollView showsVerticalScrollIndicator={false}>                
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.page}>
                 <Gap height={24}/>
                     <Text style={styles.contPage}>Ada banyak media daring dan beragam jenisnya. Unpaders memilih menjadi portal komunitas, untuk alumni Universitas Padjadjaran. Kami berkomitmen menjadi wadah lintas angkatan, lintas generasi; lintas fakultas pun lintas perkubu-kubuan (seandainya itu pun ada). Kami berkomitmen menaungi semua perspektif, hobi, hingga gaya hidup.</Text>
@@ -27,6 +27,12 @@ const AlumniTentangKami = ({navigation}) => {
                     <Gap height={80}/>
                 </View>
             </ScrollView>
+
+            {/* COBA2
+            <View style={styles.page}>
+                <NotFound type="Search"/>
+            </View> */}
+            
         </View>
     );
 };

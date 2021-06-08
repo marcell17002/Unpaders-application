@@ -8,9 +8,27 @@ import {
 } from 'react-native';
 import {Gap, ListButton} from '../../components/atoms/';
 import {Headers} from '../../components/moleculs/';
-import {fonts, colors} from '../../utils';
+import {fonts, colors, destroyData} from '../../utils';
+import {useSelector, useDispatch} from 'react-redux';
+import {Fire} from '../../services';
 
 const UmumLainnya = ({navigation}) => {
+  const user = useSelector(state => state).user;
+  const dispatch = useDispatch();
+  const onLogOut = () => {
+    const data = {
+      id: '',
+      email: '',
+      name: '',
+      status: '',
+      token: '',
+      refreshToken: '',
+    };
+    dispatch({type: 'SET_PROFILE', value: data});
+    destroyData();
+    navigation.replace('Intro');
+    Fire.destroyToken(user.id);
+  };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.page}>
@@ -43,17 +61,34 @@ const UmumLainnya = ({navigation}) => {
           <Text style={styles.textGap}>SOCIAL MEDIA UNPADERS</Text>
           <Gap height={12} />
         </View>
-        <ListButton type="secondary" namaTombol="Facebook" />
-        <ListButton type="secondary" namaTombol="Twitter" />
-        <ListButton type="secondary" namaTombol="Instagram" />
-        <ListButton type="secondary" namaTombol="Youtube" />
+        <ListButton
+          type="secondary"
+          image={require('../../assets/facebook.png')}
+          namaTombol="Facebook"
+        />
+        <ListButton
+          type="secondary"
+          image={require('../../assets/twitter.png')}
+          namaTombol="Twitter"
+        />
+        <ListButton
+          type="secondary"
+          image={require('../../assets/instagram.png')}
+          namaTombol="Instagram"
+        />
+        <ListButton
+          type="secondary"
+          image={require('../../assets/youtube.png')}
+          namaTombol="Youtube"
+        />
 
         <View style={styles.ghap}>
           <Gap height={12} />
           <Text style={styles.textGap}>Ganti Akun</Text>
           <Gap height={12} />
         </View>
-        <TouchableOpacity>
+
+        <TouchableOpacity onPress={() => onLogOut()}>
           <Text style={styles.logout}>Keluar Aplikasi</Text>
         </TouchableOpacity>
         <Gap height={20} />

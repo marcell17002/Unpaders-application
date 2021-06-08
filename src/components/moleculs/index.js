@@ -13,11 +13,31 @@ import UnggahBerita from './UnggahBerita';
 import ChatItem from './ChatItem';
 import InputChat from './InputChat';
 import SubKategori from './SubKategori';
-
+import SubCategoryHome from './SubCategoryHome';
+import SearchHeader from './SearchHeader';
 import MBottomNavigator from './MBottomNavigator';
 import UBottomNavigator from './UBottomNavigator';
+import NotFound from './NotFound';
 
-
-export {ABottomNavigator, Headers, Event, Comment, Kategori, Berita, CommentUser, 
-    ProfileAuthor, ListAlumniChat, ProfileUser, ListAlumni, UnggahBerita, ChatItem,
-    InputChat, MBottomNavigator, UBottomNavigator, SubKategori};
+export {
+  ABottomNavigator,
+  Headers,
+  Event,
+  Comment,
+  Kategori,
+  Berita,
+  CommentUser,
+  ProfileAuthor,
+  ListAlumniChat,
+  ProfileUser,
+  ListAlumni,
+  UnggahBerita,
+  ChatItem,
+  InputChat,
+  MBottomNavigator,
+  UBottomNavigator,
+  SubKategori,
+  SubCategoryHome,
+  SearchHeader,
+  NotFound,
+};

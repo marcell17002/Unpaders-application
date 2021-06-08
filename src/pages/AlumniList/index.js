@@ -4,17 +4,30 @@ import {Headers, Kategori, Event, ListAlumni} from '../../components/moleculs';
 import {Gap, ListButton} from '../../components/atoms';
 import {fonts, colors} from '../../utils';
 import {api} from '../../services';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 const AlumniList = ({navigation}) => {
   const [alumni, setAlumni] = useState([]);
-  // tagcomment
-  // useEffect(() => {
-  //   api.getUserByCategory('status', 'alumni').then(
-  //     res => setAlumni(res.data),
-  //     err => console.log('isi err : ', err),
-  //   );
-  // }, []);
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    await api.getUserByCategory('status', 'alumni').then(
+      async res => {
+        const alumnus = res.data;
+        const data = [];
+        const promises = await Object.keys(alumnus).map(async key => {
+          await data.push({
+            idReceiver: alumnus[key]._id,
+            isNew: true,
+            ...alumnus[key],
+          });
+        });
+        await Promise.all(promises);
+        await setAlumni(data);
+        await dispatch({type: 'SET_ALUMNI', value: data});
+      },
+      err => console.log('isi err : ', err),
+    );
+  }, []);
   return (
     <View>
       <View style={styles.contHeader}>
@@ -23,6 +36,7 @@ const AlumniList = ({navigation}) => {
           type="three-icon"
           onPressBack={() => navigation.goBack()}
           onPressMiddle={() => navigation.navigate('SearchAlumni')}
+          onPressRight={() => navigation.navigate('AlumniFilter')}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -36,6 +50,10 @@ const AlumniList = ({navigation}) => {
                 fakultas={item.faculty}
                 jurusan={item.prodi}
                 angkatan={item.level}
+                onPressImage={() =>
+                  navigation.navigate('AlumniProfileAuthor', item)
+                }
+                onPressBody={() => navigation.navigate('AlumniChatting', item)}
               />
             );
           })}
