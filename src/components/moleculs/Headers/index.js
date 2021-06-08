@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  Image,
+  Image, 
 } from 'react-native';
 import {Icon} from 'native-base';
 import {colors, fonts} from '../../../utils';
@@ -51,7 +51,8 @@ const Headers = ({
               <Icon style={styles.iconStyle} name="arrow-back" />
             </TouchableOpacity>
             <View >
-              <Text style={styles.searchTitle}>{title}</Text>
+              <TextInput placeholder="Cari disini..." />
+              {/* <Text style={styles.searchTitle}>{title}</Text> */}
             </View>
             <TouchableOpacity //icon kanan
               style={styles.RightIconBundle}
@@ -354,6 +355,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
-    textAlign: 'right',
+    textAlign: 'left',
   }
 });
