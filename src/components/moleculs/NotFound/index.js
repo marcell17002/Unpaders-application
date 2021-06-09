@@ -1,30 +1,43 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Image,} from 'react-native';
 import {Headers, CommentUser} from '../../components/moleculs';
 import {Gap} from '../../../components/atoms';
 import { colors, fonts } from '../../../utils';
 
 const NotFound = ({type}) => {
     const SectionNotFound = () => {
-        switch(type) {
-            case "ChatKosong" :
-                return (
-                    <View style={styles.page}>
-                        <Text style={styles.Judul}>Belum ada percakapan</Text>
-                        <Gap height={24}/>
-                        <Text style={styles.deskripsi}>Silahkan mulai percakapan dengan teman Anda</Text>
-                    </View>
-                );
-            case "Search" :
-                return (
-                    <View style={styles.page}>
-                        <Text style={styles.Judul}>Tidak ada hasil yang ditemukan</Text>
-                        <Gap height={24}/>
-                        <Text style={styles.deskripsi}>Coba cari dengan kata kunci lain</Text>
-                    </View>
-                );
-            default:
-                return null;
+        if (type === "ChatKosong") {
+            return (
+                <>
+                <View style={styles.page}>
+                   <Text style={styles.Judul}>Belum ada percakapan</Text>
+                   <Gap height={24}/>
+                   <Text style={styles.deskripsi}>Silahkan mulai percakapan dengan teman Anda</Text>
+                   <Gap height={24}/>
+                   <View>
+                       <Image
+                           style={styles.photo1}
+                           source={require('../../../assets/NotFoundChat.png')}/>
+                   </View>
+               </View>
+                </>
+            );
+        } else if (type === "Search") {
+            return (
+                <>
+                <View style={styles.page}>
+                   <Text style={styles.Judul}>Tidak ada hasil yang ditemukan</Text>
+                   <Gap height={24}/>
+                   <Text style={styles.deskripsi}>Coba cari dengan kata kunci lain</Text>
+                   <Gap height={24}/>
+                   <View>
+                       <Image
+                           style={styles.photo1}
+                           source={require('../../../assets/NotFoundBerita.png')}/>
+                   </View>
+               </View>
+                </>
+            );
         }
     };
     return (
@@ -53,6 +66,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: fonts.primary.reguler,
         color: colors.text.tertiary,
+        alignSelf: 'center',
+    },
+    photo1: {
+        flex: 1,
+        backgroundColor: colors.primaryWhite,
+        justifyContent: 'center',
         alignSelf: 'center',
     }
 });

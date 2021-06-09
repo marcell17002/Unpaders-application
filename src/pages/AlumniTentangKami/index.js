@@ -25,14 +25,10 @@ const AlumniTentangKami = ({navigation}) => {
                     <Text style={styles.contPage}>www.unpaders.id</Text>
                     <Text style={styles.contPage}>IG: unpaders.id</Text>
                     <Gap height={80}/>
+                    {/* <NotFound type="Search"/>
+                    <Gap height={80}/> */}
                 </View>
             </ScrollView>
-
-            {/* COBA2
-            <View style={styles.page}>
-                <NotFound type="Search"/>
-            </View> */}
-            
         </View>
     );
 };
