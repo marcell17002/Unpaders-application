@@ -5,7 +5,7 @@ import {colors, fonts} from '../../../utils';
 const ChatItem = ({isMe, content, time}) => {
   return (
     <View style={styles.container(isMe)}>
-      <View style={styles.chatContent}>
+      <View style={styles.chatContent(isMe)}>
         <Text style={styles.textChat}>{content}</Text>
       </View>
       <Text style={styles.date}>{time}</Text>
@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
     paddingLeft: isMe ? null : 20,
     paddingRight: isMe ? 20 : null,
   }),
-  chatContent: {
+  chatContent: isMe => ({
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: colors.secondBlue,
+    backgroundColor: isMe ? colors.secondBlue : colors.backgroundgrey,
     maxWidth: '70%',
     borderRadius: 10,
     borderBottomRightRadius: 0,
-  },
+  }),
   textChat: {
     fontSize: 12,
     fontFamily: fonts.primary.reguler,

@@ -12,6 +12,7 @@ import {Icon} from 'native-base';
 const SearchHeader = ({
   placeholder,
   value,
+  less,
   onPressBack,
   onPressMiddle,
   onPressRight,
@@ -35,11 +36,13 @@ const SearchHeader = ({
             onPress={onPressMiddle}>
             <Icon style={styles.iconStyle} name="search" />
           </TouchableOpacity>
-          <TouchableOpacity //icon kanan 2
-            style={styles.RightIconBundle}
-            onPress={onPressRight}>
-            <Icon style={styles.iconStyle} type="AntDesign" name="filter" />
-          </TouchableOpacity>
+          {less ? null : (
+            <TouchableOpacity //icon kanan 2
+              style={styles.RightIconBundle}
+              onPress={onPressRight}>
+              <Icon style={styles.iconStyle} type="AntDesign" name="filter" />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </View>

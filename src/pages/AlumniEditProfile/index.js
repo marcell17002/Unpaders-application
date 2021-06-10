@@ -22,13 +22,16 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {BASE_URL_ROOT} from '@env';
 import {api} from '../../services';
 import {Picker} from 'native-base';
+import {useDispatch} from 'react-redux';
 
 const AlumniEditProfile = ({navigation, route}) => {
   const payload = route.params;
   const [profile, setProfile] = useState({...payload, password: ''});
   const pathImage = `${BASE_URL_ROOT}${profile.image}`;
   const [photo, setPhoto] = useState(pathImage);
+  const dispatch = useDispatch();
   const [profileImage, setProfileImage] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const [facultyList, setFacultyList] = useState([
     {label: 'F. Ekonomi dan Bisnis'},
     {label: 'F. Farmasi'},
@@ -107,13 +110,16 @@ const AlumniEditProfile = ({navigation, route}) => {
     );
     await setProdiTemp(filteredData);
   }, []);
-  
+
   const filterDataProdi = async props => {
-    const filteredData = await filterData(prodiList, 'faculty', props);
-    await setProdiTemp(filteredData);
-    console.log('isi data faculty : ', props, filteredData[1].label);
-    changeText('prodi', filteredData[1].label);
-    changeText('faculty', props);
+    await setProdiTemp([]);
+    filterData(prodiList, 'faculty', props).then(async res => {
+      dispatch({type: 'SET_LOADING', value: true});
+      setIsLoading(false);
+      await setProdiTemp(res);
+      changeText('prodi', res[0].label);
+      changeText('faculty', props);
+    });
   };
 
   const getImage = () => {
@@ -168,6 +174,10 @@ const AlumniEditProfile = ({navigation, route}) => {
       err => console.log('isi data :', dataEditProfile, err),
     );
   };
+  const onLoadingProdi = () => {
+    dispatch({type: 'SET_LOADING', value: false});
+  };
+
   return (
     <View>
       <View style={styles.contHeader}>
@@ -239,21 +249,6 @@ const AlumniEditProfile = ({navigation, route}) => {
               placeholder="Masukkan Nomor Pokok Mahasiswa"
             />
             <Gap height={24} />
-
-            {/* <Inputs
-              value={profile.faculty}
-              onChangeText={value => changeText('faculty', value)}
-              title="Fakultas"
-              placeholder="Masukkan Fakultas"
-            />
-            <Gap height={24} />
-            <Inputs
-              value={profile.prodi}
-              onChangeText={value => changeText('prodi', value)}
-              title="Program Studi"
-              placeholder="Masukkan Program Studi"
-            /> */}
-
             <View>
               <Text style={styles.titleText}>Fakultas</Text>
               <View style={styles.contPicker}>
@@ -262,6 +257,7 @@ const AlumniEditProfile = ({navigation, route}) => {
                   selectedValue={profile.faculty}
                   onValueChange={value => filterDataProdi(value)}>
                   {facultyList.map(item => {
+                    dispatch({type: 'SET_LOADING', value: false});
                     return (
                       <Picker.Item label={item.label} value={item.label} />
                     );
@@ -277,11 +273,15 @@ const AlumniEditProfile = ({navigation, route}) => {
                   style={styles.contText}
                   selectedValue={profile.prodi}
                   onValueChange={value => changeText('prodi', value)}>
-                  {prodiTemp.map(item => {
-                    return (
-                      <Picker.Item label={item.label} value={item.label} />
-                    );
-                  })}
+                  {isLoading === true ? (
+                    <Picker.Item label={payload.prodi} value={payload.prodi} />
+                  ) : (
+                    prodiTemp.map(item => {
+                      return (
+                        <Picker.Item label={item.label} value={item.label} />
+                      );
+                    })
+                  )}
                 </Picker>
               </View>
             </View>
@@ -303,15 +303,7 @@ const AlumniEditProfile = ({navigation, route}) => {
               />
             ) : null}
           </View>
-          <Gap height={24} />
-          {/* Button yg kalo ditambahin bakal nambah fieldnya sendiri */}
-          {/* <View style={styles.contTambah}>
-            <Buttons status="quarternary" title="+ Tambah Pendidikan" />
-          </View> */}
           <Gap height={88} />
-          {/* <View>
-                <Link title="+ Tambah Pendidikan" type='secondary'/>
-            </View> */}
         </View>
       </ScrollView>
     </View>

@@ -14,7 +14,7 @@ import {api, Fire} from '../../services';
 
 const AlumniChatting = ({navigation, route}) => {
   const today = new Date();
-  const date = getDateName(new Date().toISOString(), true);
+  const date = 'Rabu, 09 Juni 2021';
   const payload = route.params;
   const user = useSelector(state => state).user;
   const [input, setInput] = useState('');
@@ -63,6 +63,7 @@ const AlumniChatting = ({navigation, route}) => {
         async res => {
           await setChatId(payload.chatId);
           await setMessages(res.data);
+          indexDate(res.data);
         },
         err => console.log('isi errr get rc2', payload.chatId),
       );
@@ -164,22 +165,27 @@ const AlumniChatting = ({navigation, route}) => {
         {messages.map((item, index) => {
           var content = item.allChat.chatText;
           var date = item.allChat.dateChat;
-          if (date === date + 1) return console.log('ture');
-          console.log(`isi date ${index}: `, date[index], date[index + 1]);
-          return (
-            <>
-              {date === date ? (
-                <Text key={index} style={styles.chatDate}>
-                  {date}
-                </Text>
-              ) : null}
+          {
+            date[index].allChat.dateChat ===
+            date[index + 1].allChat.dateChat ? (
               <ChatItem
                 isMe={content.sendBy === user.id}
                 content={content.chatContent}
                 time={content.chatTime}
               />
-            </>
-          );
+            ) : (
+              <>
+                <Text key={index} style={styles.chatDate}>
+                  {date}
+                </Text>
+                <ChatItem
+                  isMe={content.sendBy === user.id}
+                  content={content.chatContent}
+                  time={content.chatTime}
+                />
+              </>
+            );
+          }
         })}
       </ScrollView>
       <InputChat

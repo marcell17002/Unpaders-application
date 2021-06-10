@@ -12,10 +12,13 @@ import {colors, filterData, fonts, useForm} from '../../utils';
 import {Icon} from 'native-base';
 import GridList from 'react-native-grid-list';
 import {useDispatch} from 'react-redux';
+
 const AlumniFilter = ({navigation}) => {
   const dispatch = useDispatch();
   const [openFaculty, setOpenFaculty] = useState(true);
   const [openProdi, setOpenProdi] = useState(true);
+  const [facultyActive, setFacultyActive] = useState(false);
+  const [prodiActive, setProdiActive] = useState(false);
   const [filter, setFilter] = useForm({
     faculty: '',
     prodi: '',
@@ -94,15 +97,20 @@ const AlumniFilter = ({navigation}) => {
   const [prodiTemp, setProdiTemp] = useState([]);
 
   const filterDataProdi = async props => {
-    const filteredData = await filterData(prodiList, 'faculty', props);
-    await setFilter('faculty', props);
-    await setProdiTemp(filteredData);
+    setProdiTemp([]);
+    setFacultyActive(true);
+    filterData(prodiList, 'faculty', props).then(async res => {
+      dispatch({type: 'SET_LOADING', value: true});
+      await setFilter('faculty', props);
+      await setProdiTemp(res);
+    });
   };
 
   const renderButtonFaculty = ({item, index}) => {
     return (
       <BtnFilter
-        onPress={async () => await filterDataProdi(item.label)}
+        active={facultyActive}
+        onPress={() => filterDataProdi(item.label)}
         title1={item.label}
       />
     );
@@ -110,8 +118,20 @@ const AlumniFilter = ({navigation}) => {
   const renderButtonProdi = ({item, index}) => {
     return (
       <BtnFilter
+        active={prodiActive}
         onPress={async () => await setFilter('prodi', item.label)}
         title1={item.label}
+      />
+    );
+  };
+  const onLoadingProdi = () => {
+    dispatch({type: 'SET_LOADING', value: false});
+    return (
+      <GridList
+        showSeparator
+        data={prodiTemp}
+        numColumns={2}
+        renderItem={renderButtonProdi}
       />
     );
   };
@@ -151,14 +171,7 @@ const AlumniFilter = ({navigation}) => {
           </TouchableOpacity>
           <Gap height={20} />
           <View style={styles.content}>
-            {openProdi && (
-              <GridList
-                showSeparator
-                data={prodiTemp}
-                numColumns={2}
-                renderItem={renderButtonProdi}
-              />
-            )}
+            {prodiTemp.length > 0 ? onLoadingProdi() : null}
           </View>
         </View>
       </ScrollView>

@@ -12,9 +12,11 @@ import {
 } from '../../utils';
 import {BASE_IMG} from '@env';
 import {Item, Picker} from 'native-base';
+import {useDispatch} from 'react-redux';
 
 const AlumniDaftar = ({navigation, route}) => {
   const status = route.params.status;
+  const dispatch = useDispatch();
   const [facultyList, setFacultyList] = useState([
     {label: 'F. Ekonomi dan Bisnis'},
     {label: 'F. Farmasi'},
@@ -91,11 +93,13 @@ const AlumniDaftar = ({navigation, route}) => {
   }, []);
 
   const filterDataProdi = async props => {
-    const filteredData = await filterData(prodiList, 'faculty', props);
-    await setProdiTemp(filteredData);
-    console.log('isi data faculty : ', props, filteredData[1].label);
-    setForm('prodi', filteredData[1].label);
-    setForm('faculty', props);
+    await setProdiTemp([]);
+    filterData(prodiList, 'faculty', props).then(async res => {
+      await setProdiTemp(res);
+      setForm('prodi', res[0].label);
+      setForm('faculty', props);
+      console.log('isi data ga milih prodi ', res[0].label);
+    });
   };
 
   const [form, setForm] = useForm({
@@ -107,7 +111,7 @@ const AlumniDaftar = ({navigation, route}) => {
     faculty: '',
     prodi: '',
     level: '',
-    graduated: '',
+    graduated: status === 'alumni' ? '' : 'underGraduated',
     image: BASE_IMG,
     status: status,
   });
@@ -121,7 +125,9 @@ const AlumniDaftar = ({navigation, route}) => {
     checkValue(form.faculty, 'fakultas');
     checkValue(form.prodi, 'prodi');
     checkValue(form.level, 'angkatan');
-    checkValue(form.graduated, 'tahun lulus');
+    {
+      status === 'alumni' ? checkValue(form.graduated, 'tahun lulus') : null;
+    }
   };
   const onSave = async () => {
     await checkValueNull();
@@ -146,7 +152,11 @@ const AlumniDaftar = ({navigation, route}) => {
             source={require('../../assets/LogoBesar.png')}
             style={StyleSheet.image}
           />
-          <Text style={styles.title}>Daftar sebagai Alumni</Text>
+          <Text style={styles.title}>
+            {status === 'alumni'
+              ? 'Daftar sebagai Alumni'
+              : 'Daftar sebagai Mahasiswa'}
+          </Text>
         </View>
         <Gap height={40} />
         <View>
@@ -233,13 +243,15 @@ const AlumniDaftar = ({navigation, route}) => {
             placeholder="Masukkan Angkatan"
           />
           <Gap height={24} />
-          <Inputs
-            title="Tahun Lulus"
-            isNumeric
-            value={form.graduated}
-            onChangeText={value => setForm('graduated', value)}
-            placeholder="Masukkan Tahun Lulus"
-          />
+          {status === 'alumni' ? (
+            <Inputs
+              title="Tahun Lulus"
+              isNumeric
+              value={form.graduated}
+              onChangeText={value => setForm('graduated', value)}
+              placeholder="Masukkan Tahun Lulus"
+            />
+          ) : null}
         </View>
 
         <Gap height={50} />

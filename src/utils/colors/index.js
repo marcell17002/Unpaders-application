@@ -64,7 +64,8 @@ export const colors = {
       blue: mainColors.blue,
     },
     dropdown: {
-      background: mainColors.greyLightest,
+      passive: mainColors.greyLightest,
+      active: mainColors.blue,
       text: mainColors.greyLight,
       outline: mainColors.greylighter,
     },

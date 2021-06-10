@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {colors, fonts} from '../../../utils';
 import {Gap} from '../../atoms';
 
-const BtnFilter = ({title1, title2, type, onPress}) => {
+const BtnFilter = ({title1, title2, active, type, onPress}) => {
   const ButtonFilter = () => {
     switch (type) {
       case 'kanan-kiri':
@@ -21,7 +21,9 @@ const BtnFilter = ({title1, title2, type, onPress}) => {
       default:
         return (
           <View style={styles.container}>
-            <TouchableOpacity onPress={onPress} style={styles.buttonKiri}>
+            <TouchableOpacity
+              onPress={onPress}
+              style={styles.buttonKiri(active)}>
               <Text style={styles.textBtn}>{title1}</Text>
             </TouchableOpacity>
           </View>
@@ -29,8 +31,10 @@ const BtnFilter = ({title1, title2, type, onPress}) => {
     }
   };
   return (
-    <View>
-      <ButtonFilter />
+    <View style={styles.container}>
+      <TouchableOpacity onPress={onPress} style={styles.buttonKiri(active)}>
+        <Text style={styles.textBtn}>{title1}</Text>
+      </TouchableOpacity>
     </View>
   );
   // return (
@@ -51,14 +55,16 @@ const BtnFilter = ({title1, title2, type, onPress}) => {
 export default BtnFilter;
 
 const styles = StyleSheet.create({
-  buttonKiri: {
-    backgroundColor: colors.button.dropdown.background,
+  buttonKiri: active => ({
+    backgroundColor: active
+      ? colors.button.dropdown.active
+      : colors.button.dropdown.passive,
     borderRadius: 5,
     marginBottom: 16,
     justifyContent: 'flex-start',
     width: 168,
     //marginLeft: 24,
-  },
+  }),
   buttonKanan: {
     backgroundColor: colors.button.dropdown.background,
     borderRadius: 5,
@@ -74,20 +80,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingVertical: 10,
   },
-  // buttonFilter: {
-  //     backgroundColor: colors.button.dropdown.background,
-  //     borderRadius: 5,
-  //     marginBottom: 16,
-  //     width: 168,
-  //     //marginLeft: 24,
-  // },
-  // buttonFilter2: {
-  //     backgroundColor: colors.button.dropdown.background,
-  //     borderRadius: 5,
-  //     marginBottom: 16,
-  //     width: 168,
-  //     //marginLeft: 24,
-  // },
   container: {
     flexDirection: 'row',
   },

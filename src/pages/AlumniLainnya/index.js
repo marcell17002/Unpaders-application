@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import {Gap, ListButton} from '../../components/atoms/';
 import {Headers} from '../../components/moleculs/';
@@ -79,21 +80,25 @@ const AlumniLainnya = ({navigation}) => {
           <Gap height={12} />
         </View>
         <ListButton
+          onPress={() => Linking.openURL('https://google.com')}
           type="secondary"
           image={require('../../assets/facebook.png')}
           namaTombol="Facebook"
         />
         <ListButton
+          onPress={() => Linking.openURL('https://google.com')}
           type="secondary"
           image={require('../../assets/twitter.png')}
           namaTombol="Twitter"
         />
         <ListButton
+          onPress={() => Linking.openURL('https://google.com')}
           type="secondary"
           image={require('../../assets/instagram.png')}
           namaTombol="Instagram"
         />
         <ListButton
+          onPress={() => Linking.openURL('https://google.com')}
           type="secondary"
           image={require('../../assets/youtube.png')}
           namaTombol="Youtube"

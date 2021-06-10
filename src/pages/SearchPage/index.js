@@ -1,30 +1,73 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import {Headers, CommentUser} from '../../components/moleculs';
+import {
+  Headers,
+  CommentUser,
+  ListAlumni,
+  SearchHeader,
+  Event,
+} from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
-import { colors, fonts } from '../../utils';
+import {colors, filterData, fonts} from '../../utils';
+import {useSelector} from 'react-redux';
+import moment from 'moment';
 
-const SearchPage = ({navigation}) => {
-    return (
-        <View>
-            {/* belum dipakein header */}
-            <View> 
-                <Headers title='Cari disini...' type='search-berita' 
-                onPressBack={() => navigation.goBack()}/>
-            </View>
-            <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>  
-                {/* biar keliatan warna bg nya */}
-                <Gap height={700}/>
-            </ScrollView>
-        </View>
-    );
+const SearchAlumni = ({navigation, route}) => {
+  const payload = route.params;
+  const [event, setEvent] = useState(payload);
+  const [eventTemp, setEventTemp] = useState(payload);
+  const [input, setInput] = useState('');
+
+  const searchFilter = value => {
+    setInput(value);
+    const newData = event.filter(item => {
+      const itemData = `${item.title.toUpperCase()}`;
+      const textData = value.toUpperCase();
+
+      return itemData.indexOf(textData) > -1;
+    });
+    setEventTemp(newData);
+  };
+  return (
+    <View>
+      <SearchHeader
+        value={input}
+        less
+        onChangeText={value => searchFilter(value)}
+        placeholder="Cari disini ..."
+        onPressBack={() => navigation.goBack()}
+        onPressMiddle={() => searchFilter(input)}
+      />
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+        {eventTemp.map(item => {
+          return (
+            <Event
+              category={item.category}
+              time={moment(item.createdAt).fromNow()}
+              title={item.title}
+              picture={item.image}
+              userPicture={item.userImage}
+              author={item.name}
+              onPress={() =>
+                navigation.navigate('AlumniDetailBerita', {
+                  event: event,
+                  item: item,
+                })
+              }
+            />
+          );
+        })}
+      </ScrollView>
+    </View>
+  );
 };
 
-export default SearchPage;
+export default SearchAlumni;
 
 const styles = StyleSheet.create({
-    page: {
-        //flex: 1,
-        backgroundColor: colors.primaryWhite,
-    }
+  page: {
+    //flex: 1,
+    marginBottom: '20%',
+    backgroundColor: colors.primaryWhite,
+  },
 });

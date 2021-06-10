@@ -142,7 +142,7 @@ const AlumniChat = ({navigation, route}) => {
     <View style={styles.page}>
       <View>
         <Headers
-          title="DETAIL BERITA"
+          title={`${payload.item.category} - ${payload.item.subCategory}`}
           type="sub-main"
           onPressBack={() => navigation.goBack()}
         />

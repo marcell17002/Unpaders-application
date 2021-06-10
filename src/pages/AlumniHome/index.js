@@ -73,7 +73,7 @@ const AlumniHome = ({navigation}) => {
       <Headers
         title="Home"
         type="main-search"
-        onPressRight={() => navigation.navigate('SearchPage')}
+        onPressRight={() => navigation.navigate('SearchPage', event)}
       />
 
       <ScrollView style={styles.event} showsVerticalScrollIndicator={false}>

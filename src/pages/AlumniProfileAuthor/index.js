@@ -1,14 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Headers, ProfileAuthor, Event} from '../../components/moleculs';
 import {Gap, Buttons} from '../../components/atoms';
-import {fonts, colors} from '../../utils';
+import {fonts, colors, filterData, sortData} from '../../utils';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
+import {api} from '../../services';
 
 const AlumniProfileAuthor = ({navigation, route}) => {
   const payload = route.params;
   const recommendation = useSelector(state => state).recommendation;
+  const [eventCreated, setEventCreated] = useState([]);
+  const [tempEvent, setTempEvent] = useState([]);
+  const [subCategory, setSubCategory] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    api.getEventByCategory('author', payload._id).then(
+      async res => {
+        const eventData = res.data;
+        const filteredData = await filterData(res.data, 'status', 'published');
+        const sortedData = await sortData(filteredData, 'createdAt');
+        setEventCreated(sortedData);
+      },
+      err => notifications('danger', 'no internet connection'),
+    );
+  }, []);
   return (
     <View style={styles.page}>
       <View>
@@ -44,15 +60,15 @@ const AlumniProfileAuthor = ({navigation, route}) => {
         <Gap height={24} />
         <View>
           <Text style={styles.sectionLainnya}>Berita Terbaru Lainnya</Text>
-          {recommendation.map(item => {
+          {eventCreated.map(item => {
             return (
               <Event
                 category={item.category}
                 time={moment(item.createdAt).fromNow()}
                 title={item.title}
                 picture={item.image}
-                userPicture={item.userImage}
-                author={item.name}
+                userPicture={payload.image}
+                author={payload.name}
                 onPress={() =>
                   navigation.navigate('AlumniDetailBerita', {
                     event: payload.event,

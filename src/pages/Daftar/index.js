@@ -26,7 +26,7 @@ const Daftar = ({navigation}) => {
           status="tertiary"
           title="Daftar sebagai Mahasiswa"
           onPress={() =>
-            navigation.navigate('MahasiswaDaftar', {status: 'mahasiswa'})
+            navigation.navigate('AlumniDaftar', {status: 'mahasiswa'})
           }
         />
         <Gap height={62} />
