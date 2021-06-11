@@ -62,26 +62,39 @@ const UmumLainnya = ({navigation}) => {
           <Gap height={12} />
         </View>
         <ListButton
+          onPress={() =>
+            Linking.openURL(
+              'https://www.facebook.com/Unpadersid-105495914506441/?_rdc=2&_rdr',
+            )
+          }
           type="secondary"
           image={require('../../assets/facebook.png')}
           namaTombol="Facebook"
         />
         <ListButton
+          onPress={() => Linking.openURL('https://twitter.com/UnpadersID?s=08')}
           type="secondary"
           image={require('../../assets/twitter.png')}
           namaTombol="Twitter"
         />
         <ListButton
+          onPress={() =>
+            Linking.openURL('https://www.instagram.com/unpaders.id/')
+          }
           type="secondary"
           image={require('../../assets/instagram.png')}
           namaTombol="Instagram"
         />
         <ListButton
+          onPress={() =>
+            Linking.openURL(
+              'https://www.youtube.com/channel/UCoa32lUgboiVxtyei6OXBxg',
+            )
+          }
           type="secondary"
           image={require('../../assets/youtube.png')}
           namaTombol="Youtube"
         />
-
         <View style={styles.ghap}>
           <Gap height={12} />
           <Text style={styles.textGap}>Ganti Akun</Text>

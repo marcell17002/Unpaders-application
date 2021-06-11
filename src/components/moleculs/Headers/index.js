@@ -5,12 +5,10 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  Image,
+  Image, 
 } from 'react-native';
 import {Icon} from 'native-base';
 import {colors, fonts} from '../../../utils';
-import {Inputs} from '../../atoms';
-import {onChange} from 'react-native-reanimated';
 
 const Headers = ({
   title,
@@ -22,7 +20,7 @@ const Headers = ({
   onPressBack,
   onPressRight,
   onPressMiddle,
-  valueData,
+  value,
   placeholder,
   onChangeText,
 }) => {
@@ -44,53 +42,6 @@ const Headers = ({
           </TouchableOpacity>
         </>
       );
-    } else if (type === 'search-berita') {
-      //search di berita
-      return (
-        <>
-          <View style={styles.subMain}>
-            <TouchableOpacity onPress={onPressBack}>
-              <Icon style={styles.iconStyle} name="arrow-back" />
-            </TouchableOpacity>
-            <View>
-              <Text style={styles.searchTitle}>{title}</Text>
-            </View>
-            <TouchableOpacity //icon kanan
-              style={styles.RightIconBundle}
-              onPress={onPressRight}>
-              <Icon style={styles.iconStyle} name="search" />
-            </TouchableOpacity>
-          </View>
-        </>
-      );
-    } else if (type === 'search-alumni') {
-      return (
-        <>
-          <View style={styles.subMain}>
-            <TouchableOpacity onPress={onPressBack}>
-              <Icon style={styles.iconStyle} name="arrow-back" />
-            </TouchableOpacity>
-            <TextInput
-              value={valueData}
-              onChangeText={onChangeText}
-              placeholder={title}
-              style={styles.searchTitle}
-            />
-            <View style={styles.iconRight}>
-              <TouchableOpacity //icon kanan 1
-                style={styles.MiddleIconBundle}
-                onPress={onPressMiddle}>
-                <Icon style={styles.iconStyle} name="search" />
-              </TouchableOpacity>
-              <TouchableOpacity //icon kanan 2
-                style={styles.RightIconBundle}
-                onPress={onPressRight}>
-                <Icon style={styles.iconStyle} type="AntDesign" name="filter" />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </>
-      );
     } else if (type === 'main') {
       //judul doang
       return (
@@ -109,7 +60,7 @@ const Headers = ({
               <Icon style={styles.iconStyle} name="arrow-back" />
             </TouchableOpacity>
             <View style={styles.subMainTitleBundle}>
-              <Text style={styles.titleStyle}>{title}</Text>
+              <Text style={styles.titleJudul}>{title}</Text>
             </View>
             <TouchableOpacity //icon kanan
               style={styles.RightIconBundle}
@@ -137,7 +88,7 @@ const Headers = ({
               <Icon style={styles.iconStyle} name="arrow-back" />
             </TouchableOpacity>
             <View style={styles.subMainTitleBundle}>
-              <Text style={styles.titleStyle}>{title}</Text>
+              <Text style={styles.titleJudul}>{title}</Text>
             </View>
             <TouchableOpacity //icon kanan 1
               style={styles.MiddleIconBundle}
@@ -152,37 +103,16 @@ const Headers = ({
           </View>
         </>
       );
-    } else if (type === 'two-icon') {
-      //ada icon kanan (2)
-      return (
-        <>
-          <View style={styles.subMain}>
-            <View style={styles.subMainTitleBundle}>
-              <Text style={styles.titleStyle}>{title}</Text>
-            </View>
-            <TouchableOpacity //icon kanan 1
-              style={styles.MiddleIconBundle}
-              onPress={onPressMiddle}>
-              <Icon style={styles.iconStyle} name="share-social" />
-            </TouchableOpacity>
-            <TouchableOpacity //icon kanan 2
-              style={styles.RightIconBundle}
-              onPress={onPressRight}>
-              <Icon style={styles.iconStyle} name="filter" />
-            </TouchableOpacity>
-          </View>
-        </>
-      );
     } else if (type === 'sub-edit') {
       //icon back & button edit
       return (
         <>
-          <View style={styles.subEdit}>
+          <View style={styles.subMain}>
             <TouchableOpacity onPress={onPressBack}>
               <Icon style={styles.iconStyle} name="arrow-back" />
             </TouchableOpacity>
-            <View style={styles.subEditTitle}>
-              <Text style={styles.titleStyle}>{title}</Text>
+            <View style={styles.subMainTitleBundle}>
+              <Text style={styles.titleJudul}>{title}</Text>
             </View>
             <View>
               <TouchableOpacity onPress={onPressRight}>
@@ -201,7 +131,7 @@ const Headers = ({
               <Icon style={styles.iconStyle} name="arrow-back" />
             </TouchableOpacity>
             <View style={styles.subMainTitleBundle}>
-              <Text style={styles.titleStyleBack}>{title}</Text>
+              <Text style={styles.titleJudul}>{title}</Text>
             </View>
             <View />
           </View>
@@ -216,33 +146,21 @@ const Headers = ({
             ) : null} */}
         </>
       );
-    } else if (type === 'search') {
-      //case ketika lagi searching, dan logo back
+    } else if (type === 'filter') {
       return (
         <>
           <View style={styles.subMain}>
             <TouchableOpacity onPress={onPressBack}>
-              <Icon style={styles.iconStyle} name="arrow-back" />
+              <Icon style={styles.iconStyle} type="AntDesign" name="close" />
             </TouchableOpacity>
-            <TextInput
-              value={value}
-              style={styles.inputText}
-              onChangeText={onChangeText}
-              placeholder={placeholder}
-            />
+            <View style={styles.subMainTitleBundle}>
+              <Text style={styles.titleJudul}>{title}</Text>
+            </View>
+            <View />
           </View>
-          {actions ? (
-            <TouchableOpacity onPress={onPressRight}>
-              {icon ? (
-                <Icon style={styles.iconStyle} name="arrow-back" />
-              ) : (
-                <Text style={styles.subMainTitleActions}>{actions}</Text>
-              )}
-            </TouchableOpacity>
-          ) : null}
         </>
       );
-    }
+    } 
   };
   return (
     <View style={styles.header}>
@@ -276,10 +194,8 @@ const styles = StyleSheet.create({
   },
   mainHeader: {
     flex: 1,
-    //justifyContent: 'space-between',
     marginTop: 17,
     marginBottom: 20,
-    //backgroundColor: 'yellow',
   },
   titleStyleMain: {
     //title style ditengah
@@ -288,54 +204,39 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
   },
-  titleStyleBack: {
-    //buat yg back tapi ga ngaruhh
-    flex: 1,
-    justifyContent: 'flex-start',
-    fontSize: 20,
-    fontFamily: 'Segoe-UI-SemiBold',
-    color: colors.text.primary,
-  },
   titleStyle: {
-    //title style di kiri
-    //textAlign: 'center',
     fontSize: 20,
     fontFamily: 'Segoe-UI-SemiBold',
     color: colors.text.primary,
-    //backgroundColor: 'yellow',
   },
   subMain: {
     flexDirection: 'row',
-    flex: 1,
     marginTop: 17,
     marginBottom: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  subEdit: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 17,
-    marginBottom: 20,
-    //backgroundColor: 'yellow',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  subMainTitleBundle: {
+    flex:1,
+    paddingHorizontal: 16,
   },
   editButton: {
-    //DONE
     fontSize: 18,
     fontFamily: fonts.primary.bold,
     color: colors.text.primaryBlue,
     alignSelf: 'flex-end',
   },
   iconStyle: {
-    //DONE
     alignSelf: 'flex-start',
     justifyContent: 'space-around',
     color: colors.primaryBlack,
   },
+  titleJudul: {
+    fontSize: 20,
+    fontFamily: 'Segoe-UI-SemiBold',
+    color: colors.text.primary,
+  },
   RightIconBundle: {
-    //icon kanan
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
@@ -343,38 +244,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
-  subMainTitleActions: {
-    fontFamily: 'Segoe-UI-Bold',
-    fontSize: 18,
-    color: colors.text.primaryBlue,
-  },
-  inputText: {
-    fontSize: 18,
-    fontFamily: 'Segoe-UI',
-    paddingHorizontal: 16,
-    color: colors.input.text,
-    backgroundColor: colors.input.background,
-  },
-  searchTitle: {
-    fontSize: 18,
-    fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
-    textAlign: 'right',
-    width: '70%',
-    textAlign: 'left',
-    paddingLeft: '5%',
-  },
-  inputText: {
-    fontSize: 13,
-    fontFamily: fonts.primary.reguler,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 16,
-    borderColor: colors.input.outline,
-    color: colors.text.tertiary,
-    backgroundColor: colors.input.background,
-  },
-  iconRight: {
-    flexDirection: 'row',
-  },
+  // subMainTitleActions: {
+  //   fontFamily: 'Segoe-UI-Bold',
+  //   fontSize: 18,
+  //   color: colors.text.primaryBlue,
+  // },
 });

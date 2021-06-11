@@ -36,12 +36,11 @@ const AlumniLainnya = ({navigation}) => {
     Fire.destroyToken(user.id);
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.page}>
-        <View style={styles.contHeader}>
-          <Headers type="main" title="LAINNYA" />
-        </View>
-
+    <View style={styles.page}>
+      <View style={styles.contHeader}>
+        <Headers type="main" title="LAINNYA" />
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.ghap}>
           <Gap height={12} />
           <Text style={styles.textGap}>PROFILE</Text>
@@ -80,30 +79,39 @@ const AlumniLainnya = ({navigation}) => {
           <Gap height={12} />
         </View>
         <ListButton
-          onPress={() => Linking.openURL('https://google.com')}
+          onPress={() =>
+            Linking.openURL(
+              'https://www.facebook.com/Unpadersid-105495914506441/?_rdc=2&_rdr',
+            )
+          }
           type="secondary"
           image={require('../../assets/facebook.png')}
           namaTombol="Facebook"
         />
         <ListButton
-          onPress={() => Linking.openURL('https://google.com')}
+          onPress={() => Linking.openURL('https://twitter.com/UnpadersID?s=08')}
           type="secondary"
           image={require('../../assets/twitter.png')}
           namaTombol="Twitter"
         />
         <ListButton
-          onPress={() => Linking.openURL('https://google.com')}
+          onPress={() =>
+            Linking.openURL('https://www.instagram.com/unpaders.id/')
+          }
           type="secondary"
           image={require('../../assets/instagram.png')}
           namaTombol="Instagram"
         />
         <ListButton
-          onPress={() => Linking.openURL('https://google.com')}
+          onPress={() =>
+            Linking.openURL(
+              'https://www.youtube.com/channel/UCoa32lUgboiVxtyei6OXBxg',
+            )
+          }
           type="secondary"
           image={require('../../assets/youtube.png')}
           namaTombol="Youtube"
         />
-
         <View style={styles.ghap}>
           <Gap height={12} />
           <Text style={styles.textGap}>LOGOUT</Text>
@@ -112,8 +120,8 @@ const AlumniLainnya = ({navigation}) => {
         <TouchableOpacity onPress={() => onLogOut()}>
           <Text style={styles.logout}>Logout Akun</Text>
         </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 

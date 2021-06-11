@@ -12,14 +12,20 @@ import {colors, fonts} from '../../../utils';
 
 const InputChat = ({value, onChangeText, onPress}) => {
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={value}
-        onChangeText={onChangeText}
-        placeholder="Tulis pesan..."></TextInput>
-      <Buttons onPress={onPress} status="btn-icon-send" disable />
-      {/* disable bernilai true, kl false disable={false} */}
+    <View style={styles.page}>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          value={value}
+          onChangeText={onChangeText}
+          placeholder="Tulis pesan..."></TextInput>
+        <Buttons
+          onPress={onPress}
+          status="btn-icon-send"
+          disable={value.length < 1}
+        />
+        {/* disable bernilai true, kl false disable={false} */}
+      </View>
     </View>
   );
 };
@@ -32,6 +38,14 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     flexDirection: 'row',
     paddingVertical: 10,
+  },
+  page: {
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 5.7,
+    shadowRadius: 0,
+    elevation: 10,
   },
   input: {
     backgroundColor: colors.backgroundgrey,

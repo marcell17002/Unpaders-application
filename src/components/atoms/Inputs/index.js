@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   inputText: {
-    fontSize: 13,
+    fontSize: 16,
     fontFamily: fonts.primary.reguler,
+    color: colors.text.primary,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 16,
     borderColor: colors.input.outline,
-    color: colors.text.tertiary,
     backgroundColor: colors.input.background,
   },
 });

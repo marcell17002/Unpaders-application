@@ -65,8 +65,7 @@ const AlumniHome = ({navigation}) => {
   const filterDataSubCategory = async props => {
     const data = tempEvent;
     const filteredData = await filterData(data, 'subCategory', props);
-    console.log('isi data : ', props);
-    await setEvent(filteredData);
+    navigation.navigate('AlumniSubCategory', {filteredData, props});
   };
   return (
     <View style={styles.page}>

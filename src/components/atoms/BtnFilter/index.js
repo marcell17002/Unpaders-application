@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {colors, fonts} from '../../../utils';
 import {Gap} from '../../atoms';
 
-const BtnFilter = ({title1, title2, active, type, onPress}) => {
+const BtnFilter = ({title1, title2, type, onPress}) => {
   const ButtonFilter = () => {
     switch (type) {
       case 'kanan-kiri':
@@ -32,39 +32,24 @@ const BtnFilter = ({title1, title2, active, type, onPress}) => {
   };
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPress} style={styles.buttonKiri(active)}>
+      <TouchableOpacity onPress={onPress} style={styles.buttonKiri}>
         <Text style={styles.textBtn}>{title1}</Text>
       </TouchableOpacity>
     </View>
   );
-  // return (
-  //     <View style={styles.page}>
-  //         <View style={styles.container}>
-  //             <TouchableOpacity type={kanan} onPress={onPress} style={styles.buttonFilter}>
-  //                 <Text style={styles.textBtn}>{title1}</Text>
-  //             </TouchableOpacity>
-  //             <Gap width={16}/>
-  //             <TouchableOpacity type={kiri} onPress={onPress} style={styles.buttonFilter2}>
-  //                 <Text style={styles.textBtn}>{title2}</Text>
-  //             </TouchableOpacity>
-  //         </View>
-  //     </View>
-  //)
 };
 
 export default BtnFilter;
 
 const styles = StyleSheet.create({
-  buttonKiri: active => ({
-    backgroundColor: active
-      ? colors.button.dropdown.active
-      : colors.button.dropdown.passive,
+  buttonKiri: {
+    backgroundColor: colors.button.dropdown.passive,
     borderRadius: 5,
     marginBottom: 16,
     justifyContent: 'flex-start',
     width: 168,
     //marginLeft: 24,
-  }),
+  },
   buttonKanan: {
     backgroundColor: colors.button.dropdown.background,
     borderRadius: 5,

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   pendidikan: {
     fontSize: 14,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
+    color: colors.text.secondGrey,
     marginRight: 5,
     textAlign: 'center',
   },

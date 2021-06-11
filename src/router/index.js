@@ -31,6 +31,7 @@ import {
   AlumniTulisBerita,
   AlumniBeritaUnggah,
   AlumniChatting,
+  AlumniSubCategory,
   MahasiswaDaftar,
   MhsChat,
   MhsHome,
@@ -231,6 +232,11 @@ const Router = () => {
       <Stack.Screen
         name="AlumniChatting"
         component={AlumniChatting}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AlumniSubCategory"
+        component={AlumniSubCategory}
         options={{headerShown: false}}
       />
       {/* Mahasiswa */}

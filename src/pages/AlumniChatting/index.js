@@ -1,11 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import {Headers, ChatItem, InputChat} from '../../components/moleculs';
+import {
+  Headers,
+  ChatItem,
+  InputChat,
+  NotFound,
+} from '../../components/moleculs';
 import {
   colors,
   fonts,
   getDateName,
   getTime,
+  notifications,
   useChat,
   useForm,
 } from '../../utils';
@@ -13,8 +19,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {api, Fire} from '../../services';
 
 const AlumniChatting = ({navigation, route}) => {
+  var flag = false;
   const today = new Date();
-  const date = 'Rabu, 09 Juni 2021';
+  const date = getDateName(today.toISOString(), true);
   const payload = route.params;
   const user = useSelector(state => state).user;
   const [input, setInput] = useState('');
@@ -33,7 +40,6 @@ const AlumniChatting = ({navigation, route}) => {
       setToken(res);
     });
     console.log('isi sender : ', user.email);
-    console.log('isi payload : ', payload);
   }, []);
 
   const getChatList = () => {
@@ -63,7 +69,6 @@ const AlumniChatting = ({navigation, route}) => {
         async res => {
           await setChatId(payload.chatId);
           await setMessages(res.data);
-          indexDate(res.data);
         },
         err => console.log('isi errr get rc2', payload.chatId),
       );
@@ -125,6 +130,7 @@ const AlumniChatting = ({navigation, route}) => {
     api.postNotifications(data);
   };
   const onSend = async () => {
+    if (input.length < 1) return notifications('info', 'masukan pesan anda');
     const data = {
       chatId: chatId,
       category: 'chat',
@@ -161,33 +167,40 @@ const AlumniChatting = ({navigation, route}) => {
           }}
         />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.contText}>
-        {messages.map((item, index) => {
-          var content = item.allChat.chatText;
-          var date = item.allChat.dateChat;
-          {
-            date[index].allChat.dateChat ===
-            date[index + 1].allChat.dateChat ? (
-              <ChatItem
-                isMe={content.sendBy === user.id}
-                content={content.chatContent}
-                time={content.chatTime}
-              />
-            ) : (
-              <>
-                <Text key={index} style={styles.chatDate}>
-                  {date}
-                </Text>
-                <ChatItem
-                  isMe={content.sendBy === user.id}
-                  content={content.chatContent}
-                  time={content.chatTime}
-                />
-              </>
-            );
-          }
-        })}
-      </ScrollView>
+      <View style={styles.body}>
+        {messages.length < 1 ? (
+          <NotFound type="ChatKosong" />
+        ) : (
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.contText}>
+            {messages.map((item, index) => {
+              var content = item.allChat.chatText;
+              var date = item.allChat.dateChat;
+              if (index === 0)
+                return (
+                  <>
+                    <Text style={styles.chatDate}>{date}</Text>
+                    <ChatItem
+                      isMe={content.sendBy === user.id}
+                      content={content.chatContent}
+                      time={content.chatTime}
+                    />
+                  </>
+                );
+              return (
+                <>
+                  <ChatItem
+                    isMe={content.sendBy === user.id}
+                    content={content.chatContent}
+                    time={content.chatTime}
+                  />
+                </>
+              );
+            })}
+          </ScrollView>
+        )}
+      </View>
       <InputChat
         value={input}
         onChangeText={value => {
@@ -205,6 +218,10 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  body: {
+    flex: 1,
+    justifyContent: 'center',
   },
   chatDate: {
     fontSize: 12,

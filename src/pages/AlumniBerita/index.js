@@ -5,6 +5,7 @@ import {
   Kategori,
   Event,
   ListAlumniChat,
+  NotFound,
 } from '../../components/moleculs';
 import {Gap, ListButton} from '../../components/atoms';
 import {fonts, colors, useForm, getDateName, notifications} from '../../utils';
@@ -55,19 +56,27 @@ const AlumniBerita = ({navigation}) => {
         </View>
         <Gap height={24} />
         <Text style={styles.sectionLainnya}>DAFTAR UNGGAH BERITA</Text>
-        {event.map(item => {
-          return (
-            <Event
-              isHistory
-              status={item.status}
-              category={item.category}
-              time={getDateName(item.createdAt)}
-              picture={item.image}
-              title={item.title}
-              onPress={() => editableEvent(item)}
-            />
-          );
-        })}
+        {event.length < 1 ? (
+          <View style={styles.body}>
+            <NotFound title="Anda belum mengunggah berita" />
+          </View>
+        ) : (
+          <View>
+            {event.map(item => {
+              return (
+                <Event
+                  isHistory
+                  status={item.status}
+                  category={item.category}
+                  time={getDateName(item.createdAt)}
+                  picture={item.image}
+                  title={item.title}
+                  onPress={() => editableEvent(item)}
+                />
+              );
+            })}
+          </View>
+        )}
       </View>
     </ScrollView>
   );
@@ -78,7 +87,10 @@ export default AlumniBerita;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.primaryWhite,
+  },
+  body: {
+    marginVertical: '50%',
   },
   ghap: {
     backgroundColor: colors.text.grey,

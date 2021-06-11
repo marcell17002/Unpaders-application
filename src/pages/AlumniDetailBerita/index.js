@@ -218,7 +218,7 @@ const AlumniChat = ({navigation, route}) => {
           onPress={() => rateEvent('like')}>
           <Icon style={styles.like(like)} type="Feather" name="thumbs-up" />
           <Gap width={8} />
-          <Text style={styles.textLike}>{countLike.length}</Text>
+          <Text style={styles.textLike(like)}>{countLike.length}</Text>
         </TouchableOpacity>
 
         <Gap width={20} />
@@ -232,7 +232,7 @@ const AlumniChat = ({navigation, route}) => {
             name="thumbs-down"
           />
           <Gap width={8} />
-          <Text style={styles.textLike}>{countDislike.length}</Text>
+          <Text style={styles.textdisLike(dislike)}>{countDislike.length}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -270,16 +270,23 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   like: like => ({
-    color: like ? '#b3d1ff' : colors.primaryBlack,
+    color: like ? colors.primary : colors.secondGrey,
   }),
   disLike: disLike => ({
-    color: disLike ? '#ffb3b3' : colors.primaryBlack,
+    color: disLike ? colors.primary : colors.secondGrey,
   }),
-  textLike: {
+  textLike: like => ({
     fontSize: 16,
     fontFamily: fonts.primary.semibold,
-    color: colors.text.tertiary,
-  },
+    //color: colors.text.secondGrey,
+    color: like ? colors.primary : colors.secondGrey,
+  }),
+  textdisLike: dislike => ({
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    //color: colors.text.secondGrey,
+    color: dislike ? colors.primary : colors.secondGrey,
+  }),
   likedButton: {
     alignItems: 'center',
     flexDirection: 'row',

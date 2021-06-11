@@ -17,6 +17,7 @@ import SubCategoryHome from './SubCategoryHome';
 import SearchHeader from './SearchHeader';
 import MBottomNavigator from './MBottomNavigator';
 import UBottomNavigator from './UBottomNavigator';
+import NotFound from './NotFound';
 
 export {
   ABottomNavigator,
@@ -38,4 +39,5 @@ export {
   SubKategori,
   SubCategoryHome,
   SearchHeader,
+  NotFound,
 };

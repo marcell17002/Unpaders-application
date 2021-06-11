@@ -16,8 +16,8 @@ const CommentUser = ({image, name, waktu, komentar}) => {
             <Gap width={12} />
             <Text style={styles.waktu}>{waktu}</Text>
           </View>
-          <View style={styles.komen}>
-            <Text>{komentar}</Text>
+          <View >
+            <Text style={styles.komen}>{komentar}</Text>
           </View>
         </View>
       </View>

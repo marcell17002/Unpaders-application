@@ -14,8 +14,8 @@ const mainColors = {
   black1: 'rgba(0,0,0,0.3)',
   black2: '#2E2E2E', //warna tulisan
   white: '#ffffff', //white
-  red: '#F84F31',
-  green: '#23C552',
+  red: '#CC0C09',
+  green: '#27AE60',
 };
 
 export const colors = {
@@ -24,9 +24,10 @@ export const colors = {
   secondary: mainColors.yellow,
   primaryWhite: mainColors.white,
   primaryBlack: mainColors.black,
+  primaryBlack1: mainColors.black2,
   backgroundgrey: mainColors.greyLightest,
   primarygrey: mainColors.grey,
-  backgroundBlack: mainColors.black1,
+  secondGrey: mainColors.greyLight,
 
   text: {
     primary: mainColors.black, //warna tulisan
@@ -39,6 +40,9 @@ export const colors = {
     primdonker2: mainColors.donker2,
     grey: mainColors.greyLightest,
     primaryWhite: mainColors.primaryWhite,
+    secondGrey: mainColors.greyLight,
+    primaryGreen: mainColors.green,
+    primaryRed: mainColors.red,
   },
   boxShadow: {
     primary: mainColors.greyLightBox,

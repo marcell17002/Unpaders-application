@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
     height: 164,
   },
   title: {
-    //GAMAU KEGANTI BOLD NYA
     fontSize: 18,
     fontFamily: fonts.primary.bold,
     color: colors.text.primdonker2,

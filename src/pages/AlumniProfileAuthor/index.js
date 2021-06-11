@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Headers, ProfileAuthor, Event} from '../../components/moleculs';
+import {
+  Headers,
+  ProfileAuthor,
+  Event,
+  NotFound,
+} from '../../components/moleculs';
 import {Gap, Buttons} from '../../components/atoms';
 import {fonts, colors, filterData, sortData} from '../../utils';
 import {useSelector} from 'react-redux';
@@ -29,7 +34,7 @@ const AlumniProfileAuthor = ({navigation, route}) => {
     <View style={styles.page}>
       <View>
         <Headers
-          title="Tim Unpaders"
+          title={payload.name}
           type="sub-main-back"
           onPressBack={() => navigation.goBack()}
         />
@@ -59,25 +64,33 @@ const AlumniProfileAuthor = ({navigation, route}) => {
         </View>
         <Gap height={24} />
         <View>
-          <Text style={styles.sectionLainnya}>Berita Terbaru Lainnya</Text>
-          {eventCreated.map(item => {
-            return (
-              <Event
-                category={item.category}
-                time={moment(item.createdAt).fromNow()}
-                title={item.title}
-                picture={item.image}
-                userPicture={payload.image}
-                author={payload.name}
-                onPress={() =>
-                  navigation.navigate('AlumniDetailBerita', {
-                    event: payload.event,
-                    item: item,
-                  })
-                }
-              />
-            );
-          })}
+          <Text style={styles.sectionLainnya}>Berita yang Diunggah</Text>
+          {eventCreated.length < 1 ? (
+            <View style={styles.body}>
+              <NotFound title="Pengguna ini belum mengunggah berita" />
+            </View>
+          ) : (
+            <View>
+              {eventCreated.map(item => {
+                return (
+                  <Event
+                    category={item.category}
+                    time={moment(item.createdAt).fromNow()}
+                    title={item.title}
+                    picture={item.image}
+                    userPicture={payload.image}
+                    author={payload.name}
+                    onPress={() =>
+                      navigation.navigate('AlumniDetailBerita', {
+                        event: payload.event,
+                        item: item,
+                      })
+                    }
+                  />
+                );
+              })}
+            </View>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -90,6 +103,9 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  body: {
+    marginVertical: '30%',
   },
   contButton: {
     width: 100,

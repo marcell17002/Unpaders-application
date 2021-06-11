@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {colors, fonts} from '../../../utils';
 import {BASE_URL_ROOT} from '@env';
+import {TextColor} from '../../atoms';
 
 const Event = ({
   picture,
@@ -37,9 +38,7 @@ const Event = ({
               <View>
                 <Text>STATUS : </Text>
               </View>
-              <View>
-                <Text>{status}</Text>
-              </View>
+              <TextColor type={status} />
             </>
           ) : (
             <>

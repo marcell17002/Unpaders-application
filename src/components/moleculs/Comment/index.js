@@ -15,8 +15,11 @@ const Comment = ({image, author, waktu, desc, onPress}) => {
           <Gap height={5} />
           <Text style={styles.waktu}>{waktu}</Text>
         </View>
-        <Gap width={24} />
-        <Buttons status="quarternary" title="Lihat Profile" onPress={onPress} />
+        {/* <Gap width={24} /> */}
+        <View style={styles.buttonProfile}>
+          <Buttons status="quarternary" title="Lihat Profile" onPress={onPress} />
+        </View>
+        
       </View>
       <Gap height={24} />
     </View>
@@ -30,9 +33,12 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     marginRight: 20,
     backgroundColor: 'white',
+    flex: 1
+    //justifyContent: 'space-between',
   },
   contComment: {
     flexDirection: 'row',
+    flex: 1,
   },
   ketPenulis: {
     flexDirection: 'column',
@@ -55,13 +61,9 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.semibold,
     color: colors.text.tertiary,
   },
-
-  commentDetail: {
-    marginLeft: '5%',
+  buttonProfile: {
+    alignItems: 'flex-end',
     flex: 1,
-  },
-  commentDetailInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+
+  }
 });

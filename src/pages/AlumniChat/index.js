@@ -5,6 +5,7 @@ import {
   Kategori,
   Event,
   ListAlumniChat,
+  NotFound,
 } from '../../components/moleculs';
 import {Gap, ListButton} from '../../components/atoms';
 import {fonts, colors} from '../../utils';
@@ -76,50 +77,52 @@ const AlumniChat = ({navigation, route}) => {
     );
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.page}>
-        <View>
-          <Headers title="CHAT" type="main" />
-        </View>
-        <View style={styles.page}>
-          <View>
-            <ListButton
-              namaTombol="Temukan Alumni"
-              onPress={() => navigation.navigate('AlumniList')}
-            />
-          </View>
-          <View style={styles.ghap}>
-            <Gap height={12} />
-            <Text style={styles.textGap}>CHAT</Text>
-            <Gap height={12} />
-          </View>
-          <View>
-            {history.map(item => {
-              return (
-                <ListAlumniChat
-                  key={item._id}
-                  nama={item.name}
-                  picture={item.image}
-                  lastText={item.lastChat}
-                  onPress={() => navigation.navigate('AlumniChatting', item)}
-                />
-              );
-            })}
-            {historyTemp.map(item => {
-              return (
-                <ListAlumniChat
-                  key={item._id}
-                  nama={item.name}
-                  isBadge={item.status}
-                  picture={item.image}
-                  lastText={item.lastChat}
-                  onPress={() => navigation.navigate('AlumniChatting', item)}
-                />
-              );
-            })}
-          </View>
-        </View>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+      <View>
+        <Headers title="CHAT" type="main" />
       </View>
+      <View>
+        <ListButton
+          namaTombol="Temukan Alumni"
+          onPress={() => navigation.navigate('AlumniList')}
+        />
+      </View>
+      <View style={styles.ghap}>
+        <Gap height={12} />
+        <Text style={styles.textGap}>CHAT</Text>
+        <Gap height={12} />
+      </View>
+      {history.length < 1 && historyTemp.length < 1 ? (
+        <View style={styles.body}>
+          <NotFound title="Anda belum memiliki percakapan dengan siapapun" />
+        </View>
+      ) : (
+        <View>
+          {history.map(item => {
+            return (
+              <ListAlumniChat
+                key={item._id}
+                nama={item.name}
+                picture={item.image}
+                lastText={item.lastChat}
+                onPress={() => navigation.navigate('AlumniChatting', item)}
+              />
+            );
+          })}
+          {historyTemp.map(item => {
+            return (
+              <ListAlumniChat
+                key={item._id}
+                nama={item.name}
+                isBadge={item.status}
+                picture={item.image}
+                lastText={item.lastChat}
+                onPress={() => navigation.navigate('AlumniChatting', item)}
+              />
+            );
+          })}
+        </View>
+      )}
     </ScrollView>
   );
 };
@@ -131,6 +134,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  body: {
+    marginVertical: '50%',
+  },
   ghap: {
     backgroundColor: colors.text.grey,
   },
@@ -138,6 +144,6 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     fontSize: 12,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
+    color: colors.text.secondGrey,
   },
 });

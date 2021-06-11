@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         fontSize: 14,
         fontFamily: fonts.primary.semibold,
-        color: colors.text.tertiary,
+        color: colors.text.primary,
     }
 });

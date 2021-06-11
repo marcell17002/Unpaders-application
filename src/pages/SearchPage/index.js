@@ -6,6 +6,7 @@ import {
   ListAlumni,
   SearchHeader,
   Event,
+  NotFound,
 } from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
 import {colors, filterData, fonts} from '../../utils';
@@ -29,7 +30,7 @@ const SearchAlumni = ({navigation, route}) => {
     setEventTemp(newData);
   };
   return (
-    <View>
+    <View style={styles.page}>
       <SearchHeader
         value={input}
         less
@@ -38,26 +39,32 @@ const SearchAlumni = ({navigation, route}) => {
         onPressBack={() => navigation.goBack()}
         onPressMiddle={() => searchFilter(input)}
       />
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-        {eventTemp.map(item => {
-          return (
-            <Event
-              category={item.category}
-              time={moment(item.createdAt).fromNow()}
-              title={item.title}
-              picture={item.image}
-              userPicture={item.userImage}
-              author={item.name}
-              onPress={() =>
-                navigation.navigate('AlumniDetailBerita', {
-                  event: event,
-                  item: item,
-                })
-              }
-            />
-          );
-        })}
-      </ScrollView>
+      <View style={styles.body}>
+        {eventTemp.length < 1 ? (
+          <NotFound type="Search" />
+        ) : (
+          <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+            {eventTemp.map(item => {
+              return (
+                <Event
+                  category={item.category}
+                  time={moment(item.createdAt).fromNow()}
+                  title={item.title}
+                  picture={item.image}
+                  userPicture={item.userImage}
+                  author={item.name}
+                  onPress={() =>
+                    navigation.navigate('AlumniDetailBerita', {
+                      event: event,
+                      item: item,
+                    })
+                  }
+                />
+              );
+            })}
+          </ScrollView>
+        )}
+      </View>
     </View>
   );
 };
@@ -66,8 +73,11 @@ export default SearchAlumni;
 
 const styles = StyleSheet.create({
   page: {
-    //flex: 1,
-    marginBottom: '20%',
+    flex: 1,
     backgroundColor: colors.primaryWhite,
+  },
+  body: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });

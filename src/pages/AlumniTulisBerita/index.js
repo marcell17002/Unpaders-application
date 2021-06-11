@@ -188,7 +188,7 @@ const AlumniTulisBerita = ({navigation, route}) => {
                       style={styles.photoInput}
                       source={require('../../assets/default-image.png')}
                     />
-                    <Text>Pilih Foto</Text>
+                    <Text style={styles.pilihFoto}>Pilih Foto</Text>
                   </View>
                 )}
               </TouchableOpacity>
@@ -312,16 +312,15 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 16,
     borderColor: colors.input.outline,
   },
-  titleText: {
-    fontSize: 16,
-    fontFamily: fonts.primary.semibold,
-    color: colors.text.primary,
-    marginBottom: 12,
-  },
   contText: {
     //INI GAMAU KE GANTI STYLENYA
     fontSize: 8,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
   },
+  pilihFoto: {
+    fontSize: 14,
+    fontFamily: fonts.primary.reguler,
+    color: colors.text.secondGrey,
+  }
 });

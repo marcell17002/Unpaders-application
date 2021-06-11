@@ -40,9 +40,9 @@ const Buttons = ({status, isLittle, title, onPress, disable}) => {
         return (
           <TouchableOpacity
             style={styles.iconBundle(disable)}
-            onPress={onPress}>
-            {disable && <Icon style={styles.iconDisable} name="send" />}
-            {!disable && <Icon style={styles.iconNonDis} name="send" />}
+            onPress={onPress}
+            disable={disable ? true : false}>
+            <Icon style={styles.iconDisable(disable)} name="send" />
           </TouchableOpacity>
         );
       default:
@@ -86,9 +86,9 @@ const styles = StyleSheet.create({
   textSecondary: {
     color: colors.button.secondaryOutline.blue,
     textAlign: 'center',
-    fontFamily: 'Segoe-UI',
+    fontFamily: fonts.primary.semibold,
     fontSize: 16,
-    paddingVertical: 15,
+    paddingVertical: 10,
   },
   buttonTertiary: isLittle => ({
     backgroundColor: colors.button.primaryOutline.background,
@@ -126,11 +126,11 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 10,
   }),
-  iconDisable: {
+  iconDisable: disable => ({
     alignSelf: 'center',
     justifyContent: 'space-between',
-    color: colors.primarygrey,
-  },
+    color: disable ? colors.primarygrey : colors.primaryWhite,
+  }),
   iconNonDis: {
     alignSelf: 'center',
     justifyContent: 'space-between',

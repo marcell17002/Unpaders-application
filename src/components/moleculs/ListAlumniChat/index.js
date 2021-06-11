@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   desc: {
     fontSize: 12,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
+    color: colors.text.secondGrey,
   },
   badgeWrapper: {
     flex: 1,

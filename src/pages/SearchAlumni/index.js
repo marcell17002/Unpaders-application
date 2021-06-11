@@ -5,6 +5,7 @@ import {
   CommentUser,
   ListAlumni,
   SearchHeader,
+  NotFound,
 } from '../../components/moleculs';
 import {Gap} from '../../components/atoms';
 import {colors, filterData, fonts} from '../../utils';
@@ -48,7 +49,7 @@ const SearchAlumni = ({navigation, route}) => {
         );
         console.log('prodi', filteredData);
         return await setAlumniTemp(filteredData);
-      } else setAlumniTemp(alumniProfile);
+      } else setAlumniTemp([]);
     });
     return unsubscribe;
   }, [navigation]);
@@ -64,7 +65,7 @@ const SearchAlumni = ({navigation, route}) => {
     setAlumniTemp(newData);
   };
   return (
-    <View>
+    <View style={styles.page}>
       <SearchHeader
         value={input}
         onChangeText={value => searchFilter(value)}
@@ -73,24 +74,32 @@ const SearchAlumni = ({navigation, route}) => {
         onPressMiddle={() => searchFilter(input)}
         onPressRight={() => navigation.navigate('AlumniFilter')}
       />
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-        {alumniTemp.map(item => {
-          return (
-            <ListAlumni
-              key={item._id}
-              nama={item.name}
-              picture={item.image}
-              fakultas={item.faculty}
-              jurusan={item.prodi}
-              angkatan={item.level}
-              onPressImage={() =>
-                navigation.navigate('AlumniProfileAuthor', item)
-              }
-              onPressBody={() => navigation.navigate('AlumniChatting', item)}
-            />
-          );
-        })}
-      </ScrollView>
+      <View style={styles.body}>
+        {alumniTemp.length < 1 ? (
+          <NotFound type="Search" />
+        ) : (
+          <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+            {alumniTemp.map(item => {
+              return (
+                <ListAlumni
+                  key={item._id}
+                  nama={item.name}
+                  picture={item.image}
+                  fakultas={item.faculty}
+                  jurusan={item.prodi}
+                  angkatan={item.level}
+                  onPressImage={() =>
+                    navigation.navigate('AlumniProfileAuthor', item)
+                  }
+                  onPressBody={() =>
+                    navigation.navigate('AlumniChatting', item)
+                  }
+                />
+              );
+            })}
+          </ScrollView>
+        )}
+      </View>
     </View>
   );
 };
@@ -99,8 +108,11 @@ export default SearchAlumni;
 
 const styles = StyleSheet.create({
   page: {
-    //flex: 1,
-    marginBottom: '20%',
+    flex: 1,
     backgroundColor: colors.primaryWhite,
+  },
+  body: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });

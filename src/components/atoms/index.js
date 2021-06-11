@@ -7,9 +7,22 @@ import Separator from './Separator';
 import Link from './Link';
 import ListButton from './ListButton';
 import BtnFilter from './BtnFilter';
+import TextColor from './TextColor';
 
 import MhsTabItems from './MhsTabItems';
 import UmumTabItems from './UmumTabItems';
 
-export {AlumniTabItems, Buttons, Inputs, Gap, Loading, Separator, Link, ListButton, BtnFilter,
-        MhsTabItems, UmumTabItems};
+export {
+  AlumniTabItems,
+  TextColor,
+  Buttons,
+  Inputs,
+  Gap,
+  Loading,
+  Separator,
+  Link,
+  ListButton,
+  BtnFilter,
+  MhsTabItems,
+  UmumTabItems,
+};
