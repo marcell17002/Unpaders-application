@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.loadingBackground,
+    backgroundColor: colors.backgroundBlack,
     width: '100%',
     height: '100%',
   },
   text: {
     fontSize: 18,
-    color: colors.text.secondary,
+    color: colors.text.grey,
     marginTop: 16,
   },
 });

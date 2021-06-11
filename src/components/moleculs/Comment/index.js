@@ -1,22 +1,27 @@
+//import { Button } from 'native-base';
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
-import {Gap} from '../../atoms';
+import {fonts, colors} from '../../../utils';
+import {Gap, Buttons} from '../../atoms';
+import {BASE_URL_ROOT} from '@env';
 
-const Comment = ({image, sender, time, desc}) => {
+const Comment = ({image, author, waktu, desc, onPress}) => {
   return (
-    <View style={styles.comment}>
-      <Image
-        style={styles.image}
-        source={require('../../../assets/user.png')}
-      />
-      <View style={styles.commentDetail}>
-        <View style={styles.commentDetailInfo}>
-          <Text>{sender}</Text>
-          <Text>{time}</Text>
+    <View style={styles.page}>
+      <View style={styles.contComment}>
+        <Image style={styles.logo} source={{uri: `${BASE_URL_ROOT}${image}`}} />
+        <View style={styles.ketPenulis}>
+          <Text style={styles.penulis}>{author}</Text>
+          <Gap height={5} />
+          <Text style={styles.waktu}>{waktu}</Text>
         </View>
-        <Gap height={10} />
-        <Text>{desc}</Text>
+        {/* <Gap width={24} /> */}
+        <View style={styles.buttonProfile}>
+          <Buttons status="quarternary" title="Lihat Profile" onPress={onPress} />
+        </View>
+        
       </View>
+      <Gap height={24} />
     </View>
   );
 };
@@ -24,21 +29,41 @@ const Comment = ({image, sender, time, desc}) => {
 export default Comment;
 
 const styles = StyleSheet.create({
-  image: {
-    maxHeight: 40,
-    maxWidth: 40,
-    resizeMode: 'cover',
-    borderRadius: 20,
+  page: {
+    marginLeft: 24,
+    marginRight: 20,
+    backgroundColor: 'white',
+    flex: 1
+    //justifyContent: 'space-between',
   },
-  comment: {
+  contComment: {
     flexDirection: 'row',
-  },
-  commentDetail: {
-    marginLeft: '5%',
     flex: 1,
   },
-  commentDetailInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  ketPenulis: {
+    flexDirection: 'column',
   },
+  logo: {
+    height: 40,
+    width: 40,
+    resizeMode: 'cover',
+    borderRadius: 20,
+    alignSelf: 'center',
+    marginRight: 16,
+  },
+  penulis: {
+    fontSize: 14,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.primary,
+  },
+  waktu: {
+    fontSize: 12,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.tertiary,
+  },
+  buttonProfile: {
+    alignItems: 'flex-end',
+    flex: 1,
+
+  }
 });

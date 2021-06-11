@@ -1,20 +1,33 @@
 import React from 'react';
 import {StyleSheet, TextInput, Text, View} from 'react-native';
-import {colors} from '../../../utils';
+import {colors, fonts} from '../../../utils';
 
-const Inputs = ({title, value, edit, placeholder, onChangeText, secure}) => {
+const Inputs = ({
+  title,
+  value,
+  isNumeric,
+  edit,
+  placeholder,
+  onChangeText,
+  secure,
+  multiline,
+  numberOfLines,
+}) => {
   return (
-    <View style={styles.input}>
+    <>
       <Text style={styles.titleText}>{title}</Text>
       <TextInput
         value={value}
         style={styles.inputText}
         secureTextEntry={secure}
+        keyboardType={isNumeric ? 'numeric' : 'default'}
         editable={edit}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
         onChangeText={onChangeText}
         placeholder={placeholder}
       />
-    </View>
+    </>
   );
 };
 
@@ -23,22 +36,22 @@ export default Inputs;
 const styles = StyleSheet.create({
   input: {
     backgroundColor: colors.input.secondary,
-    marginVertical: 12,
+    //marginTop: 12,
   },
   titleText: {
-    fontSize: 14,
-    fontFamily: 'Segoe-UI-SemiBold',
-    color: colors.input.text,
-    marginBottom: 10,
+    fontSize: 16,
+    fontFamily: fonts.primary.semibold,
+    color: colors.text.primary,
+    marginBottom: 12,
   },
   inputText: {
-    fontSize: 12,
-    fontFamily: 'Segoe-UI',
+    fontSize: 16,
+    fontFamily: fonts.primary.reguler,
+    color: colors.text.primary,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 16,
     borderColor: colors.input.outline,
-    color: colors.input.text,
     backgroundColor: colors.input.background,
   },
 });
