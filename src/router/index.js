@@ -2,10 +2,6 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
-  Home,
-  Chat,
-  Berita,
-  Akun,
   Auth,
   SearchAlumni,
   SearchPage,
@@ -32,36 +28,11 @@ import {
   AlumniBeritaUnggah,
   AlumniChatting,
   AlumniSubCategory,
-  MahasiswaDaftar,
-  MhsChat,
-  MhsHome,
-  MhsLainnya,
-  MhsDetailBerita,
-  MhsKomentar,
-  MhsProfileAuthor,
-  MhsProfileUser,
-  MhsEditProfile,
-  MhsTentangKami,
-  MhsKontak,
-  MhsDisclaimer,
-  MhsListAlumni,
-  MhsChatting,
   UmumList,
   UmumLainnya,
-  UmumHome,
-  UmumDetailBerita,
-  UmumKomentar,
-  UmumProfileAuthor,
-  UmumTentangKami,
-  UmumKontak,
-  UmumDisclaimer,
   AlumniFilter,
 } from '../pages';
-import {
-  ABottomNavigator,
-  MBottomNavigator,
-  UBottomNavigator,
-} from '../components/moleculs';
+import {BottomNavigator} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -71,7 +42,7 @@ const TopTab = createMaterialTopTabNavigator();
 const MainApp = () => {
   //untuk umum
   return (
-    <Tab.Navigator tabBar={props => <UBottomNavigator {...props} />}>
+    <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={AlumniHome} />
       <Tab.Screen name="List Alumni" component={UmumList} />
       <Tab.Screen name="Lainnya" component={UmumLainnya} />
@@ -81,7 +52,7 @@ const MainApp = () => {
 const MainAppCollege = () => {
   //buat mahasiswa
   return (
-    <Tab.Navigator tabBar={props => <MBottomNavigator {...props} />}>
+    <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={AlumniHome} />
       <Tab.Screen name="Chat" component={AlumniChat} />
       <Tab.Screen name="Lainnya" component={AlumniLainnya} />
@@ -91,7 +62,7 @@ const MainAppCollege = () => {
 const MainAppGraduated = () => {
   //buat alumni
   return (
-    <Tab.Navigator tabBar={props => <ABottomNavigator {...props} />}>
+    <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={AlumniHome} />
       <Tab.Screen name="Chat" component={AlumniChat} />
       <Tab.Screen name="Berita" component={AlumniBerita} />
@@ -239,77 +210,7 @@ const Router = () => {
         component={AlumniSubCategory}
         options={{headerShown: false}}
       />
-      {/* Mahasiswa */}
-      <Stack.Screen
-        name="MahasiswaDaftar"
-        component={MahasiswaDaftar}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsHome"
-        component={MhsHome}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsChat"
-        component={MhsChat}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsLainnya"
-        component={MhsLainnya}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsDetailBerita"
-        component={MhsDetailBerita}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsKomentar"
-        component={MhsKomentar}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsProfileAuthor"
-        component={MhsProfileAuthor}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsProfileUser"
-        component={MhsProfileUser}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsEditProfile"
-        component={MhsEditProfile}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsTentangKami"
-        component={MhsTentangKami}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsKontak"
-        component={MhsKontak}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsDisclaimer"
-        component={MhsDisclaimer}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsListAlumni"
-        component={MhsListAlumni}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MhsChatting"
-        component={MhsChatting}
-        options={{headerShown: false}}
-      />
+
       {/* Masyarakat Umum */}
       <Stack.Screen
         name="UmumList"
@@ -321,41 +222,7 @@ const Router = () => {
         component={UmumLainnya}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="UmumHome"
-        component={UmumHome}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="UmumDetailBerita"
-        component={UmumDetailBerita}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="UmumKomentar"
-        component={UmumKomentar}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="UmumProfileAuthor"
-        component={UmumProfileAuthor}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="UmumTentangKami"
-        component={UmumTentangKami}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="UmumKontak"
-        component={UmumKontak}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="UmumDisclaimer"
-        component={UmumDisclaimer}
-        options={{headerShown: false}}
-      />
+
       {/* Navigator */}
       <Stack.Screen
         name="MainApp"

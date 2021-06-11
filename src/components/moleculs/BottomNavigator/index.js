@@ -1,10 +1,10 @@
 import React from 'react';
 import {LogBox, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {colors} from '../../../utils';
-import {AlumniTabItems} from '../../atoms';
+import {TabItems} from '../../atoms';
 LogBox.ignoreAllLogs();
 
-const ABottomNavigator = ({state, descriptors, navigation}) => {
+const BottomNavigator = ({state, descriptors, navigation}) => {
   return (
     <View style={styles.container}>
       {state.routes.map((route, index) => {
@@ -38,7 +38,7 @@ const ABottomNavigator = ({state, descriptors, navigation}) => {
         };
 
         return (
-          <AlumniTabItems
+          <TabItems
             title={label}
             active={isFocused}
             onPress={onPress}
@@ -50,7 +50,7 @@ const ABottomNavigator = ({state, descriptors, navigation}) => {
   );
 };
 
-export default ABottomNavigator;
+export default BottomNavigator;
 
 const styles = StyleSheet.create({
   container: {

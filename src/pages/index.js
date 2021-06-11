@@ -1,8 +1,4 @@
-import Home from './Home';
-import Chat from './Chat';
-import Berita from './Berita';
 import Akun from './Akun';
-//import Alumni from './Alumni';
 
 import Auth from './Auth';
 import Splashscreen from './Splashscreen';
@@ -33,40 +29,14 @@ import SearchPage from './SearchPage';
 import AlumniFilter from './AlumniFilter';
 import AlumniSubCategory from './AlumniSubCategory';
 
-import MahasiswaDaftar from './MahasiswaDaftar';
-import MhsHome from './MhsHome';
-import MhsChat from './MhsChat';
-import MhsLainnya from './MhsLainnya';
-//bagian home
-import MhsDetailBerita from './MhsDetailBerita';
-import MhsKomentar from './MhsKomentar';
-import MhsProfileAuthor from './MhsProfileAuthor';
-//bagian lainnya
-import MhsProfileUser from './MhsProfileUser';
-import MhsEditProfile from './MhsEditProfile';
-import MhsTentangKami from './MhsTentangKami';
-import MhsKontak from './MhsKontak';
-import MhsDisclaimer from './MhsDisclaimer';
-//bagian chat
-import MhsListAlumni from './MhsListAlumni';
-import MhsChatting from './MhsChatting';
-
 import UmumList from './UmumList';
 import UmumLainnya from './UmumLainnya';
-import UmumHome from './UmumHome';
 //bagian home
 import UmumDetailBerita from './UmumDetailBerita';
-import UmumKomentar from './UmumKomentar';
-import UmumProfileAuthor from './UmumProfileAuthor';
 //bagian lainnya
-import UmumTentangKami from './UmumTentangKami';
-import UmumKontak from './UmumKontak';
 import UmumDisclaimer from './UmumDisclaimer';
 
 export {
-  Home,
-  Chat,
-  Berita,
   Akun,
   Auth,
   Splashscreen,
@@ -90,30 +60,11 @@ export {
   AlumniKontrib,
   AlumniTulisBerita,
   AlumniBeritaUnggah,
-  AlumniChatting, 
+  AlumniChatting,
   AlumniSubCategory,
-  MahasiswaDaftar,
-  MhsHome,
-  MhsChat,
-  MhsLainnya,
-  MhsDetailBerita,
-  MhsKomentar,
-  MhsProfileAuthor,
-  MhsProfileUser,
-  MhsEditProfile,
-  MhsTentangKami,
-  MhsKontak,
-  MhsDisclaimer,
-  MhsListAlumni,
-  MhsChatting,
   UmumList,
   UmumLainnya,
-  UmumHome,
   UmumDetailBerita,
-  UmumKomentar,
-  UmumProfileAuthor,
-  UmumTentangKami,
-  UmumKontak,
   UmumDisclaimer,
   SearchAlumni,
   SearchPage,

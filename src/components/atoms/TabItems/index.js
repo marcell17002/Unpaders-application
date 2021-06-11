@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {colors, fonts} from '../../../utils';
 
-const UmumTabItems = ({title, active, onLongPress, onPress}) => {
+const TabItems = ({title, active, onLongPress, onPress}) => {
   const IconMenu = () => {
     switch (title) {
       case 'Home':
@@ -16,6 +16,17 @@ const UmumTabItems = ({title, active, onLongPress, onPress}) => {
             style={styles.image}
           />
         );
+      case 'Chat':
+        return (
+          <Image
+            source={
+              active
+                ? require('../../../assets/AChat-active.png')
+                : require('../../../assets/AChat-passive.png')
+            }
+            style={styles.image}
+          />
+        );
       case 'List Alumni':
         return (
           <Image
@@ -23,6 +34,17 @@ const UmumTabItems = ({title, active, onLongPress, onPress}) => {
               active
                 ? require('../../../assets/AList-active.png')
                 : require('../../../assets/AList-passive.png')
+            }
+            style={styles.image}
+          />
+        );
+      case 'Berita':
+        return (
+          <Image
+            source={
+              active
+                ? require('../../../assets/ABerita-active.png')
+                : require('../../../assets/ABerita-passive.png')
             }
             style={styles.image}
           />
@@ -62,7 +84,7 @@ const UmumTabItems = ({title, active, onLongPress, onPress}) => {
   );
 };
 
-export default UmumTabItems;
+export default TabItems;
 
 const styles = StyleSheet.create({
   container: {
@@ -73,10 +95,8 @@ const styles = StyleSheet.create({
     color: active ? colors.text.primary : colors.text.secondary,
   }),
   text: active => ({
-    //paddingTop: 5,
     color: active ? colors.text.quartenary : colors.text.secondary,
     fontSize: 14,
     fontFamily: fonts.primary.semibold,
-    //fontWeight: 'bold',
   }),
 });

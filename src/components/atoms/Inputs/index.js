@@ -36,7 +36,6 @@ export default Inputs;
 const styles = StyleSheet.create({
   input: {
     backgroundColor: colors.input.secondary,
-    //marginTop: 12,
   },
   titleText: {
     fontSize: 16,

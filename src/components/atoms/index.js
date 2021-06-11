@@ -1,4 +1,4 @@
-import AlumniTabItems from './AlumniTabItems';
+import TabItems from './TabItems';
 import Buttons from './Buttons';
 import Inputs from './Inputs';
 import Gap from './Gap';
@@ -13,7 +13,7 @@ import MhsTabItems from './MhsTabItems';
 import UmumTabItems from './UmumTabItems';
 
 export {
-  AlumniTabItems,
+  TabItems,
   TextColor,
   Buttons,
   Inputs,

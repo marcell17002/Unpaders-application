@@ -1,8 +1,7 @@
-import ABottomNavigator from './ABottomNavigator';
+import BottomNavigator from './BottomNavigator';
 import Headers from './Headers';
 import Event from './Event';
 import Comment from './Comment';
-import CommentUser from './CommentUser';
 import Kategori from './Kategori';
 import Berita from './Berita';
 import ProfileAuthor from './ProfileAuthor';
@@ -15,18 +14,15 @@ import InputChat from './InputChat';
 import SubKategori from './SubKategori';
 import SubCategoryHome from './SubCategoryHome';
 import SearchHeader from './SearchHeader';
-import MBottomNavigator from './MBottomNavigator';
-import UBottomNavigator from './UBottomNavigator';
 import NotFound from './NotFound';
 
 export {
-  ABottomNavigator,
+  BottomNavigator,
   Headers,
   Event,
   Comment,
   Kategori,
   Berita,
-  CommentUser,
   ProfileAuthor,
   ListAlumniChat,
   ProfileUser,
@@ -34,8 +30,6 @@ export {
   UnggahBerita,
   ChatItem,
   InputChat,
-  MBottomNavigator,
-  UBottomNavigator,
   SubKategori,
   SubCategoryHome,
   SearchHeader,

@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   View,
+  Share,
 } from 'react-native';
 import {
   Headers,
@@ -138,12 +139,32 @@ const AlumniChat = ({navigation, route}) => {
       }
     }
   };
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: `Hello, User ! Lets surf with Unpaders App ${'\n'}bit.ly/UnpadersApp`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <View style={styles.page}>
       <View>
         <Headers
           title={`${payload.item.category} - ${payload.item.subCategory}`}
           type="sub-main"
+          onPressRight={() => onShare()}
           onPressBack={() => navigation.goBack()}
         />
       </View>

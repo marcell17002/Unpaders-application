@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {colors, fonts} from '../../../utils';
-import {Gap} from '../../atoms';
 import {Icon} from 'native-base';
 
 const ListButton = ({type, namaTombol, image, onPress}) => {

@@ -114,7 +114,7 @@ const AlumniFilter = ({navigation}) => {
     return (
       <BtnFilter
         onPress={() => filterDataProdi(item.label)}
-        title1={item.label}
+        title={item.label}
       />
     );
   };
@@ -128,7 +128,7 @@ const AlumniFilter = ({navigation}) => {
             prodi: item.label,
           });
         }}
-        title1={item.label}
+        title={item.label}
       />
     );
   };

@@ -44,17 +44,17 @@ const UmumLainnya = ({navigation}) => {
         <ListButton
           type="primary"
           namaTombol="Tentang Kami"
-          onPress={() => navigation.navigate('MhsTentangKami')}
+          onPress={() => navigation.navigate('AlumniTentangKami')}
         />
         <ListButton
           type="primary"
           namaTombol="Kontak"
-          onPress={() => navigation.navigate('MhsKontak')}
+          onPress={() => navigation.navigate('AlumniKontak')}
         />
         <ListButton
           type="primary"
           namaTombol="Disclaimer"
-          onPress={() => navigation.navigate('MhsDisclaimer')}
+          onPress={() => navigation.navigate('AlumniDisclaimer')}
         />
         <View style={styles.ghap}>
           <Gap height={12} />
