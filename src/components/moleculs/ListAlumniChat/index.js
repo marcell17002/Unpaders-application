@@ -1,9 +1,10 @@
+import { BASE_URL_ROOT } from '@env';
+import { Badge } from 'native-base';
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {colors, fonts} from '../../../utils';
-import {Gap} from '../../atoms';
-import {BASE_URL_ROOT} from '@env';
-import {Badge} from 'native-base';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { Gap } from '../../atoms';
+
 const ListAlumniChat = ({nama, lastText, isBadge, picture, onPress}) => {
   return (
     <TouchableOpacity style={styles.page} onPress={onPress}>
@@ -34,8 +35,8 @@ export default ListAlumniChat;
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
-    paddingVertical: 24,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: colors.text.grey,
     alignItems: 'center',
@@ -46,12 +47,12 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 20,
     alignSelf: 'center',
-    marginRight: 16,
+    marginRight: 20,
   },
   namaAlumni: {
     fontSize: 16,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.primary,
+    color: colors.text.title,
   },
   desc: {
     fontSize: 12,

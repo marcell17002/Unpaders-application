@@ -1,8 +1,8 @@
+import { BASE_URL_ROOT } from '@env';
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {colors, fonts} from '../../../utils';
-import {BASE_URL_ROOT} from '@env';
-import {TextColor} from '../../atoms';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { TextColor } from '../../atoms';
 
 const Event = ({
   picture,
@@ -26,7 +26,7 @@ const Event = ({
       <View style={styles.eventDetail}>
         <View style={styles.eventTimeDetail}>
           <Text style={styles.KategoriWaktu}>{category}</Text>
-          <Text> - </Text>
+          <Text style={styles.KategoriWaktu}> - </Text>
           <Text style={styles.KategoriWaktu}> {time}</Text>
         </View>
         <View style={styles.title}>
@@ -36,7 +36,7 @@ const Event = ({
           {isHistory ? (
             <>
               <View>
-                <Text>STATUS : </Text>
+                <Text style={styles.statusStyle}>STATUS : </Text>
               </View>
               <TextColor type={status} />
             </>
@@ -60,8 +60,7 @@ export default Event;
 const styles = StyleSheet.create({
   event: {
     flexDirection: 'row',
-    //marginBottom: 24,
-    paddingVertical: 24,
+    paddingBottom: 24,
     paddingLeft: 24,
     paddingRight: 20,
   },
@@ -73,8 +72,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   logo: {
-    height: 16,
-    width: 16,
+    height: 20,
+    width: 20,
     resizeMode: 'cover',
     borderRadius: 8,
     alignSelf: 'center',
@@ -93,25 +92,32 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   KategoriWaktu: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primdonker2,
+    marginTop: -6,
   },
   eventCreatorDetail: {
     flexDirection: 'row',
   },
   Judul: {
-    fontSize: 18,
-    fontFamily: fonts.primary.reguler,
+    fontSize: 20,
+    fontFamily: fonts.primary.semibold,
     color: colors.text.title,
+    marginTop: -4,
   },
   title: {
     marginVertical: 8,
   },
   penulis: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
-    textAlignVertical: 'center',
+    textAlignVertical: 'top',
   },
+  statusStyle: {
+    fontSize: 14,
+    fontFamily: fonts.primary.reguler,
+    color: colors.text.title,
+  }
 });

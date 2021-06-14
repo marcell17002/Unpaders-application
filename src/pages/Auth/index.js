@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
-import {getData} from '../../utils';
-import {useSelector, useDispatch} from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getData } from '../../utils';
 
 const Auth = ({navigation}) => {
   const state = useSelector(state => state);

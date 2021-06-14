@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {Headers, CommentUser} from '../../components/moleculs';
-import {Gap} from '../../../components/atoms';
-import {colors, fonts} from '../../../utils';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { Gap } from '../../../components/atoms';
+import { colors, fonts } from '../../../utils';
 
 const NotFound = ({type, title}) => {
   const SectionNotFound = () => {

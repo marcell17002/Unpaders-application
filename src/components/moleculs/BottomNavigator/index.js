@@ -1,7 +1,6 @@
 import React from 'react';
-import {LogBox, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {colors} from '../../../utils';
-import {TabItems} from '../../atoms';
+import { LogBox, StyleSheet, View } from 'react-native';
+import { TabItems } from '../../atoms';
 LogBox.ignoreAllLogs();
 
 const BottomNavigator = ({state, descriptors, navigation}) => {

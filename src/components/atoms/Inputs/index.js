@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, TextInput, Text, View} from 'react-native';
-import {colors, fonts} from '../../../utils';
+import { StyleSheet, Text, TextInput } from 'react-native';
+import { colors, fonts } from '../../../utils';
 
 const Inputs = ({
   title,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View,TouchableOpacity, Image} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, fonts } from '../../../utils';
 import { Gap } from '../../atoms';
 
@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     container: {
         height: 172,
         width: 120,
-        //paddingBottom: 12,
         backgroundColor: 'white',
         borderRadius: 5, 
         marginRight: 20,

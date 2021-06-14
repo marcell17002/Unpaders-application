@@ -1,10 +1,10 @@
+import { BASE_URL_ROOT } from '@env';
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {fonts, colors} from '../../../utils';
-import {Gap} from '../../atoms';
-import {BASE_URL_ROOT} from '@env';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { Gap } from '../../atoms';
+
 const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
-  //belum dimasukin props untuk image
   return (
     <View style={styles.page}>
       <Text style={styles.titleBerita}>{title}</Text>
@@ -27,7 +27,6 @@ const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
           source={{uri: `${BASE_URL_ROOT}${images}`}}
         />
       </View>
-      {/* <Gap height={24}/> */}
       <Text style={styles.isiBerita}>{isiBerita}</Text>
     </View>
   );
@@ -64,10 +63,10 @@ const styles = StyleSheet.create({
   penulis: {
     fontSize: 14,
     fontFamily: fonts.primary.semibold,
-    color: colors.text.primary,
+    color: colors.text.title,
   },
   waktu: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: fonts.primary.semibold,
     color: colors.text.tertiary,
   },
@@ -76,6 +75,7 @@ const styles = StyleSheet.create({
     width: 350,
     resizeMode: 'cover',
     borderRadius: 5,
+    marginBottom: 24,
   },
   isiBerita: {
     fontSize: 18,

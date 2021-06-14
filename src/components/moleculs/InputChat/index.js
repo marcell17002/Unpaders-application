@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  TextInput,
-} from 'react-native';
-import {Gap, Buttons} from '../../atoms';
-import {colors, fonts} from '../../../utils';
+import { StyleSheet, TextInput, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { Buttons } from '../../atoms';
 
 const InputChat = ({value, onChangeText, onPress}) => {
   return (
@@ -21,7 +14,7 @@ const InputChat = ({value, onChangeText, onPress}) => {
           placeholder="Tulis pesan..."></TextInput>
         <Buttons
           onPress={onPress}
-          status="btn-icon-send"
+          status="button-icon"
           disable={value.length < 1}
         />
         {/* disable bernilai true, kl false disable={false} */}

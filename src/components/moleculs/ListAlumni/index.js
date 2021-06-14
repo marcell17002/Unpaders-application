@@ -1,8 +1,8 @@
+import { BASE_URL_ROOT } from '@env';
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {colors, fonts} from '../../../utils';
-import {Gap} from '../../atoms';
-import {BASE_URL_ROOT} from '@env';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { Gap } from '../../atoms';
 
 const ListAlumni = ({
   nama,
@@ -40,8 +40,8 @@ export default ListAlumni;
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
-    paddingVertical: 24,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: colors.text.grey,
     alignItems: 'center',
@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
     width: 40,
     resizeMode: 'cover',
     borderRadius: 20,
-    alignSelf: 'center',
-    marginRight: 16,
+    alignContent: 'center',
+    marginRight: 20,
   },
   namaAlumni: {
     fontSize: 16,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.primary,
+    color: colors.text.title,
   },
   desc: {
     fontSize: 14,

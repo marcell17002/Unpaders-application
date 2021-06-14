@@ -1,7 +1,7 @@
+import { Icon } from 'native-base';
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {colors, fonts} from '../../../utils';
-import {Icon} from 'native-base';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
 
 const ListButton = ({type, namaTombol, image, onPress}) => {
   const ListButtonMenu = () => {
@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
     width: 24,
     resizeMode: 'cover',
     borderRadius: 20,
-    //alignSelf: 'center',
     marginRight: 16,
   },
 });

@@ -1,9 +1,8 @@
+import { BASE_URL_ROOT } from '@env';
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View, Image} from 'react-native';
-import {Headers, Kategori, Event} from '../../components/moleculs';
-import {fonts, colors} from '../../../utils';
-import {Gap} from '../../atoms';
-import {BASE_URL_ROOT} from '@env';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { Gap } from '../../atoms';
 
 const ProfileAuthor = ({picture, nama, fakultas, jurusan, angkatan}) => {
   return (

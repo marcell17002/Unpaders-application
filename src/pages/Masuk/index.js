@@ -1,18 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, Image, ScrollView, Text} from 'react-native';
-import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
-import {api, Fire} from '../../services';
-import {
-  fonts,
-  colors,
-  useForm,
-  checkValue,
-  notifications,
-  storeData,
-  getData,
-  requestToken,
-} from '../../utils';
-import {useDispatch, useSelector} from 'react-redux';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { Buttons, Gap, Inputs, Link } from '../../components/atoms';
+import { api } from '../../services';
+import { checkValue, colors, fonts, notifications, requestToken, storeData, useForm } from '../../utils';
 
 const Masuk = ({navigation}) => {
   const state = useSelector(state => state);
@@ -82,7 +73,6 @@ const Masuk = ({navigation}) => {
         />
       </View>
     </View>
-    //</ScrollView>
   );
 };
 
@@ -119,5 +109,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
     marginTop: -8,
+    marginBottom: 8,
   },
 });

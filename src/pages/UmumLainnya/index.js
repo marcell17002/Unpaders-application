@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-import {Gap, ListButton} from '../../components/atoms/';
-import {Headers} from '../../components/moleculs/';
-import {fonts, colors, destroyData} from '../../utils';
-import {useSelector, useDispatch} from 'react-redux';
-import {Fire} from '../../services';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { Gap, ListButton } from '../../components/atoms/';
+import { Headers } from '../../components/moleculs/';
+import { Fire } from '../../services';
+import { colors, destroyData, fonts } from '../../utils';
 
 const UmumLainnya = ({navigation}) => {
   const user = useSelector(state => state).user;
@@ -26,7 +20,7 @@ const UmumLainnya = ({navigation}) => {
     };
     dispatch({type: 'SET_PROFILE', value: data});
     destroyData();
-    navigation.replace('Intro');
+    navigation.replace('Pengenalan');
     Fire.destroyToken(user.id);
   };
   return (
@@ -44,17 +38,17 @@ const UmumLainnya = ({navigation}) => {
         <ListButton
           type="primary"
           namaTombol="Tentang Kami"
-          onPress={() => navigation.navigate('AlumniTentangKami')}
+          onPress={() => navigation.navigate('TentangKami')}
         />
         <ListButton
           type="primary"
           namaTombol="Kontak"
-          onPress={() => navigation.navigate('AlumniKontak')}
+          onPress={() => navigation.navigate('Kontak')}
         />
         <ListButton
           type="primary"
           namaTombol="Disclaimer"
-          onPress={() => navigation.navigate('AlumniDisclaimer')}
+          onPress={() => navigation.navigate('Disclaimer')}
         />
         <View style={styles.ghap}>
           <Gap height={12} />

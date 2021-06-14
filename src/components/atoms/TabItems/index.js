@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
-import {colors, fonts} from '../../../utils';
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { colors, fonts } from '../../../utils';
 
 const TabItems = ({title, active, onLongPress, onPress}) => {
   const IconMenu = () => {

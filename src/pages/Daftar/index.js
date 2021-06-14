@@ -1,8 +1,7 @@
-//import { Link } from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, View, Image, Text, ScrollView} from 'react-native';
-import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
-import {fonts, colors} from '../../utils';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { Buttons, Gap, Link } from '../../components/atoms';
+import { colors, fonts } from '../../utils';
 
 const Daftar = ({navigation}) => {
   return (
@@ -19,14 +18,14 @@ const Daftar = ({navigation}) => {
         <Buttons
           title="Daftar sebagai Alumni"
           onPress={() =>
-            navigation.navigate('AlumniDaftar', {status: 'alumni'})
+            navigation.navigate('FormDaftar', {status: 'alumni'})
           }
         />
         <Buttons
           status="tertiary"
           title="Daftar sebagai Mahasiswa"
           onPress={() =>
-            navigation.navigate('AlumniDaftar', {status: 'mahasiswa'})
+            navigation.navigate('FormDaftar', {status: 'mahasiswa'})
           }
         />
         <Gap height={62} />
@@ -58,11 +57,6 @@ const styles = StyleSheet.create({
     color: colors.text.primdonker2,
     fontFamily: fonts.primary.bold,
   },
-  inputan: {
-    paddingLeft: 24,
-    paddingRight: 20,
-    marginBottom: 28,
-  },
   button: {
     paddingLeft: 24,
     paddingRight: 20,
@@ -73,5 +67,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
     marginTop: -8,
+    marginBottom: 8,
   },
 });

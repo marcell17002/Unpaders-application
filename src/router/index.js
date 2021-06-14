@@ -3,34 +3,34 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   Auth,
-  SearchAlumni,
-  SearchPage,
+  CariAlumni,
+  CariBerita,
   Splashscreen,
-  Intro,
+  Pengenalan,
   Masuk,
   Daftar,
-  AlumniDaftar,
-  AlumniHome,
-  AlumniChat,
-  AlumniBerita,
-  AlumniLainnya,
-  AlumniDetailBerita,
-  AlumniKomentar,
-  AlumniProfileAuthor,
-  AlumniProfileUser,
-  AlumniEditProfile,
-  AlumniTentangKami,
-  AlumniKontak,
-  AlumniDisclaimer,
-  AlumniList,
-  AlumniKontrib,
-  AlumniTulisBerita,
-  AlumniBeritaUnggah,
-  AlumniChatting,
-  AlumniSubCategory,
+  FormDaftar,
+  Home,
+  Chat,
+  Berita,
+  Lainnya,
+  DetailBerita,
+  KomentarPage,
+  ProfilAlumni,
+  ProfilPengguna,
+  EditProfile,
+  TentangKami,
+  Kontak,
+  Disclaimer,
+  TemukanAlumni,
+  KetentuanKontributor,
+  TulisBerita,
+  BeritaUnggah,
+  RuangObrolan,
+  SubKategoriHome,
   UmumList,
   UmumLainnya,
-  AlumniFilter,
+  FilterPage,
 } from '../pages';
 import {BottomNavigator} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -43,7 +43,7 @@ const MainApp = () => {
   //untuk umum
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-      <Tab.Screen name="Home" component={AlumniHome} />
+      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="List Alumni" component={UmumList} />
       <Tab.Screen name="Lainnya" component={UmumLainnya} />
     </Tab.Navigator>
@@ -53,9 +53,9 @@ const MainAppCollege = () => {
   //buat mahasiswa
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-      <Tab.Screen name="Home" component={AlumniHome} />
-      <Tab.Screen name="Chat" component={AlumniChat} />
-      <Tab.Screen name="Lainnya" component={AlumniLainnya} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Chat" component={Chat} />
+      <Tab.Screen name="Lainnya" component={Lainnya} />
     </Tab.Navigator>
   );
 };
@@ -63,10 +63,10 @@ const MainAppGraduated = () => {
   //buat alumni
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-      <Tab.Screen name="Home" component={AlumniHome} />
-      <Tab.Screen name="Chat" component={AlumniChat} />
-      <Tab.Screen name="Berita" component={AlumniBerita} />
-      <Tab.Screen name="Lainnya" component={AlumniLainnya} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Chat" component={Chat} />
+      <Tab.Screen name="Berita" component={Berita} />
+      <Tab.Screen name="Lainnya" component={Lainnya} />
     </Tab.Navigator>
   );
 };
@@ -84,8 +84,8 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Intro"
-        component={Intro}
+        name="Pengenalan"
+        component={Pengenalan}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -100,114 +100,114 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="SearchAlumni"
-        component={SearchAlumni}
+        name="CariAlumni"
+        component={CariAlumni}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="SearchPage"
-        component={SearchPage}
+        name="CariBerita"
+        component={CariBerita}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniFilter"
-        component={AlumniFilter}
+        name="FilterPage"
+        component={FilterPage}
         options={{headerShown: false}}
       />
       {/* Alumni */}
       <Stack.Screen
-        name="AlumniDaftar"
-        component={AlumniDaftar}
+        name="FormDaftar"
+        component={FormDaftar}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniHome"
-        component={AlumniHome}
+        name="Home"
+        component={Home}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniChat"
-        component={AlumniChat}
+        name="Chat"
+        component={Chat}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniBerita"
-        component={AlumniBerita}
+        name="Berita"
+        component={Berita}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniLainnya"
-        component={AlumniLainnya}
+        name="Lainnya"
+        component={Lainnya}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniDetailBerita"
-        component={AlumniDetailBerita}
+        name="DetailBerita"
+        component={DetailBerita}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniKomentar"
-        component={AlumniKomentar}
+        name="KomentarPage"
+        component={KomentarPage}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniProfileAuthor"
-        component={AlumniProfileAuthor}
+        name="ProfilAlumni"
+        component={ProfilAlumni}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniProfileUser"
-        component={AlumniProfileUser}
+        name="ProfilPengguna"
+        component={ProfilPengguna}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniEditProfile"
-        component={AlumniEditProfile}
+        name="EditProfile"
+        component={EditProfile}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniTentangKami"
-        component={AlumniTentangKami}
+        name="TentangKami"
+        component={TentangKami}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniKontak"
-        component={AlumniKontak}
+        name="Kontak"
+        component={Kontak}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniDisclaimer"
-        component={AlumniDisclaimer}
+        name="Disclaimer"
+        component={Disclaimer}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniList"
-        component={AlumniList}
+        name="TemukanAlumni"
+        component={TemukanAlumni}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniKontrib"
-        component={AlumniKontrib}
+        name="KetentuanKontributor"
+        component={KetentuanKontributor}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniTulisBerita"
-        component={AlumniTulisBerita}
+        name="TulisBerita"
+        component={TulisBerita}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniBeritaUnggah"
-        component={AlumniBeritaUnggah}
+        name="BeritaUnggah"
+        component={BeritaUnggah}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniChatting"
-        component={AlumniChatting}
+        name="RuangObrolan"
+        component={RuangObrolan}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AlumniSubCategory"
-        component={AlumniSubCategory}
+        name="SubKategoriHome"
+        component={SubKategoriHome}
         options={{headerShown: false}}
       />
 
@@ -222,7 +222,6 @@ const Router = () => {
         component={UmumLainnya}
         options={{headerShown: false}}
       />
-
       {/* Navigator */}
       <Stack.Screen
         name="MainApp"

@@ -1,20 +1,17 @@
+import { Icon } from 'native-base';
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {colors, fonts} from '../../../utils';
-import {Icon} from 'native-base';
-//import {BtnIcon} from './BtnIcon';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
 
 const Buttons = ({status, isLittle, title, onPress, disable}) => {
   const ButtonsMenu = () => {
     switch (status) {
-      //button biru primary
       case 'primary':
         return (
           <TouchableOpacity onPress={onPress} style={styles.buttonPrimary}>
             <Text style={styles.textPrimary}>{title}</Text>
           </TouchableOpacity>
         );
-      //button outer biru, bg putih
       case 'secondary':
         return (
           <TouchableOpacity onPress={onPress} style={styles.buttonSecondary}>
@@ -29,14 +26,13 @@ const Buttons = ({status, isLittle, title, onPress, disable}) => {
             <Text style={styles.textTertiary}> {title}</Text>
           </TouchableOpacity>
         );
-      //button tulisan doang
       case 'quarternary':
         return (
           <TouchableOpacity onPress={onPress} style={styles.buttonQuarternary}>
             <Text style={styles.textQuarternary}> {title} </Text>
           </TouchableOpacity>
         );
-      case 'btn-icon-send':
+      case 'button-icon':
         return (
           <TouchableOpacity
             style={styles.iconBundle(disable)}
@@ -65,14 +61,13 @@ export default Buttons;
 const styles = StyleSheet.create({
   buttonPrimary: {
     backgroundColor: colors.button.primary.background,
-    //marginHorizontal: 22, //ini buat apa
     borderRadius: 5,
     marginBottom: 24,
   },
   textPrimary: {
     color: colors.button.primary.text,
     textAlign: 'center',
-    fontFamily: fonts.primary.bold, //boldnya ga keganti
+    fontFamily: fonts.primary.bold, 
     fontSize: 16,
     paddingVertical: 15,
   },
@@ -80,7 +75,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.button.secondaryOutline.background,
     borderColor: colors.button.secondaryOutline.blue,
     borderWidth: 1,
-    //marginHorizontal: 0,
     borderRadius: 5,
   },
   textSecondary: {
@@ -101,23 +95,20 @@ const styles = StyleSheet.create({
   textTertiary: {
     color: colors.button.primaryOutline.text,
     textAlign: 'center',
-    fontFamily: fonts.primary.bold, //boldnya ga keganti
+    fontFamily: fonts.primary.bold,
     fontSize: 16,
     paddingVertical: 15,
   },
   buttonQuarternary: {
-    backgroundColor: 'white',
+    backgroundColor: colors.primaryWhite,
     borderColor: colors.button.secondaryOutline.background,
-    //borderWidth: 1,
-    //marginHorizontal: 0,
     borderRadius: 5,
   },
   textQuarternary: {
     color: colors.button.secondaryOutline.blue,
     textAlign: 'center',
     fontFamily: fonts.primary.semibold,
-    fontSize: 14,
-    //paddingVertical: 15,
+    fontSize: 16,
   },
   iconBundle: disable => ({
     backgroundColor: disable ? colors.backgroundgrey : colors.primary,
@@ -131,9 +122,4 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     color: disable ? colors.primarygrey : colors.primaryWhite,
   }),
-  iconNonDis: {
-    alignSelf: 'center',
-    justifyContent: 'space-between',
-    color: colors.primaryWhite,
-  },
 });
