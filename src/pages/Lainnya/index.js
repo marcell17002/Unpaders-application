@@ -1,10 +1,17 @@
 import React from 'react';
-import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { Gap, ListButton } from '../../components/atoms';
-import { Headers } from '../../components/moleculs';
-import { api, Fire } from '../../services';
-import { colors, destroyData, fonts } from '../../utils';
+import {
+  Linking,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {Gap, ListButton} from '../../components/atoms';
+import {Headers} from '../../components/moleculs';
+import {api, Fire} from '../../services';
+import {colors, destroyData, fonts} from '../../utils';
 
 const Lainnya = ({navigation}) => {
   const user = useSelector(state => state).user;

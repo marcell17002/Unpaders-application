@@ -12,3 +12,4 @@ export * from './randomId';
 export * from './errorParse';
 export * from './requestToken';
 export * from './sortData';
+export * from './checkStudentExist';

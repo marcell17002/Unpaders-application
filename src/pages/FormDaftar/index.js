@@ -1,11 +1,19 @@
-import { BASE_IMG } from '@env';
-import { Picker } from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { Buttons, Gap, Inputs, Link } from '../../components/atoms';
-import { api } from '../../services';
-import { checkValue, colors, filterData, fonts, notifications, useForm } from '../../utils';
+import {BASE_IMG} from '@env';
+import {Picker} from 'native-base';
+import React, {useEffect, useState} from 'react';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
+import {api} from '../../services';
+import {
+  checkValue,
+  colors,
+  filterData,
+  fonts,
+  notifications,
+  useForm,
+} from '../../utils';
+import checkStudentExist from '../../utils/checkStudentExist';
 
 const FormDaftar = ({navigation, route}) => {
   const status = route.params.status;
@@ -33,16 +41,16 @@ const FormDaftar = ({navigation, route}) => {
     {label: 'Administrasi Bisnis', faculty: 'F. Fisip'},
     {label: 'Agribisnis', faculty: 'F. Pertanian'},
     {label: 'Agroteknologi', faculty: 'F. Pertanian'},
-    {label: 'Aktuaria',  faculty: 'F. MIPA'},
+    {label: 'Aktuaria', faculty: 'F. MIPA'},
     {label: 'Akuntansi', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Antropologi', faculty: 'F. Fisip'},
-    {label: 'Biologi',  faculty: 'F. MIPA'},
+    {label: 'Biologi', faculty: 'F. MIPA'},
     {label: 'Bisnis Digital', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Ekonomi Islam', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Ekonomi Pembangunan', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Farmasi', faculty: 'F. Farmasi'},
-    {label: 'Fisika',  faculty: 'F. MIPA'},
-    {label: 'Geofisika',  faculty: 'F. MIPA'},
+    {label: 'Fisika', faculty: 'F. MIPA'},
+    {label: 'Geofisika', faculty: 'F. MIPA'},
     {label: 'Geologi', faculty: 'F. Teknik Geologi'},
     {label: 'Hubungan Internasional', faculty: 'F. Fisip'},
     {label: 'Hubungan Masyarakat', faculty: 'F. Fikom'},
@@ -58,10 +66,10 @@ const FormDaftar = ({navigation, route}) => {
     {label: 'Kedokteran Hewan', faculty: 'F. Kedokteran'},
     {label: 'Keperawatan', faculty: 'F. Keperawatan'},
     {label: 'Kesejahteraan Sosial', faculty: 'F. Fisip'},
-    {label: 'Kimia',  faculty: 'F. MIPA'},
+    {label: 'Kimia', faculty: 'F. MIPA'},
     {label: 'Manajemen', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Manajemen Komunikasi', faculty: 'F. Fikom'},
-    {label: 'Matematika',  faculty: 'F. MIPA'},
+    {label: 'Matematika', faculty: 'F. MIPA'},
     {label: 'Perikanan', faculty: 'F. PIK'},
     {label: 'Perpustakaan', faculty: 'F. Fikom'},
     {label: 'Peternakan', faculty: 'F. Peternakan'},
@@ -74,10 +82,10 @@ const FormDaftar = ({navigation, route}) => {
     {label: 'Sastra Perancis', faculty: 'F. Ilmu Budaya'},
     {label: 'Sastra Rusia', faculty: 'F. Ilmu Budaya'},
     {label: 'Sastra Sunda', faculty: 'F. Ilmu Budaya'},
-    {label: 'Statistika',  faculty: 'F. MIPA'},
+    {label: 'Statistika', faculty: 'F. MIPA'},
     {label: 'Sosiologi', faculty: 'F. Fisip'},
-    {label: 'Teknik Elektro',  faculty: 'F. MIPA'},
-    {label: 'Teknik Informatika',  faculty: 'F. MIPA'},
+    {label: 'Teknik Elektro', faculty: 'F. MIPA'},
+    {label: 'Teknik Informatika', faculty: 'F. MIPA'},
     {label: 'Teknik Pertanian', faculty: 'F. TIP'},
     {label: 'Teknologi Pangan', faculty: 'F. TIP'},
     {label: 'Televisi dan Film', faculty: 'F. Fikom'},
@@ -108,7 +116,7 @@ const FormDaftar = ({navigation, route}) => {
     faculty: '',
     prodi: '',
     level: '',
-    graduated: status === 'alumni' ? '' : 'underGraduated',
+    graduated: status === 'alumni' ? '' : 'mahasiswa',
     image: BASE_IMG,
     status: status,
   });
@@ -129,6 +137,13 @@ const FormDaftar = ({navigation, route}) => {
   const onSave = async () => {
     await checkValueNull();
     console.log('hello ', form);
+    if (form.status === 'mahasiswa')
+      await checkStudentExist(form.prodi, form.level, form.nim).then(
+        res => {
+          console.log('success');
+        },
+        err => notifications('warning', err.message),
+      );
     api.postRegister(form).then(
       res => {
         notifications('success', 'registrasi berhasil silahkan login');

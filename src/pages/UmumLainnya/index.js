@@ -1,10 +1,16 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { Gap, ListButton } from '../../components/atoms/';
-import { Headers } from '../../components/moleculs/';
-import { Fire } from '../../services';
-import { colors, destroyData, fonts } from '../../utils';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {Gap, ListButton} from '../../components/atoms/';
+import {Headers} from '../../components/moleculs/';
+import {api, Fire} from '../../services';
+import {colors, destroyData, fonts} from '../../utils';
 
 const UmumLainnya = ({navigation}) => {
   const user = useSelector(state => state).user;
@@ -18,9 +24,15 @@ const UmumLainnya = ({navigation}) => {
       token: '',
       refreshToken: '',
     };
-    dispatch({type: 'SET_PROFILE', value: data});
-    destroyData();
-    navigation.replace('Pengenalan');
+    api.deleteRefreshToken(user.id).then(
+      res => {
+        dispatch({type: 'SET_PROFILE', value: data});
+        destroyData();
+        navigation.replace('Pengenalan');
+      },
+      err => {},
+    );
+
     Fire.destroyToken(user.id);
   };
   return (

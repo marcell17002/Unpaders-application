@@ -1,9 +1,17 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { Buttons, Gap, Inputs, Link } from '../../components/atoms';
-import { api } from '../../services';
-import { checkValue, colors, fonts, notifications, requestToken, storeData, useForm } from '../../utils';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
+import {api} from '../../services';
+import {
+  checkValue,
+  colors,
+  fonts,
+  notifications,
+  requestToken,
+  storeData,
+  useForm,
+} from '../../utils';
 
 const Masuk = ({navigation}) => {
   const state = useSelector(state => state);

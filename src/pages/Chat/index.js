@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { Gap, ListButton } from '../../components/atoms';
-import { Headers, ListAlumniChat, NotFound } from '../../components/moleculs';
-import { api } from '../../services';
-import { colors, fonts } from '../../utils';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {Gap, ListButton} from '../../components/atoms';
+import {Headers, ListAlumniChat, NotFound} from '../../components/moleculs';
+import {api} from '../../services';
+import {colors, fonts, getData} from '../../utils';
 
 const Chat = ({navigation, route}) => {
   const [history, setHistory] = useState([]);
   const [historyTemp, setHistoryTemp] = useState([]);
   const user = useSelector(state => state).user;
-  useEffect(() => {
+  useEffect(async () => {
     const unsubscribe = navigation.addListener('focus', () => {
       setHistory([]);
       setHistoryTemp([]);
       getHistorySender(); //a_b   -> a
       getHistoryReceiver(); //b_a   -> a
+    });
+    await getData('user').then(res => {
+      if (res) {
+        return console.log('isi res data local :', res);
+      }
     });
     return unsubscribe;
   }, [navigation]);
@@ -92,23 +97,23 @@ const Chat = ({navigation, route}) => {
         </View>
       ) : (
         <View>
-          {history.map(item => {
+          {historyTemp.reverse().map(item => {
             return (
               <ListAlumniChat
                 key={item._id}
                 nama={item.name}
+                isBadge={item.status}
                 picture={item.image}
                 lastText={item.lastChat}
                 onPress={() => navigation.navigate('RuangObrolan', item)}
               />
             );
           })}
-          {historyTemp.map(item => {
+          {history.reverse().map(item => {
             return (
               <ListAlumniChat
                 key={item._id}
                 nama={item.name}
-                isBadge={item.status}
                 picture={item.image}
                 lastText={item.lastChat}
                 onPress={() => navigation.navigate('RuangObrolan', item)}
