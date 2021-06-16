@@ -12,6 +12,7 @@ const ListAlumni = ({
   onPressImage,
   onPressBody,
   picture,
+  disabled,
 }) => {
   return (
     <View style={styles.page}>
@@ -21,7 +22,7 @@ const ListAlumni = ({
           source={{uri: `${BASE_URL_ROOT}${picture}`}}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={onPressBody}>
+      <TouchableOpacity onPress={disabled ? null : onPressBody} disabled={disabled}>
         <Text style={styles.namaAlumni}>{nama}</Text>
         <Gap height={8} />
         <View style={styles.secData}>

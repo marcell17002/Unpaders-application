@@ -48,7 +48,8 @@ const UmumList = ({navigation}) => {
         <View style={styles.page}>
           {alumni.map(item => {
             return (
-              <ListAlumni
+              <ListAlumni 
+                disabled
                 key={item._id}
                 nama={item.name}
                 picture={item.image}

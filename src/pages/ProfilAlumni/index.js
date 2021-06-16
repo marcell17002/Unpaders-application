@@ -8,12 +8,17 @@ import { api } from '../../services';
 import { colors, filterData, fonts, sortData } from '../../utils';
 
 const ProfilAlumni = ({navigation, route}) => {
-  const payload = route.params;
-  const recommendation = useSelector(state => state).recommendation;
+  const data = route.params;
+  const payload = {
+    ...data,idReceiver : data._id
+  }
+  console.log('isi payload',payload)
   const [eventCreated, setEventCreated] = useState([]);
   const [tempEvent, setTempEvent] = useState([]);
   const [subCategory, setSubCategory] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
+  const user = useSelector(state=>state).user;
+
   useEffect(() => {
     api.getEventByCategory('author', payload._id).then(
       async res => {
@@ -47,13 +52,14 @@ const ProfilAlumni = ({navigation, route}) => {
         </View>
         <Gap height={16} />
         <View style={styles.contButton}>
-          <Buttons
-            title="Chat"
-            status="secondary"
-            onPress={() => navigation.navigate('RuangObrolan', payload)}
-          />
+          {user.status === 'umum' ? null : 
+            <Buttons
+              title="Chat"
+              status="secondary"
+              onPress={() => navigation.navigate('RuangObrolan', payload)}
+            />
+          }
         </View>
-        <Gap height={24} />
         <View style={styles.ghap}>
           <Gap height={12} />
         </View>

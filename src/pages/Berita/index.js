@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { Gap, ListButton } from '../../components/atoms';
-import { Event, Headers, NotFound } from '../../components/moleculs';
+import { EventUnggah, Headers, NotFound } from '../../components/moleculs';
 import { api } from '../../services';
 import { colors, fonts, getDateName, notifications } from '../../utils';
 
@@ -29,13 +29,13 @@ const Berita = ({navigation}) => {
     } else return navigation.navigate('TulisBerita', payload);
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.page}>
         <View>
           <Headers title="BERITA" type="main" />
         </View>
-
-        <View style={styles.page}>
+        
+        <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
           <ListButton
             namaTombol="Ketentuan Kontributor"
             onPress={() => navigation.navigate('KetentuanKontributor')}
@@ -59,10 +59,9 @@ const Berita = ({navigation}) => {
           <View>
             {event.map(item => {
               return (
-                <Event
+                <EventUnggah
                   isHistory
                   status={item.status}
-                  category={item.category}
                   time={getDateName(item.createdAt)}
                   picture={item.image}
                   title={item.title}
@@ -72,8 +71,8 @@ const Berita = ({navigation}) => {
             })}
           </View>
         )}
-      </View>
     </ScrollView>
+    </View>
   );
 };
 
@@ -82,7 +81,7 @@ export default Berita;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: colors.primaryWhite,
+    backgroundColor: 'white',
   },
   body: {
     marginVertical: '50%',

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment/locale/id';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -12,6 +13,8 @@ const Home = ({navigation}) => {
   const [subCategory, setSubCategory] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const dispatch = useDispatch();
+  moment.locale('id')
+
   useEffect(() => {
     api.getEventByCategory('status', 'published').then(
       async res => {

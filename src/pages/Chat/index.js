@@ -76,10 +76,12 @@ const Chat = ({navigation, route}) => {
     );
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+    <View style={styles.page}>
       <View>
         <Headers title="CHAT" type="main" />
       </View>
+
+      <ScrollView showsVerticalScrollIndicator={false} >
       <View>
         <ListButton
           namaTombol="Temukan Alumni"
@@ -123,6 +125,7 @@ const Chat = ({navigation, route}) => {
         </View>
       )}
     </ScrollView>
+    </View>
   );
 };
 

@@ -141,20 +141,20 @@ const FormDaftar = ({navigation, route}) => {
       await checkStudentExist(form.prodi, form.level, form.nim).then(
         res => {
           console.log('success');
+          api.postRegister(form).then(
+            res => {
+              notifications('success', 'registrasi berhasil silahkan login');
+              navigation.replace('Masuk');
+            },
+            err => {
+              const message = JSON.parse(err.response.request._response).message;
+              console.log('isi errr :', JSON.parse(err.response.request._response));
+              notifications('danger', message);
+            },
+          );
         },
         err => notifications('warning', err.message),
       );
-    api.postRegister(form).then(
-      res => {
-        notifications('success', 'registrasi berhasil silahkan login');
-        navigation.replace('Masuk');
-      },
-      err => {
-        const message = JSON.parse(err.response.request._response).message;
-        console.log('isi errr :', JSON.parse(err.response.request._response));
-        notifications('danger', message);
-      },
-    );
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

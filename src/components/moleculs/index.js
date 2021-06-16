@@ -16,6 +16,7 @@ import SubCategoryHome from './SubCategoryHome';
 import SubKategori from './SubKategori';
 import UnggahBerita from './UnggahBerita';
 import CommentUser from './CommentUser';
+import EventUnggah from './EventUnggah';
 
 export {
   BottomNavigator,
@@ -36,5 +37,6 @@ export {
   SearchHeader,
   NotFound,
   CommentUser,
+  EventUnggah,
 };
 

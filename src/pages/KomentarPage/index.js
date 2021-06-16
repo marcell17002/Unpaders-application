@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { Gap } from '../../components/atoms';
@@ -14,6 +14,7 @@ const KomentarPage = ({navigation, route}) => {
   const [input, setInput] = useState('');
   const [profile, setProfile] = useState();
   const {messages, sendMessage, setMessages} = useChat(idEvent);
+  const scrollViewRef = useRef();
 
   useEffect(async () => {
     await getCommentar(idEvent);
@@ -22,7 +23,7 @@ const KomentarPage = ({navigation, route}) => {
   }, []);
 
   const getCommentar = id => {
-    api.getChat('chatID', id).then(
+    api.getChat('chatId', id).then(
       async res => {
         console.log('isi res data getchat :', res.data);
         const commentar = res.data;
@@ -90,7 +91,9 @@ const KomentarPage = ({navigation, route}) => {
           onPressBack={() => navigation.goBack()}
         />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}
+      ref={scrollViewRef}
+      onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
         <Gap height={24} />
         
         {messages.length < 1 ? (
