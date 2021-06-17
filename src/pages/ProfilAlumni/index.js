@@ -50,16 +50,17 @@ const ProfilAlumni = ({navigation, route}) => {
             angkatan={payload.level}
           />
         </View>
-        <Gap height={16} />
-        <View style={styles.contButton}>
-          {user.status === 'umum' ? null : 
-            <Buttons
-              title="Chat"
-              status="secondary"
-              onPress={() => navigation.navigate('RuangObrolan', payload)}
-            />
-          }
-        </View>
+        {user.status === 'umum' ? null :
+          <View style={styles.contButton}>
+            <Gap height={16} />
+              <Buttons
+                title="Chat"
+                status="secondary"
+                onPress={() => navigation.navigate('RuangObrolan', payload)}
+              />
+          </View>
+        }
+        <Gap height={24} />
         <View style={styles.ghap}>
           <Gap height={12} />
         </View>

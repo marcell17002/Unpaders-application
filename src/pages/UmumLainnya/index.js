@@ -110,7 +110,7 @@ const UmumLainnya = ({navigation}) => {
         <TouchableOpacity onPress={() => onLogOut()}>
           <Text style={styles.logout}>Keluar Aplikasi</Text>
         </TouchableOpacity>
-        <Gap height={20} />
+        
       </View>
     </ScrollView>
   );

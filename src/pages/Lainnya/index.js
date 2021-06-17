@@ -52,6 +52,7 @@ const Lainnya = ({navigation}) => {
             namaTombol="Profil"
             onPress={() => navigation.navigate('ProfilPengguna')}
           />
+          
         </View>
         <View style={styles.ghap}>
           <Gap height={12} />
