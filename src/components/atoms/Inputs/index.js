@@ -52,5 +52,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderColor: colors.input.outline,
     backgroundColor: colors.input.background,
+    textAlignVertical: 'top',
   },
 });

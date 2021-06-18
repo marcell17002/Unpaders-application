@@ -145,7 +145,9 @@ const Headers = ({
             <View style={styles.subMainTitleBundle}>
               <Text style={styles.titleJudul}>{title}</Text>
             </View>
-            <View />
+            <TouchableOpacity onPress={onPressRight}>
+                <Text style={styles.editButton}>{namaButton}</Text>
+            </TouchableOpacity>
           </View>
         </>
       );

@@ -26,9 +26,9 @@ const ProfilPengguna = ({navigation}) => {
         <Headers
           type="sub-edit"
           title="Profil"
-          namaButton="EDIT"
+          namaButton="UBAH"
           onPressBack={() => navigation.goBack()}
-          onPressRight={() => navigation.navigate('EditProfile', profile)}
+          onPressRight={() => navigation.navigate('UbahProfile', profile)}
         />
       </View>
       <Gap height={24} />

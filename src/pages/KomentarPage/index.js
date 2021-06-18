@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment/locale/id';
 import React, { useEffect, useState, useRef } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -15,6 +16,7 @@ const KomentarPage = ({navigation, route}) => {
   const [profile, setProfile] = useState();
   const {messages, sendMessage, setMessages} = useChat(idEvent);
   const scrollViewRef = useRef();
+  moment.locale('id')
 
   useEffect(async () => {
     await getCommentar(idEvent);

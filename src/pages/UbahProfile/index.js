@@ -9,7 +9,7 @@ import { Headers } from '../../components/moleculs';
 import { api } from '../../services';
 import { checkValue, colors, destroyData, filterData, fonts, notifications } from '../../utils';
 
-const EditProfile = ({navigation, route}) => {
+const UbahProfile = ({navigation, route}) => {
   const payload = route.params;
   const [profile, setProfile] = useState({...payload, password: ''});
   const pathImage = `${BASE_URL_ROOT}${profile.image}`;
@@ -172,7 +172,7 @@ const EditProfile = ({navigation, route}) => {
       <View style={styles.contHeader}>
         <Headers
           type="sub-edit"
-          title="Edit Profil"
+          title="Ubah Profil Saya"
           namaButton="SIMPAN"
           onPressBack={() => navigation.goBack()}
           onPressRight={() => onSave()}
@@ -201,14 +201,14 @@ const EditProfile = ({navigation, route}) => {
               title="Email"
               placeholder="Masukkan Email"
             />
-            <Gap height={24} />
+            {/* <Gap height={24} />
             <Inputs
               value={profile.password}
               secure
               onChangeText={value => changeText('password', value)}
               title="Password"
               placeholder="Masukkan Password"
-            />
+            /> */}
             <Gap height={24} />
             <Inputs
               value={profile.name}
@@ -299,7 +299,7 @@ const EditProfile = ({navigation, route}) => {
   );
 };
 
-export default EditProfile;
+export default UbahProfile;
 
 const styles = StyleSheet.create({
   page: {

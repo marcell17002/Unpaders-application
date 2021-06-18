@@ -15,7 +15,7 @@ import DetailBerita from './DetailBerita';
 import KomentarPage from './KomentarPage';
 import ProfilAlumni from './ProfilAlumni';
 import ProfilPengguna from './ProfilPengguna';
-import EditProfile from './EditProfile';
+import UbahProfile from './UbahProfile';
 import TentangKami from './TentangKami';
 import Kontak from './Kontak';
 import Disclaimer from './Disclaimer';
@@ -28,6 +28,7 @@ import CariAlumni from './CariAlumni';
 import CariBerita from './CariBerita';
 import FilterPage from './FilterPage';
 import SubKategoriHome from './SubKategoriHome';
+import UbahPassword from './UbahPassword';
 
 import UmumList from './UmumList';
 import UmumLainnya from './UmumLainnya';
@@ -48,7 +49,7 @@ export {
   KomentarPage,
   ProfilAlumni,
   ProfilPengguna,
-  EditProfile,
+  UbahProfile,
   TentangKami,
   Kontak,
   Disclaimer,
@@ -63,4 +64,5 @@ export {
   CariAlumni,
   CariBerita,
   FilterPage,
+  UbahPassword,
 };

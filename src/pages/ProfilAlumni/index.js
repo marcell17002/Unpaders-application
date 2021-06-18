@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment/locale/id';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -18,6 +19,7 @@ const ProfilAlumni = ({navigation, route}) => {
   const [subCategory, setSubCategory] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const user = useSelector(state=>state).user;
+  moment.locale('id')
 
   useEffect(() => {
     api.getEventByCategory('author', payload._id).then(

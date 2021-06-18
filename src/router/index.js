@@ -18,7 +18,7 @@ import {
   KomentarPage,
   ProfilAlumni,
   ProfilPengguna,
-  EditProfile,
+  UbahProfile,
   TentangKami,
   Kontak,
   Disclaimer,
@@ -31,6 +31,7 @@ import {
   UmumList,
   UmumLainnya,
   FilterPage,
+  UbahPassword,
 } from '../pages';
 import {BottomNavigator} from '../components/moleculs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -161,8 +162,8 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="EditProfile"
-        component={EditProfile}
+        name="UbahProfile"
+        component={UbahProfile}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -210,7 +211,11 @@ const Router = () => {
         component={SubKategoriHome}
         options={{headerShown: false}}
       />
-
+      <Stack.Screen
+        name="UbahPassword"
+        component={UbahPassword}
+        options={{headerShown: false}}
+      />
       {/* Masyarakat Umum */}
       <Stack.Screen
         name="UmumList"

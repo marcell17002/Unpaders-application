@@ -181,11 +181,19 @@ const FormDaftar = ({navigation, route}) => {
           />
           <Gap height={24} />
           <Inputs
-            title="Password"
+            title="Kata Sandi"
             value={form.password}
             secure
             onChangeText={value => setForm('password', value)}
-            placeholder="Masukkan Password"
+            placeholder="Masukkan Kata Sandi"
+          />
+          <Gap height={24} />
+          <Inputs
+            title="Konfirmasi Kata Sandi"
+            value={form.password}
+            secure
+            onChangeText={value => setForm('password', value)}
+            placeholder="Konfirmasi Kata Sandi"
           />
           <Gap height={24} />
           <Inputs

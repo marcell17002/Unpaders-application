@@ -137,7 +137,7 @@ const TulisBerita = ({navigation, route}) => {
               value={form.title}
               onChangeText={value => setForm('title', value)}
               title="Judul"
-              placeholder="Judul Berita"
+              placeholder="Judul berita"
             />
             <Gap height={24} />
             <Text style={styles.titleText}>Foto</Text>

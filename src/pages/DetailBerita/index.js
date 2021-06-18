@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment/locale/id';
 import { Icon } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -19,6 +20,7 @@ const DetailBerita = ({navigation, route}) => {
   const stateGlobal = useSelector(state => state);
   const user = stateGlobal.user;
   const recommendation = stateGlobal.recommendation;
+  moment.locale('id')
 
   useEffect(async () => {
     api.getProfileUser(payload.item.author).then(

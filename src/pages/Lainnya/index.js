@@ -52,7 +52,11 @@ const Lainnya = ({navigation}) => {
             namaTombol="Profil"
             onPress={() => navigation.navigate('ProfilPengguna')}
           />
-          
+          <ListButton
+            type="primary"
+            namaTombol="Ubah Kata Sandi"
+            onPress={() => navigation.navigate('UbahPassword')}
+          />
         </View>
         <View style={styles.ghap}>
           <Gap height={12} />

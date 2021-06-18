@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment/locale/id';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Event, NotFound, SearchHeader } from '../../components/moleculs';
@@ -10,6 +11,7 @@ const CariBerita = ({navigation, route}) => {
   const [event, setEvent] = useState(payload);
   const [eventTemp, setEventTemp] = useState(payload);
   const [input, setInput] = useState('');
+  moment.locale('id')
 
   const searchFilter = value => {
     setInput(value);

@@ -41,7 +41,7 @@ const Masuk = ({navigation}) => {
         else navigation.replace('MainAppCollege');
       },
       err => {
-        notifications('danger', 'email atau password salah');
+        notifications('danger', 'email atau kata sandi salah');
       },
     );
   };
@@ -64,11 +64,11 @@ const Masuk = ({navigation}) => {
         />
         <Gap height={24} />
         <Inputs
-          title="Password"
+          title="Kata Sandi"
           secure
           value={form.password}
           onChangeText={value => setForm('password', value)}
-          placeholder="Masukkan Password"
+          placeholder="Masukkan Kata Sandi"
         />
       </View>
       <Gap height={80} />

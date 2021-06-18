@@ -3,12 +3,15 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Event, Headers } from '../../components/moleculs';
 import { Gap } from '../../components/atoms';
 import moment from 'moment';
+import 'moment/locale/id';
 import { colors } from '../../utils';
 
 const SubKategoriHome = ({navigation, route}) => {
   const payload = route.params;
   const header = payload.props;
   const event = payload.filteredData;
+  moment.locale('id')
+
   return (
     <View style={styles.page}>
       <Headers

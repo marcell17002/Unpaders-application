@@ -145,6 +145,7 @@ const FilterPage = ({navigation}) => {
         <Headers
           title="Filter"
           type="filter"
+          //namaButton="RESET"
           onPressBack={() => navigation.navigate('CariAlumni', filter)}
         />
       </View>
