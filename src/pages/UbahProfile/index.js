@@ -208,7 +208,7 @@ const UbahProfile = ({navigation, route}) => {
               onChangeText={value => changeText('password', value)}
               title="Password"
               placeholder="Masukkan Password"
-            /> */}
+            />  */}
             <Gap height={24} />
             <Inputs
               value={profile.name}
