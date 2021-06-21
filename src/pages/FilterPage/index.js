@@ -1,15 +1,23 @@
-import { Icon } from 'native-base';
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {Icon} from 'native-base';
+import React, {useEffect, useState} from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import GridList from 'react-native-grid-list';
-import { useDispatch } from 'react-redux';
-import { ButtonFilter, Gap } from '../../components/atoms';
-import { Headers } from '../../components/moleculs';
-import { colors, filterData, fonts, useForm } from '../../utils';
+import {useDispatch} from 'react-redux';
+import {ButtonFilter, Gap} from '../../components/atoms';
+import {Headers} from '../../components/moleculs';
+import {colors, filterData, fonts, useForm} from '../../utils';
 
 const FilterPage = ({navigation}) => {
   const dispatch = useDispatch();
   const [openFaculty, setOpenFaculty] = useState(true);
+  const [temp, setTemp] = useState('');
+  const [tempProdi, setTempProdi] = useState('');
   const [openProdi, setOpenProdi] = useState(true);
   const [facultyActive, setFacultyActive] = useState(false);
   const [prodiActive, setProdiActive] = useState(false);
@@ -94,11 +102,16 @@ const FilterPage = ({navigation}) => {
   ]);
   const [prodiTemp, setProdiTemp] = useState([]);
 
+  useEffect(() => {
+    setFilter('faculty', '');
+    setFilter('prodi', '');
+    setTemp('');
+  }, []);
+
   const filterDataProdi = async props => {
     setProdiTemp([]);
     setFacultyActive(true);
     filterData(prodiList, 'faculty', props).then(async res => {
-      dispatch({type: 'SET_LOADING', value: true});
       await setFilter('faculty', props);
       await setProdiTemp(res);
     });
@@ -107,9 +120,12 @@ const FilterPage = ({navigation}) => {
   const renderButtonFaculty = ({item, index}) => {
     return (
       <ButtonFilter
-        onPress={() => filterDataProdi(item.label)}
+        onPress={() => {
+          setTemp(item.label);
+          filterDataProdi(item.label);
+        }}
         title={item.label}
-        active={filter.faculty === item.label}
+        active={temp === item.label}
       />
     );
   };
@@ -117,6 +133,7 @@ const FilterPage = ({navigation}) => {
     return (
       <ButtonFilter
         onPress={async () => {
+          setTempProdi(item.label);
           await setFilter('prodi', item.label);
           await navigation.navigate('CariAlumni', {
             faculty: filter.faculty,
@@ -168,9 +185,7 @@ const FilterPage = ({navigation}) => {
               />
             )}
           </View>
-          <TouchableOpacity
-            onPress={() => setOpenProdi(!openProdi)}
-            style={styles.ghap}>
+          <TouchableOpacity style={styles.ghap}>
             <Text style={styles.textGap}>PROGRAM STUDI</Text>
             <Icon style={styles.iconStyle} type="AntDesign" name="caretdown" />
           </TouchableOpacity>

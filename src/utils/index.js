@@ -13,3 +13,5 @@ export * from './errorParse';
 export * from './requestToken';
 export * from './sortData';
 export * from './checkStudentExist';
+export * from './checkAlumniExist';
+export * from './checkSameData';

@@ -23,7 +23,6 @@ axios.interceptors.response.use(
       }
     });
     if (error.response.status === 401) {
-      NavigationService.navigate('Login');
       console.log('401 navigate to login');
       await destroyData();
     }
@@ -73,6 +72,7 @@ const getHistoryChat = async (variable, value) =>
   get(`historyChat/${variable}/${value}`, await config.withToken());
 const getChat = async (variable, value) =>
   get(`chat/${variable}/${value}`, null);
+const getDataAlumni = id => get(`alumni/${id}`, null);
 
 //post
 const postRegister = data => post('user/register', data, null);
@@ -93,6 +93,8 @@ const updateEvent = async (data, id) =>
   put(`event/${id}`, data, await config.withToken());
 const updateHistory = async (data, id) =>
   put(`historyChat/${id}`, data, await config.withToken());
+const updatePassword = async (data, id) =>
+  put(`user/changePassword/${id}`, data, await config.withToken());
 
 //delete
 const deleteLikedEvent = async id => drop(`likedEvent/${id}`, null);
@@ -108,6 +110,7 @@ export const api = {
   getProfileCategory,
   getHistoryChat,
   getChat,
+  getDataAlumni,
 
   postRegister,
   postLogIn,
@@ -121,6 +124,7 @@ export const api = {
   updateProfileUser,
   updateEvent,
   updateHistory,
+  updatePassword,
 
   deleteLikedEvent,
   deleteRefreshToken,

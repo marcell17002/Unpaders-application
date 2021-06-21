@@ -1,17 +1,32 @@
-import { BASE_URL_ROOT } from '@env';
-import { Picker } from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
-import { useSelector } from 'react-redux';
-import { Gap, Inputs } from '../../components/atoms';
-import { Headers } from '../../components/moleculs';
-import { api } from '../../services';
-import { checkValue, colors, filterData, fonts, notifications, useForm } from '../../utils';
-
+import {BASE_URL_ROOT} from '@env';
+import {Picker} from 'native-base';
+import React, {useEffect, useState} from 'react';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {Gap, Inputs} from '../../components/atoms';
+import {Headers} from '../../components/moleculs';
+import {api} from '../../services';
+import {
+  checkValue,
+  colors,
+  filterData,
+  fonts,
+  notifications,
+  useForm,
+} from '../../utils';
 const TulisBerita = ({navigation, route}) => {
   const payload = route.params;
   const user = useSelector(state => state).user;
+  const dispatch = useDispatch();
   const [photo, setPhoto] = useState('');
 
   const [categoryList, setCategoryList] = useState([
@@ -84,6 +99,7 @@ const TulisBerita = ({navigation, route}) => {
     checkValue(form.image, 'foto');
   };
   const responseSuccess = () => {
+    dispatch({type: 'SET_LOADING', value: false});
     notifications(
       'success',
       'berita sukses dibuat, silahkan tunggu verifikasi admin',
@@ -92,6 +108,7 @@ const TulisBerita = ({navigation, route}) => {
   };
   const onSave = async () => {
     await checkValueNull();
+    dispatch({type: 'SET_LOADING', value: true});
     const dataEvent = {
       ...form,
       image: photo,
@@ -100,6 +117,7 @@ const TulisBerita = ({navigation, route}) => {
       api.updateEvent(dataEvent, payload._id).then(
         res => responseSuccess(),
         err => {
+          dispatch({type: 'SET_LOADING', value: false});
           const message = JSON.parse(err.response.request._response).message;
           console.log('isi errr :', dataEvent);
           notifications('danger', message);
@@ -109,6 +127,7 @@ const TulisBerita = ({navigation, route}) => {
       api.postEvent(dataEvent).then(
         res => responseSuccess(),
         err => {
+          dispatch({type: 'SET_LOADING', value: false});
           const message = JSON.parse(err.response.request._response).data[0]
             .msg;
           console.log('isi errr :', message);
@@ -291,5 +310,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.secondGrey,
-  }
+  },
 });

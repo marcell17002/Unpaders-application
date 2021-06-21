@@ -1,17 +1,32 @@
-import { BASE_URL_ROOT } from '@env';
-import { Picker } from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
-import { useDispatch } from 'react-redux';
-import { Gap, Inputs } from '../../components/atoms';
-import { Headers } from '../../components/moleculs';
-import { api } from '../../services';
-import { checkValue, colors, destroyData, filterData, fonts, notifications } from '../../utils';
+import {BASE_URL_ROOT} from '@env';
+import {Picker} from 'native-base';
+import React, {useEffect, useState} from 'react';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {useDispatch} from 'react-redux';
+import {Gap, Inputs} from '../../components/atoms';
+import {Headers} from '../../components/moleculs';
+import {api} from '../../services';
+import {
+  checkValue,
+  colors,
+  destroyData,
+  filterData,
+  fonts,
+  notifications,
+} from '../../utils';
 
 const UbahProfile = ({navigation, route}) => {
   const payload = route.params;
-  const [profile, setProfile] = useState({...payload, password: ''});
+  delete payload['password'];
+  const [profile, setProfile] = useState({...payload});
   const pathImage = `${BASE_URL_ROOT}${profile.image}`;
   const [photo, setPhoto] = useState(pathImage);
   const dispatch = useDispatch();
@@ -40,16 +55,16 @@ const UbahProfile = ({navigation, route}) => {
     {label: 'Administrasi Bisnis', faculty: 'F. Fisip'},
     {label: 'Agribisnis', faculty: 'F. Pertanian'},
     {label: 'Agroteknologi', faculty: 'F. Pertanian'},
-    {label: 'Aktuaria',  faculty: 'F. MIPA'},
+    {label: 'Aktuaria', faculty: 'F. MIPA'},
     {label: 'Akuntansi', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Antropologi', faculty: 'F. Fisip'},
-    {label: 'Biologi',  faculty: 'F. MIPA'},
+    {label: 'Biologi', faculty: 'F. MIPA'},
     {label: 'Bisnis Digital', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Ekonomi Islam', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Ekonomi Pembangunan', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Farmasi', faculty: 'F. Farmasi'},
-    {label: 'Fisika',  faculty: 'F. MIPA'},
-    {label: 'Geofisika',  faculty: 'F. MIPA'},
+    {label: 'Fisika', faculty: 'F. MIPA'},
+    {label: 'Geofisika', faculty: 'F. MIPA'},
     {label: 'Geologi', faculty: 'F. Teknik Geologi'},
     {label: 'Hubungan Internasional', faculty: 'F. Fisip'},
     {label: 'Hubungan Masyarakat', faculty: 'F. Fikom'},
@@ -65,10 +80,10 @@ const UbahProfile = ({navigation, route}) => {
     {label: 'Kedokteran Hewan', faculty: 'F. Kedokteran'},
     {label: 'Keperawatan', faculty: 'F. Keperawatan'},
     {label: 'Kesejahteraan Sosial', faculty: 'F. Fisip'},
-    {label: 'Kimia',  faculty: 'F. MIPA'},
+    {label: 'Kimia', faculty: 'F. MIPA'},
     {label: 'Manajemen', faculty: 'F. Ekonomi dan Bisnis'},
     {label: 'Manajemen Komunikasi', faculty: 'F. Fikom'},
-    {label: 'Matematika',  faculty: 'F. MIPA'},
+    {label: 'Matematika', faculty: 'F. MIPA'},
     {label: 'Perikanan', faculty: 'F. PIK'},
     {label: 'Perpustakaan', faculty: 'F. Fikom'},
     {label: 'Peternakan', faculty: 'F. Peternakan'},
@@ -81,10 +96,10 @@ const UbahProfile = ({navigation, route}) => {
     {label: 'Sastra Perancis', faculty: 'F. Ilmu Budaya'},
     {label: 'Sastra Rusia', faculty: 'F. Ilmu Budaya'},
     {label: 'Sastra Sunda', faculty: 'F. Ilmu Budaya'},
-    {label: 'Statistika',  faculty: 'F. MIPA'},
+    {label: 'Statistika', faculty: 'F. MIPA'},
     {label: 'Sosiologi', faculty: 'F. Fisip'},
-    {label: 'Teknik Elektro',  faculty: 'F. MIPA'},
-    {label: 'Teknik Informatika',  faculty: 'F. MIPA'},
+    {label: 'Teknik Elektro', faculty: 'F. MIPA'},
+    {label: 'Teknik Informatika', faculty: 'F. MIPA'},
     {label: 'Teknik Pertanian', faculty: 'F. TIP'},
     {label: 'Teknologi Pangan', faculty: 'F. TIP'},
     {label: 'Televisi dan Film', faculty: 'F. Fikom'},
@@ -139,7 +154,6 @@ const UbahProfile = ({navigation, route}) => {
 
   const checkValueNull = () => {
     checkValue(profile.email, 'email');
-    checkValue(profile.password, 'password');
     checkValue(profile.name, 'nama');
     checkValue(profile.phone, 'nomor telepon');
     checkValue(profile.nim, 'npm');
@@ -150,23 +164,20 @@ const UbahProfile = ({navigation, route}) => {
   };
   const onSave = async () => {
     await checkValueNull();
+    dispatch({type: 'SET_LOADING', value: true});
     const dataEditProfile = {...profile, image: profileImage};
     api.updateProfileUser(dataEditProfile, profile._id).then(
       async res => {
-        notifications(
-          'success',
-          'data profile berhasil diubah silahkan login kembali',
-        );
-        destroyData();
-        navigation.replace('Masuk');
+        dispatch({type: 'SET_LOADING', value: false});
+        notifications('success', 'data profile berhasil diubah');
+        navigation.goBack();
       },
-      err => console.log('isi data :', dataEditProfile, err),
+      err => {
+        dispatch({type: 'SET_LOADING', value: true});
+        console.log('isi data :', dataEditProfile, profile._id);
+      },
     );
   };
-  const onLoadingProdi = () => {
-    dispatch({type: 'SET_LOADING', value: false});
-  };
-
   return (
     <View>
       <View style={styles.contHeader}>
@@ -201,14 +212,6 @@ const UbahProfile = ({navigation, route}) => {
               title="Email"
               placeholder="Masukkan Email"
             />
-            {/* <Gap height={24} />
-            <Inputs
-              value={profile.password}
-              secure
-              onChangeText={value => changeText('password', value)}
-              title="Password"
-              placeholder="Masukkan Password"
-            /> */}
             <Gap height={24} />
             <Inputs
               value={profile.name}

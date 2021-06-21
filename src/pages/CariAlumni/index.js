@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { ListAlumni, NotFound, SearchHeader } from '../../components/moleculs';
-import { colors, filterData } from '../../utils';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {ListAlumni, NotFound, SearchHeader} from '../../components/moleculs';
+import {colors, filterData} from '../../utils';
 
 const CariAlumni = ({navigation, route}) => {
   const payload = route.params;
@@ -13,6 +13,7 @@ const CariAlumni = ({navigation, route}) => {
   const [input, setInput] = useState('');
 
   useEffect(() => {
+    console.log('isi payload data ', payload);
     const unsubscribe = navigation.addListener('focus', async () => {
       if (payload.faculty && payload.prodi) {
         const dataFaculty = await filterData(
@@ -26,14 +27,14 @@ const CariAlumni = ({navigation, route}) => {
           payload.prodi,
         );
         console.log('all ', filteredData);
-        return await setAlumniTemp(filteredData);
+        return await setAlumniTemp(filteredData), await setAlumni(filteredData);
       } else if (payload.prodi.length === 0) {
         const filteredData = await filterData(
           alumniProfile,
           'faculty',
           payload.faculty,
         );
-        return await setAlumniTemp(filteredData);
+        return await setAlumniTemp(filteredData), await setAlumni(filteredData);
       } else if (payload.faculty.length === 0) {
         const filteredData = await filterData(
           alumniProfile,
@@ -41,7 +42,7 @@ const CariAlumni = ({navigation, route}) => {
           payload.prodi,
         );
         console.log('prodi', filteredData);
-        return await setAlumniTemp(filteredData);
+        return await setAlumniTemp(filteredData), await setAlumni(filteredData);
       } else setAlumniTemp([]);
     });
     return unsubscribe;
@@ -49,13 +50,13 @@ const CariAlumni = ({navigation, route}) => {
 
   const searchFilter = value => {
     setInput(value);
-    const newData = alumni.filter(item => {
+    const newData = alumniTemp.filter(item => {
       const itemData = `${item.name.toUpperCase()}`;
       const textData = value.toUpperCase();
 
       return itemData.indexOf(textData) > -1;
     });
-    setAlumniTemp(newData);
+    setAlumni(newData);
   };
   return (
     <View style={styles.page}>
@@ -65,14 +66,14 @@ const CariAlumni = ({navigation, route}) => {
         placeholder="Cari Alumni disini ..."
         onPressBack={() => navigation.navigate('TemukanAlumni')}
         onPressMiddle={() => searchFilter(input)}
-        onPressRight={() => navigation.navigate('FilterPage')}
+        less
       />
       <View style={styles.body}>
         {alumniTemp.length < 1 ? (
           <NotFound type="Search" />
         ) : (
           <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-            {alumniTemp.map(item => {
+            {alumni.map(item => {
               return (
                 <ListAlumni
                   key={item._id}
@@ -84,9 +85,7 @@ const CariAlumni = ({navigation, route}) => {
                   onPressImage={() =>
                     navigation.navigate('ProfileAuthor', item)
                   }
-                  onPressBody={() =>
-                    navigation.navigate('RuangObrolan', item)
-                  }
+                  onPressBody={() => navigation.navigate('RuangObrolan', item)}
                 />
               );
             })}

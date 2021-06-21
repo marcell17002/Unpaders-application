@@ -18,8 +18,8 @@ const Masuk = ({navigation}) => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useForm({
-    email: 'alumni@gmail.com',
-    password: 'alumni123',
+    email: 'malik@gmail.com',
+    password: 'malik123',
   });
   const checkValueNull = () => {
     checkValue(form.email, 'email');
@@ -27,9 +27,10 @@ const Masuk = ({navigation}) => {
   };
   const onLog = async () => {
     await checkValueNull();
-
+    dispatch({type: 'SET_LOADING', value: true});
     api.postLogIn(form).then(
       async res => {
+        dispatch({type: 'SET_LOADING', value: false});
         const status = res.data.status;
         notifications('success', 'login berhasil');
         console.log('data sucess', res.data);
@@ -41,6 +42,7 @@ const Masuk = ({navigation}) => {
         else navigation.replace('MainAppCollege');
       },
       err => {
+        dispatch({type: 'SET_LOADING', value: false});
         notifications('danger', 'email atau kata sandi salah');
       },
     );
