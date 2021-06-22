@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { Headers, ListAlumni } from '../../components/moleculs';
-import { api } from '../../services';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {Headers, ListAlumni} from '../../components/moleculs';
+import {api} from '../../services';
 
 const UmumList = ({navigation}) => {
-  // const [alumni, setAlumni] = useState([]);
-
-  // useEffect(() => {
-  //   api.getUserByCategory('status', 'alumni').then(
-  //     res => setAlumni(res.data),
-  //     err => console.log('isi err : ', err),
-  //   );
-  // }, []);
   const [alumni, setAlumni] = useState([]);
   const dispatch = useDispatch();
   useEffect(async () => {
@@ -48,7 +40,7 @@ const UmumList = ({navigation}) => {
         <View style={styles.page}>
           {alumni.map(item => {
             return (
-              <ListAlumni 
+              <ListAlumni
                 disabled
                 key={item._id}
                 nama={item.name}

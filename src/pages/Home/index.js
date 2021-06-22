@@ -1,11 +1,16 @@
 import moment from 'moment';
 import 'moment/locale/id';
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { Event, Headers, Kategori, SubCategoryHome } from '../../components/moleculs';
-import { api } from '../../services';
-import { colors, filterData, fonts, notifications } from '../../utils';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {
+  Event,
+  Headers,
+  Kategori,
+  SubCategoryHome,
+} from '../../components/moleculs';
+import {api} from '../../services';
+import {colors, filterData, fonts, getData, notifications} from '../../utils';
 
 const Home = ({navigation}) => {
   const [event, setEvent] = useState([]);
@@ -13,9 +18,9 @@ const Home = ({navigation}) => {
   const [subCategory, setSubCategory] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const dispatch = useDispatch();
-  moment.locale('id')
+  moment.locale('id');
 
-  useEffect(() => {
+  useEffect(async () => {
     api.getEventByCategory('status', 'published').then(
       async res => {
         const eventData = res.data;

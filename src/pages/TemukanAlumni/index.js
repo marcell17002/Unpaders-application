@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { Headers, ListAlumni } from '../../components/moleculs';
-import { api } from '../../services';
-import { colors } from '../../utils';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {Headers, ListAlumni} from '../../components/moleculs';
+import {api} from '../../services';
+import {colors} from '../../utils';
 
 const TemukanAlumni = ({navigation}) => {
   const [alumni, setAlumni] = useState([]);
@@ -49,9 +49,6 @@ const TemukanAlumni = ({navigation}) => {
                 fakultas={item.faculty}
                 jurusan={item.prodi}
                 angkatan={item.level}
-                onPressImage={() =>
-                  navigation.navigate('ProfileAuthor', item)
-                }
                 onPressBody={() => navigation.navigate('RuangObrolan', item)}
               />
             );

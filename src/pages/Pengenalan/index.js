@@ -1,10 +1,18 @@
-import { BASE_IMG } from '@env';
-import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { Buttons, Gap, Link } from '../../components/atoms';
-import { api } from '../../services';
-import { colors, fonts, randomId, randomName, requestToken, storeData } from '../../utils';
+import {BASE_IMG} from '@env';
+import React, {useEffect} from 'react';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {Buttons, Gap, Link} from '../../components/atoms';
+import {api} from '../../services';
+import {
+  colors,
+  fonts,
+  getData,
+  randomId,
+  randomName,
+  requestToken,
+  storeData,
+} from '../../utils';
 
 const Pengenalan = ({navigation}) => {
   const dispatch = useDispatch();

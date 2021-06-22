@@ -135,6 +135,8 @@ const FormDaftar = ({navigation, route}) => {
   });
 
   const checkValueNull = () => {
+    if (form.prodi === 'Pilih Prodi ...')
+      return notifications('warning', 'prodi tidak boleh kosong');
     checkValue(form.email, 'email');
     checkValue(form.password, 'password');
     checkValue(form.name, 'nama');

@@ -8,6 +8,8 @@ const CariAlumni = ({navigation, route}) => {
   const payload = route.params;
   console.log('isi payload filter ', payload);
   const alumniProfile = useSelector(state => state).alumni;
+  const user = useSelector(state => state).user;
+  const status = user.status;
   const [alumni, setAlumni] = useState(alumniProfile);
   const [alumniTemp, setAlumniTemp] = useState(alumniProfile);
   const [input, setInput] = useState('');
@@ -64,7 +66,11 @@ const CariAlumni = ({navigation, route}) => {
         value={input}
         onChangeText={value => searchFilter(value)}
         placeholder="Cari Alumni disini ..."
-        onPressBack={() => navigation.navigate('TemukanAlumni')}
+        onPressBack={() => {
+          if (status === 'umum')
+            navigation.navigate('MainApp', {screen: 'UmumList'});
+          else navigation.navigate('TemukanAlumni');
+        }}
         onPressMiddle={() => searchFilter(input)}
         less
       />
@@ -82,6 +88,7 @@ const CariAlumni = ({navigation, route}) => {
                   fakultas={item.faculty}
                   jurusan={item.prodi}
                   angkatan={item.level}
+                  disabled={status === 'umum' ? true : false}
                   onPressImage={() =>
                     navigation.navigate('ProfileAuthor', item)
                   }

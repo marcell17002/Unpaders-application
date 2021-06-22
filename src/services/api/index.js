@@ -78,7 +78,8 @@ const getDataAlumni = id => get(`alumni/${id}`, null);
 const postRegister = data => post('user/register', data, null);
 const postLogIn = data => post('user/login', data, null);
 const postLikedEvent = data => post('likedEvent', data, null);
-const postNotifications = async data => post('pushNotifications', data);
+const postNotifications = async data =>
+  post('pushNotifications', data, await config.withToken());
 const postEvent = async data => post('event', data, await config.withToken());
 const postChat = async data => post('chat', data, null);
 const postHistoryChat = async data =>
@@ -98,8 +99,7 @@ const updatePassword = async (data, id) =>
 
 //delete
 const deleteLikedEvent = async id => drop(`likedEvent/${id}`, null);
-const deleteRefreshToken = async id =>
-  drop(`user/logout/${id}`, await config.withToken());
+const deleteRefreshToken = async id => drop(`user/logout/${id}`, null);
 
 export const api = {
   getEvent,

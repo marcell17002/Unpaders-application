@@ -1,28 +1,27 @@
-import { BASE_URL_ROOT } from '@env';
+import {BASE_URL_ROOT} from '@env';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors, fonts } from '../../../utils';
-import { Gap } from '../../atoms';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {colors, fonts} from '../../../utils';
+import {Gap} from '../../atoms';
 
 const ListAlumni = ({
   nama,
   fakultas,
   jurusan,
   angkatan,
-  onPressImage,
   onPressBody,
   picture,
   disabled,
 }) => {
   return (
     <View style={styles.page}>
-      <TouchableOpacity onPress={onPressImage}>
-        <Image
-          style={styles.avatar}
-          source={{uri: `${BASE_URL_ROOT}${picture}`}}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={disabled ? null : onPressBody} disabled={disabled}>
+      <Image
+        style={styles.avatar}
+        source={{uri: `${BASE_URL_ROOT}${picture}`}}
+      />
+      <TouchableOpacity
+        onPress={disabled ? null : onPressBody}
+        disabled={disabled}>
         <Text style={styles.namaAlumni}>{nama}</Text>
         <Gap height={8} />
         <View style={styles.secData}>

@@ -69,7 +69,7 @@ const TulisBerita = ({navigation, route}) => {
   const filterDataSubCategory = async props => {
     await setSubCategoryTemp([]);
     filterData(subCategoryList, 'category', props).then(async res => {
-      res.unshift({subCategory: 'Pilih Sub Kategori .. ', category: ''});
+      await res.unshift({subCategory: 'Pilih Sub Kategori .. ', category: ''});
       await setSubCategoryTemp(res);
       await setForm('category', props);
     });

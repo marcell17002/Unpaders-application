@@ -18,8 +18,8 @@ const Masuk = ({navigation}) => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useForm({
-    email: 'malik@gmail.com',
-    password: 'malik123',
+    email: 'baby@gmail.com',
+    password: 'baby123',
   });
   const checkValueNull = () => {
     checkValue(form.email, 'email');
@@ -31,10 +31,10 @@ const Masuk = ({navigation}) => {
     api.postLogIn(form).then(
       async res => {
         dispatch({type: 'SET_LOADING', value: false});
+        dispatch({type: 'SET_PROFILE', value: res.data});
         const status = res.data.status;
         notifications('success', 'login berhasil');
         console.log('data sucess', res.data);
-        dispatch({type: 'SET_PROFILE', value: res.data});
         requestToken(res.data.id);
         await storeData('user', res.data);
         if (status === 'alumni') navigation.replace('MainAppGraduated');
