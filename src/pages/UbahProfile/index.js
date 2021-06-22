@@ -113,13 +113,23 @@ const UbahProfile = ({navigation, route}) => {
       payload.faculty,
     );
     await setProdiTemp(filteredData);
+    await defaultRenderProdi();
   }, []);
 
+  const defaultRenderProdi = () => {
+    filterData(prodiList, 'faculty', 'F. Ekonomi dan Bisnis').then(
+      async res => {
+        await setProdiTemp(res);
+        setForm('faculty', 'F. Ekonomi dan Bisnis');
+      },
+    );
+  };
   const filterDataProdi = async props => {
     await setProdiTemp([]);
     filterData(prodiList, 'faculty', props).then(async res => {
       dispatch({type: 'SET_LOADING', value: true});
       setIsLoading(false);
+      res.unshift({label: 'Silahkan Pilih Prodi...', faculty: ''});
       await setProdiTemp(res);
       changeText('prodi', res[0].label);
       changeText('faculty', props);
@@ -268,9 +278,13 @@ const UbahProfile = ({navigation, route}) => {
                   {isLoading === true ? (
                     <Picker.Item label={payload.prodi} value={payload.prodi} />
                   ) : (
-                    prodiTemp.map(item => {
+                    prodiTemp.map((item, index) => {
                       return (
-                        <Picker.Item label={item.label} value={item.label} />
+                        <Picker.Item
+                          key={index}
+                          label={item.label}
+                          value={item.label}
+                        />
                       );
                     })
                   )}

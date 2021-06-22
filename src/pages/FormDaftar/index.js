@@ -103,7 +103,6 @@ const FormDaftar = ({navigation, route}) => {
   const defaultRenderProdi = () => {
     filterData(prodiList, 'faculty', 'F. Ekonomi dan Bisnis').then(
       async res => {
-        res.unshift({label: 'Pilih Prodi .. ', faculty: ''});
         await setProdiTemp(res);
         setForm('faculty', 'F. Ekonomi dan Bisnis');
       },
@@ -114,7 +113,6 @@ const FormDaftar = ({navigation, route}) => {
     console.log('isi data : ', props);
     await setProdiTemp([]);
     filterData(prodiList, 'faculty', props).then(async res => {
-      res.unshift({label: 'Pilih Prodi .. ', faculty: ''});
       await setProdiTemp(res);
       setForm('faculty', props);
     });
@@ -278,10 +276,17 @@ const FormDaftar = ({navigation, route}) => {
             <View style={styles.contPicker}>
               <Picker
                 style={styles.contText}
-                selectedValue={prodiTemp}
+                selectedValue={form.prodi}
                 onValueChange={value => setForm('prodi', value)}>
-                {prodiTemp.map(item => {
-                  return <Picker.Item label={item.label} value={item.label} />;
+                <Picker.Item label="Silahkan Pilih Prodi..." value="0" />
+                {prodiTemp.map((item, index) => {
+                  return (
+                    <Picker.Item
+                      key={index}
+                      label={item.label}
+                      value={item.label}
+                    />
+                  );
                 })}
               </Picker>
             </View>

@@ -28,6 +28,7 @@ const TulisBerita = ({navigation, route}) => {
   const user = useSelector(state => state).user;
   const dispatch = useDispatch();
   const [photo, setPhoto] = useState('');
+  const [val, setVal] = useState(0);
 
   const [categoryList, setCategoryList] = useState([
     {category: 'Aktual'},
@@ -60,7 +61,6 @@ const TulisBerita = ({navigation, route}) => {
   const defaultRenderSubCategory = async () => {
     await setSubCategoryTemp([]);
     filterData(subCategoryList, 'category', 'Aktual').then(async res => {
-      res.unshift({subCategory: 'Pilih Sub Kategori .. ', category: ''});
       await setSubCategoryTemp(res);
       await setForm('category', 'Aktual');
     });
@@ -69,7 +69,6 @@ const TulisBerita = ({navigation, route}) => {
   const filterDataSubCategory = async props => {
     await setSubCategoryTemp([]);
     filterData(subCategoryList, 'category', props).then(async res => {
-      await res.unshift({subCategory: 'Pilih Sub Kategori .. ', category: ''});
       await setSubCategoryTemp(res);
       await setForm('category', props);
     });
@@ -148,6 +147,11 @@ const TulisBerita = ({navigation, route}) => {
       console.log('isi event :', dataEvent);
     }
   };
+  const handleChange = val => {
+    if (val !== 0) {
+      setVal(val);
+    }
+  };
   return (
     <View>
       <View>
@@ -215,7 +219,10 @@ const TulisBerita = ({navigation, route}) => {
                 <Picker
                   style={styles.contText}
                   selectedValue={form.category}
-                  onValueChange={value => filterDataSubCategory(value)}>
+                  onValueChange={value => {
+                    setVal(0);
+                    filterDataSubCategory(value);
+                  }}>
                   {categoryList.map(item => {
                     return (
                       <Picker.Item
@@ -233,11 +240,13 @@ const TulisBerita = ({navigation, route}) => {
               <View style={styles.contPicker}>
                 <Picker
                   style={styles.contText}
-                  selectedValue={''}
+                  selectedValue={form.subCategory}
                   onValueChange={value => setForm('subCategory', value)}>
-                  {subCategoryTemp.map(item => {
+                  <Picker.Item label="Silahkan Pilih sub-kategori..." value="0" />
+                  {subCategoryTemp.map((item, index) => {
                     return (
                       <Picker.Item
+                        key={index}
                         label={item.subCategory}
                         value={item.subCategory}
                       />
