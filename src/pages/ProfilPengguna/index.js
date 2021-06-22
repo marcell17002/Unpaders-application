@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { Gap } from '../../components/atoms';
-import { Headers, ProfileUser } from '../../components/moleculs';
-import { api } from '../../services';
-import { colors, notifications } from '../../utils';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {Gap} from '../../components/atoms';
+import {Headers, ProfileUser} from '../../components/moleculs';
+import {api} from '../../services';
+import {colors, notifications} from '../../utils';
 
 const ProfilPengguna = ({navigation}) => {
   const user = useSelector(state => state).user;
   const [profile, setProfile] = useState([]);
 
   useEffect(() => {
-    api.getProfileUser(user.id).then(
-      res => {
-        setProfile(res.data[0]);
-        console.log('image : ', res.data[0].image);
-      },
-      err => notifications('danger', 'anda tidak terknoneksi ke internet'),
-    );
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      api.getProfileUser(user.id).then(
+        res => {
+          setProfile(res.data[0]);
+          console.log('image : ', res.data[0].image);
+        },
+        err => notifications('danger', 'anda tidak terknoneksi ke internet'),
+      );
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={styles.page}>

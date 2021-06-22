@@ -6,6 +6,7 @@ import {useDispatch} from 'react-redux';
 import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
 import {api} from '../../services';
 import {
+  checkSameData,
   checkValue,
   colors,
   filterData,
@@ -13,6 +14,7 @@ import {
   notifications,
   useForm,
 } from '../../utils';
+import checkAlumniExist from '../../utils/checkAlumniExist';
 import checkStudentExist from '../../utils/checkStudentExist';
 
 const FormDaftar = ({navigation, route}) => {
@@ -92,6 +94,7 @@ const FormDaftar = ({navigation, route}) => {
     {label: 'T. Industri Pertanian', faculty: 'F. TIP'},
   ]);
   const [prodiTemp, setProdiTemp] = useState([]);
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   useEffect(async () => {
     await setProdiTemp(prodiList);
@@ -134,27 +137,44 @@ const FormDaftar = ({navigation, route}) => {
       status === 'alumni' ? checkValue(form.graduated, 'tahun lulus') : null;
     }
   };
+  const postData = async data => {
+    await api.postRegister(data).then(
+      res => {
+        notifications('success', 'registrasi berhasil silahkan login');
+        navigation.replace('Masuk');
+      },
+      err => {
+        const message = JSON.parse(err.response.request._response).message;
+        console.log('isi errr :', JSON.parse(err.response.request._response));
+        notifications('danger', message);
+      },
+    );
+  };
   const onSave = async () => {
     await checkValueNull();
-    console.log('hello ', form);
-    if (form.status === 'mahasiswa')
-      await checkStudentExist(form.prodi, form.level, form.nim).then(
-        res => {
-          console.log('success');
-          api.postRegister(form).then(
+    await checkSameData(form.password, confirmPassword, 'password').then(
+      async res => {
+        if (form.status === 'mahasiswa')
+          await checkStudentExist(form.prodi, form.level, form.nim).then(
             res => {
-              notifications('success', 'registrasi berhasil silahkan login');
-              navigation.replace('Masuk');
+              postData(form);
+            },
+            err => notifications('warning', err.message),
+          );
+        else {
+          await checkAlumniExist(form.nim).then(
+            res => {
+              postData(form);
             },
             err => {
-              const message = JSON.parse(err.response.request._response).message;
-              console.log('isi errr :', JSON.parse(err.response.request._response));
-              notifications('danger', message);
+              notifications('warning', err.message);
             },
           );
-        },
-        err => notifications('warning', err.message),
-      );
+        }
+      },
+      err => {},
+    );
+    console.log('hello ', form);
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -190,9 +210,9 @@ const FormDaftar = ({navigation, route}) => {
           <Gap height={24} />
           <Inputs
             title="Konfirmasi Kata Sandi"
-            value={form.password}
+            value={confirmPassword}
             secure
-            onChangeText={value => setForm('password', value)}
+            onChangeText={value => setConfirmPassword(value)}
             placeholder="Konfirmasi Kata Sandi"
           />
           <Gap height={24} />

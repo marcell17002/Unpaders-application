@@ -10,6 +10,7 @@ const mainColors = {
   greyLightest: '#F2F2F2',
   black: '#4D4D4D',
   black2: '#2E2E2E',
+  black3: 'rgba(0,0,0,0.3)',
   white: '#ffffff',
   red: '#CC0C09',
   green: '#27AE60',
@@ -23,13 +24,14 @@ export const colors = {
   primaryBlack: mainColors.black,
   backgroundgrey: mainColors.greyLightest,
   primarygrey: mainColors.grey,
+  secondaryBlack: mainColors.black2,
 
   text: {
     primary: mainColors.black,
     title: mainColors.black2,
     primaryBlue: mainColors.blue,
     secondary: mainColors.grey,
-    tertiary: mainColors.grey, 
+    tertiary: mainColors.grey,
     quartenary: mainColors.yellowLight,
     primdonker1: mainColors.donker1,
     primdonker2: mainColors.donker2,
@@ -40,17 +42,17 @@ export const colors = {
   },
   button: {
     primary: {
-      background: mainColors.blue, 
-      text: mainColors.white, 
+      background: mainColors.blue,
+      text: mainColors.white,
     },
-    primaryOutline: { 
+    primaryOutline: {
       background: mainColors.white,
       text: mainColors.blue,
       outline: mainColors.blue,
     },
     secondaryOutline: {
       background: mainColors.white,
-      blue: mainColors.blue, 
+      blue: mainColors.blue,
     },
     dropdown: {
       passive: mainColors.greyLightest,
@@ -62,4 +64,5 @@ export const colors = {
     text: mainColors.greyLight,
     outline: mainColors.greylighter,
   },
+  loadingBackground: mainColors.black3,
 };
