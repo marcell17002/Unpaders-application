@@ -54,14 +54,25 @@ const TulisBerita = ({navigation, route}) => {
   const [subCategoryTemp, setSubCategoryTemp] = useState([]);
 
   useEffect(async () => {
-    await setSubCategoryTemp(subCategoryList);
+    await defaultRenderSubCategory();
   }, []);
 
+  const defaultRenderSubCategory = async () => {
+    await setSubCategoryTemp([]);
+    filterData(subCategoryList, 'category', 'Aktual').then(async res => {
+      res.unshift({subCategory: 'Pilih Sub Kategori .. ', category: ''});
+      await setSubCategoryTemp(res);
+      await setForm('category', 'Aktual');
+    });
+  };
+
   const filterDataSubCategory = async props => {
-    const filteredData = await filterData(subCategoryList, 'category', props);
-    await setSubCategoryTemp(filteredData);
-    await setForm('subCategory', filteredData[1].category);
-    await setForm('category', props);
+    await setSubCategoryTemp([]);
+    filterData(subCategoryList, 'category', props).then(async res => {
+      res.unshift({subCategory: 'Pilih Sub Kategori .. ', category: ''});
+      await setSubCategoryTemp(res);
+      await setForm('category', props);
+    });
   };
   const [form, setForm] = useForm({
     title: payload ? payload.title : '',

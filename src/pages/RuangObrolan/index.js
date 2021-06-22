@@ -1,9 +1,21 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { ChatItem, Headers, InputChat, NotFound } from '../../components/moleculs';
-import { api, Fire } from '../../services';
-import { colors, fonts, getDateName, getTime, notifications, useChat } from '../../utils';
+import React, {useEffect, useState, useRef} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  ChatItem,
+  Headers,
+  InputChat,
+  NotFound,
+} from '../../components/moleculs';
+import {api, Fire} from '../../services';
+import {
+  colors,
+  fonts,
+  getDateName,
+  getTime,
+  notifications,
+  useChat,
+} from '../../utils';
 
 const RuangObrolan = ({navigation, route}) => {
   var flag = false;
@@ -118,7 +130,9 @@ const RuangObrolan = ({navigation, route}) => {
     api.postNotifications(data);
   };
   const onSend = async () => {
-    if (input.length < 1) return notifications('info', 'masukan pesan anda');
+    if (input.length < 1) {
+      return notifications('info', 'masukan pesan anda');
+    }
     const data = {
       chatId: chatId,
       category: 'chat',
@@ -143,7 +157,7 @@ const RuangObrolan = ({navigation, route}) => {
     );
     await findHistory(chatId);
   };
-  
+
   return (
     <View style={styles.page}>
       <View>
@@ -163,12 +177,14 @@ const RuangObrolan = ({navigation, route}) => {
           <ScrollView
             showsVerticalScrollIndicator={false}
             ref={scrollViewRef}
-            onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+            onContentSizeChange={() =>
+              scrollViewRef.current.scrollToEnd({animated: true})
+            }
             style={styles.contText}>
             {messages.map((item, index) => {
               var content = item.allChat.chatText;
               var date = item.allChat.dateChat;
-              if (index === 0)
+              if (index === 0) {
                 return (
                   <>
                     <Text style={styles.chatDate}>{date}</Text>
@@ -179,6 +195,7 @@ const RuangObrolan = ({navigation, route}) => {
                     />
                   </>
                 );
+              }
               return (
                 <>
                   <ChatItem

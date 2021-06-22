@@ -81,50 +81,50 @@ const Chat = ({navigation, route}) => {
         <Headers title="CHAT" type="main" />
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} >
-      <View>
-        <ListButton
-          namaTombol="Temukan Alumni"
-          onPress={() => navigation.navigate('TemukanAlumni')}
-        />
-      </View>
-      <View style={styles.ghap}>
-        <Gap height={12} />
-        <Text style={styles.textGap}>CHAT</Text>
-        <Gap height={12} />
-      </View>
-      {history.length < 1 && historyTemp.length < 1 ? (
-        <View style={styles.body}>
-          <NotFound title="Anda belum memiliki percakapan dengan siapapun" />
-        </View>
-      ) : (
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          {historyTemp.reverse().map(item => {
-            return (
-              <ListAlumniChat
-                key={item._id}
-                nama={item.name}
-                isBadge={item.status}
-                picture={item.image}
-                lastText={item.lastChat}
-                onPress={() => navigation.navigate('RuangObrolan', item)}
-              />
-            );
-          })}
-          {history.reverse().map(item => {
-            return (
-              <ListAlumniChat
-                key={item._id}
-                nama={item.name}
-                picture={item.image}
-                lastText={item.lastChat}
-                onPress={() => navigation.navigate('RuangObrolan', item)}
-              />
-            );
-          })}
+          <ListButton
+            namaTombol="Temukan Alumni"
+            onPress={() => navigation.navigate('TemukanAlumni')}
+          />
         </View>
-      )}
-    </ScrollView>
+        <View style={styles.ghap}>
+          <Gap height={12} />
+          <Text style={styles.textGap}>CHAT</Text>
+          <Gap height={12} />
+        </View>
+        {history.length < 1 && historyTemp.length < 1 ? (
+          <View style={styles.body}>
+            <NotFound title="Anda belum memiliki percakapan dengan siapapun" />
+          </View>
+        ) : (
+          <View>
+            {historyTemp.reverse().map(item => {
+              return (
+                <ListAlumniChat
+                  key={item._id}
+                  nama={item.name}
+                  isBadge={item.status}
+                  picture={item.image}
+                  lastText={item.lastChat}
+                  onPress={() => navigation.navigate('RuangObrolan', item)}
+                />
+              );
+            })}
+            {history.reverse().map(item => {
+              return (
+                <ListAlumniChat
+                  key={item._id}
+                  nama={item.name}
+                  picture={item.image}
+                  lastText={item.lastChat}
+                  onPress={() => navigation.navigate('RuangObrolan', item)}
+                />
+              );
+            })}
+          </View>
+        )}
+      </ScrollView>
     </View>
   );
 };

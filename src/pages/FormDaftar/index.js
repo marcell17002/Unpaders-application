@@ -97,16 +97,26 @@ const FormDaftar = ({navigation, route}) => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   useEffect(async () => {
-    await setProdiTemp(prodiList);
+    await defaultRenderProdi();
   }, []);
 
+  const defaultRenderProdi = () => {
+    filterData(prodiList, 'faculty', 'F. Ekonomi dan Bisnis').then(
+      async res => {
+        res.unshift({label: 'Pilih Prodi .. ', faculty: ''});
+        await setProdiTemp(res);
+        setForm('faculty', 'F. Ekonomi dan Bisnis');
+      },
+    );
+  };
+
   const filterDataProdi = async props => {
+    console.log('isi data : ', props);
     await setProdiTemp([]);
     filterData(prodiList, 'faculty', props).then(async res => {
+      res.unshift({label: 'Pilih Prodi .. ', faculty: ''});
       await setProdiTemp(res);
-      setForm('prodi', res[0].label);
       setForm('faculty', props);
-      console.log('isi data ga milih prodi ', res[0].label);
     });
   };
 
