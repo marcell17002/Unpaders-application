@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     width: '70%',
     textAlign: 'left',
-    paddingLeft: '5%',
+    paddingLeft: '-15%',
   },
   iconRight: {
     flexDirection: 'row',

@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   ghap: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 14,
+    paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: colors.text.grey,
   },
@@ -226,6 +226,6 @@ const styles = StyleSheet.create({
     color: colors.primaryBlack,
   },
   content: {
-    paddingHorizontal: 14,
+    paddingLeft: 20,
   },
 });

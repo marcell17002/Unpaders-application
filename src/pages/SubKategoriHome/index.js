@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Event, Headers } from '../../components/moleculs';
+import { Event, Headers, NotFound } from '../../components/moleculs';
 import { Gap } from '../../components/atoms';
 import moment from 'moment';
 import 'moment/locale/id';
@@ -21,6 +21,12 @@ const SubKategoriHome = ({navigation, route}) => {
       />
 
       <ScrollView style={styles.event} showsVerticalScrollIndicator={false}>
+        {event.length < 1 ? (
+          <View style={styles.body}>
+            <NotFound title="Tidak ada berita pada sub kategori ini" />
+          </View>
+        ) : (          
+        <View>
         <Gap height={24}/>
         {event.map(item => {
           return (
@@ -40,6 +46,8 @@ const SubKategoriHome = ({navigation, route}) => {
             />
           );
         })}
+        </View>
+        )}
       </ScrollView>
     </View>
   );
@@ -51,5 +59,8 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
+  },
+  body: {
+    marginVertical: '5%',
   },
 });

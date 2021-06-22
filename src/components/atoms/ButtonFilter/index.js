@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {colors, fonts} from '../../../utils';
 
 const ButtonFilter = ({title, onPress, active}) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPress} style={styles.button(active)}>
+      <TouchableHighlight onPress={onPress} style={styles.button(active)}
+      underlayColor= {colors.primary} Text={colors.primaryWhite}
+      activeOpacity={0.6}
+      >
         <Text style={styles.textButton(active)}>{title}</Text>
-      </TouchableOpacity>
+      </TouchableHighlight>
     </View>
   );
 };

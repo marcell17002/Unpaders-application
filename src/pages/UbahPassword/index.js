@@ -113,7 +113,7 @@ const UbahPassword = ({navigation}) => {
             secure
             onChangeText={value => setChangePassword('confirmPassword', value)}
             title="Konfirmasi Kata Sandi Baru"
-            placeholder="Masukkan kata sandi baru"
+            placeholder="Konfirmasi kata sandi baru"
           />
         </View>
       </ScrollView>
