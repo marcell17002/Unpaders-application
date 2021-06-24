@@ -21,34 +21,37 @@ const Home = ({navigation}) => {
   moment.locale('id');
 
   useEffect(async () => {
-    api.getEventByCategory('status', 'published').then(
-      async res => {
-        const eventData = res.data;
-        const data = [];
-        const promises = await Object.keys(eventData).map(async key => {
-          await api.getProfileUser(eventData[key].author).then(
-            async res => {
-              await data.push({
-                id: key,
-                name: res.data[0].name,
-                userImage: res.data[0].image,
-                ...eventData[key],
-              });
-            },
-            err => console.log('isi error alumni home:', err),
-          );
-        });
-        await Promise.all(promises);
-        const sortedData = await data.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setEvent(sortedData);
-        setTempEvent(sortedData);
-        setRecommendation(sortedData);
-      },
-      err => notifications('danger', 'no internet connection'),
-    );
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      api.getEventByCategory('status', 'published').then(
+        async res => {
+          const eventData = res.data;
+          const data = [];
+          const promises = await Object.keys(eventData).map(async key => {
+            await api.getProfileUser(eventData[key].author).then(
+              async res => {
+                await data.push({
+                  id: key,
+                  name: res.data[0].name,
+                  userImage: res.data[0].image,
+                  ...eventData[key],
+                });
+              },
+              err => console.log('isi error alumni home:', err),
+            );
+          });
+          await Promise.all(promises);
+          const sortedData = await data.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+          setEvent(sortedData);
+          setTempEvent(sortedData);
+          setRecommendation(sortedData);
+        },
+        err => notifications('danger', 'no internet connection'),
+      );
+    });
+    return unsubscribe;
+  }, [navigation]);
   const setRecommendation = data => {
     const recommendation = data.slice(0, 3);
     dispatch({type: 'SET_RECOMMENDATION', value: recommendation});

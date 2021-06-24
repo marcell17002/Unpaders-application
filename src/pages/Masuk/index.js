@@ -18,8 +18,8 @@ const Masuk = ({navigation}) => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useForm({
-    email: 'baby@gmail.com',
-    password: 'baby123',
+    email: '',
+    password: '',
   });
   const checkValueNull = () => {
     checkValue(form.email, 'email');
