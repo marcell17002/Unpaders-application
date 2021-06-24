@@ -129,7 +129,7 @@ const UbahProfile = ({navigation, route}) => {
     filterData(prodiList, 'faculty', props).then(async res => {
       dispatch({type: 'SET_LOADING', value: true});
       setIsLoading(false);
-      res.unshift({label: 'Silahkan Pilih Prodi...', faculty: ''});
+      res.unshift({label: 'Pilih Prodi...', faculty: ''});
       await setProdiTemp(res);
       changeText('prodi', res[0].label);
       changeText('faculty', props);

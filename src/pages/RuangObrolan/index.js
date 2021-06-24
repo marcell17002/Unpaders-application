@@ -215,6 +215,7 @@ const RuangObrolan = ({navigation, route}) => {
           setInput(value);
         }}
         onPress={() => onSend()}
+        placeholder='Tulis pesan...'
       />
     </View>
   );

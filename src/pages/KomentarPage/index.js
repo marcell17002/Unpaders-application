@@ -96,10 +96,9 @@ const KomentarPage = ({navigation, route}) => {
       <ScrollView showsVerticalScrollIndicator={false}
       ref={scrollViewRef}
       onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
-        <Gap height={24} />
-        
         {messages.length < 1 ? (
           <View style={styles.body}>
+            <Gap height={24} />
             <NotFound title="Belum ada komentar mengenai berita ini" />
           </View>
         ) : (
@@ -116,24 +115,12 @@ const KomentarPage = ({navigation, route}) => {
             })}
           </View>
         )}
-
-        {/* <View>
-          {messages.map(item => {
-            return (
-              <CommentUser
-                name={item.name}
-                image={item.image}
-                waktu={moment(item.createdAt).fromNow()}
-                komentar={item.allChat.chatText.chatContent}
-              />
-            );
-          })}
-        </View> */}
       </ScrollView>
       <InputChat
         value={input}
         onChangeText={value => setInput(value)}
         onPress={() => onSend()}
+        placeholder="Tulis komentar..."
       />
     </View>
   );

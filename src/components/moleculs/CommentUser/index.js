@@ -27,15 +27,17 @@ const CommentUser = ({image, name, waktu, komentar}) => {
 export default CommentUser;
 
 const styles = StyleSheet.create({
+  page: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.text.grey,
+  },
   contCommentUser: {
+    marginTop: 24,
     marginLeft: 24,
     marginRight: 20,
     backgroundColor: colors.primaryWhite,
     flexDirection: 'row',
     marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.text.grey,
-    paddingBottom: 16,
   },
   ketUser: {
     flexDirection: 'row',

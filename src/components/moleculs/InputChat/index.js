@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import { colors, fonts } from '../../../utils';
 import { Buttons } from '../../atoms';
 
-const InputChat = ({value, onChangeText, onPress}) => {
+const InputChat = ({value, onChangeText, onPress, placeholder}) => {
   return (
     <View style={styles.page}>
       <View style={styles.container}>
@@ -11,7 +11,7 @@ const InputChat = ({value, onChangeText, onPress}) => {
           style={styles.input}
           value={value}
           onChangeText={onChangeText}
-          placeholder="Tulis pesan..."></TextInput>
+          placeholder={placeholder}></TextInput>
         <Buttons
           onPress={onPress}
           status="button-icon"

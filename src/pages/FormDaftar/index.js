@@ -278,7 +278,7 @@ const FormDaftar = ({navigation, route}) => {
                 style={styles.contText}
                 selectedValue={form.prodi}
                 onValueChange={value => setForm('prodi', value)}>
-                <Picker.Item label="Silahkan Pilih Prodi..." value="0" />
+                <Picker.Item label="Pilih Prodi..." value="0" />
                 {prodiTemp.map((item, index) => {
                   return (
                     <Picker.Item

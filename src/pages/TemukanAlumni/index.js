@@ -28,8 +28,8 @@ const TemukanAlumni = ({navigation}) => {
     );
   }, []);
   return (
-    <View>
-      <View style={styles.contHeader}>
+    <View style={styles.page}>
+      <View>
         <Headers
           title="Temukan Alumni"
           type="sub-filter"
@@ -65,6 +65,5 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
-    marginBottom: '20%',
   },
 });
