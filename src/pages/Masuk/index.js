@@ -30,6 +30,7 @@ const Masuk = ({navigation}) => {
     dispatch({type: 'SET_LOADING', value: true});
     api.postLogIn(form).then(
       async res => {
+        console.log('isi res ', res.data);
         dispatch({type: 'SET_LOADING', value: false});
         dispatch({type: 'SET_PROFILE', value: res.data});
         const status = res.data.status;
@@ -42,6 +43,7 @@ const Masuk = ({navigation}) => {
         else navigation.replace('MainAppCollege');
       },
       err => {
+        console.log('isi err ', err);
         dispatch({type: 'SET_LOADING', value: false});
         notifications('danger', 'email atau kata sandi salah');
       },
