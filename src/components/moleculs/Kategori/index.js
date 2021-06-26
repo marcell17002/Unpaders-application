@@ -20,7 +20,8 @@ export default Kategori;
 const styles = StyleSheet.create({
   container: active => ({
     height: 91,
-    width: 62,
+    //width: 62,
+    flex: 1,
     paddingTop: 14,
     paddingBottom: 12,
     borderRadius: 5,

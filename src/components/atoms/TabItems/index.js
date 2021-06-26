@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   }),
   text: active => ({
     color: active ? colors.text.quartenary : colors.text.secondary,
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.semibold,
   }),
 });

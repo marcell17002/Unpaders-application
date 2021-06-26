@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 24,
     paddingRight: 20,
-    paddingVertical: 16,
+    paddingVertical: 15,
     borderBottomWidth: 1,
     borderBottomColor: colors.text.grey,
     alignItems: 'center',
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   namaButton: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
   },

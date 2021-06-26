@@ -67,9 +67,9 @@ const styles = StyleSheet.create({
   textPrimary: {
     color: colors.button.primary.text,
     textAlign: 'center',
-    fontFamily: fonts.primary.bold, 
+    fontFamily: fonts.primary.semibold, 
     fontSize: 16,
-    paddingVertical: 15,
+    paddingVertical: 12,
   },
   buttonSecondary: {
     backgroundColor: colors.button.secondaryOutline.background,
@@ -95,9 +95,9 @@ const styles = StyleSheet.create({
   textTertiary: {
     color: colors.button.primaryOutline.text,
     textAlign: 'center',
-    fontFamily: fonts.primary.bold,
+    fontFamily: fonts.primary.semibold,
     fontSize: 16,
-    paddingVertical: 15,
+    paddingVertical: 12,
   },
   buttonQuarternary: {
     backgroundColor: colors.primaryWhite,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     color: colors.button.secondaryOutline.blue,
     textAlign: 'center',
     fontFamily: fonts.primary.semibold,
-    fontSize: 16,
+    fontSize: 14,
   },
   iconBundle: disable => ({
     backgroundColor: disable ? colors.backgroundgrey : colors.primary,

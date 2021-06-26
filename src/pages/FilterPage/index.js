@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
   },
   ghap: {
     flexDirection: 'row',
+    width: '100%',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -226,6 +227,7 @@ const styles = StyleSheet.create({
     color: colors.primaryBlack,
   },
   content: {
-    paddingLeft: 20,
+    marginLeft: 12,
+    marginRight: 12,
   },
 });

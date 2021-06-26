@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   },
   contPenulis: {
     flexDirection: 'row',
+    flex: 1,
   },
   ketPenulis: {
     flexDirection: 'column',
@@ -66,19 +67,19 @@ const styles = StyleSheet.create({
     color: colors.text.title,
   },
   waktu: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.semibold,
-    color: colors.text.tertiary,
+    color: colors.text.secondGrey,
   },
   image: {
     height: 175,
-    width: 350,
+    width: '100%',
     resizeMode: 'cover',
     borderRadius: 5,
     marginBottom: 24,
   },
   isiBerita: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
   },

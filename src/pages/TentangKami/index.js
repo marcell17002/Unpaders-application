@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     contPage: {
         marginRight: 20,
         marginLeft: 24,
-        fontSize: 16, 
+        fontSize: 14, 
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
     }

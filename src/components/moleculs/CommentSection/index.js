@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
     color: colors.text.title,
   },
   waktu: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.semibold,
-    color: colors.text.tertiary,
+    color: colors.text.secondGrey,
   },
   buttonProfile: {
     alignItems: 'flex-end',

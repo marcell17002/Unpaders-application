@@ -162,8 +162,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryWhite,
   },
   kategori: {
+    //width: '100%',
     flexDirection: 'row',
     marginLeft: 24,
+    marginRight: 10,
     marginVertical: 24,
   },
   event: {

@@ -133,13 +133,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   nama: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     textAlign: 'center',
   },
   pendidikan: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.secondGrey,
     marginRight: 5,
@@ -152,13 +152,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.text.grey,
   },
   judulSection: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     marginBottom: 12,
   },
   dataSection: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
     marginBottom: 24,

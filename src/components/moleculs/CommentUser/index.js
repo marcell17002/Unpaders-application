@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.text.grey,
   },
   contCommentUser: {
-    marginTop: 24,
+    marginTop: 16,
     marginLeft: 24,
     marginRight: 20,
     backgroundColor: colors.primaryWhite,
     flexDirection: 'row',
-    marginBottom: 24,
+    marginBottom: 16,
   },
   ketUser: {
     flexDirection: 'row',
@@ -53,12 +53,13 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
   },
   waktu: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
+    textAlignVertical: 'center',
   },
   komen: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
     maxWidth: 280,

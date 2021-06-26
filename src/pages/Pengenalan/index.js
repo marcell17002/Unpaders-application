@@ -66,7 +66,7 @@ const Pengenalan = ({navigation}) => {
         </Text>
         <Text style={styles.subtitle}>mewadahi keberagaman IKA Unpad</Text>
       </View>
-      <Gap height={30} />
+      <Gap height={50} />
       <View>
         <Buttons title="Daftar" onPress={() => navigation.replace('Daftar')} />
         <Buttons
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: fonts.primary.reguler,
+    fontSize: 14,
+    fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     textAlign: 'center',
   },

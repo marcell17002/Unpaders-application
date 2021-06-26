@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   buttonlink: {
     textAlign: 'center',
     fontSize: 14,
-    fontFamily: fonts.primary.reguler,
+    fontFamily: fonts.primary.semibold,
     color: colors.text.tertiary,
     marginTop: -8,
     marginBottom: 8,

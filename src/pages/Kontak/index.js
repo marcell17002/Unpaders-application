@@ -65,14 +65,14 @@ const styles = StyleSheet.create({
     contJudul: {
         marginRight: 20,
         marginLeft: 24,
-        fontSize: 16, 
+        fontSize: 14, 
         fontFamily: fonts.primary.bold,
         color: colors.text.primary,
     },
     contText: {
         marginRight: 20,
         marginLeft: 24,
-        fontSize: 16, 
+        fontSize: 14, 
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
     }

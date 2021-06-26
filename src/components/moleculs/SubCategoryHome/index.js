@@ -101,7 +101,7 @@ const SubCategoryHome = ({props, parentCallBack}) => {
               <SubKategori
                 onPress={() => parentCallBack('UMKM Center')}
                 pict={require('../../../assets/La-Umkm.png')}
-                title="UMKM Center"
+                title="UMKM"
               />
               <SubKategori
                 onPress={() => parentCallBack('Kuliner')}
@@ -183,12 +183,12 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   judulKategori: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
   },
   descKategori: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
   },

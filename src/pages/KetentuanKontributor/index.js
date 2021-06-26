@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     textKet1: {
         maxWidth: 156,
         textAlign: 'center',
-        fontSize: 14,
+        fontSize: 12,
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
     },
@@ -130,12 +130,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     textArtikel: {
-        fontSize: 14,
+        fontSize: 12,
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
     },
     Judul: {
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: fonts.primary.semibold,
         color: colors.text.primary,
     },

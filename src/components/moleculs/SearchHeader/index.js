@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   subMain: {
     flexDirection: 'row',
     flex: 1,
-    marginVertical: 10,
+    marginVertical: 8,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   searchTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
     textAlign: 'right',

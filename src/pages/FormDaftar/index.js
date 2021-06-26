@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 12,
     textAlign: 'center',
     color: colors.text.primdonker2,
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   note: {
     fontSize: 12,
@@ -369,9 +369,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundgrey,
     borderRadius: 5,
     borderColor: colors.input.outline,
+    height: 50,
+    alignContent: 'space-between',
   },
   titleText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     marginBottom: 12,
@@ -380,5 +382,6 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
+    alignContent: 'space-between',
   },
 });

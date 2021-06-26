@@ -9,7 +9,7 @@ const SubKategori = ({title, onPress, pict}) => {
         <View style={styles.ImageCont}>
             <Image style={styles.image} source={pict} />
         </View>
-        <Gap height={16}/>
+        <Gap height={8}/>
         <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
     );
@@ -19,8 +19,8 @@ export default SubKategori;
 
 const styles = StyleSheet.create({
     container: {
-        height: 172,
-        width: 120,
+        height: 130,
+        width: 90,
         backgroundColor: 'white',
         borderRadius: 5, 
         marginRight: 20,
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     text: {
-        marginLeft: 12,
-        fontSize: 14,
+        marginLeft: 8,
+        fontSize: 13,
         fontFamily: fonts.primary.semibold,
         color: colors.text.primary,
     }

@@ -246,7 +246,7 @@ export default DetailBerita;
 const styles = StyleSheet.create({
   rating: {
     flexDirection: 'row',
-    height: 60,
+    height: 52,
     backgroundColor: colors.primaryWhite,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 0},

@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   titleText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     marginBottom: 12,

@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   logout: {
     marginVertical: 16,
     marginLeft: 24,
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: fonts.primary.bold,
     color: colors.text.primdonker1,
   },

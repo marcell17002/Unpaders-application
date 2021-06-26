@@ -20,6 +20,7 @@ export const colors = {
   primary: mainColors.blue,
   secondBlue: mainColors.blueLight,
   secondGrey: mainColors.greyLight,
+  tertierGrey: mainColors.greylighter,
   primaryWhite: mainColors.white,
   primaryBlack: mainColors.black,
   backgroundgrey: mainColors.greyLightest,

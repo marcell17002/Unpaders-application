@@ -9,7 +9,7 @@ const NotFound = ({type, title}) => {
       return (
         <View style={styles.page}>
           <Text style={styles.Judul}>Belum ada percakapan</Text>
-          <Gap height={24} />
+          <Gap height={10} />
           <Text style={styles.deskripsi}>
             Silahkan mulai percakapan dengan teman Anda
           </Text>
@@ -26,7 +26,7 @@ const NotFound = ({type, title}) => {
       return (
         <View style={styles.page}>
           <Text style={styles.Judul}>Tidak ada hasil yang ditemukan</Text>
-          <Gap height={24} />
+          <Gap height={10} />
           <Text style={styles.deskripsi}>Coba cari dengan kata kunci lain</Text>
           <Gap height={24} />
           <View>
@@ -57,21 +57,22 @@ export default NotFound;
 const styles = StyleSheet.create({
   page: {
     backgroundColor: colors.primaryWhite,
+    marginHorizontal: 20,
   },
   judulDefault: {
-    fontSize: 17,
-    fontFamily: fonts.primary.semibold,
+    fontSize: 16,
+    fontFamily: fonts.primary.reguler,
     color: colors.text.secondary,
     textAlign: 'center',
   },
   Judul: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     alignSelf: 'center',
   },
   deskripsi: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
     alignSelf: 'center',

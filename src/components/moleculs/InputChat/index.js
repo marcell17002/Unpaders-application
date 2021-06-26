@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 20,
     flexDirection: 'row',
-    paddingVertical: 10,
+    paddingVertical: 5,
   },
   page: {
     backgroundColor: 'white',
@@ -39,15 +39,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 5.7,
     shadowRadius: 0,
     elevation: 10,
+    paddingVertical: 2,
   },
   input: {
     backgroundColor: colors.backgroundgrey,
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 5,
     borderRadius: 10,
     flex: 1,
     marginRight: 12,
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
   },
 });

@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     color: colors.text.primdonker2,
     fontFamily: fonts.primary.bold,
     textAlign: 'center',
-    //marginTop: 8,
     marginBottom: 30,
   },
   textSecondary: {

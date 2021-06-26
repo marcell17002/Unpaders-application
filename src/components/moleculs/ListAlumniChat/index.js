@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   namaAlumni: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.title,
   },
