@@ -1,12 +1,10 @@
-import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import { withOrientation } from 'react-navigation';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Image, StyleSheet, View } from 'react-native';
 
 const Splashscreen = ({navigation}) => {
     useEffect(() => {
         setTimeout(() => {
-            navigation.replace('Intro');
+            navigation.replace('Pengenalan');
         }, 3000)
     }, [])
     return (

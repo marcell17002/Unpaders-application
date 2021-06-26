@@ -1,26 +1,25 @@
 import React from 'react';
-import {StyleSheet, View, Image, ScrollView, Text} from 'react-native';
-import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
-import {api, Fire} from '../../services';
-import {
-  fonts,
-  colors,
-  useForm,
-  checkValue,
-  notifications,
-  storeData,
-  getData,
-  requestToken,
-} from '../../utils';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
+import {api} from '../../services';
+import {
+  checkValue,
+  colors,
+  fonts,
+  notifications,
+  requestToken,
+  storeData,
+  useForm,
+} from '../../utils';
 
 const Masuk = ({navigation}) => {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
 
   const [form, setForm] = useForm({
-    email: 'alumni@gmail.com',
-    password: 'alumni123',
+    email: '',
+    password: '',
   });
   const checkValueNull = () => {
     checkValue(form.email, 'email');
@@ -28,13 +27,15 @@ const Masuk = ({navigation}) => {
   };
   const onLog = async () => {
     await checkValueNull();
-
+    dispatch({type: 'SET_LOADING', value: true});
     api.postLogIn(form).then(
       async res => {
+        console.log('isi res ', res.data);
+        dispatch({type: 'SET_LOADING', value: false});
+        dispatch({type: 'SET_PROFILE', value: res.data});
         const status = res.data.status;
         notifications('success', 'login berhasil');
         console.log('data sucess', res.data);
-        dispatch({type: 'SET_PROFILE', value: res.data});
         requestToken(res.data.id);
         await storeData('user', res.data);
         if (status === 'alumni') navigation.replace('MainAppGraduated');
@@ -42,7 +43,9 @@ const Masuk = ({navigation}) => {
         else navigation.replace('MainAppCollege');
       },
       err => {
-        notifications('danger', 'email atau password salah');
+        console.log('isi err ', err);
+        dispatch({type: 'SET_LOADING', value: false});
+        notifications('danger', 'email atau kata sandi salah');
       },
     );
   };
@@ -65,11 +68,11 @@ const Masuk = ({navigation}) => {
         />
         <Gap height={24} />
         <Inputs
-          title="Password"
+          title="Kata Sandi"
           secure
           value={form.password}
           onChangeText={value => setForm('password', value)}
-          placeholder="Masukkan Password"
+          placeholder="Masukkan Kata Sandi"
         />
       </View>
       <Gap height={80} />
@@ -82,7 +85,6 @@ const Masuk = ({navigation}) => {
         />
       </View>
     </View>
-    //</ScrollView>
   );
 };
 
@@ -119,5 +121,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
     marginTop: -8,
+    marginBottom: 8,
   },
 });

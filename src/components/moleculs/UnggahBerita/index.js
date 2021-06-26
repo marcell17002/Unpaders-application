@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image} from 'react-native';
-import { fonts, colors } from '../../../utils';
-import {Gap} from '../../atoms';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { Gap } from '../../atoms';
 
 const Berita = ({title, kategoriBerita, subkategoriBerita, waktu, isiBerita}) => {
-    //belum dimasukin props untuk image
     return (
         <View style={styles.page}>
             <Text style={styles.titleBerita}>{title}</Text>
@@ -25,11 +24,8 @@ const Berita = ({title, kategoriBerita, subkategoriBerita, waktu, isiBerita}) =>
                 source={require('../../../assets/event.png')}
                 />
             </View>
-            {/* <Gap height={24}/> */}
             <Text style={styles.isiBerita}>{isiBerita}</Text>
-            
         </View>
-    
     );
 };
 
@@ -54,34 +50,26 @@ const styles = StyleSheet.create({
     ketBerita: {
         flexDirection: 'row',
     },
-    logo: {
-        height: 40,
-        width: 40,
-        resizeMode: 'cover',
-        borderRadius: 20,
-        alignSelf: 'center',
-        marginRight: 16,
-      },
-      keterangan: {
-          fontSize: 14,
-          fontFamily: fonts.primary.semibold,
-          color: colors.text.primary,
-          marginRight: 5,
-      },
-      waktu: {
+    keterangan: {
+        fontSize: 14,
+        fontFamily: fonts.primary.semibold,
+        color: colors.text.primary,
+        marginRight: 5,
+    },  
+    waktu: {
         fontSize: 12,
         fontFamily: fonts.primary.semibold,
         color: colors.text.tertiary,
-      },
-      image: {
+    },
+    image: {
         maxHeight: 175,
         maxWidth: 350,
         resizeMode: 'cover',
         borderRadius: 5,
-      },
-      isiBerita: {
-          fontSize: 18,
-          fontFamily: fonts.primary.reguler,
-          color: colors.text.primary,
-      }
+    },
+    isiBerita: {
+        fontSize: 18,
+        fontFamily: fonts.primary.reguler,
+        color: colors.text.primary,
+    }
 });

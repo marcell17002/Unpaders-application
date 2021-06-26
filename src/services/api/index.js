@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import get from './get';
 import post from './post';
 import put from './put';
@@ -22,7 +23,6 @@ axios.interceptors.response.use(
       }
     });
     if (error.response.status === 401) {
-      NavigationService.navigate('Login');
       console.log('401 navigate to login');
       await destroyData();
     }
@@ -72,12 +72,14 @@ const getHistoryChat = async (variable, value) =>
   get(`historyChat/${variable}/${value}`, await config.withToken());
 const getChat = async (variable, value) =>
   get(`chat/${variable}/${value}`, null);
+const getDataAlumni = id => get(`alumni/${id}`, null);
 
 //post
 const postRegister = data => post('user/register', data, null);
 const postLogIn = data => post('user/login', data, null);
 const postLikedEvent = data => post('likedEvent', data, null);
-const postNotifications = async data => post('pushNotifications', data);
+const postNotifications = async data =>
+  post('pushNotifications', data, await config.withToken());
 const postEvent = async data => post('event', data, await config.withToken());
 const postChat = async data => post('chat', data, null);
 const postHistoryChat = async data =>
@@ -92,11 +94,12 @@ const updateEvent = async (data, id) =>
   put(`event/${id}`, data, await config.withToken());
 const updateHistory = async (data, id) =>
   put(`historyChat/${id}`, data, await config.withToken());
+const updatePassword = async (data, id) =>
+  put(`user/changePassword/${id}`, data, await config.withToken());
 
 //delete
 const deleteLikedEvent = async id => drop(`likedEvent/${id}`, null);
-const deleteRefreshToken = async id =>
-  drop(`user/logout/${id}`, await config.withToken());
+const deleteRefreshToken = async id => drop(`user/logout/${id}`, null);
 
 export const api = {
   getEvent,
@@ -107,6 +110,7 @@ export const api = {
   getProfileCategory,
   getHistoryChat,
   getChat,
+  getDataAlumni,
 
   postRegister,
   postLogIn,
@@ -120,6 +124,7 @@ export const api = {
   updateProfileUser,
   updateEvent,
   updateHistory,
+  updatePassword,
 
   deleteLikedEvent,
   deleteRefreshToken,

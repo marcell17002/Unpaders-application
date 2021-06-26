@@ -1,7 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import {Headers, CommentUser} from '../../components/moleculs';
-import {Gap} from '../../components/atoms';
+import { StyleSheet, Text, View } from 'react-native';
 import { colors, fonts } from '../../../utils';
 
 const IsMe = () => {

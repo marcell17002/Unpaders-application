@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../../utils';
 
 const Loading = () => {
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.backgroundBlack,
+    backgroundColor: colors.loadingBackground,
     width: '100%',
     height: '100%',
   },

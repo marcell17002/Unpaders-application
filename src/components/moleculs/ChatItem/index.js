@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import {colors, fonts} from '../../../utils';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
 
 const ChatItem = ({isMe, content, time}) => {
   return (
@@ -40,19 +40,5 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
     marginTop: 8,
-  },
-  page: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  chatDate: {
-    fontSize: 12,
-    fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
-    marginVertical: 20,
-    textAlign: 'center',
-  },
-  contText: {
-    flex: 1,
   },
 });

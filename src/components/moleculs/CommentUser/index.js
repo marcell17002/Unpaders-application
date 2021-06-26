@@ -1,9 +1,8 @@
+import { BASE_URL_ROOT } from '@env';
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View, Image} from 'react-native';
-import {Headers, Kategori, Event} from '../../components/moleculs';
-import {fonts, colors} from '../../../utils';
-import {Gap} from '../../atoms';
-import {BASE_URL_ROOT} from '@env';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { Gap } from '../../atoms';
 
 const CommentUser = ({image, name, waktu, komentar}) => {
   return (
@@ -28,15 +27,17 @@ const CommentUser = ({image, name, waktu, komentar}) => {
 export default CommentUser;
 
 const styles = StyleSheet.create({
-  contCommentUser: {
-    marginLeft: 24,
-    marginRight: 20,
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    marginBottom: 24,
+  page: {
     borderBottomWidth: 1,
     borderBottomColor: colors.text.grey,
-    paddingBottom: 16,
+  },
+  contCommentUser: {
+    marginTop: 16,
+    marginLeft: 24,
+    marginRight: 20,
+    backgroundColor: colors.primaryWhite,
+    flexDirection: 'row',
+    marginBottom: 16,
   },
   ketUser: {
     flexDirection: 'row',
@@ -52,12 +53,13 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
   },
   waktu: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
+    textAlignVertical: 'center',
   },
   komen: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
     maxWidth: 280,

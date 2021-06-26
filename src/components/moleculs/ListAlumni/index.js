@@ -1,27 +1,27 @@
+import {BASE_URL_ROOT} from '@env';
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors, fonts} from '../../../utils';
 import {Gap} from '../../atoms';
-import {BASE_URL_ROOT} from '@env';
 
 const ListAlumni = ({
   nama,
   fakultas,
   jurusan,
   angkatan,
-  onPressImage,
   onPressBody,
   picture,
+  disabled,
 }) => {
   return (
     <View style={styles.page}>
-      <TouchableOpacity onPress={onPressImage}>
-        <Image
-          style={styles.avatar}
-          source={{uri: `${BASE_URL_ROOT}${picture}`}}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={onPressBody}>
+      <Image
+        style={styles.avatar}
+        source={{uri: `${BASE_URL_ROOT}${picture}`}}
+      />
+      <TouchableOpacity
+        onPress={disabled ? null : onPressBody}
+        disabled={disabled}>
         <Text style={styles.namaAlumni}>{nama}</Text>
         <Gap height={8} />
         <View style={styles.secData}>
@@ -40,8 +40,8 @@ export default ListAlumni;
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
-    paddingVertical: 24,
+    paddingHorizontal: 24,
+    paddingVertical: 14,
     borderBottomWidth: 1,
     borderBottomColor: colors.text.grey,
     alignItems: 'center',
@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
     width: 40,
     resizeMode: 'cover',
     borderRadius: 20,
-    alignSelf: 'center',
-    marginRight: 16,
+    alignContent: 'center',
+    marginRight: 20,
   },
   namaAlumni: {
     fontSize: 16,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.primary,
+    color: colors.text.title,
   },
   desc: {
     fontSize: 14,

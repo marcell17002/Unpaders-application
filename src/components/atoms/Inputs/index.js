@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, TextInput, Text, View} from 'react-native';
-import {colors, fonts} from '../../../utils';
+import { StyleSheet, Text, TextInput } from 'react-native';
+import { colors, fonts } from '../../../utils';
 
 const Inputs = ({
   title,
@@ -36,22 +36,23 @@ export default Inputs;
 const styles = StyleSheet.create({
   input: {
     backgroundColor: colors.input.secondary,
-    //marginTop: 12,
   },
   titleText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
-    marginBottom: 12,
+    marginBottom: 10,
   },
   inputText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.primary,
+    color: "#000",
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 16,
     borderColor: colors.input.outline,
     backgroundColor: colors.input.background,
+    textAlignVertical: 'top',
+    paddingVertical: 10,
   },
 });

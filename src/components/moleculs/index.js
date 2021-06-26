@@ -1,32 +1,30 @@
-import ABottomNavigator from './ABottomNavigator';
-import Headers from './Headers';
-import Event from './Event';
-import Comment from './Comment';
-import CommentUser from './CommentUser';
-import Kategori from './Kategori';
 import Berita from './Berita';
-import ProfileAuthor from './ProfileAuthor';
-import ListAlumniChat from './ListAlumniChat';
-import ProfileUser from './ProfileUser';
-import ListAlumni from './ListAlumni';
-import UnggahBerita from './UnggahBerita';
+import BottomNavigator from './BottomNavigator';
 import ChatItem from './ChatItem';
+import CommentSection from './CommentSection';
+import Event from './Event';
+import Headers from './Headers';
 import InputChat from './InputChat';
-import SubKategori from './SubKategori';
-import SubCategoryHome from './SubCategoryHome';
-import SearchHeader from './SearchHeader';
-import MBottomNavigator from './MBottomNavigator';
-import UBottomNavigator from './UBottomNavigator';
+import Kategori from './Kategori';
+import ListAlumni from './ListAlumni';
+import ListAlumniChat from './ListAlumniChat';
 import NotFound from './NotFound';
+import ProfileAuthor from './ProfileAuthor';
+import ProfileUser from './ProfileUser';
+import SearchHeader from './SearchHeader';
+import SubCategoryHome from './SubCategoryHome';
+import SubKategori from './SubKategori';
+import UnggahBerita from './UnggahBerita';
+import CommentUser from './CommentUser';
+import EventUnggah from './EventUnggah';
 
 export {
-  ABottomNavigator,
+  BottomNavigator,
   Headers,
   Event,
-  Comment,
+  CommentSection,
   Kategori,
   Berita,
-  CommentUser,
   ProfileAuthor,
   ListAlumniChat,
   ProfileUser,
@@ -34,10 +32,11 @@ export {
   UnggahBerita,
   ChatItem,
   InputChat,
-  MBottomNavigator,
-  UBottomNavigator,
   SubKategori,
   SubCategoryHome,
   SearchHeader,
   NotFound,
+  CommentUser,
+  EventUnggah,
 };
+

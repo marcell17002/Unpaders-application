@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, ScrollView, Text, View} from 'react-native';
-import {colors, fonts} from '../../../utils';
-import {Gap} from '../../atoms';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
+import { Gap } from '../../atoms';
 import SubKategori from '../SubKategori';
 
 const SubCategoryHome = ({props, parentCallBack}) => {
@@ -12,13 +12,13 @@ const SubCategoryHome = ({props, parentCallBack}) => {
           <View>
             <View style={styles.textSubkat}>
               <Text style={styles.judulKategori}>Aktual</Text>
-              <Gap height={12} />
+              <Gap height={4} />
               <Text style={styles.descKategori}>
                 Berita teraktual seputar kegiatan dan acara yang diadakan IKA
                 Unpad
               </Text>
             </View>
-            <Gap height={24} />
+            <Gap height={20} />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -45,6 +45,7 @@ const SubCategoryHome = ({props, parentCallBack}) => {
               />
               <Gap width={20} />
             </ScrollView>
+            <Gap height={8}/>
           </View>
         );
       case 'Alumni':
@@ -52,12 +53,12 @@ const SubCategoryHome = ({props, parentCallBack}) => {
           <View>
             <View style={styles.textSubkat}>
               <Text style={styles.judulKategori}>Alumni</Text>
-              <Gap height={12} />
+              <Gap height={4} />
               <Text style={styles.descKategori}>
                 Artikel seputar Alumni Unpad dan Universitas Padjadjaran
               </Text>
             </View>
-            <Gap height={24} />
+            <Gap height={20} />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -79,6 +80,7 @@ const SubCategoryHome = ({props, parentCallBack}) => {
               />
               <Gap width={20} />
             </ScrollView>
+            <Gap height={8}/>
           </View>
         );
       case 'Lapak':
@@ -86,12 +88,12 @@ const SubCategoryHome = ({props, parentCallBack}) => {
           <View>
             <View style={styles.textSubkat}>
               <Text style={styles.judulKategori}>Lapak</Text>
-              <Gap height={12} />
+              <Gap height={4} />
               <Text style={styles.descKategori}>
                 Artikel seputar kegiatan bisnis mandiri Alumni Unpad{' '}
               </Text>
             </View>
-            <Gap height={24} />
+            <Gap height={20} />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -99,7 +101,7 @@ const SubCategoryHome = ({props, parentCallBack}) => {
               <SubKategori
                 onPress={() => parentCallBack('UMKM Center')}
                 pict={require('../../../assets/La-Umkm.png')}
-                title="UMKM Center"
+                title="UMKM"
               />
               <SubKategori
                 onPress={() => parentCallBack('Kuliner')}
@@ -123,6 +125,7 @@ const SubCategoryHome = ({props, parentCallBack}) => {
               />
               <Gap width={20} />
             </ScrollView>
+            <Gap height={8}/>
           </View>
         );
       case 'Loker':
@@ -130,13 +133,13 @@ const SubCategoryHome = ({props, parentCallBack}) => {
           <View>
             <View style={styles.textSubkat}>
               <Text style={styles.judulKategori}>Loker</Text>
-              <Gap height={12} />
+              <Gap height={4} />
               <Text style={styles.descKategori}>
                 Artikel seputar informasi lowongan kerja baik Internship,
                 Fulltime, dan Freelance
               </Text>
             </View>
-            <Gap height={24} />
+            <Gap height={20} />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -158,6 +161,7 @@ const SubCategoryHome = ({props, parentCallBack}) => {
               />
               <Gap width={20} />
             </ScrollView>
+            <Gap height={8}/>
           </View>
         );
       default:
@@ -179,12 +183,12 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   judulKategori: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
   },
   descKategori: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
   },

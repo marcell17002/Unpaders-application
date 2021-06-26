@@ -1,19 +1,16 @@
-import AlumniTabItems from './AlumniTabItems';
+import ButtonFilter from './ButtonFilter';
 import Buttons from './Buttons';
-import Inputs from './Inputs';
 import Gap from './Gap';
-import Loading from './Loading';
-import Separator from './Separator';
+import Inputs from './Inputs';
 import Link from './Link';
 import ListButton from './ListButton';
-import BtnFilter from './BtnFilter';
+import Loading from './Loading';
+import Separator from './Separator';
+import TabItems from './TabItems';
 import TextColor from './TextColor';
 
-import MhsTabItems from './MhsTabItems';
-import UmumTabItems from './UmumTabItems';
-
 export {
-  AlumniTabItems,
+  TabItems,
   TextColor,
   Buttons,
   Inputs,
@@ -22,7 +19,6 @@ export {
   Separator,
   Link,
   ListButton,
-  BtnFilter,
-  MhsTabItems,
-  UmumTabItems,
+  ButtonFilter,
 };
+

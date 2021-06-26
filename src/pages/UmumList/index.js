@@ -1,17 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import {Headers, Kategori, Event, ListAlumni} from '../../components/moleculs';
-import {Gap, ListButton} from '../../components/atoms';
-import {fonts, colors} from '../../utils';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {Headers, ListAlumni} from '../../components/moleculs';
 import {api} from '../../services';
-import {useSelector} from 'react-redux';
 
 const UmumList = ({navigation}) => {
   const [alumni, setAlumni] = useState([]);
-
-  useEffect(() => {
-    api.getUserByCategory('status', 'alumni').then(
-      res => setAlumni(res.data),
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    await api.getUserByCategory('status', 'alumni').then(
+      async res => {
+        const alumnus = res.data;
+        const data = [];
+        const promises = await Object.keys(alumnus).map(async key => {
+          await data.push({
+            idReceiver: alumnus[key]._id,
+            isNew: true,
+            ...alumnus[key],
+          });
+        });
+        await Promise.all(promises);
+        await setAlumni(data);
+        await dispatch({type: 'SET_ALUMNI', value: data});
+      },
       err => console.log('isi err : ', err),
     );
   }, []);
@@ -19,9 +30,10 @@ const UmumList = ({navigation}) => {
     <View>
       <View style={styles.contHeader}>
         <Headers
-          title="Temukan Alumni"
-          type="two-icon"
-          onPressBack={() => navigation.goBack()}
+          title="List Alumni"
+          type="main-umum"
+          onPressMiddle={() => navigation.navigate('CariAlumni')}
+          onPressRight={() => navigation.navigate('FilterPage')}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -29,6 +41,7 @@ const UmumList = ({navigation}) => {
           {alumni.map(item => {
             return (
               <ListAlumni
+                disabled
                 key={item._id}
                 nama={item.name}
                 picture={item.image}

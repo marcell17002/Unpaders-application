@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {colors, fonts} from '../../../utils';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
 
 const Link = ({title, type, onPress}) => {
   const LinkType = () => {
@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     color: colors.text.primdonker2,
     fontFamily: fonts.primary.bold,
     textAlign: 'center',
-    marginTop: 8,
     marginBottom: 30,
   },
   textSecondary: {

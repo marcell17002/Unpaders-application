@@ -1,13 +1,7 @@
+import { Icon } from 'native-base';
 import React from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Text,
-  View,
-} from 'react-native';
-import {colors, fonts} from '../../../utils';
-import {Icon} from 'native-base';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { colors, fonts } from '../../../utils';
 
 const SearchHeader = ({
   placeholder,
@@ -31,13 +25,13 @@ const SearchHeader = ({
           style={styles.searchTitle}
         />
         <View style={styles.iconRight}>
-          <TouchableOpacity //icon kanan 1
+          <TouchableOpacity 
             style={styles.MiddleIconBundle}
             onPress={onPressMiddle}>
             <Icon style={styles.iconStyle} name="search" />
           </TouchableOpacity>
           {less ? null : (
-            <TouchableOpacity //icon kanan 2
+            <TouchableOpacity 
               style={styles.RightIconBundle}
               onPress={onPressRight}>
               <Icon style={styles.iconStyle} type="AntDesign" name="filter" />
@@ -57,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryWhite,
     paddingLeft: 24,
     paddingRight: 20,
-    alignItems: 'center', //nyamain icon & tulisan
+    alignItems: 'center',
     shadowColor: colors.text.tertiary,
     shadowOffset: {width: 1, height: 1},
     shadowOpacity: 0.3,
@@ -68,40 +62,32 @@ const styles = StyleSheet.create({
   subMain: {
     flexDirection: 'row',
     flex: 1,
-    marginVertical: 10,
+    marginVertical: 8,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   iconStyle: {
-    //DONE
     alignSelf: 'flex-start',
     justifyContent: 'space-around',
     color: colors.primaryBlack,
   },
   RightIconBundle: {
-    //icon kanan
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    paddingLeft: 10,
   },
   MiddleIconBundle: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
-  inputText: {
-    fontSize: 18,
-    fontFamily: 'Segoe-UI',
-    paddingHorizontal: 16,
-    color: colors.input.text,
-    backgroundColor: colors.input.background,
-  },
   searchTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
+    color: colors.text.primary,
     textAlign: 'right',
     width: '70%',
     textAlign: 'left',
-    paddingLeft: '5%',
+    paddingLeft: '-15%',
   },
   iconRight: {
     flexDirection: 'row',
