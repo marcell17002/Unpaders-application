@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   input: {
+    color: "#000",
     backgroundColor: colors.backgroundgrey,
     paddingHorizontal: 20,
-    paddingVertical: 5,
     borderRadius: 10,
     flex: 1,
     marginRight: 12,

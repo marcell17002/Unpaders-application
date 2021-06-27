@@ -91,7 +91,7 @@ const UbahPassword = ({navigation}) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.pages}>
         <View>
-          <Gap height={24} />
+          <Gap height={16} />
           <Inputs
             value={form.password}
             secure
@@ -99,7 +99,7 @@ const UbahPassword = ({navigation}) => {
             title="Kata Sandi Lama"
             placeholder="Masukkan Password Lama Anda"
           />
-          <Gap height={24} />
+          <Gap height={16} />
           <Inputs
             value={changePassword.newPassword}
             secure
@@ -107,7 +107,7 @@ const UbahPassword = ({navigation}) => {
             title="Kata Sandi Baru"
             placeholder="Masukkan kata sandi baru"
           />
-          <Gap height={24} />
+          <Gap height={16} />
           <Inputs
             value={changePassword.confirmPassword}
             secure

@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
   searchTitle: {
     fontSize: 16,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.primary,
+    color: "#000",
+    //color: colors.text.primary,
     textAlign: 'right',
     width: '70%',
     textAlign: 'left',

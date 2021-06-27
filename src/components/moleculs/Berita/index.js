@@ -8,7 +8,7 @@ const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
   return (
     <View style={styles.page}>
       <Text style={styles.titleBerita}>{title}</Text>
-      <Gap height={24} />
+      <Gap height={20} />
       <View style={styles.contPenulis}>
         <Image
           style={styles.logo}
@@ -20,7 +20,7 @@ const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
           <Text style={styles.waktu}>{waktu}</Text>
         </View>
       </View>
-      <Gap height={24} />
+      <Gap height={20} />
       <View style={styles.beritaImage}>
         <Image
           style={styles.image}
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'cover',
     borderRadius: 5,
-    marginBottom: 24,
+    marginBottom: 20,
   },
   isiBerita: {
     fontSize: 14,

@@ -48,9 +48,9 @@ const Berita = ({navigation}) => {
         <View style={styles.ghap}>
           <Gap height={12} />
         </View>
-        <Gap height={24} />
+        <Gap height={16} />
         <Text style={styles.sectionLainnya}>DAFTAR UNGGAH BERITA</Text>
-        <Gap height={24}/>
+        <Gap height={16}/>
         {event.length < 1 ? (
           <View style={styles.body}>
             <NotFound title="Anda belum mengunggah berita" />
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.text.grey,
   },
   sectionLainnya: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     marginLeft: 24,

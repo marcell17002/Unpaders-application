@@ -121,7 +121,7 @@ export default UmumLainnya;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.primaryWhite,
   },
   ghap: {
     backgroundColor: colors.text.grey,
@@ -130,25 +130,12 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     fontSize: 12,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
+    color: colors.text.title,
   },
   logout: {
     marginVertical: 16,
     marginLeft: 24,
-    fontSize: 18,
-    fontFamily: fonts.primary.bold,
-    color: colors.text.primdonker1,
-  },
-  textGap: {
-    marginLeft: 24,
-    fontSize: 12,
-    fontFamily: fonts.primary.reguler,
-    color: colors.text.tertiary,
-  },
-  logout: {
-    marginVertical: 16,
-    marginLeft: 24,
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: fonts.primary.bold,
     color: colors.text.primdonker1,
   },

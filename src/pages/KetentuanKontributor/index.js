@@ -24,7 +24,7 @@ const KetentuanKontributor = ({navigation}) => {
                             />
                             <Text style={styles.textKet1}>Kontributor adalah Alumni Universitas Padjadjaran</Text>
                         </View>
-                        <Gap width={16}/>
+                        <Gap width={12}/>
                         <View>
                             <Image
                             style={styles.photo1}
@@ -34,7 +34,7 @@ const KetentuanKontributor = ({navigation}) => {
                         </View>
                     </View>
                 </View>
-                <Gap height={24}/>
+                <Gap height={20}/>
                 <View style={styles.container}>
                     <Text style={styles.Judul}>Ketentuan Artikel</Text>
                     <View>
@@ -60,7 +60,7 @@ const KetentuanKontributor = ({navigation}) => {
                             />
                             <Text style={styles.textKet1}>Profile yang ditampilkan berupa Nama, Fakultas, Jurusan, dan Angkatan</Text>
                         </View>
-                        <Gap width={32}/>
+                        <Gap width={16}/>
                         <View>
                             <Image
                             style={styles.photo1}
@@ -69,7 +69,7 @@ const KetentuanKontributor = ({navigation}) => {
                             <Text style={styles.textKet1}>Unpaders akan melakukan kurasi/editing tanpa mengurangi substansi</Text>
                         </View>
                     </View>
-                    <Gap height={24}/>
+                    <Gap height={20}/>
                     <View style={styles.subKontrib}>
                         <View>
                             <Image
@@ -106,14 +106,14 @@ const styles = StyleSheet.create({
         paddingRight: 20,
     },
     container: {
-        paddingVertical: 16,
+        paddingVertical: 12,
         paddingHorizontal: 16,
         borderColor: colors.backgroundgrey,
         borderWidth: 2,
         borderRadius: 10,
     },
     photo1: {
-        marginTop: 20,
+        marginTop: 16,
         marginBottom: 16,
         alignSelf: 'center',
     },

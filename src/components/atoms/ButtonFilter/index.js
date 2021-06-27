@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     color: active ? colors.button.primary.text : colors.button.dropdown.text,
     textAlign: 'center',
     fontFamily: fonts.primary.reguler,
-    fontSize: 14,
+    fontSize: 12,
     paddingVertical: 10,
   }),
 });

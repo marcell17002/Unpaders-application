@@ -200,7 +200,7 @@ const FormDaftar = ({navigation, route}) => {
               : 'Daftar sebagai Mahasiswa'}
           </Text>
         </View>
-        <Gap height={40} />
+        <Gap height={20} />
         <View>
           <Text style={styles.section}>Informasi Personal</Text>
           <Inputs
@@ -209,7 +209,7 @@ const FormDaftar = ({navigation, route}) => {
             onChangeText={value => setForm('email', value)}
             placeholder="Masukkan Email"
           />
-          <Gap height={24} />
+          <Gap height={16} />
           <Inputs
             title="Kata Sandi"
             value={form.password}
@@ -217,7 +217,7 @@ const FormDaftar = ({navigation, route}) => {
             onChangeText={value => setForm('password', value)}
             placeholder="Masukkan Kata Sandi"
           />
-          <Gap height={24} />
+          <Gap height={16} />
           <Inputs
             title="Konfirmasi Kata Sandi"
             value={confirmPassword}
@@ -225,14 +225,14 @@ const FormDaftar = ({navigation, route}) => {
             onChangeText={value => setConfirmPassword(value)}
             placeholder="Konfirmasi Kata Sandi"
           />
-          <Gap height={24} />
+          <Gap height={16} />
           <Inputs
             title="Nama Lengkap"
             value={form.name}
             onChangeText={value => setForm('name', value)}
             placeholder="Masukkan Nama Lengkap"
           />
-          <Gap height={24} />
+          <Gap height={16} />
           <Inputs
             title="Nomor Telepon"
             isNumeric
@@ -243,7 +243,7 @@ const FormDaftar = ({navigation, route}) => {
           <Text style={styles.note}>
             *Nomor WA tidak akan ditampilkan pada profile
           </Text>
-          <Gap height={24} />
+          <Gap height={16} />
         </View>
 
         <Gap height={32} />
@@ -256,7 +256,7 @@ const FormDaftar = ({navigation, route}) => {
             onChangeText={value => setForm('nim', value)}
             placeholder="Masukkan Nomor Pokok Mahasiswa"
           />
-          <Gap height={24} />
+          <Gap height={16} />
           <View>
             <Text style={styles.titleText}>Fakultas</Text>
             <View style={styles.contPicker}>
@@ -270,7 +270,7 @@ const FormDaftar = ({navigation, route}) => {
               </Picker>
             </View>
           </View>
-          <Gap height={24} />
+          <Gap height={16} />
           <View>
             <Text style={styles.titleText}>Program Studi</Text>
             <View style={styles.contPicker}>
@@ -291,7 +291,7 @@ const FormDaftar = ({navigation, route}) => {
               </Picker>
             </View>
           </View>
-          <Gap height={24} />
+          <Gap height={16} />
           <Inputs
             title="Angkatan"
             value={form.level}
@@ -299,7 +299,7 @@ const FormDaftar = ({navigation, route}) => {
             onChangeText={value => setForm('level', value)}
             placeholder="Masukkan Angkatan"
           />
-          <Gap height={24} />
+          <Gap height={16} />
           {status === 'alumni' ? (
             <Inputs
               title="Tahun Lulus"
@@ -320,6 +320,7 @@ const FormDaftar = ({navigation, route}) => {
             onPress={() => navigation.navigate('Masuk')}
             title="Masuk disini"
           />
+          <Gap height={4}/>
         </View>
       </View>
     </ScrollView>
@@ -336,7 +337,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   contImage: {
-    marginTop: 28,
+    marginTop: 16,
     alignItems: 'center',
   },
   title: {
@@ -364,6 +365,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.semibold,
     color: colors.text.secondGrey,
     marginTop: -8,
+    marginBottom: 4,
   },
   contPicker: {
     backgroundColor: colors.backgroundgrey,

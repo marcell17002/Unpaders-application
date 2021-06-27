@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   image: {
-    height: 120,
-    width: 140,
+    height: 110,
+    width: 128,
     resizeMode: 'cover',
     borderRadius: 5,
     alignSelf: 'center',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
     resizeMode: 'cover',
-    borderRadius: 8,
+    borderRadius: 10,
     alignSelf: 'center',
     marginRight: 10,
   },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   KategoriWaktu: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primdonker2,
     marginTop: -6,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   Judul: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.title,
     marginTop: -4,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   statusStyle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.title,
   }

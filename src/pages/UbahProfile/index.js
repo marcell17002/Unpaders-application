@@ -201,7 +201,7 @@ const UbahProfile = ({navigation, route}) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.page}>
-          <Gap height={24} />
+          <Gap height={16} />
           <TouchableOpacity
             onPress={() => getImage()}
             style={styles.profileWrapper}>
@@ -213,7 +213,7 @@ const UbahProfile = ({navigation, route}) => {
               />
             </View>
           </TouchableOpacity>
-          <Gap height={24} />
+          <Gap height={16} />
           <View>
             <Text style={styles.section}>Informasi Personal</Text>
             <Inputs
@@ -222,14 +222,14 @@ const UbahProfile = ({navigation, route}) => {
               title="Email"
               placeholder="Masukkan Email"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             <Inputs
               value={profile.name}
               onChangeText={value => changeText('name', value)}
               title="Nama Lengkap"
               placeholder="Masukkan Nama Lengkap"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             <Inputs
               value={profile.phone}
               onChangeText={value => changeText('phone', value)}
@@ -239,7 +239,7 @@ const UbahProfile = ({navigation, route}) => {
             <Text style={styles.note}>
               *Nomor WA tidak akan ditampilkan pada profile
             </Text>
-            <Gap height={24} />
+            <Gap height={16} />
           </View>
           <Gap height={32} />
           <View>
@@ -250,7 +250,7 @@ const UbahProfile = ({navigation, route}) => {
               title="Nomor Pokok Mahasiswa"
               placeholder="Masukkan Nomor Pokok Mahasiswa"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             <View>
               <Text style={styles.titleText}>Fakultas</Text>
               <View style={styles.contPicker}>
@@ -267,7 +267,7 @@ const UbahProfile = ({navigation, route}) => {
                 </Picker>
               </View>
             </View>
-            <Gap height={24} />
+            <Gap height={16} />
             <View>
               <Text style={styles.titleText}>Program Studi</Text>
               <View style={styles.contPicker}>
@@ -292,14 +292,14 @@ const UbahProfile = ({navigation, route}) => {
               </View>
             </View>
 
-            <Gap height={24} />
+            <Gap height={16} />
             <Inputs
               value={profile.level}
               onChangeText={value => changeText('level', value)}
               title="Angkatan"
               placeholder="Masukkan Angkatan"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             {payload.status === 'alumni' ? (
               <Inputs
                 value={profile.graduated}

@@ -165,7 +165,7 @@ const TulisBerita = ({navigation, route}) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.page}>
-          <Gap height={24} />
+          <Gap height={16} />
           <View>
             <Inputs
               value={form.title}
@@ -173,7 +173,7 @@ const TulisBerita = ({navigation, route}) => {
               title="Judul"
               placeholder="Judul berita"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             <Text style={styles.titleText}>Foto</Text>
             <TouchableOpacity
               onPress={() => getImage()}
@@ -212,7 +212,7 @@ const TulisBerita = ({navigation, route}) => {
               </TouchableOpacity>
             )}
 
-            <Gap height={24} />
+            <Gap height={16} />
             <View>
               <Text style={styles.titleText}>Kategori</Text>
               <View style={styles.contPicker}>
@@ -234,7 +234,7 @@ const TulisBerita = ({navigation, route}) => {
                 </Picker>
               </View>
             </View>
-            <Gap height={24} />
+            <Gap height={16} />
             <View>
               <Text style={styles.titleText}>Sub Kategori</Text>
               <View style={styles.contPicker}>
@@ -255,7 +255,7 @@ const TulisBerita = ({navigation, route}) => {
                 </Picker>
               </View>
             </View>
-            <Gap height={24} />
+            <Gap height={16} />
             <Inputs
               multiline
               numberOfLines={10}
@@ -264,7 +264,7 @@ const TulisBerita = ({navigation, route}) => {
               title="Isi Berita"
               placeholder="Masukkan isi berita"
             />
-            <Gap height={100} />
+            <Gap height={80} />
           </View>
         </View>
       </ScrollView>

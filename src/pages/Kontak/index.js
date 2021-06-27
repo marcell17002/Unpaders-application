@@ -13,38 +13,38 @@ const Kontak = ({navigation}) => {
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.page}>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contText}>UNPADERS, website komunitas Alumni Universitas Padjadjaran, menjalin masa, menginspirasi dunia.</Text>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contJudul}>Founder:</Text>
                 <Text style={styles.contText}>Irawati Hermawan</Text>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contJudul}>Co-Founder:</Text>
                 <Text style={styles.contText}>Teguh Santosa</Text>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contJudul}>Chief Editor:</Text>
                 <Text style={styles.contText}>Sonny Muhammad</Text>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contJudul}>Managing Editor:</Text>
                 <Text style={styles.contText}>Alexander Manurung</Text>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contJudul}>Editorial Staff:</Text>
                 <Text style={styles.contText}>Amelia Putri Pertiwi, Ikbal Tawakal</Text>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contJudul}>Alamat:</Text>
                 <Text style={styles.contText}>Jalan Pelajar Pejuang 45 No. 104, Bandung, Jawa Barat</Text>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contJudul}>Telp/WA:</Text>
                 <Text style={styles.contText}>085156507180</Text>
-                <Gap height={24}/>
+                <Gap height={20}/>
 
                 <Text style={styles.contJudul}>E-mail:</Text>
                 <Text style={styles.contText}>redaksi@unpaders.id</Text>

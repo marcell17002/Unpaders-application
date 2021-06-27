@@ -13,7 +13,7 @@ const TentangKami = ({navigation}) => {
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.page}>
-                <Gap height={24}/>
+                <Gap height={20}/>
                     <Text style={styles.contPage}>Ada banyak media daring dan beragam jenisnya. Unpaders memilih menjadi portal komunitas, untuk alumni Universitas Padjadjaran. Kami berkomitmen menjadi wadah lintas angkatan, lintas generasi; lintas fakultas pun lintas perkubu-kubuan (seandainya itu pun ada). Kami berkomitmen menaungi semua perspektif, hobi, hingga gaya hidup.</Text>
                     <Gap height={20}/>
                     <Text style={styles.contPage}>Para penggagas Unpaders berasal dari angkatan dan fakultas yang berbeda-beda pula. Bersua dan berurun-rembuk secara daring. Sebagian di antaranya belum pernah saling mengenal satu sama lain. Kami disatukan semangat yang sama: mengisi kekosongan medium komunikasi antar sesama alumni Unpad.</Text>

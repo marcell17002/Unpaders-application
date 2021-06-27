@@ -32,12 +32,11 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.text.grey,
   },
   contCommentUser: {
-    marginTop: 16,
     marginLeft: 24,
     marginRight: 20,
     backgroundColor: colors.primaryWhite,
     flexDirection: 'row',
-    marginBottom: 16,
+    marginVertical: 12,
   },
   ketUser: {
     flexDirection: 'row',

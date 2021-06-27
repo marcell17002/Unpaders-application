@@ -52,21 +52,23 @@ const Masuk = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View style={styles.contImage}>
-        <Image
-          source={require('../../assets/LogoBesar.png')}
-          style={StyleSheet.image}
-        />
-        <Text style={styles.title}>Masuk</Text>
+        <View>
+          <Image
+            source={require('../../assets/LogoBesar.png')}
+            style={StyleSheet.image}
+          />
+          <Text style={styles.title}>Masuk</Text>
+        </View>
       </View>
-      <Gap height={52} />
-      <View style={styles.inputan}>
+      <Gap height={16} />
+      <View style={styles.contInputan}>
         <Inputs
           title="Email"
           value={form.email}
           onChangeText={value => setForm('email', value)}
           placeholder="Masukkan Email"
         />
-        <Gap height={24} />
+        <Gap height={16} />
         <Inputs
           title="Kata Sandi"
           secure
@@ -75,14 +77,17 @@ const Masuk = ({navigation}) => {
           placeholder="Masukkan Kata Sandi"
         />
       </View>
-      <Gap height={80} />
-      <View style={styles.button}>
-        <Buttons title="Masuk" onPress={() => onLog()} />
-        <Text style={styles.buttonlink}>Belum punya Akun?</Text>
-        <Link
-          onPress={() => navigation.navigate('Daftar')}
-          title="Daftar disini"
-        />
+      <Gap height={16} />
+      <View style={styles.contButton}>
+        <View>
+          <Buttons title="Masuk" onPress={() => onLog()} />
+          <Text style={styles.buttonlink}>Belum punya Akun?</Text>
+          <Link
+            onPress={() => navigation.navigate('Daftar')}
+            title="Daftar disini"
+          />
+          
+        </View>
       </View>
     </View>
   );
@@ -94,33 +99,34 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: 'white',
+    paddingLeft: 24,
+    paddingRight: 20,
   },
   contImage: {
-    marginTop: 100,
     alignItems: 'center',
+    flex: 1.5,
+    justifyContent: 'space-around',
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 12,
     textAlign: 'center',
     color: colors.text.primdonker2,
     fontFamily: fonts.primary.bold,
   },
-  inputan: {
-    paddingLeft: 24,
-    paddingRight: 20,
-    marginBottom: 28,
+  contInputan: {
+    flex: 3,
   },
-  button: {
-    paddingLeft: 24,
-    paddingRight: 20,
+  contButton: {
+    flex: 1.5,
+    justifyContent: 'space-around',
   },
   buttonlink: {
     textAlign: 'center',
     fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
-    marginTop: -8,
-    marginBottom: 8,
+    //marginTop: -8,
+    //marginBottom: 4,
   },
 });

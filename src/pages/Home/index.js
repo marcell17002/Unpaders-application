@@ -9,6 +9,7 @@ import {
   Kategori,
   SubCategoryHome,
 } from '../../components/moleculs';
+import {Gap} from '../../components/atoms';
 import {api} from '../../services';
 import {colors, filterData, fonts, getData, notifications} from '../../utils';
 
@@ -131,6 +132,7 @@ const Home = ({navigation}) => {
           props={subCategory}
           parentCallBack={filterDataSubCategory}
         />
+        <Gap height={4}/>
         {event.map(item => {
           return (
             <Event
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 24,
     marginRight: 10,
-    marginVertical: 24,
+    marginVertical: 20,
   },
   event: {
     backgroundColor: colors.primaryWhite,

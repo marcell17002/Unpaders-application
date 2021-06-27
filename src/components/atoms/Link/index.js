@@ -36,18 +36,18 @@ export default Link;
 
 const styles = StyleSheet.create({
   textPrimary: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.text.primdonker2,
-    fontFamily: fonts.primary.bold,
+    fontFamily: fonts.primary.semibold,
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 8,
   },
   textSecondary: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.text.primdonker2,
-    fontFamily: fonts.primary.bold,
+    fontFamily: fonts.primary.semibold,
     textAlign: 'left',
-    marginTop: 8,
-    marginBottom: 30,
+    //marginTop: 8,
+    marginBottom: 8,
   },
 });
