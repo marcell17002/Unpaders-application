@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'white',
     paddingHorizontal: 40,
-    paddingVertical: 8,
+    paddingVertical: 5,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 5.7,

@@ -22,6 +22,7 @@ const SearchHeader = ({
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
+          placeholderTextColor="#787878"
           style={styles.searchTitle}
         />
         <View style={styles.iconRight}>
@@ -52,11 +53,11 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 20,
     alignItems: 'center',
-    shadowColor: colors.text.tertiary,
-    shadowOffset: {width: 1, height: 1},
-    shadowOpacity: 0.3,
+    shadowColor: '#000',
+    shadowOffset: {width: 1, height: 10},
+    shadowOpacity: 0.6,
     shadowRadius: 5,
-    elevation: 1,
+    elevation: 2.5,
     alignItems: 'center',
   },
   subMain: {

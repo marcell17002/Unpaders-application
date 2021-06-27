@@ -10,6 +10,7 @@ const InputChat = ({value, onChangeText, onPress, placeholder}) => {
         <TextInput
           style={styles.input}
           value={value}
+          placeholderTextColor="#787878"
           onChangeText={onChangeText}
           placeholder={placeholder}></TextInput>
         <Buttons

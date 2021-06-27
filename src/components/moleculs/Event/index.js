@@ -99,12 +99,13 @@ const styles = StyleSheet.create({
   },
   eventCreatorDetail: {
     flexDirection: 'row',
+    marginTop: -6,
   },
   Judul: {
     fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.title,
-    marginTop: -4,
+    marginTop: -6,
   },
   title: {
     marginVertical: 8,

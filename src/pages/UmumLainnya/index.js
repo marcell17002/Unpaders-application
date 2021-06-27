@@ -108,7 +108,7 @@ const UmumLainnya = ({navigation}) => {
         </View>
 
         <TouchableOpacity onPress={() => onLogOut()}>
-          <Text style={styles.logout}>Keluar Aplikasi</Text>
+          <Text style={styles.logout}>KELUAR APLIKASI</Text>
         </TouchableOpacity>
         
       </View>

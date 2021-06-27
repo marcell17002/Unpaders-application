@@ -26,6 +26,7 @@ const Inputs = ({
         numberOfLines={numberOfLines}
         onChangeText={onChangeText}
         placeholder={placeholder}
+        placeholderTextColor="#787878"
       />
     </>
   );

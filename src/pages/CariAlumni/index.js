@@ -64,6 +64,7 @@ const CariAlumni = ({navigation, route}) => {
     <View style={styles.page}>
       <SearchHeader
         value={input}
+        less
         onChangeText={value => searchFilter(value)}
         placeholder="Cari Alumni disini ..."
         onPressBack={() => {
@@ -75,7 +76,7 @@ const CariAlumni = ({navigation, route}) => {
         less
       />
       <View style={styles.body}>
-        {alumniTemp.length < 1 ? (
+        {alumni.length < 1 ? (
           <NotFound type="Search" />
         ) : (
           <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>

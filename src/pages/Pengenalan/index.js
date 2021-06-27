@@ -83,7 +83,7 @@ const Pengenalan = ({navigation}) => {
             />
             <Link
               onPress={() => generateUserId()}
-              title="Daftar sebagai Pengunjung"
+              title="Masuk sebagai Pengunjung"
             />
           </View>
       </View>

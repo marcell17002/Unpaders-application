@@ -294,11 +294,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
-    marginBottom: 12,
+    marginBottom: 8,
   },
   inputImage: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     fontSize: 13,
     fontFamily: fonts.primary.reguler,
     borderWidth: 1,
@@ -315,6 +316,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     resizeMode: 'cover',
     marginRight: '5%',
+    color: colors.text.primary,
   },
   contPicker: {
     backgroundColor: colors.backgroundgrey,
@@ -329,6 +331,6 @@ const styles = StyleSheet.create({
   pilihFoto: {
     fontSize: 14,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.secondGrey,
+    color: colors.text.primary,
   },
 });
