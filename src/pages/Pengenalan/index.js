@@ -51,7 +51,8 @@ const Pengenalan = ({navigation}) => {
       <View style={styles.contImage}>
         <Image
           source={require('../../assets/Intro.png')}
-          style={StyleSheet.image}
+          style={{width: '100%', height: '100%',}}
+          resizeMode='contain'
         />
       </View>
       <Gap height={16} />
@@ -112,10 +113,6 @@ const styles = StyleSheet.create({
   contButton: {
     flex: 2,
     justifyContent: 'space-around',
-  },
-  image: {
-    width: 250,
-    height: 164,
   },
   title: {
     fontSize: 18,

@@ -23,8 +23,9 @@ const Headers = ({
         <>
           <View style={styles.mainTitleBundle}>
             <Image
-              style={styles.image}
               source={require('../../../assets/LogoKecil.png')}
+              style={{marginVertical: 3, maxHeight: '50%'}}
+              resizeMode='contain'
             />
           </View>
           <TouchableOpacity
@@ -180,6 +181,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    marginLeft: -40,
     marginVertical: 10,
   },
   mainHeader: {

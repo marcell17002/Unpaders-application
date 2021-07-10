@@ -210,6 +210,7 @@ const UbahProfile = ({navigation, route}) => {
               <Image
                 style={styles.iconAdd}
                 source={require('../../assets/addImage.png')}
+                resizeMode='cover'
               />
             </View>
           </TouchableOpacity>
@@ -341,7 +342,6 @@ const styles = StyleSheet.create({
   iconAdd: {
     height: 24,
     width: 24,
-    resizeMode: 'cover',
     alignSelf: 'center',
     position: 'absolute',
     bottom: 0,

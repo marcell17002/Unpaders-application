@@ -199,6 +199,7 @@ const TulisBerita = ({navigation, route}) => {
                         ? {uri: photo}
                         : require('../../assets/default-image.png')
                     }
+                    resizeMode='cover'
                   />
                 ) : (
                   <View style={styles.inputImage}>

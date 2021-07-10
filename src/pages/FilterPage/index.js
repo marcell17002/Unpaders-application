@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   pages: {
-    paddingBottom: '30%',
+    paddingBottom: '10%',
   },
   ghap: {
     flexDirection: 'row',
@@ -231,5 +231,6 @@ const styles = StyleSheet.create({
   content: {
     marginLeft: 12,
     marginRight: 12,
+    
   },
 });

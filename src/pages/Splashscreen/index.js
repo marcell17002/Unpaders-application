@@ -11,7 +11,8 @@ const Splashscreen = ({navigation}) => {
         <View style={styles.container}> 
             <Image
                 source={require("../../assets/Splash.png")}
-                style={StyleSheet.image} />
+                style={{width: '80%', height: '100%',}}
+                resizeMode='contain'/>
         </View>
     );
 };
@@ -22,11 +23,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "space-around",
         alignItems: "center",
-    },
-    image: {
-        width: 313,
-        height: 208,
     },
 })

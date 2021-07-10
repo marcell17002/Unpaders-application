@@ -105,7 +105,7 @@ const Home = ({navigation}) => {
             }}
             active={activeIndex === 2 ? true : false}
             pict={require('../../assets/KatAlumni.png')}
-            title="Alumni"
+            title="IKA"
           />
           <Kategori
             onPress={() => {

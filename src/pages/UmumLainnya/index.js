@@ -75,6 +75,7 @@ const UmumLainnya = ({navigation}) => {
             }
             type="secondary"
             image={require('../../assets/facebook.png')}
+            
             namaTombol="Facebook"
           />
           <ListButton

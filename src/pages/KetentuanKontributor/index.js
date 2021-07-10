@@ -17,18 +17,20 @@ const KetentuanKontributor = ({navigation}) => {
                     <Text style={styles.Judul}>Kontributor</Text>
                     {/* ini yg flex row */}
                     <View style={styles.subKontrib}>
-                        <View>
+                        <View style={styles.subKontrib1}>
                             <Image
-                            style={styles.photo1}
-                            source={require('../../assets/Kontrib1.png')}
+                                style={styles.photo1}
+                                source={require('../../assets/Kontrib1.png')}
+                                resizeMode='contain'
                             />
                             <Text style={styles.textKet1}>Kontributor adalah Alumni Universitas Padjadjaran</Text>
                         </View>
-                        <Gap width={12}/>
-                        <View>
+                        {/* <Gap width={12}/> */}
+                        <View style={styles.subKontrib2}>
                             <Image
-                            style={styles.photo1}
-                            source={require('../../assets/Kontrib2.png')}
+                                style={styles.photo1}
+                                source={require('../../assets/Kontrib2.png')}
+                                resizeMode='contain'
                             />
                             <Text style={styles.textKet1}>Kontributor melengkapi data diri dengan sebenar-benarnya pada form Registrasi</Text>
                         </View>
@@ -39,8 +41,9 @@ const KetentuanKontributor = ({navigation}) => {
                     <Text style={styles.Judul}>Ketentuan Artikel</Text>
                     <View>
                         <Image
-                            style={styles.photo1}
+                            style={styles.photoArtikel}
                             source={require('../../assets/Kontrib3.png')}
+                            resizeMode='contain'
                         />
                         <Text style={styles.textArtikel}>1. Artikel dikirimkan dengan bahasa Indonesia yang baik dan benar dan memperhatikan kaidah penulisan.</Text>
                         <Text style={styles.textArtikel}>2. Artikel juga dapat menggunakan bahasa Sunda dan bahasa Inggris, dengan memperhatikan kaidah penulisan yang baik dan benar.</Text>
@@ -52,39 +55,42 @@ const KetentuanKontributor = ({navigation}) => {
                 <View style={styles.container}> 
                     <Text style={styles.Judul}>Publikasi Artikel</Text>
                     {/* ini yg flex row */}
-                    <View style={styles.subKontrib}>
-                        <View>
+                    <View style={styles.subPublikasi}>
+                        <View style={styles.subPublikasi1}>
                             <Image
-                            style={styles.photo1}
+                            style={styles.photoPublikasi}
                             source={require('../../assets/Kontrib4.png')}
+                            resizeMode='contain'
                             />
-                            <Text style={styles.textKet1}>Profile yang ditampilkan berupa Nama, Fakultas, Jurusan, dan Angkatan</Text>
+                            <Text style={styles.textPublikasi}>Profile yang ditampilkan berupa Nama, Fakultas, Jurusan, dan Angkatan</Text>
                         </View>
-                        <Gap width={16}/>
-                        <View>
+                        {/* <Gap width={16}/> */}
+                        <View style={styles.subPublikasi2}>
                             <Image
-                            style={styles.photo1}
+                            style={styles.photoPublikasi}
                             source={require('../../assets/Kontrib5.png')}
+                            resizeMode='contain'
                             />
-                            <Text style={styles.textKet1}>Unpaders akan melakukan kurasi/editing tanpa mengurangi substansi</Text>
+                            <Text style={styles.textPublikasi}>Unpaders akan melakukan kurasi/editing tanpa mengurangi substansi</Text>
                         </View>
                     </View>
-                    <Gap height={20}/>
-                    <View style={styles.subKontrib}>
-                        <View>
+                    <View style={styles.subPublikasi}>
+                        <View style={styles.subPublikasi1}>
                             <Image
-                            style={styles.photo1}
+                            style={styles.photoPublikasi}
                             source={require('../../assets/Kontrib6.png')}
+                            resizeMode='contain'
                             />
-                            <Text style={styles.textKet1}>Bila diperlukan, Tim Unpaders akan menghubungi untuk mengonfirmasi artikel</Text>
+                            <Text style={styles.textPublikasi}>Bila diperlukan, Tim Unpaders akan menghubungi untuk mengonfirmasi artikel</Text>
                         </View>
-                        <Gap width={16}/>
-                        <View>
+                        {/* <Gap width={16}/> */}
+                        <View style={styles.subPublikasi2}>
                             <Image
-                            style={styles.photo1}
+                            style={styles.photoPublikasi}
                             source={require('../../assets/Kontrib7.png')}
+                            resizeMode='contain'
                             />
-                            <Text style={styles.textKet1}>Kontributor bertanggung jawab atas Artikel yang dikirim dan dipublikasikan</Text>
+                            <Text style={styles.textPublikasi}>Kontributor bertanggung jawab atas Artikel yang dikirim dan dipublikasikan</Text>
                         </View>
                     </View>
                 </View>
@@ -108,38 +114,91 @@ const styles = StyleSheet.create({
         paddingRight: 20,
     },
     container: {
-        paddingVertical: 12,
-        paddingHorizontal: 16,
         borderColor: colors.backgroundgrey,
         borderWidth: 2,
         borderRadius: 10,
     },
-    photo1: {
-        marginTop: 16,
-        marginBottom: 16,
-        alignSelf: 'center',
-    },
-    textKet1: {
-        maxWidth: 156,
-        textAlign: 'center',
-        fontSize: 12,
-        fontFamily: fonts.primary.reguler,
-        color: colors.text.primary,
-    },
     subKontrib: {
         flexDirection: 'row',
-        flex: 1,
-        alignSelf: 'center',
+        alignContent: 'center',
+        maxWidth: '100%',
     },
-    textArtikel: {
+    subKontrib1: {
+        flex: 1,
+        width: '100%',
+        backgroundColor: 'yellow',
+    },
+    subKontrib2: {
+        flex: 1,
+        width: '100%',
+    },
+    photo1: {
+        marginVertical: 16,
+        alignSelf: 'center',
+        maxHeight: '40%',
+        maxWidth: '50%',
+        //backgroundColor: 'yellow',
+    },
+    textKet1: {
+        maxWidth: '90%',
+        textAlign: 'center',
+        alignSelf: 'center',
         fontSize: 12,
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
+        //backgroundColor: 'yellow',
+    },
+    subPublikasi: {
+        flexDirection: 'row',
+        alignContent: 'center',
+        maxWidth: '100%',
+    },
+    subPublikasi1: {
+        flex: 1,
+        width: '100%',
+        backgroundColor: 'yellow',
+    },
+    subPublikasi2: {
+        flex: 1,
+        width: '100%',
+    },
+    photoPublikasi: {
+        marginVertical: 16,
+        alignSelf: 'center',
+        maxHeight: '40%',
+        maxWidth: '50%',
+        //backgroundColor: 'yellow',
+    },
+    textPublikasi: {
+        maxWidth: '90%',
+        textAlign: 'center',
+        alignSelf: 'center',
+        fontSize: 12,
+        fontFamily: fonts.primary.reguler,
+        color: colors.text.primary,
+        //backgroundColor: 'yellow',
+    },
+    textArtikel: {
+        flex:1,
+        fontSize: 12,
+        fontFamily: fonts.primary.reguler,
+        color: colors.text.primary,
+        paddingHorizontal: 14,
+        backgroundColor: 'yellow',
+    },
+    photoArtikel: {
+        marginVertical: 16,
+        alignSelf: 'center',
+        maxHeight: '25%',
+        maxWidth: '25%',
     },
     Judul: {
         fontSize: 16,
         fontFamily: fonts.primary.semibold,
         color: colors.text.primary,
+        marginLeft: 16,
+        paddingTop: 4,
+        marginBottom: 16,
     },
 
 });

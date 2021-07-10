@@ -55,7 +55,8 @@ const Masuk = ({navigation}) => {
         <View>
           <Image
             source={require('../../assets/LogoBesar.png')}
-            style={StyleSheet.image}
+            resizeMode='contain'
+            style={{maxWidth: '70%',}}
           />
           <Text style={styles.title}>Masuk</Text>
         </View>
@@ -103,13 +104,10 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: 'white',
-    paddingLeft: 24,
-    paddingRight: 20,
   },
   contImage: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'space-around',
   },
   title: {
     fontSize: 16,
@@ -120,19 +118,14 @@ const styles = StyleSheet.create({
   },
   contInputan: {
     flex: 4,
+    paddingLeft: 24,
+    paddingRight: 20,
   },
-  // contButton: {
-  //   // flex: 1.5,
-  //   // justifyContent: 'space-around',
-  //   backgroundColor: 'yellow',
-  // },
   buttonlink: {
     textAlign: 'center',
     fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
-    //marginTop: -8,
-    //marginBottom: 4,
   },
   contLink: {
     flexDirection: 'row',

@@ -20,6 +20,7 @@ export default ButtonFilter;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    width: '100%',
   },
   button: active => ({
     backgroundColor: active

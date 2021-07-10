@@ -56,7 +56,7 @@ const MainAppCollege = () => {
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Chat" component={Chat} />
-      <Tab.Screen name="Lainnya" component={Lainnya} />
+      <Tab.Screen name="Profil" component={Lainnya} />
     </Tab.Navigator>
   );
 };
@@ -67,7 +67,7 @@ const MainAppGraduated = () => {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Chat" component={Chat} />
       <Tab.Screen name="Berita" component={Berita} />
-      <Tab.Screen name="Lainnya" component={Lainnya} />
+      <Tab.Screen name="Profil" component={Lainnya} />
     </Tab.Navigator>
   );
 };

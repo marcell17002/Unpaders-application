@@ -192,15 +192,20 @@ const FormDaftar = ({navigation, route}) => {
         <View style={styles.contImage}>
           <Image
             source={require('../../assets/LogoBesar.png')}
-            style={StyleSheet.image}
+            //style={StyleSheet.image}
+            resizeMode='contain'
+            style={{maxWidth: '70%',}}
           />
+          <Gap height={8}/>
           <Text style={styles.title}>
             {status === 'alumni'
               ? 'Daftar sebagai Alumni'
               : 'Daftar sebagai Mahasiswa'}
           </Text>
         </View>
-        <Gap height={20} />
+        <Gap height={32} />
+        <View style={styles.contIsian}>
+
         <View>
           <Text style={styles.section}>Informasi Personal</Text>
           <Inputs
@@ -322,6 +327,8 @@ const FormDaftar = ({navigation, route}) => {
           />
           <Gap height={4}/>
         </View>
+
+        </View>
       </View>
     </ScrollView>
   );
@@ -333,12 +340,14 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
-    paddingLeft: 24,
-    paddingRight: 20,
   },
   contImage: {
-    marginTop: 16,
     alignItems: 'center',
+    //backgroundColor: 'yellow',
+  },
+  contIsian: {
+    paddingLeft: 24,
+    paddingRight: 20,
   },
   title: {
     fontSize: 16,

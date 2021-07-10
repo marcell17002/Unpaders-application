@@ -10,7 +10,8 @@ const Daftar = ({navigation}) => {
         <View>
           <Image
             source={require('../../assets/LogoBesar.png')}
-            style={StyleSheet.image}
+            resizeMode='contain'
+            style={{maxWidth: '70%',}}
           />
           <Text style={styles.title}>Daftar</Text>
         </View>
@@ -62,7 +63,6 @@ const styles = StyleSheet.create({
   contImage: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'space-around',
   },
   title: {
     fontSize: 16,
@@ -83,10 +83,6 @@ const styles = StyleSheet.create({
     color: colors.text.tertiary,
     marginBottom: 4,
   },
-  // contMasuk:{
-  //   flex: 1.5/2,
-  //   justifyContent: 'space-around',
-  // },
   contLink: {
     flexDirection: 'row',
     justifyContent: 'center',
