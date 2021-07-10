@@ -58,6 +58,11 @@ const Event = ({
 export default Event;
 
 const styles = StyleSheet.create({
+  eventImage: {
+    borderRadius: 5,
+    borderWidth: 0.5,
+    borderColor: colors.input.outline,
+  },
   event: {
     flexDirection: 'row',
     paddingBottom: 24,

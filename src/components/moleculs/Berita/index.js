@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   titleBerita: {
-    fontSize: 24,
-    fontFamily: fonts.secondary.semibold,
+    fontSize: 20,
+    fontFamily: fonts.primary.semibold,
     color: colors.text.title,
   },
   contPenulis: {

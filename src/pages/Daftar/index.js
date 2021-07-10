@@ -15,8 +15,9 @@ const Daftar = ({navigation}) => {
           <Text style={styles.title}>Daftar</Text>
         </View>
       </View>
-      <Gap height={16} />
+      
       <View style={styles.contButton}>
+        <Gap height={48} />
         <View>
           <Buttons
             title="Daftar sebagai Alumni"
@@ -31,18 +32,21 @@ const Daftar = ({navigation}) => {
               navigation.navigate('FormDaftar', {status: 'mahasiswa'})
             }
           />
-        </View>
-      </View>
-        <Gap height={16} />
-        <View style={styles.contMasuk}>
-          <View>
+          <Gap height={16} />
+
+          <View style={styles.contLink}>
             <Text style={styles.buttonlink}>Sudah punya Akun?</Text>
+            <Gap width={8}/>
             <Link
               onPress={() => navigation.navigate('Masuk')}
               title="Masuk disini"
             />
-          </View>
         </View>
+
+        </View>
+      </View>
+        
+        
       
     </View>
   );
@@ -57,11 +61,11 @@ const styles = StyleSheet.create({
   },
   contImage: {
     alignItems: 'center',
-    flex: 1.5,
+    flex: 1,
     justifyContent: 'space-around',
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 12,
     textAlign: 'center',
     color: colors.text.primdonker2,
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
   contButton: {
     paddingLeft: 24,
     paddingRight: 20,
-    flex: 3,
+    flex: 4,
   },
   buttonlink: {
     textAlign: 'center',
@@ -79,8 +83,13 @@ const styles = StyleSheet.create({
     color: colors.text.tertiary,
     marginBottom: 4,
   },
-  contMasuk:{
-    flex: 1.5/2,
-    justifyContent: 'space-around',
+  // contMasuk:{
+  //   flex: 1.5/2,
+  //   justifyContent: 'space-around',
+  // },
+  contLink: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: -8,
   }
 });

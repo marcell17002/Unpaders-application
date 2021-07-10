@@ -6,13 +6,13 @@ import { colors, fonts } from '../../utils';
 
 const Kontak = ({navigation}) => {
     return (
-        <View>
+        <View style={styles.page}>
             <View>
                 <Headers title='Kontak' type='sub-back' 
                 onPressBack={() => navigation.goBack()}/>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.page}>
+                <View>
                 <Gap height={20}/>
 
                 <Text style={styles.contText}>UNPADERS, website komunitas Alumni Universitas Padjadjaran, menjalin masa, menginspirasi dunia.</Text>
@@ -48,7 +48,7 @@ const Kontak = ({navigation}) => {
 
                 <Text style={styles.contJudul}>E-mail:</Text>
                 <Text style={styles.contText}>redaksi@unpaders.id</Text>
-                <Gap height={80}/>
+                <Gap height={20}/>
                 </View>
             </ScrollView>
         </View>

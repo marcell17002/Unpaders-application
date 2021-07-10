@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 20,
     alignContent: 'center',
-    marginRight: 20,
+    marginRight: 16,
   },
   namaAlumni: {
     fontSize: 14,

@@ -6,13 +6,13 @@ import { colors, fonts } from '../../utils';
 
 const KetentuanKontributor = ({navigation}) => {
     return (
-        <View>
+        <View style={styles.page}>
             <View>
                 <Headers title='Ketentuan Kontributor' type='sub-back' 
                 onPressBack={() => navigation.goBack()}/>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}> 
-            <View style={styles.page}>
+            <View style={styles.pages}>
                 <View style={styles.container}> 
                     <Text style={styles.Judul}>Kontributor</Text>
                     {/* ini yg flex row */}
@@ -45,7 +45,7 @@ const KetentuanKontributor = ({navigation}) => {
                         <Text style={styles.textArtikel}>1. Artikel dikirimkan dengan bahasa Indonesia yang baik dan benar dan memperhatikan kaidah penulisan.</Text>
                         <Text style={styles.textArtikel}>2. Artikel juga dapat menggunakan bahasa Sunda dan bahasa Inggris, dengan memperhatikan kaidah penulisan yang baik dan benar.</Text>
                         <Text style={styles.textArtikel}>3. Apabila artikel maupun foto berupa saduran dari sumber lain, kontributor wajib menyebutkan sumber.</Text>
-                        <Text style={styles.textArtikel}>4. Informasi UMKM yang dikirimkan harus mengandung informasi mengenai Nama Alumni, Fakultas/Angkatan, Kategori Usaha, Nomor Kontak, Lokasi Usaha, dan Medias Sosial, serta Deskripsi mengenai produk UMKM.</Text>
+                        <Text style={styles.textArtikel}>4. Informasi UMKM yang dikirimkan harus mengandung informasi mengenai Nama Alumni, Fakultas/Angkatan, Kategori Usaha, Nomor Kontak, Lokasi Usaha, dan Media Sosial, serta Deskripsi mengenai produk UMKM.</Text>
                     </View>
                 </View>
                 <Gap height={24}/>
@@ -88,7 +88,7 @@ const KetentuanKontributor = ({navigation}) => {
                         </View>
                     </View>
                 </View>
-                <Gap height={80}/>
+                <Gap height={20}/>
             </View>
             </ScrollView>
         </View>
@@ -101,6 +101,8 @@ const styles = StyleSheet.create({
     page: {
         flex: 1,
         backgroundColor: colors.primaryWhite,
+    },
+    pages: {
         paddingTop: 20,
         paddingLeft: 24,
         paddingRight: 20,

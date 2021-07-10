@@ -189,7 +189,7 @@ const UbahProfile = ({navigation, route}) => {
     );
   };
   return (
-    <View>
+    <View  style={styles.page}>
       <View style={styles.contHeader}>
         <Headers
           type="sub-edit"
@@ -200,7 +200,7 @@ const UbahProfile = ({navigation, route}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.page}>
+        <View style={styles.pages}>
           <Gap height={16} />
           <TouchableOpacity
             onPress={() => getImage()}
@@ -309,7 +309,7 @@ const UbahProfile = ({navigation, route}) => {
               />
             ) : null}
           </View>
-          <Gap height={88} />
+          <Gap height={20} />
         </View>
       </ScrollView>
     </View>
@@ -322,6 +322,8 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
+  },
+  pages: {
     paddingLeft: 24,
     paddingRight: 20,
   },

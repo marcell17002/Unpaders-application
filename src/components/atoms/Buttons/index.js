@@ -114,14 +114,14 @@ const styles = StyleSheet.create({
   },
   iconBundle: disable => ({
     backgroundColor: disable ? colors.backgroundgrey : colors.primary,
-    width: 52,
-    height: 52,
+    width: 44,
+    height: 44,
     padding: 8,
     borderRadius: 10,
   }),
   iconDisable: disable => ({
+    marginLeft: 2,
     alignSelf: 'center',
-    justifyContent: 'space-between',
     color: disable ? colors.primarygrey : colors.primaryWhite,
   }),
 });

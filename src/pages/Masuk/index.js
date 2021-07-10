@@ -76,18 +76,22 @@ const Masuk = ({navigation}) => {
           onChangeText={value => setForm('password', value)}
           placeholder="Masukkan Kata Sandi"
         />
+        <Gap height={32} />
+        <Buttons title="Masuk" onPress={() => onLog()} />
+          <View style={styles.contLink}>
+            <Text style={styles.buttonlink}>Belum punya Akun?</Text>
+            <Gap width={8}/>
+            <Link
+              onPress={() => navigation.navigate('Daftar')}
+              title="Daftar disini"
+            />
       </View>
-      <Gap height={16} />
+      {/* <Gap height={16} />
       <View style={styles.contButton}>
         <View>
-          <Buttons title="Masuk" onPress={() => onLog()} />
-          <Text style={styles.buttonlink}>Belum punya Akun?</Text>
-          <Link
-            onPress={() => navigation.navigate('Daftar')}
-            title="Daftar disini"
-          />
           
-        </View>
+          </View>
+        </View> */}
       </View>
     </View>
   );
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
   },
   contImage: {
     alignItems: 'center',
-    flex: 1.5,
+    flex: 1,
     justifyContent: 'space-around',
   },
   title: {
@@ -115,12 +119,13 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.bold,
   },
   contInputan: {
-    flex: 3,
+    flex: 4,
   },
-  contButton: {
-    flex: 1.5,
-    justifyContent: 'space-around',
-  },
+  // contButton: {
+  //   // flex: 1.5,
+  //   // justifyContent: 'space-around',
+  //   backgroundColor: 'yellow',
+  // },
   buttonlink: {
     textAlign: 'center',
     fontSize: 14,
@@ -129,4 +134,9 @@ const styles = StyleSheet.create({
     //marginTop: -8,
     //marginBottom: 4,
   },
+  contLink: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: -8,
+  }
 });

@@ -153,7 +153,7 @@ const TulisBerita = ({navigation, route}) => {
     }
   };
   return (
-    <View>
+    <View style={styles.page}>
       <View>
         <Headers
           type="sub-edit"
@@ -164,7 +164,7 @@ const TulisBerita = ({navigation, route}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.page}>
+        <View style={styles.pages}>
           <Gap height={16} />
           <View>
             <Inputs
@@ -264,7 +264,7 @@ const TulisBerita = ({navigation, route}) => {
               title="Isi Berita"
               placeholder="Masukkan isi berita"
             />
-            <Gap height={80} />
+            <Gap height={20} />
           </View>
         </View>
       </ScrollView>
@@ -278,6 +278,8 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
+  },
+  pages: {
     paddingLeft: 24,
     paddingRight: 20,
   },

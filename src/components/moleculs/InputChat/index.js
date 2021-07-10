@@ -45,7 +45,9 @@ const styles = StyleSheet.create({
   input: {
     color: "#000",
     backgroundColor: colors.backgroundgrey,
-    paddingHorizontal: 20,
+    maxHeight: 44,
+    alignSelf: 'center',
+    paddingHorizontal: 16,
     borderRadius: 10,
     flex: 1,
     marginRight: 12,

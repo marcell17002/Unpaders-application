@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ScrollView,
+  Linking,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -48,7 +49,7 @@ const UmumLainnya = ({navigation}) => {
           </View>
           <ListButton
             type="primary"
-            namaTombol="Tentang Kami"
+            namaTombol="Unpaders"
             onPress={() => navigation.navigate('TentangKami')}
           />
           <ListButton
@@ -56,11 +57,11 @@ const UmumLainnya = ({navigation}) => {
             namaTombol="Kontak"
             onPress={() => navigation.navigate('Kontak')}
           />
-          <ListButton
+          {/* <ListButton
             type="primary"
             namaTombol="Disclaimer"
             onPress={() => navigation.navigate('Disclaimer')}
-          />
+          /> */}
           <View style={styles.ghap}>
             <Gap height={12} />
             <Text style={styles.textGap}>SOCIAL MEDIA UNPADERS</Text>
@@ -102,12 +103,12 @@ const UmumLainnya = ({navigation}) => {
           />
           <View style={styles.ghap}>
             <Gap height={12} />
-            <Text style={styles.textGap}>GANTI AKUN</Text>
+            <Text style={styles.textGap}>AKUN</Text>
             <Gap height={12} />
           </View>
 
           <TouchableOpacity onPress={() => onLogOut()}>
-            <Text style={styles.logout}>Keluar Aplikasi</Text>
+            <Text style={styles.logout}>Beralih Akun</Text>
           </TouchableOpacity>
 
       </ScrollView>  
