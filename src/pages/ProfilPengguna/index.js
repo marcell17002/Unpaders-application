@@ -17,7 +17,7 @@ const ProfilPengguna = ({navigation}) => {
           setProfile(res.data[0]);
           console.log('image : ', res.data[0].image);
         },
-        err => notifications('danger', 'anda tidak terknoneksi ke internet'),
+        err => notifications('danger', 'Tidak terkoneksi internet'),
       );
     });
     return unsubscribe;

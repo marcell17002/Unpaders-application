@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   // },
   subMain: {
     flexDirection: 'row',
-    marginVertical: 12,
+    marginVertical: 14,
     justifyContent: 'space-between',
     alignItems: 'center',
   },

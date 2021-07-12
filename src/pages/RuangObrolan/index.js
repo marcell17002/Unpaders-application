@@ -131,7 +131,7 @@ const RuangObrolan = ({navigation, route}) => {
   };
   const onSend = async () => {
     if (input.length < 1) {
-      return notifications('info', 'masukan pesan anda');
+      return notifications('info', 'Masukan pesan anda');
     }
     const data = {
       chatId: chatId,

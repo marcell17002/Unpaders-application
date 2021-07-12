@@ -24,7 +24,7 @@ const Berita = ({navigation}) => {
     if (payload.status === 'waiting') {
       return notifications(
         'info',
-        'silahkan menunggu data anda direview oleh admin',
+        'Data anda sedang diverifikasi Admin',
       );
     } else return navigation.navigate('TulisBerita', payload);
   };

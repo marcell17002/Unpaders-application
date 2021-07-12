@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   subMain: {
     flexDirection: 'row',
     flex: 1,
-    marginVertical: 8,
+    marginVertical: 5,
     justifyContent: 'space-between',
     alignItems: 'center',
   },

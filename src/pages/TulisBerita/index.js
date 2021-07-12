@@ -47,8 +47,9 @@ const TulisBerita = ({navigation, route}) => {
     {subCategory: 'UMKM Center', category: 'Lapak'},
     {subCategory: 'Kuliner', category: 'Lapak'},
     {subCategory: 'Kiat Bisnis', category: 'Lapak'},
+    {subCategory: 'Merchandise', category: 'Lapak'},
     {subCategory: 'Preloved', category: 'Lapak'},
-    {subCategory: 'Intership', category: 'Loker'},
+    {subCategory: 'Internship', category: 'Loker'},
     {subCategory: 'Fulltime', category: 'Loker'},
     {subCategory: 'Freelance', category: 'Loker'},
   ]);
@@ -90,7 +91,7 @@ const TulisBerita = ({navigation, route}) => {
         if (response.didCancel || response.errorMessage) {
           notifications(
             'warning',
-            'oops, sepertinya anda tidak jadi upload foto ?',
+            'Anda tidak jadi unggah foto?',
           );
         } else {
           const source = `data:${response.type};base64,${response.base64}`;
@@ -112,7 +113,7 @@ const TulisBerita = ({navigation, route}) => {
     dispatch({type: 'SET_LOADING', value: false});
     notifications(
       'success',
-      'berita sukses dibuat, silahkan tunggu verifikasi admin',
+      'Berita berhasil dibuat, tunggu konfirmasi',
     );
     navigation.navigate('MainAppGraduated', {screen: 'Berita'});
   };

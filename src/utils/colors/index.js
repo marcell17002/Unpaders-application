@@ -14,6 +14,8 @@ const mainColors = {
   white: '#ffffff',
   red: '#CC0C09',
   green: '#27AE60',
+  yellowWarn: '#FFF3CD',
+  redDanger: '#F8D7DA',
 };
 
 export const colors = {
@@ -64,6 +66,11 @@ export const colors = {
     background: mainColors.white,
     text: mainColors.greyLight,
     outline: mainColors.greylighter,
+  },
+  notif:{
+    succes: mainColors.blueLight,
+    warning: mainColors.yellowWarn,
+    danger: mainColors.redDanger,
   },
   loadingBackground: mainColors.black3,
 };

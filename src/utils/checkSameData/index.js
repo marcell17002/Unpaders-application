@@ -7,7 +7,7 @@ export const checkSameData = (value1, value2, message) => {
       reject(
         notifications(
           'danger',
-          `oops ${message} yang anda masukkan belum sesuai`,
+          `${message} yang anda masukkan tidak sesuai`,
         ),
       );
     }

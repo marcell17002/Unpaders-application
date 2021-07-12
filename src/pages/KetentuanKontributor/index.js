@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
     subKontrib1: {
         flex: 1,
         width: '100%',
-        backgroundColor: 'yellow',
     },
     subKontrib2: {
         flex: 1,
@@ -137,7 +136,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         maxHeight: '40%',
         maxWidth: '50%',
-        //backgroundColor: 'yellow',
     },
     textKet1: {
         maxWidth: '90%',
@@ -146,7 +144,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
-        //backgroundColor: 'yellow',
     },
     subPublikasi: {
         flexDirection: 'row',
@@ -156,7 +153,6 @@ const styles = StyleSheet.create({
     subPublikasi1: {
         flex: 1,
         width: '100%',
-        backgroundColor: 'yellow',
     },
     subPublikasi2: {
         flex: 1,
@@ -167,7 +163,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         maxHeight: '40%',
         maxWidth: '50%',
-        //backgroundColor: 'yellow',
     },
     textPublikasi: {
         maxWidth: '90%',
@@ -176,7 +171,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
-        //backgroundColor: 'yellow',
     },
     textArtikel: {
         flex:1,
@@ -184,7 +178,6 @@ const styles = StyleSheet.create({
         fontFamily: fonts.primary.reguler,
         color: colors.text.primary,
         paddingHorizontal: 14,
-        backgroundColor: 'yellow',
     },
     photoArtikel: {
         marginVertical: 16,

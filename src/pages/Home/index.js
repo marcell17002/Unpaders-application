@@ -48,7 +48,7 @@ const Home = ({navigation}) => {
           setTempEvent(sortedData);
           setRecommendation(sortedData);
         },
-        err => notifications('danger', 'no internet connection'),
+        err => notifications('danger', 'Tidak terkoneksi internet'),
       );
     });
     return unsubscribe;

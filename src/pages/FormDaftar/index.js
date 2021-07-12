@@ -1,9 +1,9 @@
 import {BASE_IMG} from '@env';
-import {Picker} from 'native-base';
+import {Picker, Icon} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
+import {Buttons, Gap, InputPassword, Inputs, Link} from '../../components/atoms';
 import {api} from '../../services';
 import {
   checkSameData,
@@ -18,6 +18,7 @@ import checkAlumniExist from '../../utils/checkAlumniExist';
 import checkStudentExist from '../../utils/checkStudentExist';
 
 const FormDaftar = ({navigation, route}) => {
+  const [isSecureEntry, setIsSecureEntry]=useState(true) //show/hide password
   const status = route.params.status;
   const dispatch = useDispatch();
   const [facultyList, setFacultyList] = useState([
@@ -134,7 +135,7 @@ const FormDaftar = ({navigation, route}) => {
 
   const checkValueNull = () => {
     if (form.prodi === 'Pilih Prodi ...')
-      return notifications('warning', 'prodi tidak boleh kosong');
+      return notifications('warning', 'Prodi tidak boleh kosong');
     checkValue(form.email, 'email');
     checkValue(form.password, 'password');
     checkValue(form.name, 'nama');
@@ -150,7 +151,7 @@ const FormDaftar = ({navigation, route}) => {
   const postData = async data => {
     await api.postRegister(data).then(
       res => {
-        notifications('success', 'registrasi berhasil silahkan login');
+        notifications('success', 'Registrasi berhasil');
         navigation.replace('Masuk');
       },
       err => {
@@ -196,7 +197,7 @@ const FormDaftar = ({navigation, route}) => {
             resizeMode='contain'
             style={{maxWidth: '70%',}}
           />
-          <Gap height={8}/>
+          {/* <Gap height={8}/> */}
           <Text style={styles.title}>
             {status === 'alumni'
               ? 'Daftar sebagai Alumni'
@@ -215,20 +216,42 @@ const FormDaftar = ({navigation, route}) => {
             placeholder="Masukkan Email"
           />
           <Gap height={16} />
-          <Inputs
+          <InputPassword
             title="Kata Sandi"
             value={form.password}
-            secure
+            secure={isSecureEntry}
             onChangeText={value => setForm('password', value)}
             placeholder="Masukkan Kata Sandi"
+            iconEye={
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecureEntry((prev) => !prev);
+                }}>
+                <Icon style={styles.iconStyle} type="Entypo"
+                  name={
+                    isSecureEntry ? "eye-with-line" : "eye"
+                  }/>
+              </TouchableOpacity>
+            }
           />
           <Gap height={16} />
-          <Inputs
+          <InputPassword
             title="Konfirmasi Kata Sandi"
             value={confirmPassword}
-            secure
+            secure={isSecureEntry}
             onChangeText={value => setConfirmPassword(value)}
             placeholder="Konfirmasi Kata Sandi"
+            iconEye={
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecureEntry((prev) => !prev);
+                }}>
+                <Icon style={styles.iconStyle} type="Entypo"
+                  name={
+                    isSecureEntry ? "eye-with-line" : "eye"
+                  }/>
+              </TouchableOpacity>
+            }
           />
           <Gap height={16} />
           <Inputs
@@ -319,13 +342,15 @@ const FormDaftar = ({navigation, route}) => {
         <Gap height={50} />
         <View>
           <Buttons title="Daftar" onPress={onSave} />
-
-          <Text style={styles.buttonlink}>Sudah punya Akun?</Text>
-          <Link
-            onPress={() => navigation.navigate('Masuk')}
-            title="Masuk disini"
-          />
-          <Gap height={4}/>
+          <View style={styles.contLink}>
+            <Text style={styles.buttonlink}>Sudah punya Akun?</Text>
+            <Gap width={8}/>
+            <Link
+              onPress={() => navigation.navigate('Masuk')}
+              title="Masuk disini"
+            />
+          </View>
+          <Gap height={12}/>
         </View>
 
         </View>
@@ -337,6 +362,9 @@ const FormDaftar = ({navigation, route}) => {
 export default FormDaftar;
 
 const styles = StyleSheet.create({
+  iconStyle: {
+    color: colors.tertierGrey,
+  },
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
@@ -372,8 +400,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     fontFamily: fonts.primary.semibold,
-    color: colors.text.secondGrey,
-    marginTop: -8,
+    color: colors.text.tertiary,
     marginBottom: 4,
   },
   contPicker: {
@@ -395,4 +422,9 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     alignContent: 'space-between',
   },
+  contLink: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: -8,
+  }
 });

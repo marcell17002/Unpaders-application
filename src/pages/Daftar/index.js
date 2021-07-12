@@ -42,7 +42,7 @@ const Daftar = ({navigation}) => {
               onPress={() => navigation.navigate('Masuk')}
               title="Masuk disini"
             />
-        </View>
+          </View>
 
         </View>
       </View>

@@ -25,7 +25,7 @@ const DetailBerita = ({navigation, route}) => {
   useEffect(async () => {
     api.getProfileUser(payload.item.author).then(
       res => setAuthor(res.data[0]),
-      err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
+      err => notifications('danger', 'Tidak terkoneksi internet'),
     );
     api.getLikedEvent('eventId', payload.item._id).then(
       async res => {

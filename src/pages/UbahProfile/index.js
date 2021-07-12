@@ -143,7 +143,7 @@ const UbahProfile = ({navigation, route}) => {
         if (response.didCancel || response.errorMessage) {
           notifications(
             'warning',
-            'oops, sepertinya anda tidak jadi upload foto ?',
+            'Anda tidak jadi unggah foto?',
           );
           setPhoto(pathImage);
         } else {
@@ -179,7 +179,7 @@ const UbahProfile = ({navigation, route}) => {
     api.updateProfileUser(dataEditProfile, profile._id).then(
       async res => {
         dispatch({type: 'SET_LOADING', value: false});
-        notifications('success', 'data profile berhasil diubah');
+        notifications('success', 'Data profile berhasil diubah');
         navigation.goBack();
       },
       err => {

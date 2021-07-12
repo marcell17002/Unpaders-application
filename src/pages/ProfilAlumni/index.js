@@ -29,7 +29,7 @@ const ProfilAlumni = ({navigation, route}) => {
         const sortedData = await sortData(filteredData, 'createdAt');
         setEventCreated(sortedData);
       },
-      err => notifications('danger', 'no internet connection'),
+      err => notifications('danger', 'Tidak terkoneksi internet'),
     );
   }, []);
   return (
