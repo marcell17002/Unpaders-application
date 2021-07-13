@@ -38,7 +38,7 @@ const Lainnya = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View style={styles.contHeader}>
-        <Headers type="main" title="LAINNYA" />
+        <Headers type="main" title="PROFIL" />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.ghap}>
