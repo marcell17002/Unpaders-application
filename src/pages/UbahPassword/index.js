@@ -17,6 +17,8 @@ import {api} from '../../services';
 
 const UbahPassword = ({navigation}) => {
   const [isSecureEntry, setIsSecureEntry]=useState(true) //show/hide password
+  const [isSecureEntry2, setIsSecureEntry2]=useState(true) //show/hide password2
+  const [isSecureEntry3, setIsSecureEntry3]=useState(true) //show/hide password3
   const user = useSelector(state => state).user;
   const dispatch = useDispatch();
   const [profile, setProfile] = useState([]);
@@ -115,18 +117,18 @@ const UbahPassword = ({navigation}) => {
           <Gap height={16} />
           <InputPassword
             value={changePassword.newPassword}
-            secure={isSecureEntry}
+            secure={isSecureEntry2}
             onChangeText={value => setChangePassword('newPassword', value)}
             title="Kata Sandi Baru"
             placeholder="Masukkan kata sandi baru"
             iconEye={
               <TouchableOpacity
                 onPress={() => {
-                  setIsSecureEntry((prev) => !prev);
+                  setIsSecureEntry2((prev) => !prev);
                 }}>
                 <Icon style={styles.iconStyle} type="Entypo"
                   name={
-                    isSecureEntry ? "eye-with-line" : "eye"
+                    isSecureEntry2 ? "eye-with-line" : "eye"
                   }/>
               </TouchableOpacity>
             }
@@ -134,18 +136,18 @@ const UbahPassword = ({navigation}) => {
           <Gap height={16} />
           <InputPassword
             value={changePassword.confirmPassword}
-            secure={isSecureEntry}
+            secure={isSecureEntry3}
             onChangeText={value => setChangePassword('confirmPassword', value)}
             title="Konfirmasi Kata Sandi Baru"
             placeholder="Konfirmasi kata sandi baru"
             iconEye={
               <TouchableOpacity
                 onPress={() => {
-                  setIsSecureEntry((prev) => !prev);
+                  setIsSecureEntry3((prev) => !prev);
                 }}>
                 <Icon style={styles.iconStyle} type="Entypo"
                   name={
-                    isSecureEntry ? "eye-with-line" : "eye"
+                    isSecureEntry3 ? "eye-with-line" : "eye"
                   }/>
               </TouchableOpacity>
             }

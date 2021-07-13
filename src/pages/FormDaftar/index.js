@@ -18,7 +18,8 @@ import checkAlumniExist from '../../utils/checkAlumniExist';
 import checkStudentExist from '../../utils/checkStudentExist';
 
 const FormDaftar = ({navigation, route}) => {
-  const [isSecureEntry, setIsSecureEntry]=useState(true) //show/hide password
+  const [isSecureEntry, setIsSecureEntry]=useState(true) //show/hide password1
+  const [isSecureEntry2, setIsSecureEntry2]=useState(true) //show/hide password2
   const status = route.params.status;
   const dispatch = useDispatch();
   const [facultyList, setFacultyList] = useState([
@@ -238,17 +239,17 @@ const FormDaftar = ({navigation, route}) => {
           <InputPassword
             title="Konfirmasi Kata Sandi"
             value={confirmPassword}
-            secure={isSecureEntry}
+            secure={isSecureEntry2}
             onChangeText={value => setConfirmPassword(value)}
             placeholder="Konfirmasi Kata Sandi"
             iconEye={
               <TouchableOpacity
                 onPress={() => {
-                  setIsSecureEntry((prev) => !prev);
+                  setIsSecureEntry2((prev) => !prev);
                 }}>
                 <Icon style={styles.iconStyle} type="Entypo"
                   name={
-                    isSecureEntry ? "eye-with-line" : "eye"
+                    isSecureEntry2 ? "eye-with-line" : "eye"
                   }/>
               </TouchableOpacity>
             }
