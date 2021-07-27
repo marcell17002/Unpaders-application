@@ -23,8 +23,9 @@ const Headers = ({
         <>
           <View style={styles.mainTitleBundle}>
             <Image
-              style={styles.image}
               source={require('../../../assets/LogoKecil.png')}
+              style={{marginVertical: 3, maxHeight: '50%'}}
+              resizeMode='contain'
             />
           </View>
           <TouchableOpacity
@@ -170,23 +171,22 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: {width: 1, height: 5},
+    shadowOffset: {width: 0, height: 10},
     shadowOpacity: 0.6,
     shadowRadius: 5,
-    elevation: 1.5,
+    elevation: 2.5,
     alignItems: 'center',
   },
   mainTitleBundle: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginTop: 12,
-    marginBottom: 12,
+    marginLeft: -40,
+    marginVertical: 10,
   },
   mainHeader: {
     flex: 1,
-    marginTop: 16,
-    marginBottom: 16,
+    marginVertical: 12,
   },
   titleStyleMain: {
     textAlign: 'center',
@@ -194,15 +194,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
   },
-  titleStyle: {
-    fontSize: 18,
-    fontFamily: 'Segoe-UI-SemiBold',
-    color: colors.text.primary,
-  },
+  // titleStyle: {
+  //   fontSize: 18,
+  //   fontFamily: 'Segoe-UI-SemiBold',
+  //   color: colors.text.primary,
+  // },
   subMain: {
     flexDirection: 'row',
-    marginTop: 16,
-    marginBottom: 16,
+    marginVertical: 14,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -211,7 +210,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   editButton: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: fonts.primary.bold,
     color: colors.text.primaryBlue,
     alignSelf: 'flex-end',

@@ -30,14 +30,13 @@ const styles = StyleSheet.create({
   page: {
     borderBottomWidth: 1,
     borderBottomColor: colors.text.grey,
+    paddingLeft: 24,
+    paddingRight: 20,
+    backgroundColor: colors.primaryWhite,
   },
   contCommentUser: {
-    marginTop: 16,
-    marginLeft: 24,
-    marginRight: 20,
-    backgroundColor: colors.primaryWhite,
     flexDirection: 'row',
-    marginBottom: 16,
+    marginVertical: 12,
   },
   ketUser: {
     flexDirection: 'row',
@@ -62,13 +61,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
-    maxWidth: 280,
+    paddingRight: '10%',
   },
   logo: {
     height: 40,
     width: 40,
     resizeMode: 'cover',
     borderRadius: 20,
-    marginRight: 16,
+    alignSelf: 'center',
   },
 });

@@ -7,7 +7,7 @@ import { colors } from '../../utils';
 const BeritaUnggah = ({navigation}) => {
   return (
     <View>
-      <View>
+      <View style={styles.page}>
         <Headers
           type="sub-edit"
           title="Berita Terunggah"
@@ -17,7 +17,7 @@ const BeritaUnggah = ({navigation}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.page}>
+        <View>
           <Gap height={24} />
           <UnggahBerita
             title="Universitas Padjadjaran, ptn Terfavorit 2021"

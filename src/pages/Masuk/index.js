@@ -1,7 +1,14 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
+import {
+  Buttons,
+  Gap,
+  InputPassword,
+  Inputs,
+  Link,
+} from '../../components/atoms';
+import {Icon} from 'native-base';
 import {api} from '../../services';
 import {
   checkValue,
@@ -11,19 +18,22 @@ import {
   requestToken,
   storeData,
   useForm,
+  checkEmail,
 } from '../../utils';
+import {color} from 'react-native-reanimated';
 
 const Masuk = ({navigation}) => {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
+  const [isSecureEntry, setIsSecureEntry] = useState(true); //show/hide password
 
   const [form, setForm] = useForm({
     email: '',
     password: '',
   });
-  const checkValueNull = () => {
-    checkValue(form.email, 'email');
-    checkValue(form.password, 'password');
+  const checkValueNull = async () => {
+    await checkEmail(form.email, 'email');
+    await checkValue(form.password, 'password');
   };
   const onLog = async () => {
     await checkValueNull();
@@ -34,7 +44,7 @@ const Masuk = ({navigation}) => {
         dispatch({type: 'SET_LOADING', value: false});
         dispatch({type: 'SET_PROFILE', value: res.data});
         const status = res.data.status;
-        notifications('success', 'login berhasil');
+        //notifications('success', 'Login berhasil!');
         console.log('data sucess', res.data);
         requestToken(res.data.id);
         await storeData('user', res.data);
@@ -45,44 +55,66 @@ const Masuk = ({navigation}) => {
       err => {
         console.log('isi err ', err);
         dispatch({type: 'SET_LOADING', value: false});
-        notifications('danger', 'email atau kata sandi salah');
+        notifications('danger', 'Email atau kata sandi salah');
       },
     );
   };
   return (
     <View style={styles.page}>
       <View style={styles.contImage}>
-        <Image
-          source={require('../../assets/LogoBesar.png')}
-          style={StyleSheet.image}
-        />
-        <Text style={styles.title}>Masuk</Text>
+        <View>
+          <Image
+            source={require('../../assets/LogoBesar.png')}
+            resizeMode="contain"
+            style={{maxWidth: '70%'}}
+          />
+          <Text style={styles.title}>Masuk</Text>
+        </View>
       </View>
-      <Gap height={52} />
-      <View style={styles.inputan}>
+      <Gap height={16} />
+      <View style={styles.contInputan}>
         <Inputs
           title="Email"
           value={form.email}
           onChangeText={value => setForm('email', value)}
           placeholder="Masukkan Email"
         />
-        <Gap height={24} />
-        <Inputs
+        <Gap height={16} />
+        <InputPassword
           title="Kata Sandi"
-          secure
+          secure={isSecureEntry}
           value={form.password}
           onChangeText={value => setForm('password', value)}
           placeholder="Masukkan Kata Sandi"
+          iconEye={
+            <TouchableOpacity
+              onPress={() => {
+                setIsSecureEntry(prev => !prev);
+              }}>
+              <Icon
+                style={styles.iconStyle}
+                type="Entypo"
+                name={isSecureEntry ? 'eye-with-line' : 'eye'}
+              />
+            </TouchableOpacity>
+          }
         />
-      </View>
-      <Gap height={80} />
-      <View style={styles.button}>
+        <Gap height={32} />
         <Buttons title="Masuk" onPress={() => onLog()} />
-        <Text style={styles.buttonlink}>Belum punya Akun?</Text>
-        <Link
-          onPress={() => navigation.navigate('Daftar')}
-          title="Daftar disini"
-        />
+        <View style={styles.contLink}>
+          <Text style={styles.buttonlink}>Belum punya Akun?</Text>
+          <Gap width={8} />
+          <Link
+            onPress={() => navigation.navigate('Daftar')}
+            title="Daftar disini"
+          />
+        </View>
+        {/* <Gap height={16} />
+      <View style={styles.contButton}>
+        <View>
+          
+          </View>
+        </View> */}
       </View>
     </View>
   );
@@ -91,27 +123,26 @@ const Masuk = ({navigation}) => {
 export default Masuk;
 
 const styles = StyleSheet.create({
+  iconStyle: {
+    color: colors.tertierGrey,
+  },
   page: {
     flex: 1,
     backgroundColor: 'white',
   },
   contImage: {
-    marginTop: 100,
     alignItems: 'center',
+    flex: 1,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 12,
     textAlign: 'center',
     color: colors.text.primdonker2,
     fontFamily: fonts.primary.bold,
   },
-  inputan: {
-    paddingLeft: 24,
-    paddingRight: 20,
-    marginBottom: 28,
-  },
-  button: {
+  contInputan: {
+    flex: 4,
     paddingLeft: 24,
     paddingRight: 20,
   },
@@ -120,7 +151,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.primary.reguler,
     color: colors.text.tertiary,
+  },
+  contLink: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginTop: -8,
-    marginBottom: 8,
   },
 });

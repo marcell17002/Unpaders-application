@@ -36,19 +36,22 @@ const RuangObrolan = ({navigation, route}) => {
 
   useEffect(async () => {
     await getChatList();
-    Fire.getToken(payload.idReceiver).then(res => {
-      setToken(res);
-    });
-    console.log('isi sender : ', user.email);
+    console.log('isi payload ', payload);
   }, []);
 
-  const getChatList = () => {
+  const getToken = id => {
+    Fire.getToken(id).then(res => {
+      setToken(res);
+    });
+  };
+  const getChatList = async () => {
     if (payload.chatId === undefined) {
       api.getChat('chatId', `${payload.idReceiver}_${user.id}`).then(
         async res => {
           console.log(`isi chat id 1${payload.idReceiver}_${user.id}`);
           await setChatId(`${payload.idReceiver}_${user.id}`);
           await setMessages(res.data);
+          await getToken(user.id);
         },
         err => {
           api.getChat('chatId', `${user.id}_${payload.idReceiver}`).then(
@@ -56,15 +59,20 @@ const RuangObrolan = ({navigation, route}) => {
               console.log(`isi chat id 2${user.id}_${payload.idReceiver}`);
               await setChatId(`${user.id}_${payload.idReceiver}`);
               await setMessages(res.data);
+              await getToken(payload.idReceiver);
             },
             async err => {
               await setChatId(`${user.id}_${payload.idReceiver}`);
+              await getToken(payload.idReceiver);
               console.log('new communication');
             },
           );
         },
       );
     } else {
+      console.log('hellos');
+      if (payload.idSender === user.id) await getToken(payload.idReceiver);
+      else await getToken(payload.idSender);
       api.getChat('chatId', payload.chatId).then(
         async res => {
           await setChatId(payload.chatId);
@@ -131,7 +139,7 @@ const RuangObrolan = ({navigation, route}) => {
   };
   const onSend = async () => {
     if (input.length < 1) {
-      return notifications('info', 'masukan pesan anda');
+      return notifications('info', 'Masukan pesan anda');
     }
     const data = {
       chatId: chatId,
@@ -215,7 +223,7 @@ const RuangObrolan = ({navigation, route}) => {
           setInput(value);
         }}
         onPress={() => onSend()}
-        placeholder='Tulis pesan...'
+        placeholder="Tulis pesan..."
       />
     </View>
   );

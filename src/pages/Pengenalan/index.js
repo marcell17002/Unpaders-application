@@ -47,38 +47,48 @@ const Pengenalan = ({navigation}) => {
 
   return (
     <View style={styles.page}>
+      <Gap height={12} />
       <View style={styles.contImage}>
         <Image
           source={require('../../assets/Intro.png')}
-          style={StyleSheet.image}
+          style={{width: '100%', height: '100%',}}
+          resizeMode='contain'
         />
       </View>
-      <View>
-        <Text style={styles.title}>Hai, IKA Universitas Padjadjaran!</Text>
+      <Gap height={16} />
+      <View style={styles.contPage}>
+        <View>
+          <View>
+            <Text style={styles.title}>Hai, IKA Universitas Padjadjaran!</Text>
+          </View>
+          <Gap height={16} />
+          <View>
+            <Text style={styles.subtitle}>
+              Unpaders adalah portal komunitas untuk alumni
+            </Text>
+            <Text style={styles.subtitle}>
+              Universitas Padjadaran yang bertujuan untuk
+            </Text>
+            <Text style={styles.subtitle}>mewadahi keberagaman IKA Unpad</Text>
+          </View>
+        </View>
       </View>
-      <Gap height={24} />
-      <View>
-        <Text style={styles.subtitle}>
-          Unpaders adalah portal komunitas untuk alumni
-        </Text>
-        <Text style={styles.subtitle}>
-          Universitas Padjadaran yang bertujuan untuk
-        </Text>
-        <Text style={styles.subtitle}>mewadahi keberagaman IKA Unpad</Text>
+        <Gap height={20} />
+      <View style={styles.contButton}>
+          <View>
+            <Buttons title="Daftar" onPress={() => navigation.replace('Daftar')} />
+            <Buttons
+              status="tertiary"
+              title="Masuk"
+              onPress={() => navigation.replace('Masuk')}
+            />
+            <Link
+              onPress={() => generateUserId()}
+              title="Masuk sebagai Pengunjung"
+            />
+          </View>
       </View>
-      <Gap height={50} />
-      <View>
-        <Buttons title="Daftar" onPress={() => navigation.replace('Daftar')} />
-        <Buttons
-          status="tertiary"
-          title="Masuk"
-          onPress={() => navigation.replace('Masuk')}
-        />
-        <Link
-          onPress={() => generateUserId()}
-          title="Daftar sebagai Pengunjung"
-        />
-      </View>
+      
     </View>
   );
 };
@@ -90,15 +100,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 22,
-    paddingTop: 60,
   },
   contImage: {
-    marginBottom: 50,
     alignItems: 'center',
+    flex: 2.5,
+    justifyContent: 'space-around',
   },
-  image: {
-    width: 250,
-    height: 164,
+  contPage: {
+    flex: 1.5,
+    justifyContent: 'space-around',
+  },
+  contButton: {
+    flex: 2,
+    justifyContent: 'space-around',
   },
   title: {
     fontSize: 18,
@@ -108,7 +122,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    fontFamily: fonts.primary.semibold,
+    fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
     textAlign: 'center',
   },

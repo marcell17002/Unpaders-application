@@ -161,6 +161,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
-    marginBottom: 24,
+    marginBottom: 20,
   },
 });

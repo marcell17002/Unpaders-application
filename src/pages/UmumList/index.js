@@ -27,7 +27,7 @@ const UmumList = ({navigation}) => {
     );
   }, []);
   return (
-    <View>
+    <View style={styles.page}>
       <View style={styles.contHeader}>
         <Headers
           title="List Alumni"
@@ -37,7 +37,7 @@ const UmumList = ({navigation}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.page}>
+        <View >
           {alumni.map(item => {
             return (
               <ListAlumni
@@ -63,6 +63,5 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: 'white',
-    marginBottom: '20%',
   },
 });

@@ -25,7 +25,7 @@ const DetailBerita = ({navigation, route}) => {
   useEffect(async () => {
     api.getProfileUser(payload.item.author).then(
       res => setAuthor(res.data[0]),
-      err => notifications('danger', 'anda tidak terkoneksi dengan internet'),
+      err => notifications('danger', 'Tidak terkoneksi internet'),
     );
     api.getLikedEvent('eventId', payload.item._id).then(
       async res => {
@@ -151,7 +151,7 @@ const DetailBerita = ({navigation, route}) => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          <Gap height={24} />
+          <Gap height={20} />
           <Berita
             title={payload.item.title}
             author={author.name}
@@ -160,13 +160,13 @@ const DetailBerita = ({navigation, route}) => {
             images={payload.item.image}
             imagesUser={author.image}
           />
-          <Gap height={24} />
+          <Gap height={20} />
         </View>
         <View style={styles.ghap}>
           <Gap height={12} />
         </View>
         <View>
-          <Gap height={24} />
+          <Gap height={20} />
           <CommentSection
             author={author.name}
             image={author.image}
@@ -182,7 +182,7 @@ const DetailBerita = ({navigation, route}) => {
                 navigation.navigate('KomentarPage', payload.item._id)
               }
             />
-            <Gap height={24} />
+            <Gap height={20} />
           </View>
         </View>
 
@@ -190,9 +190,9 @@ const DetailBerita = ({navigation, route}) => {
           <Gap height={12} />
         </View>
         <View>
-          <Gap height={24} />
+          <Gap height={20} />
           <Text style={styles.sectionLainnya}>Berita Terbaru Lainnya</Text>
-          <Gap height={24}/>
+          <Gap height={20}/>
           {recommendation.slice(0, 3).map(item => {
             return (
               <Event
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.text.grey,
   },
   sectionLainnya: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     marginLeft: 24,

@@ -14,6 +14,7 @@ const TabItems = ({title, active, onLongPress, onPress}) => {
                 : require('../../../assets/AHome-passive.png')
             }
             style={styles.image}
+            resizeMode='cover'
           />
         );
       case 'Chat':
@@ -25,6 +26,7 @@ const TabItems = ({title, active, onLongPress, onPress}) => {
                 : require('../../../assets/AChat-passive.png')
             }
             style={styles.image}
+            resizeMode='cover'
           />
         );
       case 'List Alumni':
@@ -36,6 +38,7 @@ const TabItems = ({title, active, onLongPress, onPress}) => {
                 : require('../../../assets/AList-passive.png')
             }
             style={styles.image}
+            resizeMode='cover'
           />
         );
       case 'Berita':
@@ -47,6 +50,7 @@ const TabItems = ({title, active, onLongPress, onPress}) => {
                 : require('../../../assets/ABerita-passive.png')
             }
             style={styles.image}
+            resizeMode='cover'
           />
         );
       case 'Lainnya':
@@ -58,8 +62,21 @@ const TabItems = ({title, active, onLongPress, onPress}) => {
                 : require('../../../assets/ALainnya-passive.png')
             }
             style={styles.image}
+            resizeMode='cover'
           />
         );
+        case 'Profil':
+          return (
+            <Image
+              source={
+                active
+                  ? require('../../../assets/AProfile-active.png')
+                  : require('../../../assets/AProfile-passive.png')
+              }
+              style={styles.image}
+              resizeMode='cover'
+            />
+          );  
       default:
         return (
           <Image
@@ -69,6 +86,7 @@ const TabItems = ({title, active, onLongPress, onPress}) => {
                 : require('../../../assets/AHome-passive.png')
             }
             style={styles.image}
+            resizeMode='cover'
           />
         );
     }
@@ -89,14 +107,23 @@ export default TabItems;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    justifyContent: 'space-around',
   },
   iconStyle: active => ({
     fontSize: 25,
     color: active ? colors.text.primary : colors.text.secondary,
   }),
   text: active => ({
-    color: active ? colors.text.quartenary : colors.text.secondary,
+    color: active ? colors.text.primdonker2 : colors.text.secondary,
     fontSize: 12,
-    fontFamily: fonts.primary.semibold,
+    fontFamily: fonts.primary.reguler,
+    marginTop: -12,
+    //backgroundColor: 'yellow',
   }),
+  image: {
+    //backgroundColor: 'yellow',
+    maxWidth: '50%',
+    maxHeight:'50%',
+    alignItems: 'center',
+  }
 });

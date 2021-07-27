@@ -18,6 +18,7 @@ const NotFound = ({type, title}) => {
             <Image
               style={styles.photo1}
               source={require('../../../assets/NotFoundChat.png')}
+              resizeMode='contain'
             />
           </View>
         </View>
@@ -33,6 +34,7 @@ const NotFound = ({type, title}) => {
             <Image
               style={styles.photo1}
               source={require('../../../assets/NotFoundBerita.png')}
+              resizeMode='contain'
             />
           </View>
         </View>
@@ -81,5 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryWhite,
     justifyContent: 'center',
     alignSelf: 'center',
+    width: '60%',
+    height: '60%',
   },
 });

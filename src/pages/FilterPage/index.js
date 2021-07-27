@@ -157,7 +157,7 @@ const FilterPage = ({navigation}) => {
     );
   };
   return (
-    <View>
+    <View style={styles.page}>
       <View>
         <Headers
           title="Filter"
@@ -167,7 +167,7 @@ const FilterPage = ({navigation}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.page}>
+        <View style={styles.pages}>
           <TouchableOpacity
             onPress={() => setOpenFaculty(!openFaculty)}
             style={styles.ghap}>
@@ -205,7 +205,9 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: colors.primaryWhite,
     flex: 1,
-    paddingBottom: '30%',
+  },
+  pages: {
+    paddingBottom: '10%',
   },
   ghap: {
     flexDirection: 'row',
@@ -229,5 +231,6 @@ const styles = StyleSheet.create({
   content: {
     marginLeft: 12,
     marginRight: 12,
+    
   },
 });

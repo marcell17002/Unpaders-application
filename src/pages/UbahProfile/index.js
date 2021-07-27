@@ -17,7 +17,7 @@ import {api} from '../../services';
 import {
   checkValue,
   colors,
-  destroyData,
+  checkEmail,
   filterData,
   fonts,
   notifications,
@@ -141,10 +141,7 @@ const UbahProfile = ({navigation, route}) => {
       {quality: 0.3, minHeight: 110, minWidth: 110, includeBase64: true},
       response => {
         if (response.didCancel || response.errorMessage) {
-          notifications(
-            'warning',
-            'oops, sepertinya anda tidak jadi upload foto ?',
-          );
+          notifications('warning', 'Anda tidak jadi unggah foto?');
           setPhoto(pathImage);
         } else {
           const source = `data:${response.type};base64,${response.base64}`;
@@ -162,15 +159,15 @@ const UbahProfile = ({navigation, route}) => {
     });
   };
 
-  const checkValueNull = () => {
-    checkValue(profile.email, 'email');
-    checkValue(profile.name, 'nama');
-    checkValue(profile.phone, 'nomor telepon');
-    checkValue(profile.nim, 'npm');
-    checkValue(profile.faculty, 'fakultas');
-    checkValue(profile.prodi, 'program studi');
-    checkValue(profile.level, 'angkatan');
-    checkValue(profile.graduated, 'tahun lulus');
+  const checkValueNull = async () => {
+    await checkEmail(profile.email, 'email');
+    await checkValue(profile.name, 'nama');
+    await checkValue(profile.phone, 'nomor telepon');
+    await checkValue(profile.nim, 'npm');
+    await checkValue(profile.faculty, 'fakultas');
+    await checkValue(profile.prodi, 'program studi');
+    await checkValue(profile.level, 'angkatan');
+    await checkValue(profile.graduated, 'tahun lulus');
   };
   const onSave = async () => {
     await checkValueNull();
@@ -179,7 +176,7 @@ const UbahProfile = ({navigation, route}) => {
     api.updateProfileUser(dataEditProfile, profile._id).then(
       async res => {
         dispatch({type: 'SET_LOADING', value: false});
-        notifications('success', 'data profile berhasil diubah');
+        notifications('success', 'Data profile berhasil diubah');
         navigation.goBack();
       },
       err => {
@@ -189,7 +186,7 @@ const UbahProfile = ({navigation, route}) => {
     );
   };
   return (
-    <View>
+    <View style={styles.page}>
       <View style={styles.contHeader}>
         <Headers
           type="sub-edit"
@@ -200,8 +197,8 @@ const UbahProfile = ({navigation, route}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.page}>
-          <Gap height={24} />
+        <View style={styles.pages}>
+          <Gap height={16} />
           <TouchableOpacity
             onPress={() => getImage()}
             style={styles.profileWrapper}>
@@ -210,10 +207,11 @@ const UbahProfile = ({navigation, route}) => {
               <Image
                 style={styles.iconAdd}
                 source={require('../../assets/addImage.png')}
+                resizeMode="cover"
               />
             </View>
           </TouchableOpacity>
-          <Gap height={24} />
+          <Gap height={16} />
           <View>
             <Text style={styles.section}>Informasi Personal</Text>
             <Inputs
@@ -222,14 +220,14 @@ const UbahProfile = ({navigation, route}) => {
               title="Email"
               placeholder="Masukkan Email"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             <Inputs
               value={profile.name}
               onChangeText={value => changeText('name', value)}
               title="Nama Lengkap"
               placeholder="Masukkan Nama Lengkap"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             <Inputs
               value={profile.phone}
               onChangeText={value => changeText('phone', value)}
@@ -239,7 +237,7 @@ const UbahProfile = ({navigation, route}) => {
             <Text style={styles.note}>
               *Nomor WA tidak akan ditampilkan pada profile
             </Text>
-            <Gap height={24} />
+            <Gap height={16} />
           </View>
           <Gap height={32} />
           <View>
@@ -250,7 +248,7 @@ const UbahProfile = ({navigation, route}) => {
               title="Nomor Pokok Mahasiswa"
               placeholder="Masukkan Nomor Pokok Mahasiswa"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             <View>
               <Text style={styles.titleText}>Fakultas</Text>
               <View style={styles.contPicker}>
@@ -267,7 +265,7 @@ const UbahProfile = ({navigation, route}) => {
                 </Picker>
               </View>
             </View>
-            <Gap height={24} />
+            <Gap height={16} />
             <View>
               <Text style={styles.titleText}>Program Studi</Text>
               <View style={styles.contPicker}>
@@ -292,14 +290,14 @@ const UbahProfile = ({navigation, route}) => {
               </View>
             </View>
 
-            <Gap height={24} />
+            <Gap height={16} />
             <Inputs
               value={profile.level}
               onChangeText={value => changeText('level', value)}
               title="Angkatan"
               placeholder="Masukkan Angkatan"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             {payload.status === 'alumni' ? (
               <Inputs
                 value={profile.graduated}
@@ -309,7 +307,7 @@ const UbahProfile = ({navigation, route}) => {
               />
             ) : null}
           </View>
-          <Gap height={88} />
+          <Gap height={20} />
         </View>
       </ScrollView>
     </View>
@@ -322,6 +320,8 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
+  },
+  pages: {
     paddingLeft: 24,
     paddingRight: 20,
   },
@@ -339,7 +339,6 @@ const styles = StyleSheet.create({
   iconAdd: {
     height: 24,
     width: 24,
-    resizeMode: 'cover',
     alignSelf: 'center',
     position: 'absolute',
     bottom: 0,

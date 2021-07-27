@@ -1,12 +1,17 @@
 import moment from 'moment';
 import 'moment/locale/id';
-import React, { useEffect, useState, useRef } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { Gap } from '../../components/atoms';
-import { CommentUser, Headers, InputChat, NotFound } from '../../components/moleculs';
-import { api } from '../../services';
-import { getTime, useChat, colors } from '../../utils';
+import React, {useEffect, useState, useRef} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {Gap} from '../../components/atoms';
+import {
+  CommentUser,
+  Headers,
+  InputChat,
+  NotFound,
+} from '../../components/moleculs';
+import {api} from '../../services';
+import {getTime, useChat, colors} from '../../utils';
 
 const KomentarPage = ({navigation, route}) => {
   const idEvent = route.params;
@@ -16,7 +21,8 @@ const KomentarPage = ({navigation, route}) => {
   const [profile, setProfile] = useState();
   const {messages, sendMessage, setMessages} = useChat(idEvent);
   const scrollViewRef = useRef();
-  moment.locale('id')
+  const dispatch = useDispatch();
+  moment.locale('id');
 
   useEffect(async () => {
     await getCommentar(idEvent);
@@ -25,6 +31,7 @@ const KomentarPage = ({navigation, route}) => {
   }, []);
 
   const getCommentar = id => {
+    dispatch({type: 'SET_LOADING', value: true});
     api.getChat('chatId', id).then(
       async res => {
         console.log('isi res data getchat :', res.data);
@@ -46,9 +53,13 @@ const KomentarPage = ({navigation, route}) => {
         await Promise.all(promises);
         await setComment(data);
         await setMessages(data);
+        dispatch({type: 'SET_LOADING', value: false});
         console.log('isi data rendered : ', data);
       },
-      err => console.log('isi err :', id),
+      err => {
+        console.log('isi err :', id);
+        dispatch({type: 'SET_LOADING', value: false});
+      },
     );
   };
 
@@ -93,9 +104,12 @@ const KomentarPage = ({navigation, route}) => {
           onPressBack={() => navigation.goBack()}
         />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}
-      ref={scrollViewRef}
-      onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        ref={scrollViewRef}
+        onContentSizeChange={() =>
+          scrollViewRef.current.scrollToEnd({animated: true})
+        }>
         {messages.length < 1 ? (
           <View style={styles.body}>
             <Gap height={24} />
@@ -104,13 +118,13 @@ const KomentarPage = ({navigation, route}) => {
         ) : (
           <View>
             {messages.map(item => {
-            return (
-              <CommentUser
-                name={item.name}
-                image={item.image}
-                waktu={moment(item.createdAt).fromNow()}
-                komentar={item.allChat.chatText.chatContent}
-              />
+              return (
+                <CommentUser
+                  name={item.name}
+                  image={item.image}
+                  waktu={moment(item.createdAt).fromNow()}
+                  komentar={item.allChat.chatText.chatContent}
+                />
               );
             })}
           </View>

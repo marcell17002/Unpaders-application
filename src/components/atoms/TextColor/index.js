@@ -20,17 +20,17 @@ export default TextColor;
 const styles = StyleSheet.create({
   waiting: {
     color: colors.text.quartenary,
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.semibold,
   },
   success: {
     color: colors.text.primaryGreen,
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.semibold,
   },
   failed: {
     color: colors.text.primaryRed,
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary.semibold,
   },
 });

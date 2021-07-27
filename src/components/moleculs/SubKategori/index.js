@@ -7,7 +7,10 @@ const SubKategori = ({title, onPress, pict}) => {
     return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
         <View style={styles.ImageCont}>
-            <Image style={styles.image} source={pict} />
+            <Image 
+                //style={styles.image} 
+                style={{height: '85%', width: '100%',}}
+                source={pict} />
         </View>
         <Gap height={8}/>
         <Text style={styles.text}>{title}</Text>
@@ -32,10 +35,6 @@ const styles = StyleSheet.create({
         shadowRadius: 1,
         elevation: 2,
     },
-    ImageCont: {
-        justifyContent: 'space-between',
-        alignContent: 'stretch',
-    },
     image: {
         alignSelf: 'center',
     },
@@ -44,5 +43,6 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontFamily: fonts.primary.semibold,
         color: colors.text.primary,
+        marginTop: -20,
     }
 });

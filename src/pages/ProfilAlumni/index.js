@@ -29,7 +29,7 @@ const ProfilAlumni = ({navigation, route}) => {
         const sortedData = await sortData(filteredData, 'createdAt');
         setEventCreated(sortedData);
       },
-      err => notifications('danger', 'no internet connection'),
+      err => notifications('danger', 'Tidak terkoneksi internet'),
     );
   }, []);
   return (
@@ -42,7 +42,7 @@ const ProfilAlumni = ({navigation, route}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Gap height={24} />
+        <Gap height={20} />
         <View>
           <ProfileAuthor
             nama={payload.name}
@@ -62,14 +62,14 @@ const ProfilAlumni = ({navigation, route}) => {
               />
           </View>
         }
-        <Gap height={24} />
+        <Gap height={20} />
         <View style={styles.ghap}>
           <Gap height={12} />
         </View>
-        <Gap height={24} />
+        <Gap height={20} />
         <View>
           <Text style={styles.sectionLainnya}>Berita yang Diunggah</Text>
-          <Gap height={24}/>
+          <Gap height={20}/>
           {eventCreated.length < 1 ? (
             <View style={styles.body}>
               <NotFound title="Pengguna ini belum mengunggah berita" />
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.text.grey,
   },
   sectionLainnya: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     marginLeft: 24,

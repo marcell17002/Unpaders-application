@@ -8,6 +8,7 @@ import Loading from './Loading';
 import Separator from './Separator';
 import TabItems from './TabItems';
 import TextColor from './TextColor';
+import InputPassword from './InputPassword';
 
 export {
   TabItems,
@@ -20,5 +21,6 @@ export {
   Link,
   ListButton,
   ButtonFilter,
+  InputPassword,
 };
 

@@ -62,14 +62,16 @@ const styles = StyleSheet.create({
   buttonPrimary: {
     backgroundColor: colors.button.primary.background,
     borderRadius: 5,
-    marginBottom: 24,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: colors.button.primaryOutline.outline,
   },
   textPrimary: {
     color: colors.button.primary.text,
     textAlign: 'center',
     fontFamily: fonts.primary.semibold, 
-    fontSize: 16,
-    paddingVertical: 12,
+    fontSize: 14,
+    paddingVertical: 10,
   },
   buttonSecondary: {
     backgroundColor: colors.button.secondaryOutline.background,
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     color: colors.button.secondaryOutline.blue,
     textAlign: 'center',
     fontFamily: fonts.primary.semibold,
-    fontSize: 16,
+    fontSize: 14,
     paddingVertical: 10,
   },
   buttonTertiary: isLittle => ({
@@ -90,14 +92,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: isLittle ? '37%' : 0,
     borderRadius: 5,
-    marginBottom: 24,
+    marginBottom: 20,
   }),
   textTertiary: {
     color: colors.button.primaryOutline.text,
     textAlign: 'center',
     fontFamily: fonts.primary.semibold,
-    fontSize: 16,
-    paddingVertical: 12,
+    fontSize: 14,
+    paddingVertical: 10,
   },
   buttonQuarternary: {
     backgroundColor: colors.primaryWhite,
@@ -112,14 +114,14 @@ const styles = StyleSheet.create({
   },
   iconBundle: disable => ({
     backgroundColor: disable ? colors.backgroundgrey : colors.primary,
-    width: 52,
-    height: 52,
+    width: 44,
+    height: 44,
     padding: 8,
     borderRadius: 10,
   }),
   iconDisable: disable => ({
+    marginLeft: 2,
     alignSelf: 'center',
-    justifyContent: 'space-between',
     color: disable ? colors.primarygrey : colors.primaryWhite,
   }),
 });

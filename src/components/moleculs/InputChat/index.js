@@ -10,6 +10,7 @@ const InputChat = ({value, onChangeText, onPress, placeholder}) => {
         <TextInput
           style={styles.input}
           value={value}
+          placeholderTextColor="#787878"
           onChangeText={onChangeText}
           placeholder={placeholder}></TextInput>
         <Buttons
@@ -42,9 +43,11 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   input: {
+    color: "#000",
     backgroundColor: colors.backgroundgrey,
-    paddingHorizontal: 20,
-    paddingVertical: 5,
+    maxHeight: 44,
+    alignSelf: 'center',
+    paddingHorizontal: 16,
     borderRadius: 10,
     flex: 1,
     marginRight: 12,

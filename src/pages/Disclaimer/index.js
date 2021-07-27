@@ -6,14 +6,14 @@ import { colors, fonts } from '../../utils';
 
 const Disclaimer = ({navigation}) => {
     return (
-        <View>
+        <View style={styles.page}>
             <View>
                 <Headers title='Disclaimer' type='sub-back' 
                 onPressBack={() => navigation.goBack()}/>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>                
-                <View style={styles.page}>
-                <Gap height={24}/>
+                <View >
+                <Gap height={20}/>
                     <Text style={styles.contPage}>UNPADERS adalah website komunitas alumni Universitas Padjadjaran dan memberi kesempatan kepada semua alumni untuk menjadi Kontributor. Alumni dan anggota masyarakat umum diperkenankan memberikan komentar atas naskah/artikel/informasi yang dimuat UNPADERS.</Text>
                     <Gap height={20}/>
                     <Text style={styles.contPage}>UNPADERS sangat menganjurkan agar Kontributor dan Pembaca yang hendak mempublikasikan naskah/artikel serta opini dan pendapat tidak menyinggung suku, agama, ras dan antar-golongan (SARA), tidak menyebarkan fitnah, tidak menggunakan kata-kata kotor, tidak menggunakan nickname atau nama samaran.</Text>
@@ -25,7 +25,7 @@ const Disclaimer = ({navigation}) => {
                     <Text style={styles.contPage}>UNPADERS tidak bertanggung jawab atas naskah/artikel yang dipublikasikan Kontributor, juga komentar yang diberikan Pembaca.</Text>
                     <Gap height={20}/>
                     <Text style={styles.contPage}>UNPADERS tidak bertanggung jawab atas semua bentuk pelanggaran hukum yang dilakukan pihak lain dengan menggunakan atau memanfaatkan berita atau materi lain yang dipublikasikan UNPADERS, baik sebagian atau keseluruhan.</Text>
-                    <Gap height={80}/>
+                    <Gap height={20}/>
                 </View>
             </ScrollView>
         </View>

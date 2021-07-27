@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
     paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: colors.text.grey,
     alignItems: 'center',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 20,
     alignSelf: 'center',
-    marginRight: 20,
+    marginRight: 16,
   },
   namaAlumni: {
     fontSize: 14,

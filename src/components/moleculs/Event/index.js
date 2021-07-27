@@ -58,6 +58,11 @@ const Event = ({
 export default Event;
 
 const styles = StyleSheet.create({
+  eventImage: {
+    borderRadius: 5,
+    borderWidth: 0.5,
+    borderColor: colors.input.outline,
+  },
   event: {
     flexDirection: 'row',
     paddingBottom: 24,
@@ -99,12 +104,13 @@ const styles = StyleSheet.create({
   },
   eventCreatorDetail: {
     flexDirection: 'row',
+    marginTop: -6,
   },
   Judul: {
     fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.title,
-    marginTop: -4,
+    marginTop: -6,
   },
   title: {
     marginVertical: 8,

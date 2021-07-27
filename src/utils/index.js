@@ -15,3 +15,5 @@ export * from './sortData';
 export * from './checkStudentExist';
 export * from './checkAlumniExist';
 export * from './checkSameData';
+export * from './checkEmail';
+export * from './checkCharLength';

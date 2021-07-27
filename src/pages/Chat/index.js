@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Gap, ListButton} from '../../components/atoms';
 import {Headers, ListAlumniChat, NotFound} from '../../components/moleculs';
 import {api} from '../../services';
 import {colors, fonts, getData} from '../../utils';
 
 const Chat = ({navigation, route}) => {
+  const dispatch = useDispatch();
   const [history, setHistory] = useState([]);
   const [historyTemp, setHistoryTemp] = useState([]);
   const user = useSelector(state => state).user;
   useEffect(async () => {
     const unsubscribe = navigation.addListener('focus', () => {
+      dispatch({type: 'SET_LOADING', value: true});
       setHistory([]);
       setHistoryTemp([]);
       getHistorySender(); //a_b   -> a
@@ -46,8 +48,12 @@ const Chat = ({navigation, route}) => {
         });
         await Promise.all(promises);
         await setHistory(data);
+        dispatch({type: 'SET_LOADING', value: false});
       },
-      err => console.log('isi errhist : ', err, user.id),
+      err => {
+        dispatch({type: 'SET_LOADING', value: false});
+        console.log('isi errhist : ', err, user.id);
+      },
     );
   };
   const getHistoryReceiver = () => {
@@ -71,8 +77,12 @@ const Chat = ({navigation, route}) => {
         });
         await Promise.all(promises);
         await setHistoryTemp(data);
+        dispatch({type: 'SET_LOADING', value: false});
       },
-      err => console.log('isi errhist : ', err, user.id),
+      err => {
+        dispatch({type: 'SET_LOADING', value: false});
+        console.log('isi errhist : ', err, user.id);
+      },
     );
   };
   return (

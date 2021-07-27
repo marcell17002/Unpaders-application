@@ -47,8 +47,9 @@ const TulisBerita = ({navigation, route}) => {
     {subCategory: 'UMKM Center', category: 'Lapak'},
     {subCategory: 'Kuliner', category: 'Lapak'},
     {subCategory: 'Kiat Bisnis', category: 'Lapak'},
+    {subCategory: 'Merchandise', category: 'Lapak'},
     {subCategory: 'Preloved', category: 'Lapak'},
-    {subCategory: 'Intership', category: 'Loker'},
+    {subCategory: 'Internship', category: 'Loker'},
     {subCategory: 'Fulltime', category: 'Loker'},
     {subCategory: 'Freelance', category: 'Loker'},
   ]);
@@ -88,10 +89,7 @@ const TulisBerita = ({navigation, route}) => {
       {quality: 0.3, minHeight: 110, minWidth: 110, includeBase64: true},
       response => {
         if (response.didCancel || response.errorMessage) {
-          notifications(
-            'warning',
-            'oops, sepertinya anda tidak jadi upload foto ?',
-          );
+          notifications('warning', 'Anda tidak jadi unggah foto?');
         } else {
           const source = `data:${response.type};base64,${response.base64}`;
           setPhoto(source);
@@ -101,19 +99,16 @@ const TulisBerita = ({navigation, route}) => {
     );
   };
 
-  const checkValueNull = () => {
-    checkValue(form.title, 'judul');
-    checkValue(form.category, 'kategory');
-    checkValue(form.subCategory, 'sub kategori');
-    checkValue(form.desc, 'isi berita');
-    checkValue(form.image, 'foto');
+  const checkValueNull = async () => {
+    await checkValue(form.title, 'judul');
+    await checkValue(form.category, 'kategory');
+    await checkValue(form.subCategory, 'sub kategori');
+    await checkValue(form.desc, 'isi berita');
+    await checkValue(form.image, 'foto');
   };
   const responseSuccess = () => {
     dispatch({type: 'SET_LOADING', value: false});
-    notifications(
-      'success',
-      'berita sukses dibuat, silahkan tunggu verifikasi admin',
-    );
+    notifications('success', 'Berita berhasil dibuat, tunggu konfirmasi');
     navigation.navigate('MainAppGraduated', {screen: 'Berita'});
   };
   const onSave = async () => {
@@ -153,7 +148,7 @@ const TulisBerita = ({navigation, route}) => {
     }
   };
   return (
-    <View>
+    <View style={styles.page}>
       <View>
         <Headers
           type="sub-edit"
@@ -164,8 +159,8 @@ const TulisBerita = ({navigation, route}) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.page}>
-          <Gap height={24} />
+        <View style={styles.pages}>
+          <Gap height={16} />
           <View>
             <Inputs
               value={form.title}
@@ -173,7 +168,7 @@ const TulisBerita = ({navigation, route}) => {
               title="Judul"
               placeholder="Judul berita"
             />
-            <Gap height={24} />
+            <Gap height={16} />
             <Text style={styles.titleText}>Foto</Text>
             <TouchableOpacity
               onPress={() => getImage()}
@@ -199,6 +194,7 @@ const TulisBerita = ({navigation, route}) => {
                         ? {uri: photo}
                         : require('../../assets/default-image.png')
                     }
+                    resizeMode="cover"
                   />
                 ) : (
                   <View style={styles.inputImage}>
@@ -212,7 +208,7 @@ const TulisBerita = ({navigation, route}) => {
               </TouchableOpacity>
             )}
 
-            <Gap height={24} />
+            <Gap height={16} />
             <View>
               <Text style={styles.titleText}>Kategori</Text>
               <View style={styles.contPicker}>
@@ -234,7 +230,7 @@ const TulisBerita = ({navigation, route}) => {
                 </Picker>
               </View>
             </View>
-            <Gap height={24} />
+            <Gap height={16} />
             <View>
               <Text style={styles.titleText}>Sub Kategori</Text>
               <View style={styles.contPicker}>
@@ -255,7 +251,7 @@ const TulisBerita = ({navigation, route}) => {
                 </Picker>
               </View>
             </View>
-            <Gap height={24} />
+            <Gap height={16} />
             <Inputs
               multiline
               numberOfLines={10}
@@ -264,7 +260,7 @@ const TulisBerita = ({navigation, route}) => {
               title="Isi Berita"
               placeholder="Masukkan isi berita"
             />
-            <Gap height={100} />
+            <Gap height={20} />
           </View>
         </View>
       </ScrollView>
@@ -278,6 +274,8 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
+  },
+  pages: {
     paddingLeft: 24,
     paddingRight: 20,
   },
@@ -294,11 +292,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
-    marginBottom: 12,
+    marginBottom: 8,
   },
   inputImage: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     fontSize: 13,
     fontFamily: fonts.primary.reguler,
     borderWidth: 1,
@@ -315,6 +314,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     resizeMode: 'cover',
     marginRight: '5%',
+    color: colors.text.primary,
   },
   contPicker: {
     backgroundColor: colors.backgroundgrey,
@@ -329,6 +329,6 @@ const styles = StyleSheet.create({
   pilihFoto: {
     fontSize: 14,
     fontFamily: fonts.primary.reguler,
-    color: colors.text.secondGrey,
+    color: colors.text.primary,
   },
 });

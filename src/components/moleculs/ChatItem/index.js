@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     backgroundColor: isMe ? colors.secondBlue : colors.backgroundgrey,
     maxWidth: '70%',
     borderRadius: 10,
-    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: !isMe ? 0 : 10,
+    borderBottomRightRadius: isMe ? 0 : 10,
   }),
   textChat: {
     fontSize: 14,

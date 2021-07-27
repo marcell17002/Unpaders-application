@@ -66,8 +66,7 @@ export default checkStudentExist = async (prodi, level, nim) => {
       )
       .then(
         res => resolve({message: 'Terverifikasi Mahasiswa Unpad'}),
-        err =>
-          reject({message: 'Oops, Sepertinya Anda Bukan Mahasiswa Unpad?'}),
+        err => reject({message: 'NPM anda tidak valid'}),
       );
   });
   return promise;

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Image, ScrollView, TouchableOpacity,} from 'react-native';
 import {Headers, CommentUser} from '../../components/moleculs';
-import {Gap, Inputs} from '../../components/atoms';
+import {Gap, InputPassword, Inputs} from '../../components/atoms';
+import { Icon } from 'native-base';
 import {
   checkSameData,
   colors,
@@ -15,6 +16,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {api} from '../../services';
 
 const UbahPassword = ({navigation}) => {
+  const [isSecureEntry, setIsSecureEntry]=useState(true) //show/hide password
+  const [isSecureEntry2, setIsSecureEntry2]=useState(true) //show/hide password2
+  const [isSecureEntry3, setIsSecureEntry3]=useState(true) //show/hide password3
   const user = useSelector(state => state).user;
   const dispatch = useDispatch();
   const [profile, setProfile] = useState([]);
@@ -62,7 +66,7 @@ const UbahPassword = ({navigation}) => {
                   dispatch({type: 'SET_LOADING', value: false});
                   destroyData();
                   dispatch({type: 'SET_PROFILE', value: data});
-                  notifications('success', 'silahkan login kembali');
+                  notifications('success', 'Silahkan login kembali');
                   navigation.replace('Masuk');
                 },
                 err => console.log('isi error ', err),
@@ -74,7 +78,7 @@ const UbahPassword = ({navigation}) => {
         );
       },
       err => {
-        notifications('danger', 'kata sandi lama anda salah');
+        notifications('danger', 'Kata sandi lama Anda salah');
       },
     );
   };
@@ -91,29 +95,64 @@ const UbahPassword = ({navigation}) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.pages}>
         <View>
-          <Gap height={24} />
-          <Inputs
+          <Gap height={16} />
+          <InputPassword
             value={form.password}
-            secure
+            secure={isSecureEntry}
             onChangeText={value => setForm('password', value)}
             title="Kata Sandi Lama"
             placeholder="Masukkan Password Lama Anda"
+            iconEye={
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecureEntry((prev) => !prev);
+                }}>
+                <Icon style={styles.iconStyle} type="Entypo"
+                  name={
+                    isSecureEntry ? "eye-with-line" : "eye"
+                  }/>
+              </TouchableOpacity>
+            }
           />
-          <Gap height={24} />
-          <Inputs
+          <Gap height={16} />
+          <InputPassword
             value={changePassword.newPassword}
-            secure
+            secure={isSecureEntry2}
             onChangeText={value => setChangePassword('newPassword', value)}
             title="Kata Sandi Baru"
             placeholder="Masukkan kata sandi baru"
+            placeholderTextColor="#787878"
+            iconEye={
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecureEntry2((prev) => !prev);
+                }}>
+                <Icon style={styles.iconStyle} type="Entypo"
+                  name={
+                    isSecureEntry2 ? "eye-with-line" : "eye"
+                  }/>
+              </TouchableOpacity>
+            }
           />
-          <Gap height={24} />
-          <Inputs
+          <Gap height={16} />
+          <InputPassword
             value={changePassword.confirmPassword}
-            secure
+            secure={isSecureEntry3}
             onChangeText={value => setChangePassword('confirmPassword', value)}
             title="Konfirmasi Kata Sandi Baru"
             placeholder="Konfirmasi kata sandi baru"
+            placeholderTextColor="#787878"
+            iconEye={
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecureEntry3((prev) => !prev);
+                }}>
+                <Icon style={styles.iconStyle} type="Entypo"
+                  name={
+                    isSecureEntry3 ? "eye-with-line" : "eye"
+                  }/>
+              </TouchableOpacity>
+            }
           />
         </View>
       </ScrollView>
@@ -124,6 +163,9 @@ const UbahPassword = ({navigation}) => {
 export default UbahPassword;
 
 const styles = StyleSheet.create({
+  iconStyle: {
+    color: colors.tertierGrey,
+  },
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,

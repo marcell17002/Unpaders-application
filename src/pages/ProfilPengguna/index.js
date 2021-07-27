@@ -17,7 +17,7 @@ const ProfilPengguna = ({navigation}) => {
           setProfile(res.data[0]);
           console.log('image : ', res.data[0].image);
         },
-        err => notifications('danger', 'anda tidak terknoneksi ke internet'),
+        err => notifications('danger', 'Tidak terkoneksi internet'),
       );
     });
     return unsubscribe;
@@ -34,7 +34,7 @@ const ProfilPengguna = ({navigation}) => {
           onPressRight={() => navigation.navigate('UbahProfile', profile)}
         />
       </View>
-      <Gap height={24} />
+      <Gap height={20} />
       <View>
         <ProfileUser
           type={user.status === 'alumni' ? 'alumni' : 'mahasiswa'}
@@ -50,7 +50,7 @@ const ProfilPengguna = ({navigation}) => {
           telepon={profile.phone}
         />
       </View>
-      <Gap height={24} />
+      <Gap height={20} />
     </View>
   );
 };

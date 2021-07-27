@@ -1,40 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { Gap, ListButton } from '../../components/atoms';
-import { EventUnggah, Headers, NotFound } from '../../components/moleculs';
-import { api } from '../../services';
-import { colors, fonts, getDateName, notifications } from '../../utils';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {Gap, ListButton} from '../../components/atoms';
+import {EventUnggah, Headers, NotFound} from '../../components/moleculs';
+import {api} from '../../services';
+import {colors, fonts, getDateName, notifications} from '../../utils';
 
 const Berita = ({navigation}) => {
   const user = useSelector(state => state).user;
+  const dispatch = useDispatch();
   const [event, setEvent] = useState([]);
-  console.log('isi user id : ', user.id);
+  const [refreshing, setRefreshing] = useState(false);
+
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      api.getEventByCategory('author', user.id).then(
-        res => setEvent(res.data),
-        err => console.log('isi err', event),
-      );
+    dispatch({type: 'SET_LOADING', value: true});
+    const unsubscribe = navigation.addListener('focus', async () => {
+      await getEvent();
     });
     return unsubscribe;
   }, [navigation]);
+
+  const getEvent = () => {
+    api.getEventByCategory('author', user.id).then(
+      res => {
+        dispatch({type: 'SET_LOADING', value: false});
+        setEvent(res.data);
+      },
+      err => dispatch({type: 'SET_LOADING', value: false}),
+    );
+  };
+
   const editableEvent = payload => {
     console.log('isi event :', payload);
     if (payload.status === 'waiting') {
-      return notifications(
-        'info',
-        'silahkan menunggu data anda direview oleh admin',
-      );
+      return notifications('info', 'Data anda sedang diverifikasi Admin');
     } else return navigation.navigate('TulisBerita', payload);
   };
+
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(async () => {
+      await getEvent();
+      await setRefreshing(false);
+    });
+  }, []);
+
   return (
-      <View style={styles.page}>
-        <View>
-          <Headers title="BERITA" type="main" />
-        </View>
-        
-        <ScrollView showsVerticalScrollIndicator={false}>
+    <View style={styles.page}>
+      <View>
+        <Headers title="BERITA" type="main" />
+      </View>
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View>
           <ListButton
             namaTombol="Ketentuan Kontributor"
@@ -48,9 +72,9 @@ const Berita = ({navigation}) => {
         <View style={styles.ghap}>
           <Gap height={12} />
         </View>
-        <Gap height={24} />
+        <Gap height={16} />
         <Text style={styles.sectionLainnya}>DAFTAR UNGGAH BERITA</Text>
-        <Gap height={24}/>
+        <Gap height={16} />
         {event.length < 1 ? (
           <View style={styles.body}>
             <NotFound title="Anda belum mengunggah berita" />
@@ -71,7 +95,7 @@ const Berita = ({navigation}) => {
             })}
           </View>
         )}
-    </ScrollView>
+      </ScrollView>
     </View>
   );
 };
@@ -90,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.text.grey,
   },
   sectionLainnya: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     marginLeft: 24,

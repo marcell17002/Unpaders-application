@@ -1,23 +1,40 @@
 import {BASE_IMG} from '@env';
-import {Picker} from 'native-base';
+import {Picker, Icon} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {Buttons, Gap, Inputs, Link} from '../../components/atoms';
+import {
+  Buttons,
+  Gap,
+  InputPassword,
+  Inputs,
+  Link,
+} from '../../components/atoms';
 import {api} from '../../services';
 import {
   checkSameData,
   checkValue,
+  checkEmail,
   colors,
   filterData,
   fonts,
   notifications,
   useForm,
+  checkCharLength,
 } from '../../utils';
 import checkAlumniExist from '../../utils/checkAlumniExist';
 import checkStudentExist from '../../utils/checkStudentExist';
 
 const FormDaftar = ({navigation, route}) => {
+  const [isSecureEntry, setIsSecureEntry] = useState(true); //show/hide password1
+  const [isSecureEntry2, setIsSecureEntry2] = useState(true); //show/hide password2
   const status = route.params.status;
   const dispatch = useDispatch();
   const [facultyList, setFacultyList] = useState([
@@ -132,28 +149,32 @@ const FormDaftar = ({navigation, route}) => {
     status: status,
   });
 
-  const checkValueNull = () => {
+  const checkValueNull = async () => {
+    await checkEmail(form.email, 'email');
+    await checkCharLength(form.nim, 12);
     if (form.prodi === 'Pilih Prodi ...')
-      return notifications('warning', 'prodi tidak boleh kosong');
-    checkValue(form.email, 'email');
-    checkValue(form.password, 'password');
-    checkValue(form.name, 'nama');
-    checkValue(form.phone, 'nomor telepon');
-    checkValue(form.nim, 'NPM');
-    checkValue(form.faculty, 'fakultas');
-    checkValue(form.prodi, 'prodi');
-    checkValue(form.level, 'angkatan');
-    {
-      status === 'alumni' ? checkValue(form.graduated, 'tahun lulus') : null;
+      return notifications('warning', 'Prodi tidak boleh kosong');
+    await checkValue(form.password, 'password');
+    await checkValue(form.name, 'nama');
+    await checkValue(form.phone, 'nomor telepon');
+    await checkValue(form.nim, 'NPM');
+    await checkValue(form.faculty, 'fakultas');
+    await checkValue(form.prodi, 'prodi');
+    await checkValue(form.level, 'angkatan');
+    if (status === 'alumni') {
+      await checkValue(form.graduated, 'tahun lulus');
     }
   };
   const postData = async data => {
+    dispatch({type: 'SET_LOADING', value: true});
     await api.postRegister(data).then(
       res => {
-        notifications('success', 'registrasi berhasil silahkan login');
+        dispatch({type: 'SET_LOADING', value: false});
+        notifications('success', 'Registrasi berhasil');
         navigation.replace('Masuk');
       },
       err => {
+        dispatch({type: 'SET_LOADING', value: false});
         const message = JSON.parse(err.response.request._response).message;
         console.log('isi errr :', JSON.parse(err.response.request._response));
         notifications('danger', message);
@@ -184,7 +205,6 @@ const FormDaftar = ({navigation, route}) => {
       },
       err => {},
     );
-    console.log('hello ', form);
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -192,134 +212,169 @@ const FormDaftar = ({navigation, route}) => {
         <View style={styles.contImage}>
           <Image
             source={require('../../assets/LogoBesar.png')}
-            style={StyleSheet.image}
+            //style={StyleSheet.image}
+            resizeMode="contain"
+            style={{maxWidth: '70%'}}
           />
+          {/* <Gap height={8}/> */}
           <Text style={styles.title}>
             {status === 'alumni'
               ? 'Daftar sebagai Alumni'
               : 'Daftar sebagai Mahasiswa'}
           </Text>
         </View>
-        <Gap height={40} />
-        <View>
-          <Text style={styles.section}>Informasi Personal</Text>
-          <Inputs
-            title="Email"
-            value={form.email}
-            onChangeText={value => setForm('email', value)}
-            placeholder="Masukkan Email"
-          />
-          <Gap height={24} />
-          <Inputs
-            title="Kata Sandi"
-            value={form.password}
-            secure
-            onChangeText={value => setForm('password', value)}
-            placeholder="Masukkan Kata Sandi"
-          />
-          <Gap height={24} />
-          <Inputs
-            title="Konfirmasi Kata Sandi"
-            value={confirmPassword}
-            secure
-            onChangeText={value => setConfirmPassword(value)}
-            placeholder="Konfirmasi Kata Sandi"
-          />
-          <Gap height={24} />
-          <Inputs
-            title="Nama Lengkap"
-            value={form.name}
-            onChangeText={value => setForm('name', value)}
-            placeholder="Masukkan Nama Lengkap"
-          />
-          <Gap height={24} />
-          <Inputs
-            title="Nomor Telepon"
-            isNumeric
-            value={form.phone}
-            onChangeText={value => setForm('phone', value)}
-            placeholder="Masukkan Nomor Telepon"
-          />
-          <Text style={styles.note}>
-            *Nomor WA tidak akan ditampilkan pada profile
-          </Text>
-          <Gap height={24} />
-        </View>
-
         <Gap height={32} />
-        <View>
-          <Text style={styles.section}>Latar Belakang Pendidikan</Text>
-          <Inputs
-            title="Nomor Pokok Mahasiswa"
-            value={form.npm}
-            isNumeric
-            onChangeText={value => setForm('nim', value)}
-            placeholder="Masukkan Nomor Pokok Mahasiswa"
-          />
-          <Gap height={24} />
+        <View style={styles.contIsian}>
           <View>
-            <Text style={styles.titleText}>Fakultas</Text>
-            <View style={styles.contPicker}>
-              <Picker
-                style={styles.contText}
-                selectedValue={facultyList}
-                onValueChange={value => filterDataProdi(value)}>
-                {facultyList.map(item => {
-                  return <Picker.Item label={item.label} value={item.label} />;
-                })}
-              </Picker>
-            </View>
-          </View>
-          <Gap height={24} />
-          <View>
-            <Text style={styles.titleText}>Program Studi</Text>
-            <View style={styles.contPicker}>
-              <Picker
-                style={styles.contText}
-                selectedValue={form.prodi}
-                onValueChange={value => setForm('prodi', value)}>
-                <Picker.Item label="Pilih Prodi..." value="0" />
-                {prodiTemp.map((item, index) => {
-                  return (
-                    <Picker.Item
-                      key={index}
-                      label={item.label}
-                      value={item.label}
-                    />
-                  );
-                })}
-              </Picker>
-            </View>
-          </View>
-          <Gap height={24} />
-          <Inputs
-            title="Angkatan"
-            value={form.level}
-            isNumeric
-            onChangeText={value => setForm('level', value)}
-            placeholder="Masukkan Angkatan"
-          />
-          <Gap height={24} />
-          {status === 'alumni' ? (
+            <Text style={styles.section}>Informasi Personal</Text>
             <Inputs
-              title="Tahun Lulus"
-              isNumeric
-              value={form.graduated}
-              onChangeText={value => setForm('graduated', value)}
-              placeholder="Masukkan Tahun Lulus"
+              title="Email"
+              value={form.email}
+              onChangeText={value => setForm('email', value)}
+              placeholder="Masukkan Email"
             />
-          ) : null}
-        </View>
+            <Gap height={16} />
+            <InputPassword
+              title="Kata Sandi"
+              value={form.password}
+              secure={isSecureEntry}
+              onChangeText={value => setForm('password', value)}
+              placeholder="Masukkan Kata Sandi"
+              iconEye={
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsSecureEntry(prev => !prev);
+                  }}>
+                  <Icon
+                    style={styles.iconStyle}
+                    type="Entypo"
+                    name={isSecureEntry ? 'eye-with-line' : 'eye'}
+                  />
+                </TouchableOpacity>
+              }
+            />
+            <Gap height={16} />
+            <InputPassword
+              title="Konfirmasi Kata Sandi"
+              value={confirmPassword}
+              secure={isSecureEntry2}
+              onChangeText={value => setConfirmPassword(value)}
+              placeholder="Konfirmasi Kata Sandi"
+              placeholderTextColor="#787878"
+              iconEye={
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsSecureEntry2(prev => !prev);
+                  }}>
+                  <Icon
+                    style={styles.iconStyle}
+                    type="Entypo"
+                    name={isSecureEntry2 ? 'eye-with-line' : 'eye'}
+                  />
+                </TouchableOpacity>
+              }
+            />
+            <Gap height={16} />
+            <Inputs
+              title="Nama Lengkap"
+              value={form.name}
+              onChangeText={value => setForm('name', value)}
+              placeholder="Masukkan Nama Lengkap"
+            />
+            <Gap height={16} />
+            <Inputs
+              title="Nomor Telepon"
+              isNumeric
+              value={form.phone}
+              onChangeText={value => setForm('phone', value)}
+              placeholder="Masukkan Nomor Telepon"
+            />
+            <Text style={styles.note}>
+              *Nomor WA tidak akan ditampilkan pada profile
+            </Text>
+            <Gap height={16} />
+          </View>
 
-        <Gap height={50} />
-        <View>
-          <Buttons title="Daftar" onPress={onSave} />
+          <Gap height={32} />
+          <View>
+            <Text style={styles.section}>Latar Belakang Pendidikan</Text>
+            <Inputs
+              title="Nomor Pokok Mahasiswa"
+              value={form.npm}
+              isNumeric
+              onChangeText={value => setForm('nim', value)}
+              placeholder="Masukkan Nomor Pokok Mahasiswa"
+            />
+            <Gap height={16} />
+            <View>
+              <Text style={styles.titleText}>Fakultas</Text>
+              <View style={styles.contPicker}>
+                <Picker
+                  style={styles.contText}
+                  selectedValue={facultyList}
+                  onValueChange={value => filterDataProdi(value)}>
+                  {facultyList.map(item => {
+                    return (
+                      <Picker.Item label={item.label} value={item.label} />
+                    );
+                  })}
+                </Picker>
+              </View>
+            </View>
+            <Gap height={16} />
+            <View>
+              <Text style={styles.titleText}>Program Studi</Text>
+              <View style={styles.contPicker}>
+                <Picker
+                  style={styles.contText}
+                  selectedValue={form.prodi}
+                  onValueChange={value => setForm('prodi', value)}>
+                  <Picker.Item label="Pilih Prodi..." value=" " />
+                  {prodiTemp.map((item, index) => {
+                    return (
+                      <Picker.Item
+                        key={index}
+                        label={item.label}
+                        value={item.label}
+                      />
+                    );
+                  })}
+                </Picker>
+              </View>
+            </View>
+            <Gap height={16} />
+            <Inputs
+              title="Angkatan"
+              value={form.level}
+              isNumeric
+              onChangeText={value => setForm('level', value)}
+              placeholder="Masukkan Angkatan"
+            />
+            <Gap height={16} />
+            {status === 'alumni' ? (
+              <Inputs
+                title="Tahun Lulus"
+                isNumeric
+                value={form.graduated}
+                onChangeText={value => setForm('graduated', value)}
+                placeholder="Masukkan Tahun Lulus"
+              />
+            ) : null}
+          </View>
 
-          <Text style={styles.buttonlink}>Sudah punya Akun?</Text>
-          <Link
-            onPress={() => navigation.navigate('Masuk')}
-            title="Masuk disini"
-          />
+          <Gap height={50} />
+          <View>
+            <Buttons title="Daftar" onPress={onSave} />
+            <View style={styles.contLink}>
+              <Text style={styles.buttonlink}>Sudah punya Akun?</Text>
+              <Gap width={8} />
+              <Link
+                onPress={() => navigation.navigate('Masuk')}
+                title="Masuk disini"
+              />
+            </View>
+            <Gap height={12} />
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -329,15 +384,20 @@ const FormDaftar = ({navigation, route}) => {
 export default FormDaftar;
 
 const styles = StyleSheet.create({
+  iconStyle: {
+    color: colors.tertierGrey,
+  },
   page: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
-    paddingLeft: 24,
-    paddingRight: 20,
   },
   contImage: {
-    marginTop: 28,
     alignItems: 'center',
+    //backgroundColor: 'yellow',
+  },
+  contIsian: {
+    paddingLeft: 24,
+    paddingRight: 20,
   },
   title: {
     fontSize: 16,
@@ -362,8 +422,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     fontFamily: fonts.primary.semibold,
-    color: colors.text.secondGrey,
-    marginTop: -8,
+    color: colors.text.tertiary,
+    marginBottom: 4,
   },
   contPicker: {
     backgroundColor: colors.backgroundgrey,
@@ -383,5 +443,10 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
     alignContent: 'space-between',
+  },
+  contLink: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: -8,
   },
 });

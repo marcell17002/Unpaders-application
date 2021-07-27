@@ -1,7 +1,7 @@
 export const getTime = date => {
   const hour = date.getHours();
-  const minutes = date.getMinutes();
-
+  let minutes = date.getMinutes();
+  if (minutes < 10) return (minutes = '0' + minutes);
   return `${hour}:${minutes} ${hour >= 12 ? 'PM' : 'AM'}`;
 };
 

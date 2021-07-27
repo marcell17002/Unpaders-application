@@ -38,7 +38,7 @@ const Lainnya = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View style={styles.contHeader}>
-        <Headers type="main" title="LAINNYA" />
+        <Headers type="main" title="PROFIL" />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.ghap}>
@@ -65,7 +65,7 @@ const Lainnya = ({navigation}) => {
         </View>
         <ListButton
           type="primary"
-          namaTombol="Tentang Kami"
+          namaTombol="Unpaders"
           onPress={() => navigation.navigate('TentangKami')}
         />
         <ListButton
@@ -73,11 +73,11 @@ const Lainnya = ({navigation}) => {
           namaTombol="Kontak"
           onPress={() => navigation.navigate('Kontak')}
         />
-        <ListButton
+        {/* <ListButton
           type="primary"
           namaTombol="Disclaimer"
           onPress={() => navigation.navigate('Disclaimer')}
-        />
+        /> */}
         <View style={styles.ghap}>
           <Gap height={12} />
           <Text style={styles.textGap}>SOCIAL MEDIA UNPADERS</Text>
@@ -123,7 +123,7 @@ const Lainnya = ({navigation}) => {
           <Gap height={12} />
         </View>
         <TouchableOpacity onPress={() => onLogOut()}>
-          <Text style={styles.logout}>Logout Akun</Text>
+          <Text style={styles.logout}>Logout</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

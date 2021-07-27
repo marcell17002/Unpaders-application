@@ -19,7 +19,7 @@ const CommentSection = ({image, author, waktu, desc, onPress}) => {
         </View>
         
       </View>
-      <Gap height={24} />
+      <Gap height={20} />
     </View>
   );
 };
