@@ -20,6 +20,7 @@ import checkStudentExist from '../../utils/checkStudentExist';
 const FormDaftar = ({navigation, route}) => {
   const [isSecureEntry, setIsSecureEntry]=useState(true) //show/hide password1
   const [isSecureEntry2, setIsSecureEntry2]=useState(true) //show/hide password2
+
   const status = route.params.status;
   const dispatch = useDispatch();
   const [facultyList, setFacultyList] = useState([
@@ -242,6 +243,7 @@ const FormDaftar = ({navigation, route}) => {
             secure={isSecureEntry2}
             onChangeText={value => setConfirmPassword(value)}
             placeholder="Konfirmasi Kata Sandi"
+            placeholderTextColor="#787878"
             iconEye={
               <TouchableOpacity
                 onPress={() => {

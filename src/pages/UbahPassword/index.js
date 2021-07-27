@@ -121,6 +121,7 @@ const UbahPassword = ({navigation}) => {
             onChangeText={value => setChangePassword('newPassword', value)}
             title="Kata Sandi Baru"
             placeholder="Masukkan kata sandi baru"
+            placeholderTextColor="#787878"
             iconEye={
               <TouchableOpacity
                 onPress={() => {
@@ -140,6 +141,7 @@ const UbahPassword = ({navigation}) => {
             onChangeText={value => setChangePassword('confirmPassword', value)}
             title="Konfirmasi Kata Sandi Baru"
             placeholder="Konfirmasi kata sandi baru"
+            placeholderTextColor="#787878"
             iconEye={
               <TouchableOpacity
                 onPress={() => {
