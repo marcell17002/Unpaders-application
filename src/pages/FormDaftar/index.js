@@ -152,8 +152,6 @@ const FormDaftar = ({navigation, route}) => {
   const checkValueNull = async () => {
     await checkEmail(form.email, 'email');
     await checkCharLength(form.nim, 12);
-    if (form.prodi === 'Pilih Prodi ...')
-      return notifications('warning', 'Prodi tidak boleh kosong');
     await checkValue(form.password, 'password');
     await checkValue(form.name, 'nama');
     await checkValue(form.phone, 'nomor telepon');

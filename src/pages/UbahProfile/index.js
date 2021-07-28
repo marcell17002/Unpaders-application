@@ -129,7 +129,6 @@ const UbahProfile = ({navigation, route}) => {
     filterData(prodiList, 'faculty', props).then(async res => {
       dispatch({type: 'SET_LOADING', value: true});
       setIsLoading(false);
-      res.unshift({label: 'Pilih Prodi...', faculty: ''});
       await setProdiTemp(res);
       changeText('prodi', res[0].label);
       changeText('faculty', props);
@@ -273,6 +272,7 @@ const UbahProfile = ({navigation, route}) => {
                   style={styles.contText}
                   selectedValue={profile.prodi}
                   onValueChange={value => changeText('prodi', value)}>
+                  <Picker.Item label="Pilih Prodi..." value=" " />
                   {isLoading === true ? (
                     <Picker.Item label={payload.prodi} value={payload.prodi} />
                   ) : (
