@@ -238,7 +238,7 @@ const TulisBerita = ({navigation, route}) => {
                   style={styles.contText}
                   selectedValue={form.subCategory}
                   onValueChange={value => setForm('subCategory', value)}>
-                  <Picker.Item label="Pilih sub-kategori..." value="0" />
+                  <Picker.Item label="Pilih sub-kategori..." value=" " />
                   {subCategoryTemp.map((item, index) => {
                     return (
                       <Picker.Item
