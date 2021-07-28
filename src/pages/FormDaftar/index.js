@@ -173,8 +173,8 @@ const FormDaftar = ({navigation, route}) => {
       },
       err => {
         dispatch({type: 'SET_LOADING', value: false});
-        const message = JSON.parse(err.response.request._response).message;
-        console.log('isi errr :', JSON.parse(err.response.request._response));
+        const message = JSON.parse(err.response.request._response).data[0].msg;
+        console.log('isi errr :', message);
         notifications('danger', message);
       },
     );

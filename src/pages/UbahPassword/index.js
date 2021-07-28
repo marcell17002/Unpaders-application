@@ -1,8 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Image, ScrollView, TouchableOpacity,} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {Headers, CommentUser} from '../../components/moleculs';
 import {Gap, InputPassword, Inputs} from '../../components/atoms';
-import { Icon } from 'native-base';
+import {Icon} from 'native-base';
 import {
   checkSameData,
   colors,
@@ -16,9 +23,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {api} from '../../services';
 
 const UbahPassword = ({navigation}) => {
-  const [isSecureEntry, setIsSecureEntry]=useState(true) //show/hide password
-  const [isSecureEntry2, setIsSecureEntry2]=useState(true) //show/hide password2
-  const [isSecureEntry3, setIsSecureEntry3]=useState(true) //show/hide password3
+  const [isSecureEntry, setIsSecureEntry] = useState(true); //show/hide password
+  const [isSecureEntry2, setIsSecureEntry2] = useState(true); //show/hide password2
+  const [isSecureEntry3, setIsSecureEntry3] = useState(true); //show/hide password3
   const user = useSelector(state => state).user;
   const dispatch = useDispatch();
   const [profile, setProfile] = useState([]);
@@ -69,7 +76,13 @@ const UbahPassword = ({navigation}) => {
                   notifications('success', 'Silahkan login kembali');
                   navigation.replace('Masuk');
                 },
-                err => console.log('isi error ', err),
+                err => {
+                  const message = JSON.parse(err.response.request._response)
+                    .data[0].msg;
+                  console.log('isi errr :', message);
+                  notifications('danger', message);
+                  dispatch({type: 'SET_LOADING', value: false});
+                },
               );
           },
           err => {
@@ -105,12 +118,13 @@ const UbahPassword = ({navigation}) => {
             iconEye={
               <TouchableOpacity
                 onPress={() => {
-                  setIsSecureEntry((prev) => !prev);
+                  setIsSecureEntry(prev => !prev);
                 }}>
-                <Icon style={styles.iconStyle} type="Entypo"
-                  name={
-                    isSecureEntry ? "eye-with-line" : "eye"
-                  }/>
+                <Icon
+                  style={styles.iconStyle}
+                  type="Entypo"
+                  name={isSecureEntry ? 'eye-with-line' : 'eye'}
+                />
               </TouchableOpacity>
             }
           />
@@ -125,12 +139,13 @@ const UbahPassword = ({navigation}) => {
             iconEye={
               <TouchableOpacity
                 onPress={() => {
-                  setIsSecureEntry2((prev) => !prev);
+                  setIsSecureEntry2(prev => !prev);
                 }}>
-                <Icon style={styles.iconStyle} type="Entypo"
-                  name={
-                    isSecureEntry2 ? "eye-with-line" : "eye"
-                  }/>
+                <Icon
+                  style={styles.iconStyle}
+                  type="Entypo"
+                  name={isSecureEntry2 ? 'eye-with-line' : 'eye'}
+                />
               </TouchableOpacity>
             }
           />
@@ -145,12 +160,13 @@ const UbahPassword = ({navigation}) => {
             iconEye={
               <TouchableOpacity
                 onPress={() => {
-                  setIsSecureEntry3((prev) => !prev);
+                  setIsSecureEntry3(prev => !prev);
                 }}>
-                <Icon style={styles.iconStyle} type="Entypo"
-                  name={
-                    isSecureEntry3 ? "eye-with-line" : "eye"
-                  }/>
+                <Icon
+                  style={styles.iconStyle}
+                  type="Entypo"
+                  name={isSecureEntry3 ? 'eye-with-line' : 'eye'}
+                />
               </TouchableOpacity>
             }
           />
