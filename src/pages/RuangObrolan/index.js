@@ -71,8 +71,11 @@ const RuangObrolan = ({navigation, route}) => {
       );
     } else {
       console.log('hellos');
-      if (payload.idSender === user.id) await getToken(payload.idReceiver);
-      else await getToken(payload.idSender);
+      if (payload.idSender === user.id) {
+        await getToken(payload.idReceiver);
+      } else {
+        await getToken(payload.idSender);
+      }
       api.getChat('chatId', payload.chatId).then(
         async res => {
           await setChatId(payload.chatId);
@@ -132,7 +135,7 @@ const RuangObrolan = ({navigation, route}) => {
   const sendNotifications = () => {
     const data = {
       token: token,
-      title: payload.name,
+      title: user.name,
       body: input,
     };
     api.postNotifications(data);

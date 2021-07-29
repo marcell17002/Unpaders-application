@@ -1,4 +1,4 @@
-import {showMessage, } from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 import {colors} from '../colors';
 
 export const notifications = (type, message) => {
@@ -7,7 +7,7 @@ export const notifications = (type, message) => {
       message: message,
       type: type,
       color: colors.text.primary,
-      position: 'center',
+      position: 'top',
       backgroundColor: colors.notif.succes,
     });
   } else if (type === 'warning') {
@@ -15,7 +15,7 @@ export const notifications = (type, message) => {
       message: message,
       type: type,
       color: colors.text.primary,
-      position: 'center',
+      position: 'top',
       backgroundColor: colors.notif.warning,
     });
   } else if (type === 'danger') {
@@ -23,7 +23,7 @@ export const notifications = (type, message) => {
       message: message,
       type: type,
       color: colors.text.primary,
-      position: 'center',
+      position: 'top',
       backgroundColor: colors.notif.danger,
     });
   } else if (type === 'info') {
@@ -31,7 +31,7 @@ export const notifications = (type, message) => {
       message: message,
       type: type,
       color: colors.text.primary,
-      position: 'center',
+      position: 'top',
       backgroundColor: colors.notif.succes,
     });
   } else {

@@ -1,7 +1,9 @@
 export const getTime = date => {
   const hour = date.getHours();
   let minutes = date.getMinutes();
-  if (minutes < 10) return (minutes = '0' + minutes);
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
   return `${hour}:${minutes} ${hour >= 12 ? 'PM' : 'AM'}`;
 };
 
@@ -33,6 +35,9 @@ export const getDateName = (date, less) => {
 
   const year = timeParsed.split('-')[0];
   const newDate = timeParsed.split('-')[2];
-  if (less) return `${dayName}, ${newDate} ${monthName} ${year}`;
-  else return `${dayName}, ${newDate} ${monthName} ${year} ${time}:${minutes} `;
+  if (less) {
+    return `${dayName}, ${newDate} ${monthName} ${year}`;
+  } else {
+    return `${dayName}, ${newDate} ${monthName} ${year} ${time}:${minutes} `;
+  }
 };

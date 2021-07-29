@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View, RefreshControl} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {Gap, ListButton} from '../../components/atoms';
 import {Headers, ListAlumniChat, NotFound} from '../../components/moleculs';
@@ -11,6 +11,8 @@ const Chat = ({navigation, route}) => {
   const [history, setHistory] = useState([]);
   const [historyTemp, setHistoryTemp] = useState([]);
   const user = useSelector(state => state).user;
+  const [refreshing, setRefreshing] = useState(false);
+
   useEffect(async () => {
     const unsubscribe = navigation.addListener('focus', () => {
       dispatch({type: 'SET_LOADING', value: true});
@@ -85,13 +87,28 @@ const Chat = ({navigation, route}) => {
       },
     );
   };
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(async () => {
+      await getHistorySender(); //a_b   -> a
+      await getHistoryReceiver(); //b_a   -> a
+      await setRefreshing(false);
+    });
+  }, []);
   return (
     <View style={styles.page}>
       <View>
         <Headers title="CHAT" type="main" />
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View>
           <ListButton
             namaTombol="Temukan Alumni"

@@ -229,6 +229,7 @@ const UbahProfile = ({navigation, route}) => {
             <Gap height={16} />
             <Inputs
               value={profile.phone}
+              isNumeric
               onChangeText={value => changeText('phone', value)}
               title="Nomor Telepon"
               placeholder="Masukkan Nomor Telepon"
@@ -243,6 +244,7 @@ const UbahProfile = ({navigation, route}) => {
             <Text style={styles.section}>Latar Belakang Pendidikan</Text>
             <Inputs
               value={profile.nim}
+              isNumeric
               onChangeText={value => changeText('nim', value)}
               title="Nomor Pokok Mahasiswa"
               placeholder="Masukkan Nomor Pokok Mahasiswa"
@@ -295,6 +297,7 @@ const UbahProfile = ({navigation, route}) => {
               value={profile.level}
               onChangeText={value => changeText('level', value)}
               title="Angkatan"
+              isNumeric
               placeholder="Masukkan Angkatan"
             />
             <Gap height={16} />
@@ -303,6 +306,7 @@ const UbahProfile = ({navigation, route}) => {
                 value={profile.graduated}
                 onChangeText={value => changeText('graduated', value)}
                 title="Tahun Lulus"
+                isNumeric
                 placeholder="Masukkan Tahun Lulus"
               />
             ) : null}
