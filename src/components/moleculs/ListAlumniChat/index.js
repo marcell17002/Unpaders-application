@@ -12,7 +12,7 @@ const ListAlumniChat = ({nama, lastText, isBadge, picture, onPress}) => {
         style={styles.avatar}
         source={{uri: `${BASE_URL_ROOT}${picture}`}}
       />
-      <View>
+      <View style={styles.contChat}>
         <Text style={styles.namaAlumni}>{nama}</Text>
         <Gap height={8} />
         <Text style={styles.desc}>{lastText}</Text>
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.text.grey,
     alignItems: 'center',
+    flexShrink: 1,
   },
   avatar: {
     height: 40,
@@ -48,6 +49,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignSelf: 'center',
     marginRight: 16,
+  },
+  contChat: {
+    paddingRight: 10,
+    flexShrink: 1,
+    flex: 1,
   },
   namaAlumni: {
     fontSize: 14,
@@ -58,11 +64,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fonts.primary.reguler,
     color: colors.text.secondGrey,
+    maxHeight: 22,
   },
   badgeWrapper: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    alignContent: 'flex-end',
+    maxWidth: 25,
   },
   badge: {
     backgroundColor: colors.primary,

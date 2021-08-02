@@ -133,10 +133,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   nama: {
+    paddingHorizontal: 20,
     fontSize: 16,
     fontFamily: fonts.primary.semibold,
     color: colors.text.primary,
     textAlign: 'center',
+    flexShrink: 1,
   },
   pendidikan: {
     fontSize: 12,

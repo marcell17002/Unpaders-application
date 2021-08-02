@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 0.5,
     borderColor: colors.input.outline,
+    height: 111,
+    width: 129,
   },
   event: {
     flexDirection: 'row',
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.reguler,
     color: colors.text.primary,
     textAlignVertical: 'top',
+    flexShrink: 1,
   },
   statusStyle: {
     fontSize: 14,
