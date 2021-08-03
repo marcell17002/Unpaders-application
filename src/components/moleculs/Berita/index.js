@@ -1,15 +1,28 @@
 import { BASE_URL_ROOT } from '@env';
 import React from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native';
+import { Animated, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { PinchGestureHandler } from 'react-native-gesture-handler';
+import Lightbox from 'react-native-lightbox';
+import Carousel from 'react-native-looped-carousel';
 import { colors, fonts } from '../../../utils';
 import { Gap } from '../../atoms';
-import Lightbox from 'react-native-lightbox';
-import { PinchGestureHandler } from 'react-native-gesture-handler';
+
+const WINDOW_WIDTH = Dimensions.get('window').width;
 
 const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
 
   const scale = React.useRef(new Animated.Value(1)).current;
   const handlePinch = Animated.event([{nativeEvent: {scale}}]);
+
+  const renderCarousel = () => (
+    <Carousel style={{ width: WINDOW_WIDTH, height: WINDOW_WIDTH }}>
+      <Image
+        style={{ flex: 1 }}
+        resizeMode="contain"
+        source={{uri: `${BASE_URL_ROOT}${images}`}}
+      />
+    </Carousel>
+  )
 
   return (
     <View style={styles.page}>
@@ -27,21 +40,16 @@ const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
         </View>
       </View>
       <Gap height={20} />
-      <Lightbox 
-        renderHeader={close => (
-          <TouchableOpacity onPress={close}>
-            <Text style={styles.closeButton}>x</Text>
-          </TouchableOpacity>
-        )}>
-        <View style={styles.beritaImage}>
+
+      <View style={styles.beritaImage}>
+        <Lightbox springConfig={{tension: 15, friction: 7}} swipeToDismiss={false} renderContent={renderCarousel}>
           <PinchGestureHandler onGestureEvent={handlePinch}>
             <Animated.Image
-              //style={styles.image}
               style={[styles.image, {transform: [{scale}]}]}
               source={{uri: `${BASE_URL_ROOT}${images}`}}/>
           </PinchGestureHandler>
-        </View>
-      </Lightbox>
+        </Lightbox>
+      </View>
       <Gap height={16}/>
       <Text style={styles.isiBerita}>{isiBerita}</Text>
     </View>
@@ -107,7 +115,7 @@ const styles = StyleSheet.create({
     color: colors.text.secondGrey,
   },
   image: {
-    height: 175,
+    height:175 ,
     width: '100%',
     resizeMode: 'cover',
     borderRadius: 10,
