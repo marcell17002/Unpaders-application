@@ -1,7 +1,6 @@
 import { BASE_URL_ROOT } from '@env';
 import React from 'react';
 import { Animated, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
-import { PinchGestureHandler } from 'react-native-gesture-handler';
 import Lightbox from 'react-native-lightbox';
 import Carousel from 'react-native-looped-carousel';
 import { colors, fonts } from '../../../utils';
@@ -12,7 +11,6 @@ const WINDOW_WIDTH = Dimensions.get('window').width;
 const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
 
   const scale = React.useRef(new Animated.Value(1)).current;
-  const handlePinch = Animated.event([{nativeEvent: {scale}}]);
 
   const renderCarousel = () => (
     <Carousel style={{ width: WINDOW_WIDTH, height: WINDOW_WIDTH }}>
@@ -42,12 +40,10 @@ const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
       <Gap height={20} />
 
       <View style={styles.beritaImage}>
-        <Lightbox springConfig={{tension: 15, friction: 7}} swipeToDismiss={false} renderContent={renderCarousel}>
-          <PinchGestureHandler onGestureEvent={handlePinch}>
+        <Lightbox springConfig={{tension: 15, friction: 7}} renderContent={renderCarousel}>
             <Animated.Image
               style={[styles.image, {transform: [{scale}]}]}
               source={{uri: `${BASE_URL_ROOT}${images}`}}/>
-          </PinchGestureHandler>
         </Lightbox>
       </View>
       <Gap height={16}/>
