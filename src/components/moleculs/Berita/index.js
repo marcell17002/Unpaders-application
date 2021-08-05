@@ -1,13 +1,19 @@
-import { BASE_URL_ROOT } from '@env';
+import {BASE_URL_ROOT} from '@env';
 import React from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native';
-import { colors, fonts } from '../../../utils';
-import { Gap } from '../../atoms';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Animated,
+} from 'react-native';
+import {colors, fonts} from '../../../utils';
+import {Gap} from '../../atoms';
 import Lightbox from 'react-native-lightbox';
-import { PinchGestureHandler } from 'react-native-gesture-handler';
+import {PinchGestureHandler} from 'react-native-gesture-handler';
 
 const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
-
   const scale = React.useRef(new Animated.Value(1)).current;
   const handlePinch = Animated.event([{nativeEvent: {scale}}]);
 
@@ -27,7 +33,7 @@ const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
         </View>
       </View>
       <Gap height={20} />
-      <Lightbox 
+      <Lightbox
         renderHeader={close => (
           <TouchableOpacity onPress={close}>
             <Text style={styles.closeButton}>x</Text>
@@ -38,11 +44,12 @@ const Berita = ({title, author, waktu, isiBerita, images, imagesUser}) => {
             <Animated.Image
               //style={styles.image}
               style={[styles.image, {transform: [{scale}]}]}
-              source={{uri: `${BASE_URL_ROOT}${images}`}}/>
+              source={{uri: `${BASE_URL_ROOT}${images}`}}
+            />
           </PinchGestureHandler>
         </View>
       </Lightbox>
-      <Gap height={16}/>
+      <Gap height={16} />
       <Text style={styles.isiBerita}>{isiBerita}</Text>
     </View>
   );
@@ -52,7 +59,7 @@ export default Berita;
 
 const styles = StyleSheet.create({
   closeButton: {
-    color: "black",
+    color: 'black',
     borderWidth: 2,
     borderColor: 'white',
     backgroundColor: colors.primaryWhite,
@@ -65,7 +72,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.bold,
     fontSize: 16,
   },
-  beritaImage:{
+  beritaImage: {
     borderRadius: 10,
     borderWidth: 0.5,
     borderColor: colors.input.outline,

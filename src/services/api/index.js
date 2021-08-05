@@ -7,26 +7,32 @@ import config from './config';
 import {destroyData, getData, updateToken} from '../../utils';
 import {BASE_URL} from '@env';
 import axios from 'axios';
-import {goToLogin} from '../../router/helpers';
-import {useSelector, useDispatch} from 'react-redux';
+import {BackHandler} from 'react-native';
 //response interceptor to refresh token on receiving token expired error
+
 axios.interceptors.response.use(
   response => {
     return response;
   },
   async function (error) {
     const originalRequest = error.config;
+    const errorMessage = JSON.parse(error.response.request._response).message;
     console.log('error root : ', error.response.status);
     const data = await getData('user').then(res => {
       if (res) {
         return res;
       }
     });
-    if (error.response.status === 401) {
+    console.log('isi error msg', errorMessage);
+    if (error.response.status === 403 && errorMessage === 'jwt expired') {
       console.log('401 navigate to login');
-      await destroyData();
-    }
-    if (error.response.status === 403 && !originalRequest._retry) {
+      BackHandler.exitApp();
+      return destroyData();
+    } else if (
+      (error.response.status === 403 ||
+        errorMessage === 'Failed to authenticate token.') &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
       console.log('FLAG REFRESH TOKEN', data.refreshToken);
       return axios

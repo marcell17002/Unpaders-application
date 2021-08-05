@@ -179,7 +179,7 @@ const UbahProfile = ({navigation, route}) => {
         navigation.goBack();
       },
       err => {
-        dispatch({type: 'SET_LOADING', value: true});
+        dispatch({type: 'SET_LOADING', value: false});
         console.log('isi data :', dataEditProfile, profile._id);
       },
     );

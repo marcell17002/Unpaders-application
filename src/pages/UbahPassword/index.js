@@ -91,6 +91,7 @@ const UbahPassword = ({navigation}) => {
         );
       },
       err => {
+        dispatch({type: 'SET_LOADING', value: false});
         notifications('danger', 'Kata sandi lama Anda salah');
       },
     );
