@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getData } from '../../utils';
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {getData} from '../../utils';
 
 const Auth = ({navigation}) => {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
   useEffect(() => {
     const _validasiSession = async () => {
+      dispatch({type: 'SET_LOADING', value: false});
       const isLogin = await getData('user');
       if (isLogin) {
         const status = isLogin.status;
